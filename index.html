@@ -74,11 +74,14 @@
   .room-detail .rd-cap{flex:0 0 auto;font-size:.72rem;font-weight:600;padding:5px 12px;border-radius:999px;white-space:nowrap}
 
   /* bandeau privatisation */
-  .privat{display:flex;align-items:center;gap:14px;justify-content:space-between;flex-wrap:wrap;background:var(--ink);color:#fff;border-radius:18px;padding:18px 20px;margin-top:16px}
-  .privat .pt b{display:block;font-size:1rem}
-  .privat .pt span{font-size:.86rem;color:#cfcac3}
-  .privat button{flex:0 0 auto;border:none;border-radius:11px;padding:12px 18px;background:#fff;color:var(--ink);font-family:inherit;font-weight:700;font-size:.9rem;cursor:pointer;transition:transform .1s}
-  .privat button:hover{transform:scale(1.03)}
+  .privat{display:flex;align-items:center;gap:14px;background:#fff;border:1.5px solid #CDD8BE;border-radius:16px;padding:14px 18px;margin:10px 0 4px}
+  .privat .pic{width:40px;height:40px;border-radius:12px;background:#CDD8BE;color:#4f5e42;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+  .privat .pic svg{width:21px;height:21px}
+  .privat .pt{flex:1;min-width:0}
+  .privat .pt b{display:block;font-size:.93rem;font-weight:700;color:var(--ink)}
+  .privat .pt span{font-size:.81rem;color:var(--warm-grey)}
+  .privat button{flex:0 0 auto;border:1.5px solid var(--sage);border-radius:11px;padding:10px 16px;background:transparent;color:var(--sage);font-family:inherit;font-weight:700;font-size:.85rem;cursor:pointer;transition:all .15s}
+  .privat button:hover{background:var(--sage);color:#fff}
 
   /* navigation semaine */
   .weeknav{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:8px 10px}
@@ -134,8 +137,12 @@
   @keyframes flip{0%{transform:rotate(0deg)}50%{transform:rotate(180deg)}100%{transform:rotate(360deg)}}
 
   /* Barre sticky mini salles */
-  .sticky-bar{position:sticky;top:0;z-index:40;background:var(--cream);padding:10px 0 8px;display:none;justify-content:center;gap:8px;border-bottom:1px solid var(--line)}
+  .sticky-bar{position:sticky;top:0;z-index:40;background:var(--cream);padding:10px 0 8px;display:none;align-items:center;justify-content:center;gap:8px;border-bottom:1px solid var(--line)}
   .sticky-bar.visible{display:flex}
+  .sticky-brand{display:flex;align-items:center;gap:5px;flex:0 0 auto;margin-right:6px}
+  .sticky-brand svg{width:16px;height:16px;color:var(--sage)}
+  .sticky-brand .slogo{font-size:.82rem;font-weight:700;letter-spacing:-.3px;color:var(--sage)}
+  .sticky-brand .slogo span{color:var(--ink)}
   .mini-room{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:12px;border:1.5px solid var(--line);background:#fff;cursor:pointer;font-family:inherit;font-size:.82rem;font-weight:600;color:var(--warm-grey);transition:all .12s}
   .mini-room .mini-ic{width:24px;height:24px;border-radius:8px;display:flex;align-items:center;justify-content:center}
   .mini-room .mini-ic svg{width:15px;height:15px}
@@ -180,14 +187,15 @@
     </div>
   </div>
 
+  <div class="privat">
+    <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9"/><path d="M5 10v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8"/></svg></div>
+    <div class="pt"><b>Un événement, un groupe ?</b><span>Privatisez un salon ou la maison.</span></div>
+    <button onclick="openPrivat()">Privatiser</button>
+  </div>
+
   <div class="step"><span class="n">1</span> Choisissez votre espace</div>
   <div class="rooms" id="rooms"></div>
   <div class="room-detail" id="roomDetail"></div>
-
-  <div class="privat">
-    <div class="pt"><b>Un événement, un groupe ?</b><span>Privatisez un salon ou la maison pour vos temps collectifs.</span></div>
-    <button onclick="openPrivat()">Privatiser un espace</button>
-  </div>
 
   <div class="step"><span class="n">2</span> Choisissez votre semaine</div>
   <div class="weeknav">
@@ -404,7 +412,7 @@
   // ---- Barre sticky ----
   function renderStickyBar(){
     const bar=document.getElementById('stickyBar');
-    bar.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:18px;height:18px;color:var(--ink);flex:0 0 auto;"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>';
+    bar.innerHTML='<div class="sticky-brand"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 21c0-9 7-16 16-16 0 9-7 16-16 16zm3-3C12 16 16 12 17.4 7.6 12 9 8.4 12.6 7 18z"/></svg><span class="slogo">GREAT<span>LY</span></span></div>';
     Object.entries(ROOMS).forEach(([k,r])=>{
       const b=document.createElement('button');
       b.className='mini-room'+(k===current?' sel':'');
