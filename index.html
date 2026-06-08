@@ -55,20 +55,16 @@
   .step{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:1.3px;color:var(--occupied-ink);margin:30px 0 14px;display:flex;align-items:center;gap:10px}
   .step .n{width:22px;height:22px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.72rem;flex:0 0 auto}
 
-  /* cartes espaces */
-  .rooms{display:grid;grid-template-columns:1fr;gap:12px}
-  @media(min-width:620px){.rooms{grid-template-columns:repeat(3,1fr)}}
-  .room-card{position:relative;text-align:left;background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:18px;cursor:pointer;font-family:inherit;transition:border-color .15s, box-shadow .15s, transform .08s;overflow:hidden}
-  .room-card:hover{box-shadow:0 6px 20px rgba(26,26,26,.06);transform:translateY(-1px)}
-  .room-card.sel{border-color:var(--c);background:color-mix(in srgb, var(--cp) 38%, #fff)}
-  .room-card .ic-wrap{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--cp);color:var(--cd);margin-bottom:12px}
-  .room-card .ic-wrap svg{width:23px;height:23px}
-  .room-card .rname{font-size:1.12rem;font-weight:700;letter-spacing:-.3px}
-  .room-card .rtag{color:var(--warm-grey);font-size:.85rem;margin:4px 0 12px;line-height:1.4}
-  .room-card .rcap{display:inline-block;font-size:.72rem;font-weight:600;color:var(--cd);background:var(--cp);padding:4px 10px;border-radius:999px}
-  .room-card .check{position:absolute;top:14px;right:14px;width:24px;height:24px;border-radius:50%;background:var(--c);color:#fff;display:none;align-items:center;justify-content:center}
-  .room-card.sel .check{display:flex}
-  .room-card .check svg{width:14px;height:14px}
+  /* sélecteur espaces compact */
+  .rooms{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+  .room-pill{display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:14px;border:1.5px solid var(--line);background:#fff;cursor:pointer;font-family:inherit;transition:all .15s;position:relative}
+  .room-pill:hover{box-shadow:0 4px 12px rgba(26,26,26,.06);transform:translateY(-1px)}
+  .room-pill.sel{border-color:var(--c);background:color-mix(in srgb, var(--cp) 38%, #fff)}
+  .room-pill .ic-wrap{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--cp);color:var(--cd);flex:0 0 auto}
+  .room-pill .ic-wrap svg{width:18px;height:18px}
+  .room-pill .rinfo{text-align:left;line-height:1.2}
+  .room-pill .rname{font-size:.92rem;font-weight:700;letter-spacing:-.2px}
+  .room-pill .rcap{font-size:.68rem;color:var(--warm-grey);font-weight:500}
 
   /* bandeau privatisation */
   .privat{display:flex;align-items:center;gap:14px;justify-content:space-between;flex-wrap:wrap;background:var(--ink);color:#fff;border-radius:18px;padding:18px 20px;margin-top:16px}
@@ -320,14 +316,11 @@
     const wrap=document.getElementById('rooms');wrap.innerHTML='';
     Object.entries(ROOMS).forEach(([k,r])=>{
       const c=document.createElement('button');
-      c.className='room-card'+(k===current?' sel':'');
+      c.className='room-pill'+(k===current?' sel':'');
       c.style.setProperty('--c',r.accent);c.style.setProperty('--cp',r.pale);c.style.setProperty('--cd',r.dark);
       c.innerHTML=`
-        <span class="check">${ICONS.check}</span>
         <span class="ic-wrap">${ICONS[r.icon]}</span>
-        <div class="rname">${r.name}</div>
-        <div class="rtag">${r.tag}</div>
-        <span class="rcap">${r.cap}</span>`;
+        <div class="rinfo"><div class="rname">${r.name}</div><div class="rcap">${r.cap}</div></div>`;
       c.onclick=()=>{current=k;render();};
       wrap.appendChild(c);
     });
