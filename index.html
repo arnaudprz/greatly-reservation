@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Réserver un espace · Greatly</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sage:#6B7D5C; --sage-dark:#5a6b4d;
+    --cream:#F7F4EF; --ink:#1A1A1A; --warm-grey:#6B6460; --line:#E7E1D7;
+    --occupied:#DAD4CA; --occupied-ink:#9c958b; --closed:#EFEBE3;
+    --accent:#6B7D5C; --accent-pale:#CDD8BE; --accent-dark:#4f5e42;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+  svg{display:block}
+
+  /* ---------- Mot de passe ---------- */
+  #gate{position:fixed;inset:0;background:var(--cream);display:flex;align-items:center;justify-content:center;padding:24px;z-index:50}
+  .gate-card{width:100%;max-width:380px;text-align:center}
+  .logo{font-weight:700;font-size:1.6rem;letter-spacing:-0.5px;color:var(--sage)}
+  .logo span{color:var(--ink)}
+  .gate-sub{color:var(--warm-grey);font-size:.95rem;margin:6px 0 28px}
+  .gate-card label{display:block;text-align:left;font-size:.8rem;font-weight:600;color:var(--warm-grey);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
+  input[type=password],input[type=text],input[type=email],input[type=tel],input[type=date],input[type=number],textarea{width:100%;padding:14px 15px;border:1.5px solid var(--line);border-radius:12px;font-family:inherit;font-size:16px;background:#fff;transition:border-color .15s;color:var(--ink)}
+  input:focus,textarea:focus{outline:none;border-color:var(--accent)}
+  textarea{resize:vertical;min-height:84px;line-height:1.45}
+  .btn{width:100%;margin-top:16px;padding:14px;border:none;border-radius:12px;background:var(--sage);color:#fff;font-family:inherit;font-size:1rem;font-weight:600;cursor:pointer;transition:background .15s}
+  .btn:hover{background:var(--sage-dark)}
+  .gate-error{color:#b4533f;font-size:.85rem;margin-top:12px;min-height:1.1em}
+  .gate-hint{color:var(--occupied-ink);font-size:.78rem;margin-top:22px}
+
+  /* ---------- App ---------- */
+  #app{display:none;max-width:680px;margin:0 auto;padding:26px 18px 96px}
+  .brand{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:8px}
+  .brand .leaf{width:20px;height:20px;color:var(--sage)}
+  .brand .logo{font-size:1.15rem}
+  .brand .sub{color:var(--warm-grey);font-weight:600;font-size:1.15rem;letter-spacing:-.3px}
+  h1{text-align:center;font-size:1.7rem;font-weight:700;letter-spacing:-.6px}
+  .intro{text-align:center;max-width:520px;margin:10px auto 0;color:var(--warm-grey);font-size:.96rem;line-height:1.55}
+
+  /* infos pratiques */
+  .info-strip{display:flex;flex-direction:column;gap:2px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:6px;margin:22px 0 6px}
+  .info{display:flex;gap:12px;align-items:center;padding:11px 12px;border-radius:13px}
+  .info .ic{width:22px;height:22px;color:var(--sage);flex:0 0 auto}
+  .info .txt{display:flex;flex-direction:column;line-height:1.3;text-align:left}
+  .info b{font-size:.66rem;text-transform:uppercase;letter-spacing:.7px;color:var(--sage);font-weight:700}
+  .info span{font-size:.86rem;color:var(--warm-grey)}
+  @media(min-width:620px){.info-strip{flex-direction:row}.info{flex:1}.info:not(:last-child){border-right:1px solid var(--line)}}
+
+  .step{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:1.3px;color:var(--occupied-ink);margin:30px 0 14px;display:flex;align-items:center;gap:10px}
+  .step .n{width:22px;height:22px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.72rem;flex:0 0 auto}
+
+  /* cartes espaces */
+  .rooms{display:grid;grid-template-columns:1fr;gap:12px}
+  @media(min-width:620px){.rooms{grid-template-columns:repeat(3,1fr)}}
+  .room-card{position:relative;text-align:left;background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:18px;cursor:pointer;font-family:inherit;transition:border-color .15s, box-shadow .15s, transform .08s;overflow:hidden}
+  .room-card:hover{box-shadow:0 6px 20px rgba(26,26,26,.06);transform:translateY(-1px)}
+  .room-card.sel{border-color:var(--c);background:color-mix(in srgb, var(--cp) 38%, #fff)}
+  .room-card .ic-wrap{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--cp);color:var(--cd);margin-bottom:12px}
+  .room-card .ic-wrap svg{width:23px;height:23px}
+  .room-card .rname{font-size:1.12rem;font-weight:700;letter-spacing:-.3px}
+  .room-card .rtag{color:var(--warm-grey);font-size:.85rem;margin:4px 0 12px;line-height:1.4}
+  .room-card .rcap{display:inline-block;font-size:.72rem;font-weight:600;color:var(--cd);background:var(--cp);padding:4px 10px;border-radius:999px}
+  .room-card .check{position:absolute;top:14px;right:14px;width:24px;height:24px;border-radius:50%;background:var(--c);color:#fff;display:none;align-items:center;justify-content:center}
+  .room-card.sel .check{display:flex}
+  .room-card .check svg{width:14px;height:14px}
+
+  /* bandeau privatisation */
+  .privat{display:flex;align-items:center;gap:14px;justify-content:space-between;flex-wrap:wrap;background:var(--ink);color:#fff;border-radius:18px;padding:18px 20px;margin-top:16px}
+  .privat .pt b{display:block;font-size:1rem}
+  .privat .pt span{font-size:.86rem;color:#cfcac3}
+  .privat button{flex:0 0 auto;border:none;border-radius:11px;padding:12px 18px;background:#fff;color:var(--ink);font-family:inherit;font-weight:700;font-size:.9rem;cursor:pointer;transition:transform .1s}
+  .privat button:hover{transform:scale(1.03)}
+
+  /* navigation semaine */
+  .weeknav{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:8px 10px}
+  .weeknav button{width:42px;height:42px;border:none;border-radius:11px;background:var(--cream);color:var(--accent-dark);font-size:1.3rem;font-weight:700;cursor:pointer;flex:0 0 auto;transition:background .15s}
+  .weeknav button:hover:not(:disabled){background:var(--accent-pale)}
+  .weeknav button:disabled{opacity:.35;cursor:not-allowed}
+  .weeknav .label{font-weight:700;font-size:1rem;text-align:center;flex:1}
+
+  .hint{text-align:center;color:var(--occupied-ink);font-size:.78rem;margin:12px 0 6px}
+
+  /* liste des créneaux */
+  .day-block{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin-bottom:12px}
+  .day-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .day-id{display:flex;align-items:baseline;gap:8px}
+  .day-name{font-weight:700;font-size:1rem}
+  .day-date{color:var(--warm-grey);font-size:.88rem}
+  .day-count{font-size:.7rem;font-weight:700;color:var(--accent-dark);background:var(--accent-pale);padding:5px 11px;border-radius:999px;white-space:nowrap}
+  .day-state{font-size:.82rem;color:var(--occupied-ink);font-weight:600}
+  .chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:12px}
+  .chip{background:var(--accent-pale);color:var(--accent-dark);border:1.5px solid transparent;border-radius:11px;padding:11px 14px;font-weight:600;font-size:.9rem;cursor:pointer;font-family:inherit;transition:all .12s}
+  .chip:hover{background:var(--accent);color:#fff}
+
+  /* ---------- Modal ---------- */
+  #modal{position:fixed;inset:0;background:rgba(26,26,26,.45);display:none;align-items:flex-end;justify-content:center;padding:0;z-index:60}
+  .modal-card{background:#fff;border-radius:22px 22px 0 0;padding:24px 22px calc(26px + env(safe-area-inset-bottom));width:100%;max-width:440px;max-height:92vh;overflow-y:auto}
+  .modal-card h3{font-size:1.25rem;margin-bottom:4px}
+  .modal-card .when{color:var(--accent);font-weight:600;font-size:.92rem;margin-bottom:18px}
+  .field{margin-bottom:14px}
+  .field label{display:block;font-size:.76rem;font-weight:600;color:var(--warm-grey);margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px}
+  .modal-actions{display:flex;gap:10px;margin-top:8px}
+  .btn-ghost{flex:1;padding:14px;border:1.5px solid var(--line);background:#fff;border-radius:12px;font-family:inherit;font-weight:600;color:var(--warm-grey);cursor:pointer}
+  .btn-solid{flex:1.4;padding:14px;border:none;border-radius:12px;background:var(--accent);color:#fff;font-family:inherit;font-weight:600;cursor:pointer}
+  .btn-solid:hover{background:var(--accent-dark)}
+  .form-err{color:#b4533f;font-size:.84rem;margin:2px 0 4px;min-height:1em;font-weight:600}
+  .rgpd{font-size:.74rem;color:var(--occupied-ink);line-height:1.45;margin:2px 0 12px}
+  .confirm-msg{text-align:center;padding:8px 0}
+  .confirm-msg .check{width:56px;height:56px;border-radius:50%;background:var(--accent-pale);color:var(--accent-dark);display:flex;align-items:center;justify-content:center;font-size:1.7rem;margin:0 auto 14px}
+
+  /* WhatsApp */
+  .wa-fab{position:fixed;right:18px;bottom:18px;z-index:90;display:flex;align-items:center;gap:10px;text-decoration:none}
+  .wa-fab .bubble{width:58px;height:58px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.22);transition:transform .15s}
+  .wa-fab:hover .bubble{transform:scale(1.06)}
+  .wa-fab .lbl{background:#fff;color:var(--ink);font-size:.82rem;font-weight:600;padding:8px 13px;border-radius:999px;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+  @media (max-width:520px){.wa-fab .lbl{display:none}}
+
+  @media(min-width:760px){
+    #modal{align-items:center;padding:20px}
+    .modal-card{border-radius:20px;padding:28px}
+  }
+</style>
+</head>
+<body>
+
+
+<div id="gate">
+  <div class="gate-card">
+    <div class="logo">GREAT<span>LY</span></div>
+    <div class="gate-sub">Espace membres · Réservation</div>
+    <label for="pw">Mot de passe membre</label>
+    <input type="password" id="pw" placeholder="••••••••" autocomplete="off">
+    <button class="btn" onclick="checkPw()">Accéder</button>
+    <div class="gate-error" id="gateError"></div>
+  </div>
+</div>
+
+<div id="app">
+  <div class="brand">
+    <svg class="leaf" viewBox="0 0 24 24" fill="currentColor"><path d="M4 21c0-9 7-16 16-16 0 9-7 16-16 16zm3-3C12 16 16 12 17.4 7.6 12 9 8.4 12.6 7 18z"/></svg>
+    <span class="logo">GREAT<span>LY</span></span><span class="sub">House</span>
+  </div>
+  <h1>Réserver un espace</h1>
+  <p class="intro">Votre lieu pour vous mettre au vert, souffler et travailler autrement. Choisissez un salon privatif ou la salle de sport, puis un créneau qui vous convient.</p>
+
+  <div class="info-strip">
+    <div class="info">
+      <svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+      <div class="txt"><b>Où</b><span>10 rue de Lambersart, Verlinghem</span></div>
+    </div>
+    <div class="info">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+      <div class="txt"><b>Quand</b><span>Lun–Ven · 13h–18h30 · hors vacances</span></div>
+    </div>
+    <div class="info">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h12v5a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8z"/><path d="M16 9h2a2 2 0 0 1 0 4h-2"/><path d="M7 3v2M10 3v2M13 3v2"/></svg>
+      <div class="txt"><b>Sur place</b><span>Thé, café & wifi offerts</span></div>
+    </div>
+  </div>
+
+  <div class="step"><span class="n">1</span> Choisissez votre espace</div>
+  <div class="rooms" id="rooms"></div>
+
+  <div class="privat">
+    <div class="pt"><b>Un événement, un groupe ?</b><span>Privatisez un salon ou la maison pour vos temps collectifs.</span></div>
+    <button onclick="openPrivat()">Privatiser un espace</button>
+  </div>
+
+  <div class="step"><span class="n">2</span> Choisissez votre semaine</div>
+  <div class="weeknav">
+    <button id="prevW" onclick="changeWeek(-1)">‹</button>
+    <div class="label" id="weekLabel"></div>
+    <button id="nextW" onclick="changeWeek(1)">›</button>
+  </div>
+
+  <div class="step"><span class="n">3</span> Choisissez un créneau</div>
+  <p class="hint">Seuls les créneaux disponibles sont affichés. Les autres sont déjà réservés (sans afficher par qui).</p>
+  <div id="slotsList"></div>
+</div>
+
+<div id="modal"><div class="modal-card" id="modalCard"></div></div>
+
+<a class="wa-fab" href="https://wa.me/33651156344" target="_blank" rel="noopener" aria-label="Discuter sur WhatsApp">
+  <span class="lbl">Une question ? Écris-moi</span>
+  <span class="bubble">
+    <svg width="30" height="30" viewBox="0 0 32 32" fill="#fff"><path d="M16.04 3C9.4 3 4 8.4 4 15.04c0 2.12.55 4.18 1.6 6L4 29l8.18-1.55a12 12 0 0 0 3.86.64h.01C22.7 28.08 28.1 22.68 28.1 16.04 28.1 8.4 22.68 3 16.04 3zm0 22.06c-1.18 0-2.34-.2-3.44-.6l-.25-.1-4.85.92.92-4.73-.16-.25a9.9 9.9 0 0 1-1.52-5.21c0-5.5 4.48-9.98 9.98-9.98 2.67 0 5.18 1.04 7.06 2.92a9.92 9.92 0 0 1 2.92 7.06c0 5.5-4.48 9.97-9.98 9.97zm5.47-7.47c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35z"/></svg>
+  </span>
+</a>
+
+<script>
+  // ---- API ----
+  const API_URL = ‘https://script.google.com/macros/s/AKfycbwUjNVzi71jonR6eft0QL_iBXDl7smT91UsypAE72sTXBzLSmecWcMXZLVgKV-l-6qkDg/exec’;
+  let PASSWORD = ‘’;
+
+  // ---- Espaces ----
+  const ICONS = {
+    headphones:’<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="13" width="4" height="7" rx="2"/><rect x="17" y="13" width="4" height="7" rx="2"/></svg>’,
+    users:’<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 5.2a3.2 3.2 0 0 1 0 6"/><path d="M18.5 20a6.5 6.5 0 0 0-3-5.5"/></svg>’,
+    activity:’<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2.5 7 5-14 2.5 7H21"/></svg>’,
+    check:’<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>’
+  };
+  const ROOMS = {
+    bulle: {name:"La Bulle", icon:"headphones", accent:"#6B7D5C", pale:"#CDD8BE", dark:"#4f5e42",
+            tag:"Cocon côté nature pour vos appels visio et la concentration.", cap:"1 à 3 personnes"},
+    nid:   {name:"Le Nid",   icon:"users",      accent:"#C0814E", pale:"#EBD6BC", dark:"#8f6035",
+            tag:"Salon feutré pour vos réunions et points d’équipe.", cap:"1 à 3 personnes"},
+    dojo:  {name:"Le Dojo",  icon:"activity",   accent:"#4F7C82", pale:"#C2D8DA", dark:"#3a5d62",
+            tag:"Salle de sport pour vos séances, mobilité et étirements.", cap:"3 personnes max"},
+  };
+
+  const DAY_NAMES = ["Lundi","Mardi","Mercredi","Jeudi","Vendredi"];
+  const FR_MONTH = ["janv.","févr.","mars","avr.","mai","juin","juil.","août","sept.","oct.","nov.","déc."];
+
+  const OPEN=13*60, CLOSE=18.5*60, STEP=90;
+  const SLOTS=[]; for(let m=OPEN;m<CLOSE;m+=STEP) SLOTS.push(m);
+  const slotEnd=m=>Math.min(m+STEP,CLOSE);
+
+  // Vacances scolaires ZONE B (Lille)
+  const HOLIDAYS=[
+    ["2026-07-04","2026-09-01"],["2026-10-17","2026-11-02"],["2026-12-19","2027-01-04"],
+    ["2027-02-20","2027-03-08"],["2027-04-17","2027-05-03"],
+  ];
+  const JOURS_FERIES=["2026-07-14","2026-08-15","2026-11-01","2026-11-11","2026-12-25",
+    "2027-01-01","2027-03-29","2027-05-01","2027-05-06","2027-05-08","2027-05-17","2027-07-14","2027-08-15"];
+  const FERMETURES=[];
+
+  const pad=n=>String(n).padStart(2,’0’);
+  const ymd=d=>d.getFullYear()+’-’+pad(d.getMonth()+1)+’-’+pad(d.getDate());
+  const addDays=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x;};
+  function mondayOf(d){const x=new Date(d);x.setHours(0,0,0,0);return addDays(x,-((x.getDay()+6)%7));}
+  const fmtTime=m=>pad(Math.floor(m/60))+’:’+pad(m%60);
+  const isHoliday=d=>{const t=ymd(d);return HOLIDAYS.some(([s,e])=>t>=s&&t<e);};
+  function closeReason(d){const t=ymd(d);
+    if(isHoliday(d))return "Fermé · vacances";
+    if(JOURS_FERIES.includes(t))return "Fermé · jour férié";
+    if(FERMETURES.includes(t))return "Fermé";
+    return null;}
+  const isEmail=v=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  const showErr=(el,msg)=>{if(el){el.textContent=msg;}};
+  const today=new Date();today.setHours(0,0,0,0);
+  const minMonday=mondayOf(today);
+  const isPast=d=>d<today;
+  const val=id=>{const e=document.getElementById(id);return e?e.value.trim():’’;};
+
+  // Cache des disponibilités (clé = room+weekStart)
+  let availCache={};
+
+  let current="bulle";
+  let weekStart=new Date(minMonday);
+  const weekDates=()=>DAY_NAMES.map((_,i)=>addDays(weekStart,i));
+
+  function applyAccent(){
+    const r=document.documentElement;
+    r.style.setProperty(‘--accent’,ROOMS[current].accent);
+    r.style.setProperty(‘--accent-pale’,ROOMS[current].pale);
+    r.style.setProperty(‘--accent-dark’,ROOMS[current].dark);
+  }
+
+  // Helper pour toutes les requêtes API (POST pour éviter les problèmes CORS)
+  async function apiCall(payload){
+    const res=await fetch(API_URL,{
+      method:’POST’,
+      headers:{‘Content-Type’:’text/plain;charset=utf-8’},
+      body:JSON.stringify(payload)
+    });
+    return await res.json();
+  }
+
+  // ---- Mot de passe vérifié côté serveur ----
+  async function checkPw(){
+    const v=document.getElementById(‘pw’).value.trim();
+    const btn=document.querySelector(‘#gate .btn’);
+    btn.textContent=’Vérification…’;btn.disabled=true;
+    try{
+      const data=await apiCall({action:’checkpassword’,pw:v});
+      if(data.ok){
+        PASSWORD=v;
+        document.getElementById(‘gate’).style.display=’none’;
+        document.getElementById(‘app’).style.display=’block’;
+        render();
+      } else {
+        document.getElementById(‘gateError’).textContent="Mot de passe incorrect.";
+      }
+    }catch(e){
+      document.getElementById(‘gateError’).textContent="Erreur de connexion. Réessayez.";
+    }
+    btn.textContent=’Accéder’;btn.disabled=false;
+  }
+  document.getElementById(‘pw’).addEventListener(‘keydown’,e=>{if(e.key===’Enter’)checkPw();});
+
+  function changeWeek(dir){const ns=addDays(weekStart,dir*7);if(ns<minMonday)return;weekStart=ns;render();}
+
+  function renderRooms(){
+    const wrap=document.getElementById(‘rooms’);wrap.innerHTML=’’;
+    Object.entries(ROOMS).forEach(([k,r])=>{
+      const c=document.createElement(‘button’);
+      c.className=’room-card’+(k===current?’ sel’:’’);
+      c.style.setProperty(‘--c’,r.accent);c.style.setProperty(‘--cp’,r.pale);c.style.setProperty(‘--cd’,r.dark);
+      c.innerHTML=`
+        <span class="check">${ICONS.check}</span>
+        <span class="ic-wrap">${ICONS[r.icon]}</span>
+        <div class="rname">${r.name}</div>
+        <div class="rtag">${r.tag}</div>
+        <span class="rcap">${r.cap}</span>`;
+      c.onclick=()=>{current=k;render();};
+      wrap.appendChild(c);
+    });
+  }
+
+  function renderWeekNav(){
+    const ds=weekDates(),a=ds[0],b=ds[ds.length-1];
+    const same=a.getMonth()===b.getMonth();
+    document.getElementById(‘weekLabel’).textContent = same
+      ? `${a.getDate()} – ${b.getDate()} ${FR_MONTH[b.getMonth()]} ${b.getFullYear()}`
+      : `${a.getDate()} ${FR_MONTH[a.getMonth()]} – ${b.getDate()} ${FR_MONTH[b.getMonth()]} ${b.getFullYear()}`;
+    document.getElementById(‘prevW’).disabled = addDays(weekStart,-7) < minMonday;
+  }
+
+  // ---- Disponibilités depuis l’API ----
+  async function fetchAvailability(roomKey, monday){
+    const cacheKey=roomKey+ymd(monday);
+    if(availCache[cacheKey]) return availCache[cacheKey];
+    const data=await apiCall({action:’availability’,room:roomKey,start:ymd(monday)});
+    if(data.ok){
+      availCache[cacheKey]=data.days;
+      return data.days;
+    }
+    return null;
+  }
+
+  async function renderSlots(){
+    const wrap=document.getElementById(‘slotsList’);
+    wrap.innerHTML=’<p class="hint" style="text-align:center;padding:20px 0;">Chargement des disponibilités…</p>’;
+
+    let apiDays=null;
+    try{
+      apiDays=await fetchAvailability(current, weekStart);
+    }catch(e){}
+
+    wrap.innerHTML=’’;
+    weekDates().forEach((d,di)=>{
+      const block=document.createElement(‘div’);block.className=’day-block’;
+      const left=`<div class="day-id"><span class="day-name">${DAY_NAMES[di]}</span><span class="day-date">${d.getDate()} ${FR_MONTH[d.getMonth()]}</span></div>`;
+      if(isPast(d)){block.innerHTML=`<div class="day-head">${left}<span class="day-state">Passé</span></div>`;wrap.appendChild(block);return;}
+      const cr=closeReason(d);
+      if(cr){block.innerHTML=`<div class="day-head">${left}<span class="day-state">${cr}</span></div>`;wrap.appendChild(block);return;}
+
+      if(!apiDays){
+        block.innerHTML=`<div class="day-head">${left}<span class="day-state">Erreur de chargement</span></div>`;
+        wrap.appendChild(block);return;
+      }
+
+      const dayData=apiDays.find(dd=>dd.date===ymd(d));
+      if(!dayData){block.innerHTML=`<div class="day-head">${left}<span class="day-state">—</span></div>`;wrap.appendChild(block);return;}
+
+      const avail=dayData.slots.filter(s=>!s.busy).map(s=>{
+        const si=SLOTS.indexOf(s.start);
+        return {m:s.start, si:si};
+      }).filter(s=>s.si!==-1);
+
+      if(!avail.length){block.innerHTML=`<div class="day-head">${left}<span class="day-state">Complet</span></div>`;wrap.appendChild(block);return;}
+      const chips=avail.map(s=>`<button class="chip" onclick="openModal(${di},${s.si})">${fmtTime(s.m)} – ${fmtTime(slotEnd(s.m))}</button>`).join(‘’);
+      block.innerHTML=`<div class="day-head">${left}<span class="day-count">${avail.length} dispo</span></div><div class="chips">${chips}</div>`;
+      wrap.appendChild(block);
+    });
+  }
+
+  function render(){applyAccent();renderRooms();renderWeekNav();renderSlots();}
+
+  // ---- Réservation ----
+  function openModal(di,si){
+    const d=weekDates()[di],m=SLOTS[si];
+    const dateLabel=`${DAY_NAMES[di]} ${d.getDate()} ${FR_MONTH[d.getMonth()]}`;
+    document.getElementById(‘modalCard’).innerHTML=`
+      <h3>${ROOMS[current].name}</h3>
+      <div class="when">${dateLabel} · ${fmtTime(m)} – ${fmtTime(slotEnd(m))}</div>
+      <div class="field"><label>Ton prénom</label><input type="text" id="bkName" placeholder="Prénom"></div>
+      <div class="field"><label>Ton email</label><input type="email" id="bkMail" placeholder="prenom@email.com" inputmode="email"></div>
+      <div class="field"><label>Ton téléphone</label><input type="tel" id="bkTel" placeholder="06 12 34 56 78" inputmode="tel"></div>
+      <div class="form-err" id="bkErr"></div>
+      <p class="rgpd">Vos données (prénom, email, téléphone) servent uniquement à gérer votre réservation et ne sont jamais partagées.</p>
+      <div class="modal-actions">
+        <button class="btn-ghost" onclick="closeModal()">Annuler</button>
+        <button class="btn-solid" id="bkSubmit" onclick="confirmBooking(${di},${si})">Confirmer</button>
+      </div>`;
+    document.getElementById(‘modal’).style.display=’flex’;
+  }
+  function closeModal(){document.getElementById(‘modal’).style.display=’none’;}
+
+  async function confirmBooking(di,si){
+    const name=val(‘bkName’),mail=val(‘bkMail’),tel=val(‘bkTel’),err=document.getElementById(‘bkErr’);
+    if(!name)return showErr(err,’Merci d\u2019indiquer ton prénom.’);
+    if(!isEmail(mail))return showErr(err,’Merci d\u2019indiquer un email valide.’);
+    if(tel.replace(/\D/g,’’).length<8)return showErr(err,’Merci d\u2019indiquer un téléphone valide.’);
+
+    const d=weekDates()[di],m=SLOTS[si];
+    const dateLabel=`${DAY_NAMES[di]} ${d.getDate()} ${FR_MONTH[d.getMonth()]}`;
+    const timeLabel=`${fmtTime(m)} – ${fmtTime(slotEnd(m))}`;
+
+    const btn=document.getElementById(‘bkSubmit’);
+    btn.textContent=’Réservation en cours…’;btn.disabled=true;
+    showErr(err,’’);
+
+    try{
+      const data=await apiCall({action:’book’,password:PASSWORD,room:current,
+          date:ymd(d),start:m,name:name,email:mail,tel:tel});
+      if(!data.ok){
+        showErr(err,data.error||’Erreur lors de la réservation.’);
+        btn.textContent=’Confirmer’;btn.disabled=false;
+        return;
+      }
+      // Invalider le cache pour recharger les dispos
+      delete availCache[current+ymd(weekStart)];
+      document.getElementById(‘modalCard’).innerHTML=`
+        <div class="confirm-msg">
+          <div class="check">✓</div>
+          <h3>Créneau réservé !</h3>
+          <p style="color:var(--warm-grey);margin:10px 0 4px">${ROOMS[current].name} · ${dateLabel} · ${timeLabel}</p>
+          <p style="color:var(--occupied-ink);font-size:.82rem;margin-bottom:18px">Un email de confirmation avec l’invitation agenda vous a été envoyé.</p>
+          <button class="btn-solid" style="width:100%" onclick="closeModal();renderSlots();">Terminer</button>
+        </div>`;
+    }catch(e){
+      showErr(err,’Erreur de connexion. Réessayez.’);
+      btn.textContent=’Confirmer’;btn.disabled=false;
+    }
+  }
+
+  // ---- Privatisation ----
+  function openPrivat(){
+    document.getElementById(‘modalCard’).innerHTML=`
+      <h3>Privatiser un espace</h3>
+      <div class="when">Demande de privatisation · GREATLY House</div>
+      <div class="field"><label>Ton prénom</label><input type="text" id="pvName" placeholder="Prénom"></div>
+      <div class="field"><label>Ton email</label><input type="email" id="pvMail" placeholder="prenom@email.com" inputmode="email"></div>
+      <div class="field"><label>Ton téléphone</label><input type="tel" id="pvTel" placeholder="06 12 34 56 78" inputmode="tel"></div>
+      <div class="field"><label>Ton besoin</label><textarea id="pvNeed" placeholder="Type d’événement, espace souhaité, horaires…"></textarea></div>
+      <div class="field"><label>Date souhaitée</label><input type="date" id="pvDate"></div>
+      <div class="field"><label>Nombre de personnes</label><input type="number" id="pvNb" min="1" placeholder="Ex : 8"></div>
+      <div class="form-err" id="pvErr"></div>
+      <p class="rgpd">Vos données servent uniquement à traiter votre demande de privatisation.</p>
+      <div class="modal-actions">
+        <button class="btn-ghost" onclick="closeModal()">Annuler</button>
+        <button class="btn-solid" id="pvSubmit" onclick="sendPrivat()">Envoyer la demande</button>
+      </div>`;
+    document.getElementById(‘modal’).style.display=’flex’;
+  }
+  async function sendPrivat(){
+    const err=document.getElementById(‘pvErr’);
+    if(!val(‘pvName’))return showErr(err,’Merci d\u2019indiquer ton prénom.’);
+    if(!isEmail(val(‘pvMail’)))return showErr(err,’Merci d\u2019indiquer un email valide.’);
+    if(val(‘pvTel’).replace(/\D/g,’’).length<8)return showErr(err,’Merci d\u2019indiquer un téléphone valide.’);
+    if(!val(‘pvNeed’))return showErr(err,’Merci de décrire ton besoin.’);
+    if(!val(‘pvDate’))return showErr(err,’Merci d\u2019indiquer une date souhaitée.’);
+
+    const btn=document.getElementById(‘pvSubmit’);
+    btn.textContent=’Envoi en cours…’;btn.disabled=true;
+    showErr(err,’’);
+
+    try{
+      const data=await apiCall({action:’privatisation’,
+          name:val(‘pvName’),email:val(‘pvMail’),tel:val(‘pvTel’),
+          need:val(‘pvNeed’),date:val(‘pvDate’),nb:val(‘pvNb’)});
+      if(!data.ok){
+        showErr(err,data.error||’Erreur lors de l\u2019envoi.’);
+        btn.textContent=’Envoyer la demande’;btn.disabled=false;
+        return;
+      }
+      document.getElementById(‘modalCard’).innerHTML=`
+        <div class="confirm-msg">
+          <div class="check">✓</div>
+          <h3>Demande envoyée !</h3>
+          <p style="color:var(--warm-grey);margin:10px 0 4px">Nous reviendrons vers vous rapidement.</p>
+          <button class="btn-solid" style="width:100%" onclick="closeModal()">Terminer</button>
+        </div>`;
+    }catch(e){
+      showErr(err,’Erreur de connexion. Réessayez.’);
+      btn.textContent=’Envoyer la demande’;btn.disabled=false;
+    }
+  }
+
+  document.getElementById(‘modal’).addEventListener(‘click’,e=>{if(e.target.id===’modal’)closeModal();});
+</script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Email de confirmation · GREATLY</title>
+</head>
+<!-- Aperçu de l'email de confirmation. Tables + styles inline = compatible Gmail / Apple Mail / Outlook.
+     Les valeurs entre {{ }} seront remplies automatiquement par le script à la réservation. -->
+<body style="margin:0;padding:24px 12px;background:#EDE8E0;font-family:'Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased;">
+
+  <!-- preheader caché -->
+  <div style="display:none;max-height:0;overflow:hidden;opacity:0;">C'est réservé ! La Bulle — jeudi 11 juin, 14h30. On vous attend à la GREATLY House.</div>
+
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px;margin:0 auto;">
+    <tr><td>
+
+      <!-- En-tête marque -->
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+        <tr><td align="center" style="padding:6px 0 18px;">
+          <span style="font-size:18px;font-weight:700;letter-spacing:-.3px;color:#6B7D5C;">GREAT<span style="color:#1A1A1A;">LY</span></span>
+          <span style="font-size:18px;font-weight:600;color:#6B6460;">&nbsp;House</span>
+        </td></tr>
+      </table>
+
+      <!-- Carte principale -->
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FFFFFF;border-radius:20px;overflow:hidden;border:1px solid #E7E1D7;">
+
+        <!-- bandeau couleur de la salle (ici La Bulle = vert sauge) -->
+        <tr><td style="height:6px;background:#6B7D5C;font-size:0;line-height:0;">&nbsp;</td></tr>
+
+        <tr><td style="padding:32px 30px 8px;text-align:center;">
+          <!-- pastille check -->
+          <table role="presentation" cellpadding="0" cellspacing="0" align="center">
+            <tr><td style="width:56px;height:56px;background:#CDD8BE;border-radius:50%;text-align:center;vertical-align:middle;font-size:28px;color:#4f5e42;">&#10003;</td></tr>
+          </table>
+          <h1 style="margin:18px 0 4px;font-size:23px;color:#1A1A1A;font-weight:700;">C'est réservé&nbsp;!</h1>
+          <p style="margin:0;color:#6B6460;font-size:15px;line-height:1.5;">
+            Bonjour <strong>{{prenom}}</strong>, votre créneau est confirmé.<br>On a hâte de vous accueillir à la maison.
+          </p>
+        </td></tr>
+
+        <!-- récap réservation -->
+        <tr><td style="padding:22px 30px 6px;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F7F4EF;border-radius:14px;">
+            <tr><td style="padding:18px 20px;">
+
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="font-size:12px;text-transform:uppercase;letter-spacing:.6px;color:#9c958b;font-weight:700;padding-bottom:2px;">Espace</td>
+                </tr>
+                <tr><td style="font-size:18px;font-weight:700;color:#1A1A1A;padding-bottom:14px;">
+                  <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#6B7D5C;margin-right:8px;"></span>{{salle}}
+                </td></tr>
+
+                <tr><td style="font-size:12px;text-transform:uppercase;letter-spacing:.6px;color:#9c958b;font-weight:700;padding-bottom:2px;">Date & horaire</td></tr>
+                <tr><td style="font-size:15px;color:#1A1A1A;font-weight:600;padding-bottom:14px;">{{date}} · {{horaire}}</td></tr>
+
+                <tr><td style="font-size:12px;text-transform:uppercase;letter-spacing:.6px;color:#9c958b;font-weight:700;padding-bottom:2px;">Lieu</td></tr>
+                <tr><td style="font-size:15px;color:#1A1A1A;font-weight:600;">GREATLY House — 10 rue de Lambersart, Verlinghem</td></tr>
+              </table>
+
+            </td></tr>
+          </table>
+        </td></tr>
+
+        <!-- boutons agenda -->
+        <tr><td style="padding:20px 30px 6px;text-align:center;">
+          <!-- Google Agenda (lien render pré-rempli, généré par le script) -->
+          <a href="{{lien_google_agenda}}" style="display:block;background:#6B7D5C;color:#ffffff;text-decoration:none;font-size:15px;font-weight:700;padding:15px 20px;border-radius:12px;">
+            Ajouter à Google Agenda
+          </a>
+          <!-- .ics joint (Apple Calendar, Outlook…) -->
+          <a href="{{lien_ics}}" style="display:block;margin-top:10px;background:#ffffff;color:#1A1A1A;text-decoration:none;font-size:15px;font-weight:700;padding:14px 20px;border-radius:12px;border:1.5px solid #E7E1D7;">
+            Ajouter à mon agenda (Apple, Outlook…)
+          </a>
+        </td></tr>
+
+        <tr><td style="padding:14px 30px 4px;text-align:center;">
+          <p style="margin:0;color:#9c958b;font-size:13px;line-height:1.5;">
+            Une invitation est aussi jointe à ce mail : Gmail vous proposera de l'ajouter directement.
+          </p>
+        </td></tr>
+
+        <!-- annulation -->
+        <tr><td style="padding:18px 30px 0;text-align:center;">
+          <p style="margin:0;color:#6B6460;font-size:14px;line-height:1.6;">
+            Un empêchement&nbsp;?
+            <a href="{{lien_annulation}}" style="color:#6B7D5C;font-weight:700;text-decoration:underline;">Annuler ce créneau</a>
+            — il sera aussitôt libéré pour un autre membre.
+          </p>
+        </td></tr>
+
+        <!-- note + contact -->
+        <tr><td style="padding:12px 30px 28px;text-align:center;">
+          <p style="margin:0;color:#6B6460;font-size:14px;line-height:1.6;">
+            Une question&nbsp;? Écrivez-nous sur WhatsApp au
+            <a href="https://wa.me/33651156344" style="color:#6B7D5C;font-weight:700;text-decoration:none;white-space:nowrap;">06&nbsp;51&nbsp;15&nbsp;63&nbsp;44</a>.
+          </p>
+        </td></tr>
+
+      </table>
+
+      <!-- pied de page -->
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+        <tr><td align="center" style="padding:20px 16px 8px;">
+          <p style="margin:0;color:#9c958b;font-size:12px;line-height:1.6;">
+            GREATLY House · Votre lieu pour vous mettre au vert et souffler.<br>
+            10 rue de Lambersart, Verlinghem · Lun–Ven, 13h–18h30
+          </p>
+        </td></tr>
+      </table>
+
+    </td></tr>
+  </table>
+
+</body>
+</html>
