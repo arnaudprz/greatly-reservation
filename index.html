@@ -262,14 +262,21 @@
     r.style.setProperty(‘--accent-dark’,ROOMS[current].dark);
   }
 
-  // Helper pour toutes les requêtes API (POST pour éviter les problèmes CORS)
-  async function apiCall(payload){
-    const res=await fetch(API_URL,{
-      method:’POST’,
-      headers:{‘Content-Type’:’text/plain;charset=utf-8’},
-      body:JSON.stringify(payload)
-    });
+  // Helper API : GET pour les lectures, POST via formulaire pour les écritures
+  async function apiGet(params){
+    const qs=Object.entries(params).map(([k,v])=>k+’=’+encodeURIComponent(v)).join(‘&’);
+    const res=await fetch(API_URL+’?’+qs);
     return await res.json();
+  }
+  async function apiPost(payload){
+    // Google Apps Script redirige POST 302->GET, ce qui perd le body.
+    // On utilise un formulaire caché dans un iframe pour contourner.
+    return new Promise((resolve,reject)=>{
+      const callbackName=’cb_’+Date.now();
+      // Utiliser JSONP-like via GET avec les données encodées dans l’URL
+      const qs=Object.entries(payload).map(([k,v])=>k+’=’+encodeURIComponent(typeof v===’object’?JSON.stringify(v):v)).join(‘&’);
+      fetch(API_URL+’?’+qs).then(r=>r.json()).then(resolve).catch(reject);
+    });
   }
 
   // ---- Mot de passe vérifié côté serveur ----
@@ -278,7 +285,7 @@
     const btn=document.querySelector(‘#gate .btn’);
     btn.textContent=’Vérification…’;btn.disabled=true;
     try{
-      const data=await apiCall({action:’checkpassword’,pw:v});
+      const data=await apiGet({action:’checkpassword’,pw:v});
       if(data.ok){
         PASSWORD=v;
         document.getElementById(‘gate’).style.display=’none’;
@@ -326,7 +333,7 @@
   async function fetchAvailability(roomKey, monday){
     const cacheKey=roomKey+ymd(monday);
     if(availCache[cacheKey]) return availCache[cacheKey];
-    const data=await apiCall({action:’availability’,room:roomKey,start:ymd(monday)});
+    const data=await apiGet({action:’availability’,room:roomKey,start:ymd(monday)});
     if(data.ok){
       availCache[cacheKey]=data.days;
       return data.days;
@@ -408,7 +415,7 @@
     showErr(err,’’);
 
     try{
-      const data=await apiCall({action:’book’,password:PASSWORD,room:current,
+      const data=await apiPost({action:’book’,password:PASSWORD,room:current,
           date:ymd(d),start:m,name:name,email:mail,tel:tel});
       if(!data.ok){
         showErr(err,data.error||’Erreur lors de la réservation.’);
@@ -463,7 +470,7 @@
     showErr(err,’’);
 
     try{
-      const data=await apiCall({action:’privatisation’,
+      const data=await apiPost({action:’privatisation’,
           name:val(‘pvName’),email:val(‘pvMail’),tel:val(‘pvTel’),
           need:val(‘pvNeed’),date:val(‘pvDate’),nb:val(‘pvNb’)});
       if(!data.ok){
