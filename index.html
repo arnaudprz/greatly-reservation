@@ -366,10 +366,13 @@
       const dayData=apiDays.find(dd=>dd.date===ymd(d));
       if(!dayData){block.innerHTML=`<div class="day-head">${left}<span class="day-state">—</span></div>`;wrap.appendChild(block);return;}
 
+      const now=new Date();
+      const nowMin=now.getHours()*60+now.getMinutes();
+      const isToday=ymd(d)===ymd(now);
       const avail=dayData.slots.filter(s=>!s.busy).map(s=>{
         const si=SLOTS.indexOf(s.start);
         return {m:s.start, si:si};
-      }).filter(s=>s.si!==-1);
+      }).filter(s=>s.si!==-1 && !(isToday && s.m<=nowMin));
 
       if(!avail.length){block.innerHTML=`<div class="day-head">${left}<span class="day-state">Complet</span></div>`;wrap.appendChild(block);return;}
       const chips=avail.map(s=>`<button class="chip" onclick="openModal(${di},${s.si})">${fmtTime(s.m)} – ${fmtTime(slotEnd(s.m))}</button>`).join('');
