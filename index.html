@@ -195,21 +195,21 @@
 
 <script>
   // ---- API ----
-  const API_URL = ‘https://script.google.com/macros/s/AKfycbx_O4Mo47Y9vvUkSG9pltSh4D9ktJvfdnqUx1fSLP5bfLpy8ip9hajGns3VhhnwQljFBQ/exec’;
-  let PASSWORD = ‘’;
+  const API_URL = 'https://script.google.com/macros/s/AKfycbx_O4Mo47Y9vvUkSG9pltSh4D9ktJvfdnqUx1fSLP5bfLpy8ip9hajGns3VhhnwQljFBQ/exec';
+  let PASSWORD = '';
 
   // ---- Espaces ----
   const ICONS = {
-    headphones:’<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="13" width="4" height="7" rx="2"/><rect x="17" y="13" width="4" height="7" rx="2"/></svg>’,
-    users:’<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 5.2a3.2 3.2 0 0 1 0 6"/><path d="M18.5 20a6.5 6.5 0 0 0-3-5.5"/></svg>’,
-    activity:’<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2.5 7 5-14 2.5 7H21"/></svg>’,
-    check:’<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>’
+    headphones:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="13" width="4" height="7" rx="2"/><rect x="17" y="13" width="4" height="7" rx="2"/></svg>',
+    users:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 5.2a3.2 3.2 0 0 1 0 6"/><path d="M18.5 20a6.5 6.5 0 0 0-3-5.5"/></svg>',
+    activity:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2.5 7 5-14 2.5 7H21"/></svg>',
+    check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>'
   };
   const ROOMS = {
     bulle: {name:"La Bulle", icon:"headphones", accent:"#6B7D5C", pale:"#CDD8BE", dark:"#4f5e42",
             tag:"Cocon côté nature pour vos appels visio et la concentration.", cap:"1 à 3 personnes"},
     nid:   {name:"Le Nid",   icon:"users",      accent:"#C0814E", pale:"#EBD6BC", dark:"#8f6035",
-            tag:"Salon feutré pour vos réunions et points d’équipe.", cap:"1 à 3 personnes"},
+            tag:"Salon feutré pour vos réunions et points d'équipe.", cap:"1 à 3 personnes"},
     dojo:  {name:"Le Dojo",  icon:"activity",   accent:"#4F7C82", pale:"#C2D8DA", dark:"#3a5d62",
             tag:"Salle de sport pour vos séances, mobilité et étirements.", cap:"3 personnes max"},
   };
@@ -230,11 +230,11 @@
     "2027-01-01","2027-03-29","2027-05-01","2027-05-06","2027-05-08","2027-05-17","2027-07-14","2027-08-15"];
   const FERMETURES=[];
 
-  const pad=n=>String(n).padStart(2,’0’);
-  const ymd=d=>d.getFullYear()+’-’+pad(d.getMonth()+1)+’-’+pad(d.getDate());
+  const pad=n=>String(n).padStart(2,'0');
+  const ymd=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
   const addDays=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x;};
   function mondayOf(d){const x=new Date(d);x.setHours(0,0,0,0);return addDays(x,-((x.getDay()+6)%7));}
-  const fmtTime=m=>pad(Math.floor(m/60))+’:’+pad(m%60);
+  const fmtTime=m=>pad(Math.floor(m/60))+':'+pad(m%60);
   const isHoliday=d=>{const t=ymd(d);return HOLIDAYS.some(([s,e])=>t>=s&&t<e);};
   function closeReason(d){const t=ymd(d);
     if(isHoliday(d))return "Fermé · vacances";
@@ -246,7 +246,7 @@
   const today=new Date();today.setHours(0,0,0,0);
   const minMonday=mondayOf(today);
   const isPast=d=>d<today;
-  const val=id=>{const e=document.getElementById(id);return e?e.value.trim():’’;};
+  const val=id=>{const e=document.getElementById(id);return e?e.value.trim():'';};
 
   // Cache des disponibilités (clé = room+weekStart)
   let availCache={};
@@ -257,58 +257,58 @@
 
   function applyAccent(){
     const r=document.documentElement;
-    r.style.setProperty(‘--accent’,ROOMS[current].accent);
-    r.style.setProperty(‘--accent-pale’,ROOMS[current].pale);
-    r.style.setProperty(‘--accent-dark’,ROOMS[current].dark);
+    r.style.setProperty('--accent',ROOMS[current].accent);
+    r.style.setProperty('--accent-pale',ROOMS[current].pale);
+    r.style.setProperty('--accent-dark',ROOMS[current].dark);
   }
 
   // Helper API : GET pour les lectures, POST via formulaire pour les écritures
   async function apiGet(params){
-    const qs=Object.entries(params).map(([k,v])=>k+’=’+encodeURIComponent(v)).join(‘&’);
-    const res=await fetch(API_URL+’?’+qs);
+    const qs=Object.entries(params).map(([k,v])=>k+'='+encodeURIComponent(v)).join('&');
+    const res=await fetch(API_URL+'?'+qs);
     return await res.json();
   }
   async function apiPost(payload){
     // Google Apps Script redirige POST 302->GET, ce qui perd le body.
     // On utilise un formulaire caché dans un iframe pour contourner.
     return new Promise((resolve,reject)=>{
-      const callbackName=’cb_’+Date.now();
-      // Utiliser JSONP-like via GET avec les données encodées dans l’URL
-      const qs=Object.entries(payload).map(([k,v])=>k+’=’+encodeURIComponent(typeof v===’object’?JSON.stringify(v):v)).join(‘&’);
-      fetch(API_URL+’?’+qs).then(r=>r.json()).then(resolve).catch(reject);
+      const callbackName='cb_'+Date.now();
+      // Utiliser JSONP-like via GET avec les données encodées dans l'URL
+      const qs=Object.entries(payload).map(([k,v])=>k+'='+encodeURIComponent(typeof v==='object'?JSON.stringify(v):v)).join('&');
+      fetch(API_URL+'?'+qs).then(r=>r.json()).then(resolve).catch(reject);
     });
   }
 
   // ---- Mot de passe vérifié côté serveur ----
   async function checkPw(){
-    const v=document.getElementById(‘pw’).value.trim();
-    const btn=document.querySelector(‘#gate .btn’);
-    btn.textContent=’Vérification…’;btn.disabled=true;
+    const v=document.getElementById('pw').value.trim();
+    const btn=document.querySelector('#gate .btn');
+    btn.textContent='Vérification…';btn.disabled=true;
     try{
-      const data=await apiGet({action:’checkpassword’,pw:v});
+      const data=await apiGet({action:'checkpassword',pw:v});
       if(data.ok){
         PASSWORD=v;
-        document.getElementById(‘gate’).style.display=’none’;
-        document.getElementById(‘app’).style.display=’block’;
+        document.getElementById('gate').style.display='none';
+        document.getElementById('app').style.display='block';
         render();
       } else {
-        document.getElementById(‘gateError’).textContent="Mot de passe incorrect.";
+        document.getElementById('gateError').textContent="Mot de passe incorrect.";
       }
     }catch(e){
-      document.getElementById(‘gateError’).textContent="Erreur de connexion. Réessayez.";
+      document.getElementById('gateError').textContent="Erreur de connexion. Réessayez.";
     }
-    btn.textContent=’Accéder’;btn.disabled=false;
+    btn.textContent='Accéder';btn.disabled=false;
   }
-  document.getElementById(‘pw’).addEventListener(‘keydown’,e=>{if(e.key===’Enter’)checkPw();});
+  document.getElementById('pw').addEventListener('keydown',e=>{if(e.key==='Enter')checkPw();});
 
   function changeWeek(dir){const ns=addDays(weekStart,dir*7);if(ns<minMonday)return;weekStart=ns;render();}
 
   function renderRooms(){
-    const wrap=document.getElementById(‘rooms’);wrap.innerHTML=’’;
+    const wrap=document.getElementById('rooms');wrap.innerHTML='';
     Object.entries(ROOMS).forEach(([k,r])=>{
-      const c=document.createElement(‘button’);
-      c.className=’room-card’+(k===current?’ sel’:’’);
-      c.style.setProperty(‘--c’,r.accent);c.style.setProperty(‘--cp’,r.pale);c.style.setProperty(‘--cd’,r.dark);
+      const c=document.createElement('button');
+      c.className='room-card'+(k===current?' sel':'');
+      c.style.setProperty('--c',r.accent);c.style.setProperty('--cp',r.pale);c.style.setProperty('--cd',r.dark);
       c.innerHTML=`
         <span class="check">${ICONS.check}</span>
         <span class="ic-wrap">${ICONS[r.icon]}</span>
@@ -323,17 +323,17 @@
   function renderWeekNav(){
     const ds=weekDates(),a=ds[0],b=ds[ds.length-1];
     const same=a.getMonth()===b.getMonth();
-    document.getElementById(‘weekLabel’).textContent = same
+    document.getElementById('weekLabel').textContent = same
       ? `${a.getDate()} – ${b.getDate()} ${FR_MONTH[b.getMonth()]} ${b.getFullYear()}`
       : `${a.getDate()} ${FR_MONTH[a.getMonth()]} – ${b.getDate()} ${FR_MONTH[b.getMonth()]} ${b.getFullYear()}`;
-    document.getElementById(‘prevW’).disabled = addDays(weekStart,-7) < minMonday;
+    document.getElementById('prevW').disabled = addDays(weekStart,-7) < minMonday;
   }
 
-  // ---- Disponibilités depuis l’API ----
+  // ---- Disponibilités depuis l'API ----
   async function fetchAvailability(roomKey, monday){
     const cacheKey=roomKey+ymd(monday);
     if(availCache[cacheKey]) return availCache[cacheKey];
-    const data=await apiGet({action:’availability’,room:roomKey,start:ymd(monday)});
+    const data=await apiGet({action:'availability',room:roomKey,start:ymd(monday)});
     if(data.ok){
       availCache[cacheKey]=data.days;
       return data.days;
@@ -342,17 +342,17 @@
   }
 
   async function renderSlots(){
-    const wrap=document.getElementById(‘slotsList’);
-    wrap.innerHTML=’<p class="hint" style="text-align:center;padding:20px 0;">Chargement des disponibilités…</p>’;
+    const wrap=document.getElementById('slotsList');
+    wrap.innerHTML='<p class="hint" style="text-align:center;padding:20px 0;">Chargement des disponibilités…</p>';
 
     let apiDays=null;
     try{
       apiDays=await fetchAvailability(current, weekStart);
     }catch(e){}
 
-    wrap.innerHTML=’’;
+    wrap.innerHTML='';
     weekDates().forEach((d,di)=>{
-      const block=document.createElement(‘div’);block.className=’day-block’;
+      const block=document.createElement('div');block.className='day-block';
       const left=`<div class="day-id"><span class="day-name">${DAY_NAMES[di]}</span><span class="day-date">${d.getDate()} ${FR_MONTH[d.getMonth()]}</span></div>`;
       if(isPast(d)){block.innerHTML=`<div class="day-head">${left}<span class="day-state">Passé</span></div>`;wrap.appendChild(block);return;}
       const cr=closeReason(d);
@@ -372,7 +372,7 @@
       }).filter(s=>s.si!==-1);
 
       if(!avail.length){block.innerHTML=`<div class="day-head">${left}<span class="day-state">Complet</span></div>`;wrap.appendChild(block);return;}
-      const chips=avail.map(s=>`<button class="chip" onclick="openModal(${di},${s.si})">${fmtTime(s.m)} – ${fmtTime(slotEnd(s.m))}</button>`).join(‘’);
+      const chips=avail.map(s=>`<button class="chip" onclick="openModal(${di},${s.si})">${fmtTime(s.m)} – ${fmtTime(slotEnd(s.m))}</button>`).join('');
       block.innerHTML=`<div class="day-head">${left}<span class="day-count">${avail.length} dispo</span></div><div class="chips">${chips}</div>`;
       wrap.appendChild(block);
     });
@@ -384,7 +384,7 @@
   function openModal(di,si){
     const d=weekDates()[di],m=SLOTS[si];
     const dateLabel=`${DAY_NAMES[di]} ${d.getDate()} ${FR_MONTH[d.getMonth()]}`;
-    document.getElementById(‘modalCard’).innerHTML=`
+    document.getElementById('modalCard').innerHTML=`
       <h3>${ROOMS[current].name}</h3>
       <div class="when">${dateLabel} · ${fmtTime(m)} – ${fmtTime(slotEnd(m))}</div>
       <div class="field"><label>Ton prénom</label><input type="text" id="bkName" placeholder="Prénom"></div>
@@ -396,57 +396,57 @@
         <button class="btn-ghost" onclick="closeModal()">Annuler</button>
         <button class="btn-solid" id="bkSubmit" onclick="confirmBooking(${di},${si})">Confirmer</button>
       </div>`;
-    document.getElementById(‘modal’).style.display=’flex’;
+    document.getElementById('modal').style.display='flex';
   }
-  function closeModal(){document.getElementById(‘modal’).style.display=’none’;}
+  function closeModal(){document.getElementById('modal').style.display='none';}
 
   async function confirmBooking(di,si){
-    const name=val(‘bkName’),mail=val(‘bkMail’),tel=val(‘bkTel’),err=document.getElementById(‘bkErr’);
-    if(!name)return showErr(err,’Merci d\u2019indiquer ton prénom.’);
-    if(!isEmail(mail))return showErr(err,’Merci d\u2019indiquer un email valide.’);
-    if(tel.replace(/\D/g,’’).length<8)return showErr(err,’Merci d\u2019indiquer un téléphone valide.’);
+    const name=val('bkName'),mail=val('bkMail'),tel=val('bkTel'),err=document.getElementById('bkErr');
+    if(!name)return showErr(err,'Merci d\u2019indiquer ton prénom.');
+    if(!isEmail(mail))return showErr(err,'Merci d\u2019indiquer un email valide.');
+    if(tel.replace(/\D/g,'').length<8)return showErr(err,'Merci d\u2019indiquer un téléphone valide.');
 
     const d=weekDates()[di],m=SLOTS[si];
     const dateLabel=`${DAY_NAMES[di]} ${d.getDate()} ${FR_MONTH[d.getMonth()]}`;
     const timeLabel=`${fmtTime(m)} – ${fmtTime(slotEnd(m))}`;
 
-    const btn=document.getElementById(‘bkSubmit’);
-    btn.textContent=’Réservation en cours…’;btn.disabled=true;
-    showErr(err,’’);
+    const btn=document.getElementById('bkSubmit');
+    btn.textContent='Réservation en cours…';btn.disabled=true;
+    showErr(err,'');
 
     try{
-      const data=await apiPost({action:’book’,password:PASSWORD,room:current,
+      const data=await apiPost({action:'book',password:PASSWORD,room:current,
           date:ymd(d),start:m,name:name,email:mail,tel:tel});
       if(!data.ok){
-        showErr(err,data.error||’Erreur lors de la réservation.’);
-        btn.textContent=’Confirmer’;btn.disabled=false;
+        showErr(err,data.error||'Erreur lors de la réservation.');
+        btn.textContent='Confirmer';btn.disabled=false;
         return;
       }
       // Invalider le cache pour recharger les dispos
       delete availCache[current+ymd(weekStart)];
-      document.getElementById(‘modalCard’).innerHTML=`
+      document.getElementById('modalCard').innerHTML=`
         <div class="confirm-msg">
           <div class="check">✓</div>
           <h3>Créneau réservé !</h3>
           <p style="color:var(--warm-grey);margin:10px 0 4px">${ROOMS[current].name} · ${dateLabel} · ${timeLabel}</p>
-          <p style="color:var(--occupied-ink);font-size:.82rem;margin-bottom:18px">Un email de confirmation avec l’invitation agenda vous a été envoyé.</p>
+          <p style="color:var(--occupied-ink);font-size:.82rem;margin-bottom:18px">Un email de confirmation avec l'invitation agenda vous a été envoyé.</p>
           <button class="btn-solid" style="width:100%" onclick="closeModal();renderSlots();">Terminer</button>
         </div>`;
     }catch(e){
-      showErr(err,’Erreur de connexion. Réessayez.’);
-      btn.textContent=’Confirmer’;btn.disabled=false;
+      showErr(err,'Erreur de connexion. Réessayez.');
+      btn.textContent='Confirmer';btn.disabled=false;
     }
   }
 
   // ---- Privatisation ----
   function openPrivat(){
-    document.getElementById(‘modalCard’).innerHTML=`
+    document.getElementById('modalCard').innerHTML=`
       <h3>Privatiser un espace</h3>
       <div class="when">Demande de privatisation · GREATLY House</div>
       <div class="field"><label>Ton prénom</label><input type="text" id="pvName" placeholder="Prénom"></div>
       <div class="field"><label>Ton email</label><input type="email" id="pvMail" placeholder="prenom@email.com" inputmode="email"></div>
       <div class="field"><label>Ton téléphone</label><input type="tel" id="pvTel" placeholder="06 12 34 56 78" inputmode="tel"></div>
-      <div class="field"><label>Ton besoin</label><textarea id="pvNeed" placeholder="Type d’événement, espace souhaité, horaires…"></textarea></div>
+      <div class="field"><label>Ton besoin</label><textarea id="pvNeed" placeholder="Type d'événement, espace souhaité, horaires…"></textarea></div>
       <div class="field"><label>Date souhaitée</label><input type="date" id="pvDate"></div>
       <div class="field"><label>Nombre de personnes</label><input type="number" id="pvNb" min="1" placeholder="Ex : 8"></div>
       <div class="form-err" id="pvErr"></div>
@@ -455,30 +455,30 @@
         <button class="btn-ghost" onclick="closeModal()">Annuler</button>
         <button class="btn-solid" id="pvSubmit" onclick="sendPrivat()">Envoyer la demande</button>
       </div>`;
-    document.getElementById(‘modal’).style.display=’flex’;
+    document.getElementById('modal').style.display='flex';
   }
   async function sendPrivat(){
-    const err=document.getElementById(‘pvErr’);
-    if(!val(‘pvName’))return showErr(err,’Merci d\u2019indiquer ton prénom.’);
-    if(!isEmail(val(‘pvMail’)))return showErr(err,’Merci d\u2019indiquer un email valide.’);
-    if(val(‘pvTel’).replace(/\D/g,’’).length<8)return showErr(err,’Merci d\u2019indiquer un téléphone valide.’);
-    if(!val(‘pvNeed’))return showErr(err,’Merci de décrire ton besoin.’);
-    if(!val(‘pvDate’))return showErr(err,’Merci d\u2019indiquer une date souhaitée.’);
+    const err=document.getElementById('pvErr');
+    if(!val('pvName'))return showErr(err,'Merci d\u2019indiquer ton prénom.');
+    if(!isEmail(val('pvMail')))return showErr(err,'Merci d\u2019indiquer un email valide.');
+    if(val('pvTel').replace(/\D/g,'').length<8)return showErr(err,'Merci d\u2019indiquer un téléphone valide.');
+    if(!val('pvNeed'))return showErr(err,'Merci de décrire ton besoin.');
+    if(!val('pvDate'))return showErr(err,'Merci d\u2019indiquer une date souhaitée.');
 
-    const btn=document.getElementById(‘pvSubmit’);
-    btn.textContent=’Envoi en cours…’;btn.disabled=true;
-    showErr(err,’’);
+    const btn=document.getElementById('pvSubmit');
+    btn.textContent='Envoi en cours…';btn.disabled=true;
+    showErr(err,'');
 
     try{
-      const data=await apiPost({action:’privatisation’,
-          name:val(‘pvName’),email:val(‘pvMail’),tel:val(‘pvTel’),
-          need:val(‘pvNeed’),date:val(‘pvDate’),nb:val(‘pvNb’)});
+      const data=await apiPost({action:'privatisation',
+          name:val('pvName'),email:val('pvMail'),tel:val('pvTel'),
+          need:val('pvNeed'),date:val('pvDate'),nb:val('pvNb')});
       if(!data.ok){
-        showErr(err,data.error||’Erreur lors de l\u2019envoi.’);
-        btn.textContent=’Envoyer la demande’;btn.disabled=false;
+        showErr(err,data.error||'Erreur lors de l\u2019envoi.');
+        btn.textContent='Envoyer la demande';btn.disabled=false;
         return;
       }
-      document.getElementById(‘modalCard’).innerHTML=`
+      document.getElementById('modalCard').innerHTML=`
         <div class="confirm-msg">
           <div class="check">✓</div>
           <h3>Demande envoyée !</h3>
@@ -486,12 +486,12 @@
           <button class="btn-solid" style="width:100%" onclick="closeModal()">Terminer</button>
         </div>`;
     }catch(e){
-      showErr(err,’Erreur de connexion. Réessayez.’);
-      btn.textContent=’Envoyer la demande’;btn.disabled=false;
+      showErr(err,'Erreur de connexion. Réessayez.');
+      btn.textContent='Envoyer la demande';btn.disabled=false;
     }
   }
 
-  document.getElementById(‘modal’).addEventListener(‘click’,e=>{if(e.target.id===’modal’)closeModal();});
+  document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal();});
 </script>
 </body>
 </html>
