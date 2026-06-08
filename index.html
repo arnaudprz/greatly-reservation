@@ -55,16 +55,23 @@
   .step{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:1.3px;color:var(--occupied-ink);margin:30px 0 14px;display:flex;align-items:center;gap:10px}
   .step .n{width:22px;height:22px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.72rem;flex:0 0 auto}
 
-  /* sélecteur espaces compact */
-  .rooms{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
-  .room-pill{display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:14px;border:1.5px solid var(--line);background:#fff;cursor:pointer;font-family:inherit;transition:all .15s;position:relative}
-  .room-pill:hover{box-shadow:0 4px 12px rgba(26,26,26,.06);transform:translateY(-1px)}
-  .room-pill.sel{border-color:var(--c);background:color-mix(in srgb, var(--cp) 38%, #fff)}
-  .room-pill .ic-wrap{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--cp);color:var(--cd);flex:0 0 auto}
-  .room-pill .ic-wrap svg{width:18px;height:18px}
-  .room-pill .rinfo{text-align:left;line-height:1.2}
-  .room-pill .rname{font-size:.92rem;font-weight:700;letter-spacing:-.2px}
-  .room-pill .rcap{font-size:.68rem;color:var(--warm-grey);font-weight:500}
+  /* sélecteur espaces — onglets segmentés */
+  .rooms{background:#fff;border:1px solid var(--line);border-radius:16px;padding:6px;display:flex;gap:6px}
+  .room-tab{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px 8px;border-radius:12px;border:none;background:transparent;cursor:pointer;font-family:inherit;font-size:.88rem;font-weight:600;color:#6B6460;transition:all .15s}
+  .room-tab svg{width:18px;height:18px;flex:0 0 auto}
+  .room-tab:hover{background:var(--cream)}
+  .room-tab.sel{background:var(--c);color:#fff}
+  .room-tab.sel svg{color:#fff}
+  @media(max-width:420px){.room-tab{font-size:.78rem;padding:9px 4px;gap:4px}.room-tab svg{width:16px;height:16px}}
+
+  /* bande détail espace sélectionné */
+  .room-detail{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-top:10px}
+  .room-detail .rd-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+  .room-detail .rd-icon svg{width:20px;height:20px}
+  .room-detail .rd-info{flex:1;min-width:0}
+  .room-detail .rd-name{font-size:1rem;font-weight:700;letter-spacing:-.2px}
+  .room-detail .rd-tag{font-size:.82rem;color:var(--warm-grey);line-height:1.35;margin-top:2px}
+  .room-detail .rd-cap{flex:0 0 auto;font-size:.72rem;font-weight:600;padding:5px 12px;border-radius:999px;white-space:nowrap}
 
   /* bandeau privatisation */
   .privat{display:flex;align-items:center;gap:14px;justify-content:space-between;flex-wrap:wrap;background:var(--ink);color:#fff;border-radius:18px;padding:18px 20px;margin-top:16px}
@@ -175,6 +182,7 @@
 
   <div class="step"><span class="n">1</span> Choisissez votre espace</div>
   <div class="rooms" id="rooms"></div>
+  <div class="room-detail" id="roomDetail"></div>
 
   <div class="privat">
     <div class="pt"><b>Un événement, un groupe ?</b><span>Privatisez un salon ou la maison pour vos temps collectifs.</span></div>
@@ -316,14 +324,18 @@
     const wrap=document.getElementById('rooms');wrap.innerHTML='';
     Object.entries(ROOMS).forEach(([k,r])=>{
       const c=document.createElement('button');
-      c.className='room-pill'+(k===current?' sel':'');
-      c.style.setProperty('--c',r.accent);c.style.setProperty('--cp',r.pale);c.style.setProperty('--cd',r.dark);
-      c.innerHTML=`
-        <span class="ic-wrap">${ICONS[r.icon]}</span>
-        <div class="rinfo"><div class="rname">${r.name}</div><div class="rcap">${r.cap}</div></div>`;
+      c.className='room-tab'+(k===current?' sel':'');
+      c.style.setProperty('--c',r.accent);
+      c.innerHTML=ICONS[r.icon]+r.name;
       c.onclick=()=>{current=k;render();};
       wrap.appendChild(c);
     });
+    // Bande de detail
+    const r=ROOMS[current];
+    document.getElementById('roomDetail').innerHTML=`
+      <div class="rd-icon" style="background:${r.pale};color:${r.dark}">${ICONS[r.icon]}</div>
+      <div class="rd-info"><div class="rd-name">${r.name}</div><div class="rd-tag">${r.tag}</div></div>
+      <span class="rd-cap" style="background:${r.pale};color:${r.dark}">${r.cap}</span>`;
   }
 
   function renderWeekNav(){
