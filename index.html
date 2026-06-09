@@ -253,18 +253,6 @@
   <div class="rooms" id="rooms"></div>
   <div class="room-detail" id="roomDetail"></div>
 
-  <div id="maisonPanel">
-    <div class="maison-card">
-      <div class="maison-header">
-        <div class="maison-avatar">A</div>
-        <div class="mh-info"><div class="mh-title">A la maison</div><div class="mh-sub">Je suis dans les espaces communs · passez sans rendez-vous</div></div>
-      </div>
-      <p class="maison-desc">Pas besoin de réserver une salle : dites-moi juste que vous passez, je serai la pour papoter, prendre un cafe ou echanger.</p>
-      <div class="maison-label">Choisissez un jour pour me prevenir :</div>
-      <div id="maisonDays"><div class="maison-loading">Chargement...</div></div>
-    </div>
-  </div>
-
   <div id="step2" class="step"><span class="n">2</span> Choisissez votre semaine</div>
   <div class="weeknav">
     <button id="prevW" onclick="changeWeek(-1)">‹</button>
@@ -557,25 +545,13 @@
       c.onclick=()=>{current=k;render();};
       wrap.appendChild(c);
     });
-    // Bande de detail / panneau maison
+    // Bande de detail
     const det=document.getElementById('roomDetail');
-    const mp=document.getElementById('maisonPanel');
-    const s2=document.getElementById('step2');
-    const s3=document.getElementById('step3');
-    const wn=document.querySelector('.weeknav');
-    const hint=document.querySelector('.hint');
-    const sl=document.getElementById('slotsList');
     if(current==='maison'){
-      det.style.display='none';
-      mp.classList.add('visible');
-      s2.style.display='none';wn.style.display='none';
-      s3.style.display='none';if(hint)hint.style.display='none';sl.style.display='none';
-      renderMaisonDays();
+      det.innerHTML=`
+        <div class="rd-icon" style="background:#CDD8BE;color:#4f5e42">${ICONS.home}</div>
+        <div class="rd-info"><div class="rd-name">A la maison</div><div class="rd-tag">Passez sans rendez-vous dans les espaces communs. Cafe, the & wifi offerts.</div></div>`;
     } else {
-      det.style.display='';
-      mp.classList.remove('visible');
-      s2.style.display='';wn.style.display='';
-      s3.style.display='';if(hint)hint.style.display='';sl.style.display='';
       const r=ROOMS[current];
       det.innerHTML=`
         <div class="rd-icon" style="background:${r.pale};color:${r.dark}">${ICONS[r.icon]}</div>
@@ -584,29 +560,6 @@
     }
   }
 
-  async function renderMaisonDays(){
-    const wrap=document.getElementById('maisonDays');
-    wrap.innerHTML='<div class="maison-loading">Chargement...</div>';
-    let apiDays=null;
-    try{apiDays=await fetchAvailability('bulle',weekStart);}catch(e){}
-    wrap.innerHTML='';
-    if(!apiDays){wrap.innerHTML='<div class="maison-loading">Erreur de chargement</div>';return;}
-    const DAY_FULL=['Lundi','Mardi','Mercredi','Jeudi','Vendredi'];
-    let found=false;
-    apiDays.forEach((dd,i)=>{
-      if(!dd.presence) return;
-      if(isPast(addDays(weekStart,i))) return;
-      found=true;
-      const d=addDays(weekStart,i);
-      const label=DAY_FULL[i]+' '+d.getDate()+' '+FR_MONTH[d.getMonth()];
-      const btn=document.createElement('div');
-      btn.className='maison-day';
-      btn.innerHTML='<span class="md-date">'+label+'</span><span class="md-text">'+dd.presence+'</span><span class="md-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg></span>';
-      btn.onclick=()=>openMaisonModal(ymd(d),label,dd.presence);
-      wrap.appendChild(btn);
-    });
-    if(!found) wrap.innerHTML='<div class="maison-loading">Aucun jour de presence cette semaine</div>';
-  }
 
   function openMaisonModal(dateStr,label,presence){
     document.getElementById('modalCard').innerHTML=`
@@ -667,20 +620,28 @@
 
   async function renderSlots(){
     const wrap=document.getElementById('slotsList');
-    wrap.innerHTML='<div class="loader"><span class="hourglass">&#9203;</span><p style="color:var(--warm-grey);font-size:.92rem;margin:0;">Nous recherchons les disponibilites...</p></div>';
+    if(current!=='maison'){
+      wrap.innerHTML='<div class="loader"><span class="hourglass">&#9203;</span><p style="color:var(--warm-grey);font-size:.92rem;margin:0;">Nous recherchons les disponibilites...</p></div>';
+    }
 
     let apiDays=null;
-    try{
-      apiDays=await fetchAvailability(current, weekStart);
-    }catch(e){}
+    if(current!=='maison'){
+      try{apiDays=await fetchAvailability(current, weekStart);}catch(e){}
+    }
 
     wrap.innerHTML='';
     weekDates().forEach((d,di)=>{
       const block=document.createElement('div');block.className='day-block';
       const left=`<div class="day-id"><span class="day-name">${DAY_NAMES[di]}</span><span class="day-date">${d.getDate()} ${FR_MONTH[d.getMonth()]}</span></div>`;
-      if(isPast(d)){block.innerHTML=`<div class="day-head">${left}<span class="day-state">Passé</span></div>`;wrap.appendChild(block);return;}
+      if(isPast(d)){block.innerHTML=`<div class="day-head">${left}<span class="day-state">Passe</span></div>`;wrap.appendChild(block);return;}
       const cr=closeReason(d);
       if(cr){block.innerHTML=`<div class="day-head">${left}<span class="day-state">${cr}</span></div>`;wrap.appendChild(block);return;}
+
+      if(current==='maison'){
+        // Mode maison : un bouton par jour ouvert
+        block.innerHTML=`<div class="day-head">${left}<span class="day-count">Ouvert</span></div><div class="chips"><button class="chip" onclick="openMaisonModal('${ymd(d)}','${DAY_NAMES[di]} ${d.getDate()} ${FR_MONTH[d.getMonth()]}','')">Je passe ce jour</button></div>`;
+        wrap.appendChild(block);return;
+      }
 
       if(!apiDays){
         block.innerHTML=`<div class="day-head">${left}<span class="day-state">Erreur de chargement</span></div>`;
