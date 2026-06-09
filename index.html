@@ -17,7 +17,6 @@
 <meta name="twitter:title" content="GREATLY House — Espace membres">
 <meta name="twitter:description" content="Réservez un salon privatif ou la salle de sport à la GREATLY House, Verlinghem.">
 <meta name="twitter:image" content="https://arnaudprz.github.io/greatly-reservation/greatly-og-share.jpg">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
@@ -200,7 +199,7 @@
 
 <!-- Navbar -->
 <nav class="navbar">
-  <div class="nav-logo"><img src="favicon.svg" alt=""><span>G R E A T L Y</span><span class="dot"></span></div>
+  <div class="nav-logo"><span>G R E A T L Y</span><span class="dot"></span></div>
   <div class="nav-links">
     <button class="nav-link" onclick="openContact('arnaud')">Contacter Arnaud</button>
     <button class="nav-link" onclick="openContact('julie')">Contacter Julie</button>
@@ -214,7 +213,6 @@
 
 <div id="gate">
   <div class="gate-card">
-    <img src="favicon.svg" alt="Greatly" style="width:40px;height:38px;margin-bottom:8px;">
     <div class="logo">GREAT<span>LY</span></div>
     <div class="gate-sub">Espace membres</div>
     <label for="pw">Mot de passe membre</label>
@@ -227,7 +225,6 @@
 <div id="stickyBar" class="sticky-bar"></div>
 <div id="app">
   <div class="brand">
-    <img src="favicon.svg" alt="Greatly" style="width:24px;height:23px;">
     <span class="logo">GREAT<span>LY</span></span><span class="sub">House</span>
   </div>
   <h1>Réserver un espace</h1>
@@ -588,7 +585,7 @@
   // ---- Barre sticky ----
   function renderStickyBar(){
     const bar=document.getElementById('stickyBar');
-    bar.innerHTML='<div class="sticky-brand"><img src="favicon.svg" alt="" style="width:18px;height:17px;"><span class="slogo">GREAT<span>LY</span></span></div>';
+    bar.innerHTML='<div class="sticky-brand"><span class="slogo">GREAT<span>LY</span></span></div>';
     Object.entries(ROOMS).forEach(([k,r])=>{
       const b=document.createElement('button');
       b.className='mini-room'+(k===current?' sel':'');
