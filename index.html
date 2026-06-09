@@ -476,9 +476,9 @@
   function applyAccent(){
     const r=document.documentElement;
     if(current==='maison'){
-      r.style.setProperty('--accent','#4f5e42');
-      r.style.setProperty('--accent-pale','#CDD8BE');
-      r.style.setProperty('--accent-dark','#4f5e42');
+      r.style.setProperty('--accent','#8B6E4E');
+      r.style.setProperty('--accent-pale','#E8D9C5');
+      r.style.setProperty('--accent-dark','#6B5138');
     } else {
       r.style.setProperty('--accent',ROOMS[current].accent);
       r.style.setProperty('--accent-pale',ROOMS[current].pale);
@@ -532,7 +532,7 @@
     // Onglet maison
     const m=document.createElement('button');
     m.className='room-tab sep'+(current==='maison'?' sel':'');
-    m.style.setProperty('--c','#4f5e42');
+    m.style.setProperty('--c','#8B6E4E');
     m.innerHTML=ICONS.home+'A la maison';
     m.onclick=()=>{current='maison';render();};
     wrap.appendChild(m);
@@ -549,7 +549,7 @@
     const det=document.getElementById('roomDetail');
     if(current==='maison'){
       det.innerHTML=`
-        <div class="rd-icon" style="background:#CDD8BE;color:#4f5e42">${ICONS.home}</div>
+        <div class="rd-icon" style="background:#E8D9C5;color:#6B5138">${ICONS.home}</div>
         <div class="rd-info"><div class="rd-name">A la maison</div><div class="rd-tag">Passez sans rendez-vous dans les espaces communs. Cafe, the & wifi offerts.</div></div>`;
     } else {
       const r=ROOMS[current];
@@ -633,7 +633,7 @@
     weekDates().forEach((d,di)=>{
       const block=document.createElement('div');block.className='day-block';
       const left=`<div class="day-id"><span class="day-name">${DAY_NAMES[di]}</span><span class="day-date">${d.getDate()} ${FR_MONTH[d.getMonth()]}</span></div>`;
-      if(isPast(d)){block.innerHTML=`<div class="day-head">${left}<span class="day-state">Passe</span></div>`;wrap.appendChild(block);return;}
+      if(isPast(d)){return;}
       const cr=closeReason(d);
       if(cr){block.innerHTML=`<div class="day-head">${left}<span class="day-state">${cr}</span></div>`;wrap.appendChild(block);return;}
 
