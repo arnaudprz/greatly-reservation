@@ -561,18 +561,18 @@
   }
 
 
-  function openMaisonModal(dateStr,label,presence){
+  function openMaisonModal(dateStr,label){
     document.getElementById('modalCard').innerHTML=`
       <h3>A la maison</h3>
-      <div class="when">${label} · ${presence}</div>
+      <div class="when">${label} · 13:00 - 18:30</div>
       <div class="field"><label>Ton prenom</label><input type="text" id="bkName" placeholder="Prenom"></div>
       <div class="field"><label>Ton email</label><input type="email" id="bkMail" placeholder="prenom@email.com" inputmode="email"></div>
       <div class="field"><label>Ton telephone</label><input type="tel" id="bkTel" placeholder="06 12 34 56 78" inputmode="tel"></div>
       <div class="form-err" id="bkErr"></div>
-      <p class="rgpd">Aucun creneau bloque : je note simplement votre passage.</p>
+      <p class="rgpd">Vos donnees servent uniquement a confirmer votre passage. Aucun creneau horaire n'est bloque.</p>
       <div class="modal-actions">
         <button class="btn-ghost" onclick="closeModal()">Annuler</button>
-        <button class="btn-solid" id="bkSubmit" style="background:#4f5e42" onclick="confirmMaison('${dateStr}','${label}')">Je passe</button>
+        <button class="btn-solid" id="bkSubmit" onclick="confirmMaison('${dateStr}','${label}')">Confirmer</button>
       </div>`;
     document.getElementById('modal').style.display='flex';
   }
@@ -638,8 +638,7 @@
       if(cr){block.innerHTML=`<div class="day-head">${left}<span class="day-state">${cr}</span></div>`;wrap.appendChild(block);return;}
 
       if(current==='maison'){
-        // Mode maison : un bouton par jour ouvert
-        block.innerHTML=`<div class="day-head">${left}<span class="day-count">Ouvert</span></div><div class="chips"><button class="chip" onclick="openMaisonModal('${ymd(d)}','${DAY_NAMES[di]} ${d.getDate()} ${FR_MONTH[d.getMonth()]}','')">Je passe ce jour</button></div>`;
+        block.innerHTML=`<div class="day-head">${left}<span class="day-count">1 dispo</span></div><div class="chips"><button class="chip" onclick="openMaisonModal('${ymd(d)}','${DAY_NAMES[di]} ${d.getDate()} ${FR_MONTH[d.getMonth()]}')">13:00 - 18:30</button></div>`;
         wrap.appendChild(block);return;
       }
 
