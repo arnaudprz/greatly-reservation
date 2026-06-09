@@ -100,8 +100,8 @@
   .chip:hover{background:var(--accent);color:#fff}
 
   /* ---------- Modal ---------- */
-  #modal{position:fixed;inset:0;background:rgba(26,26,26,.45);display:none;align-items:flex-end;justify-content:center;padding:0;z-index:60}
-  .modal-card{background:#fff;border-radius:22px 22px 0 0;padding:24px 22px calc(26px + env(safe-area-inset-bottom));width:100%;max-width:440px;max-height:92vh;overflow-y:auto}
+  #modal{position:fixed;inset:0;background:rgba(26,26,26,.45);display:none;align-items:center;justify-content:center;padding:20px;z-index:60}
+  .modal-card{background:#fff;border-radius:20px;padding:28px 26px;width:100%;max-width:520px;max-height:92vh;overflow-y:auto}
   .modal-card h3{font-size:1.25rem;margin-bottom:4px}
   .modal-card .when{color:var(--accent);font-weight:600;font-size:.92rem;margin-bottom:18px}
   .field{margin-bottom:14px}
@@ -146,14 +146,13 @@
   .menu-item .mi-sub{font-size:.76rem;color:var(--warm-grey);font-weight:400}
 
   /* Contact panels */
-  .contact-panel{position:fixed;inset:0;z-index:85;display:none;align-items:flex-end;justify-content:center}
+  .contact-panel{position:fixed;inset:0;z-index:85;display:none;align-items:center;justify-content:center;padding:20px}
   .contact-panel.open{display:flex}
   .contact-overlay{position:absolute;inset:0;background:rgba(26,26,26,.45)}
-  .contact-card{position:relative;background:#fff;border-radius:22px 22px 0 0;padding:28px 24px calc(28px + env(safe-area-inset-bottom));width:100%;max-width:440px;max-height:90vh;overflow-y:auto;z-index:1}
-  @media(min-width:760px){.contact-card{border-radius:20px;margin:20px}}
-  .contact-photo{width:80px;height:80px;border-radius:50%;object-fit:cover;margin:0 auto 14px;display:block}
-  .contact-name{text-align:center;font-size:1.2rem;font-weight:700;font-family:'Playfair Display',Georgia,serif}
-  .contact-role{text-align:center;font-size:.85rem;color:var(--warm-grey);margin:4px 0 20px}
+  .contact-card{position:relative;background:#fff;border-radius:20px;padding:36px 28px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;z-index:1}
+  .contact-photo{width:100px;height:100px;border-radius:50%;object-fit:cover;margin:0 auto 16px;display:block}
+  .contact-name{text-align:center;font-size:1.35rem;font-weight:700;font-family:'Playfair Display',Georgia,serif}
+  .contact-role{text-align:center;font-size:.88rem;color:var(--warm-grey);margin:6px 0 24px}
   .contact-actions{display:flex;flex-direction:column;gap:10px}
   .contact-btn{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:14px;text-decoration:none;font-family:inherit;font-size:.9rem;font-weight:600;border:none;cursor:pointer;transition:all .12s}
   .contact-btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.08)}
@@ -175,10 +174,6 @@
   .privat-form .field{margin-bottom:14px}
   .privat-form .field label{display:block;font-size:.76rem;font-weight:600;color:var(--warm-grey);margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px}
 
-  @media(min-width:760px){
-    #modal{align-items:center;padding:20px}
-    .modal-card{border-radius:20px;padding:28px}
-  }
   @keyframes spin{to{transform:rotate(360deg)}}
   .loader{display:flex;flex-direction:column;align-items:center;padding:40px 0;gap:14px}
   .hourglass{font-size:2rem;animation:flip 1.5s ease-in-out infinite}
