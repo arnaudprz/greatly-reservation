@@ -638,7 +638,7 @@
       if(cr){block.innerHTML=`<div class="day-head">${left}<span class="day-state">${cr}</span></div>`;wrap.appendChild(block);return;}
 
       if(current==='maison'){
-        block.innerHTML=`<div class="day-head">${left}<span class="day-count">1 dispo</span></div><div class="chips"><button class="chip" onclick="openMaisonModal('${ymd(d)}','${DAY_NAMES[di]} ${d.getDate()} ${FR_MONTH[d.getMonth()]}')">13:00 - 18:30</button></div>`;
+        block.innerHTML=`<div class="day-head">${left}<span class="day-count">Dispo</span></div><div class="chips"><button class="chip" onclick="openMaisonModal('${ymd(d)}','${DAY_NAMES[di]} ${d.getDate()} ${FR_MONTH[d.getMonth()]}')">13:00 - 18:30</button></div>`;
         wrap.appendChild(block);return;
       }
 
