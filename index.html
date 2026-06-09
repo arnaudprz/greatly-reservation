@@ -205,7 +205,7 @@
     <button class="nav-link" onclick="openContact('arnaud')">Contacter Arnaud</button>
     <button class="nav-link" onclick="openContact('julie')">Contacter Julie</button>
     <button class="nav-link" onclick="openPrivatPage()">Privatiser la maison</button>
-    <button class="nav-link cta" onclick="toggleMenu()">Nos horaires</button>
+    <button class="nav-link cta" onclick="openHoraires()">Nos horaires</button>
   </div>
   <button class="nav-burger" onclick="toggleMenu()">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
@@ -273,7 +273,7 @@
         <span class="mi-icon" style="background:#CDD8BE;color:#4f5e42;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9"/><path d="M5 10v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8"/></svg></span>
         <div><div class="mi-text">Privatiser la maison</div><div class="mi-sub">Pour vos événements pro</div></div>
       </a>
-      <div class="menu-item" onclick="toggleMenu()">
+      <div class="menu-item" onclick="toggleMenu();openHoraires()">
         <span class="mi-icon" style="background:var(--cream);color:var(--ink);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
         <div><div class="mi-text">Nos horaires</div><div class="mi-sub">Lun-Ven 13h-18h30 · hors vacances scolaires</div></div>
       </div>
@@ -316,6 +316,28 @@
         Envoyer un email
       </a>
     </div>
+  </div>
+</div>
+
+<!-- Horaires -->
+<div class="contact-panel" id="horairesPanel">
+  <div class="contact-overlay" onclick="closeHoraires()"></div>
+  <div class="contact-card">
+    <button class="contact-close" onclick="closeHoraires()">&#10005;</button>
+    <div style="text-align:center;margin-bottom:20px;">
+      <div style="width:56px;height:56px;border-radius:16px;background:var(--accent-pale);color:var(--accent-dark);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:28px;height:28px;"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
+      <div class="contact-name">Nos horaires</div>
+      <div class="contact-role">GREATLY House · Verlinghem</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div style="display:flex;justify-content:space-between;padding:12px 16px;background:var(--cream);border-radius:12px;"><span style="font-weight:600;">Lundi</span><span style="color:var(--sage);font-weight:600;">13h00 - 18h30</span></div>
+      <div style="display:flex;justify-content:space-between;padding:12px 16px;background:var(--cream);border-radius:12px;"><span style="font-weight:600;">Mardi</span><span style="color:var(--sage);font-weight:600;">13h00 - 18h30</span></div>
+      <div style="display:flex;justify-content:space-between;padding:12px 16px;background:var(--cream);border-radius:12px;"><span style="font-weight:600;">Mercredi</span><span style="color:var(--sage);font-weight:600;">13h00 - 18h30</span></div>
+      <div style="display:flex;justify-content:space-between;padding:12px 16px;background:var(--cream);border-radius:12px;"><span style="font-weight:600;">Jeudi</span><span style="color:var(--sage);font-weight:600;">13h00 - 18h30</span></div>
+      <div style="display:flex;justify-content:space-between;padding:12px 16px;background:var(--cream);border-radius:12px;"><span style="font-weight:600;">Vendredi</span><span style="color:var(--sage);font-weight:600;">13h00 - 18h30</span></div>
+      <div style="display:flex;justify-content:space-between;padding:12px 16px;background:var(--cream);border-radius:12px;"><span style="font-weight:600;">Samedi - Dimanche</span><span style="color:var(--occupied-ink);font-weight:600;">Ferme</span></div>
+    </div>
+    <p style="text-align:center;font-size:.82rem;color:var(--warm-grey);margin-top:16px;line-height:1.5;">Ferme pendant les vacances scolaires (zone B / Lille) et les jours feries.<br>10 rue de Lambersart, Verlinghem.</p>
   </div>
 </div>
 
@@ -364,6 +386,10 @@
     var id=who==='arnaud'?'contactArnaud':'contactJulie';
     document.getElementById(id).classList.remove('open');
   }
+
+  // ---- Horaires ----
+  function openHoraires(){document.getElementById('horairesPanel').classList.add('open');}
+  function closeHoraires(){document.getElementById('horairesPanel').classList.remove('open');}
 
   // ---- Privatisation page ----
   function openPrivatPage(){
