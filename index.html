@@ -116,19 +116,19 @@
   .confirm-msg .check{width:56px;height:56px;border-radius:50%;background:var(--accent-pale);color:var(--accent-dark);display:flex;align-items:center;justify-content:center;font-size:1.7rem;margin:0 auto 14px}
 
   /* Navbar */
-  .navbar{position:fixed;top:0;left:0;right:0;z-index:78;background:#fff;height:56px;display:flex;align-items:center;padding:0 24px;border-bottom:1px solid var(--line)}
+  .navbar{position:fixed;top:0;left:0;right:0;z-index:80;background:#fff;height:56px;display:flex;align-items:center;padding:0 24px;border-bottom:1px solid var(--line)}
   .nav-logo{display:flex;align-items:center;gap:6px;flex:0 0 auto}
   .nav-logo img{width:22px;height:21px}
   .nav-logo span{font-size:.95rem;font-weight:700;letter-spacing:2px;color:var(--ink)}
   .nav-logo .dot{width:8px;height:8px;border-radius:50%;background:var(--sage);margin-left:2px}
-  .nav-links{display:none;align-items:center;gap:6px;margin-left:auto}
-  .nav-link{font-size:.82rem;font-weight:500;color:var(--warm-grey);text-decoration:none;padding:8px 14px;border-radius:10px;cursor:pointer;transition:all .12s;border:none;background:none;font-family:inherit}
-  .nav-link:hover{color:var(--ink);background:var(--cream)}
+  .nav-links{display:none;align-items:center;gap:4px;margin-left:auto}
+  .nav-link{font-size:.82rem;font-weight:500;color:var(--sage-dark);text-decoration:none;padding:8px 14px;border-radius:10px;cursor:pointer;transition:all .12s;border:none;background:none;font-family:inherit}
+  .nav-link:hover{color:var(--sage);background:rgba(107,125,92,.08)}
   .nav-link.cta{background:var(--sage);color:#fff;font-weight:600;padding:8px 18px;border-radius:999px}
   .nav-link.cta:hover{background:var(--sage-dark)}
-  .nav-burger{display:flex;align-items:center;justify-content:center;margin-left:auto;background:none;border:none;cursor:pointer;padding:6px;color:var(--ink)}
+  .nav-burger{display:flex;align-items:center;justify-content:center;margin-left:auto;background:none;border:none;cursor:pointer;padding:6px;color:var(--sage-dark)}
   .nav-burger svg{width:24px;height:24px}
-  @media(min-width:820px){.nav-links{display:flex}.nav-burger{display:none}}
+  @media(min-width:820px){.nav-links{display:flex}.nav-burger{margin-left:8px}}
 
   /* Adjust body for navbar */
   body{padding-top:56px}
@@ -198,6 +198,19 @@
 </head>
 <body>
 
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="nav-logo"><img src="favicon.svg" alt=""><span>G R E A T L Y</span><span class="dot"></span></div>
+  <div class="nav-links">
+    <button class="nav-link" onclick="openContact('arnaud')">Contacter Arnaud</button>
+    <button class="nav-link" onclick="openContact('julie')">Contacter Julie</button>
+    <button class="nav-link" onclick="openPrivatPage()">Privatiser la maison</button>
+    <button class="nav-link cta" onclick="toggleMenu()">Nos horaires</button>
+  </div>
+  <button class="nav-burger" onclick="toggleMenu()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+</nav>
 
 <div id="gate">
   <div class="gate-card">
@@ -238,19 +251,6 @@
 
 <div id="modal"><div class="modal-card" id="modalCard"></div></div>
 
-<!-- Navbar -->
-<nav class="navbar">
-  <div class="nav-logo"><img src="favicon.svg" alt=""><span>G R E A T L Y</span><span class="dot"></span></div>
-  <div class="nav-links">
-    <button class="nav-link" onclick="openContact('arnaud')">Contacter Arnaud</button>
-    <button class="nav-link" onclick="openContact('julie')">Contacter Julie</button>
-    <button class="nav-link" onclick="openPrivatPage()">Privatiser la maison</button>
-    <button class="nav-link cta" onclick="toggleMenu()">Nos horaires</button>
-  </div>
-  <button class="nav-burger" onclick="toggleMenu()">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-  </button>
-</nav>
 
 <!-- Menu panel -->
 <div id="menuPanel">
