@@ -242,8 +242,47 @@ function handleMaison(data) {
     description: 'Passage a la GREATLY House\nPrenom : ' + name + '\nEmail : ' + email + '\nTelephone : ' + tel
   });
   event.setColor('2');
-  GmailApp.sendEmail(OWNER_EMAIL, '[Maison] ' + name + ' passe le ' + dateStr,
-    'Passage prevu :\n\nPrenom : ' + name + '\nEmail : ' + email + '\nTel : ' + tel + '\nDate : ' + dateStr,
+  var DAY_NAMES = ['dimanche','lundi','mardi','mercredi','jeudi','vendredi','samedi'];
+  var FR_MONTH = ['janvier','fevrier','mars','avril','mai','juin','juillet','aout','septembre','octobre','novembre','decembre'];
+  var dateLabel = DAY_NAMES[date.getDay()] + ' ' + date.getDate() + ' ' + FR_MONTH[date.getMonth()];
+  // Email de confirmation au visiteur
+  var htmlVisiteur = '<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"></head>'
+    + '<body style="margin:0;padding:24px 12px;background:#EDE8E0;font-family:Helvetica Neue,Arial,sans-serif;">'
+    + '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px;margin:0 auto;"><tr><td>'
+    + '<table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:6px 0 18px;">'
+    + '<span style="font-size:18px;font-weight:700;letter-spacing:-.3px;color:#6B7D5C;">GREAT<span style="color:#1A1A1A;">LY</span></span>'
+    + '<span style="font-size:18px;font-weight:600;color:#6B6460;"> House</span></td></tr></table>'
+    + '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FFFFFF;border-radius:20px;overflow:hidden;border:1px solid #E7E1D7;">'
+    + '<tr><td style="height:6px;background:#4f5e42;font-size:0;line-height:0;"> </td></tr>'
+    + '<tr><td style="padding:32px 30px 8px;text-align:center;">'
+    + '<table role="presentation" cellpadding="0" cellspacing="0" align="center"><tr><td style="width:56px;height:56px;background:#CDD8BE;border-radius:50%;text-align:center;vertical-align:middle;font-size:28px;color:#4f5e42;">&#10003;</td></tr></table>'
+    + '<h1 style="margin:18px 0 4px;font-size:23px;color:#1A1A1A;font-weight:700;">C\'est note !</h1>'
+    + '<p style="margin:0;color:#6B6460;font-size:15px;line-height:1.5;">Bonjour <strong>' + name + '</strong>, votre passage est bien enregistre.<br>On a hate de vous accueillir a la maison.</p>'
+    + '</td></tr>'
+    + '<tr><td style="padding:22px 30px 6px;">'
+    + '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F7F4EF;border-radius:14px;"><tr><td style="padding:18px 20px;">'
+    + '<table role="presentation" width="100%" cellpadding="0" cellspacing="0">'
+    + '<tr><td style="font-size:12px;text-transform:uppercase;letter-spacing:.6px;color:#9c958b;font-weight:700;padding-bottom:2px;">Quand</td></tr>'
+    + '<tr><td style="font-size:18px;font-weight:700;color:#1A1A1A;padding-bottom:14px;">' + dateLabel + '</td></tr>'
+    + '<tr><td style="font-size:12px;text-transform:uppercase;letter-spacing:.6px;color:#9c958b;font-weight:700;padding-bottom:2px;">Lieu</td></tr>'
+    + '<tr><td style="font-size:15px;color:#1A1A1A;font-weight:600;">GREATLY House - 10 rue de Lambersart, Verlinghem</td></tr>'
+    + '</table></td></tr></table></td></tr>'
+    + '<tr><td style="padding:18px 30px 0;text-align:center;">'
+    + '<p style="margin:0;color:#6B6460;font-size:14px;line-height:1.6;">Pas besoin de reserver une salle, je serai la pour papoter, prendre un cafe ou echanger.</p>'
+    + '</td></tr>'
+    + '<tr><td style="padding:12px 30px 28px;text-align:center;">'
+    + '<p style="margin:0;color:#6B6460;font-size:14px;line-height:1.6;">Une question ? Ecrivez-nous sur WhatsApp au <a href="https://wa.me/33651156344" style="color:#4f5e42;font-weight:700;text-decoration:none;">06 51 15 63 44</a>.</p>'
+    + '</td></tr></table>'
+    + '<table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:20px 16px 8px;">'
+    + '<p style="margin:0;color:#9c958b;font-size:12px;line-height:1.6;">GREATLY House - 10 rue de Lambersart, Verlinghem - Lun-Ven, 13h-18h30</p>'
+    + '</td></tr></table></td></tr></table></body></html>';
+  GmailApp.sendEmail(email, 'A bientot a la maison - ' + dateLabel,
+    'Bonjour ' + name + ', votre passage est bien enregistre pour le ' + dateLabel + '. GREATLY House, 10 rue de Lambersart, Verlinghem.',
+    {htmlBody: htmlVisiteur, name: 'GREATLY House', replyTo: OWNER_EMAIL});
+  labelLastSentEmail('A bientot a la maison');
+  // Copie equipe
+  GmailApp.sendEmail(OWNER_EMAIL, '[Maison] ' + name + ' passe le ' + dateLabel,
+    'Passage prevu :\n\nPrenom : ' + name + '\nEmail : ' + email + '\nTel : ' + tel + '\nDate : ' + dateLabel,
     {name: 'GREATLY Reservation'});
   labelLastSentEmail('[Maison] ' + name);
   return jsonOut({ok:true, message:'C est note !'});
