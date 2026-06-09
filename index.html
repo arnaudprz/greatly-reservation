@@ -78,16 +78,6 @@
   .room-detail .rd-tag{font-size:.82rem;color:var(--warm-grey);line-height:1.35;margin-top:2px}
   .room-detail .rd-cap{flex:0 0 auto;font-size:.72rem;font-weight:600;padding:5px 12px;border-radius:999px;white-space:nowrap}
 
-  /* bandeau privatisation */
-  .privat{display:flex;align-items:center;gap:14px;background:#fff;border:1.5px solid #CDD8BE;border-radius:16px;padding:14px 18px;margin:10px 0 4px}
-  .privat .pic{width:40px;height:40px;border-radius:12px;background:#CDD8BE;color:#4f5e42;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
-  .privat .pic svg{width:21px;height:21px}
-  .privat .pt{flex:1;min-width:0}
-  .privat .pt b{display:block;font-size:.93rem;font-weight:700;color:var(--ink)}
-  .privat .pt span{font-size:.81rem;color:var(--warm-grey)}
-  .privat button{flex:0 0 auto;border:1.5px solid var(--sage);border-radius:11px;padding:10px 16px;background:transparent;color:var(--sage);font-family:inherit;font-weight:700;font-size:.85rem;cursor:pointer;transition:all .15s}
-  .privat button:hover{background:var(--sage);color:#fff}
-
   /* navigation semaine */
   .weeknav{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:8px 10px}
   .weeknav button{width:42px;height:42px;border:none;border-radius:11px;background:var(--cream);color:var(--accent-dark);font-size:1.3rem;font-weight:700;cursor:pointer;flex:0 0 auto;transition:background .15s}
@@ -162,6 +152,19 @@
   .contact-btn.mail{background:var(--cream);color:var(--ink);border:1.5px solid var(--line)}
   .contact-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;border:none;background:var(--cream);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:var(--warm-grey)}
 
+  /* Page privatisation */
+  #privatPage{position:fixed;inset:0;z-index:85;display:none;align-items:flex-end;justify-content:center}
+  #privatPage.open{display:flex}
+  .privat-card{position:relative;background:#fff;border-radius:22px 22px 0 0;padding:28px 24px calc(28px + env(safe-area-inset-bottom));width:100%;max-width:480px;max-height:92vh;overflow-y:auto;z-index:1}
+  @media(min-width:760px){.privat-card{border-radius:20px;margin:20px}}
+  .privat-hero{text-align:center;margin-bottom:20px}
+  .privat-hero .ph-icon{width:56px;height:56px;border-radius:16px;background:#CDD8BE;color:#4f5e42;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+  .privat-hero .ph-icon svg{width:28px;height:28px}
+  .privat-hero h2{font-size:1.3rem;font-weight:400;font-family:'Playfair Display',Georgia,serif;margin-bottom:6px}
+  .privat-hero p{font-size:.88rem;color:var(--warm-grey);line-height:1.5;max-width:380px;margin:0 auto}
+  .privat-form .field{margin-bottom:14px}
+  .privat-form .field label{display:block;font-size:.76rem;font-weight:600;color:var(--warm-grey);margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px}
+
   @media(min-width:760px){
     #modal{align-items:center;padding:20px}
     .modal-card{border-radius:20px;padding:28px}
@@ -208,12 +211,6 @@
   <h1>Réserver un espace</h1>
   <p class="intro">Votre lieu pour vous mettre au vert, souffler et travailler autrement. Choisissez un salon privatif ou la salle de sport, puis un créneau qui vous convient.</p>
 
-  <div class="privat">
-    <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9"/><path d="M5 10v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8"/></svg></div>
-    <div class="pt"><b>Un événement, un groupe ?</b><span>Privatisez la maison entière pour vos temps collectifs.</span></div>
-    <button onclick="openPrivat()">Privatiser</button>
-  </div>
-
   <div class="step"><span class="n">1</span> Choisissez votre espace</div>
   <div class="rooms" id="rooms"></div>
   <div class="room-detail" id="roomDetail"></div>
@@ -253,7 +250,11 @@
       </a>
     </div>
     <div class="menu-section">
-      <div class="menu-section-title">Informations</div>
+      <div class="menu-section-title">La maison</div>
+      <a class="menu-item" onclick="toggleMenu();openPrivatPage()">
+        <span class="mi-icon" style="background:#CDD8BE;color:#4f5e42;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9"/><path d="M5 10v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8"/></svg></span>
+        <div><div class="mi-text">Privatiser la maison</div><div class="mi-sub">Pour vos événements pro</div></div>
+      </a>
       <div class="menu-item" onclick="toggleMenu()">
         <span class="mi-icon" style="background:var(--cream);color:var(--ink);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
         <div><div class="mi-text">Nos horaires</div><div class="mi-sub">Lun-Ven 13h-18h30 · hors vacances scolaires</div></div>
@@ -300,6 +301,33 @@
   </div>
 </div>
 
+<!-- Privatisation -->
+<div id="privatPage">
+  <div class="contact-overlay" onclick="closePrivatPage()"></div>
+  <div class="privat-card">
+    <button class="contact-close" onclick="closePrivatPage()">&#10005;</button>
+    <div class="privat-hero">
+      <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9"/><path d="M5 10v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8"/></svg></div>
+      <h2>Privatiser la maison</h2>
+      <p>En tant que membre, vous pouvez réserver la GREATLY House entière pour vos événements professionnels. Du lundi au vendredi, hors vacances scolaires.</p>
+    </div>
+    <div class="privat-form" id="privatForm">
+      <div class="field"><label>Ton prénom</label><input type="text" id="pvName" placeholder="Prénom"></div>
+      <div class="field"><label>Ton email</label><input type="email" id="pvMail" placeholder="prenom@email.com" inputmode="email"></div>
+      <div class="field"><label>Ton téléphone</label><input type="tel" id="pvTel" placeholder="06 12 34 56 78" inputmode="tel"></div>
+      <div class="field"><label>Ton besoin</label><textarea id="pvNeed" placeholder="Type d'événement, horaires souhaités..."></textarea></div>
+      <div class="field"><label>Date souhaitée</label><input type="date" id="pvDate"></div>
+      <div class="field"><label>Nombre de personnes</label><input type="number" id="pvNb" min="1" placeholder="Ex : 8"></div>
+      <div class="form-err" id="pvErr"></div>
+      <p class="rgpd">Vos données servent uniquement à traiter votre demande de privatisation.</p>
+      <div class="modal-actions">
+        <button class="btn-ghost" onclick="closePrivatPage()">Annuler</button>
+        <button class="btn-solid" id="pvSubmit" onclick="sendPrivat()">Envoyer la demande</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
   // ---- API ----
   const API_URL = 'https://script.google.com/macros/s/AKfycbx_O4Mo47Y9vvUkSG9pltSh4D9ktJvfdnqUx1fSLP5bfLpy8ip9hajGns3VhhnwQljFBQ/exec';
@@ -324,6 +352,14 @@
   function closeContact(who){
     var id=who==='arnaud'?'contactArnaud':'contactJulie';
     document.getElementById(id).classList.remove('open');
+  }
+
+  // ---- Privatisation page ----
+  function openPrivatPage(){
+    document.getElementById('privatPage').classList.add('open');
+  }
+  function closePrivatPage(){
+    document.getElementById('privatPage').classList.remove('open');
   }
 
   // ---- Espaces ----
@@ -591,34 +627,16 @@
   }
 
   // ---- Privatisation ----
-  function openPrivat(){
-    document.getElementById('modalCard').innerHTML=`
-      <h3>Privatiser la maison</h3>
-      <div class="when">Demande de privatisation · GREATLY House</div>
-      <div class="field"><label>Ton prénom</label><input type="text" id="pvName" placeholder="Prénom"></div>
-      <div class="field"><label>Ton email</label><input type="email" id="pvMail" placeholder="prenom@email.com" inputmode="email"></div>
-      <div class="field"><label>Ton téléphone</label><input type="tel" id="pvTel" placeholder="06 12 34 56 78" inputmode="tel"></div>
-      <div class="field"><label>Ton besoin</label><textarea id="pvNeed" placeholder="Type d'événement, espace souhaité, horaires…"></textarea></div>
-      <div class="field"><label>Date souhaitée</label><input type="date" id="pvDate"></div>
-      <div class="field"><label>Nombre de personnes</label><input type="number" id="pvNb" min="1" placeholder="Ex : 8"></div>
-      <div class="form-err" id="pvErr"></div>
-      <p class="rgpd">Vos données servent uniquement à traiter votre demande de privatisation.</p>
-      <div class="modal-actions">
-        <button class="btn-ghost" onclick="closeModal()">Annuler</button>
-        <button class="btn-solid" id="pvSubmit" onclick="sendPrivat()">Envoyer la demande</button>
-      </div>`;
-    document.getElementById('modal').style.display='flex';
-  }
   async function sendPrivat(){
     const err=document.getElementById('pvErr');
-    if(!val('pvName'))return showErr(err,'Merci d\u2019indiquer ton prénom.');
+    if(!val('pvName'))return showErr(err,'Merci d\u2019indiquer ton prenom.');
     if(!isEmail(val('pvMail')))return showErr(err,'Merci d\u2019indiquer un email valide.');
-    if(val('pvTel').replace(/\D/g,'').length<8)return showErr(err,'Merci d\u2019indiquer un téléphone valide.');
-    if(!val('pvNeed'))return showErr(err,'Merci de décrire ton besoin.');
-    if(!val('pvDate'))return showErr(err,'Merci d\u2019indiquer une date souhaitée.');
+    if(val('pvTel').replace(/\D/g,'').length<8)return showErr(err,'Merci d\u2019indiquer un telephone valide.');
+    if(!val('pvNeed'))return showErr(err,'Merci de decrire ton besoin.');
+    if(!val('pvDate'))return showErr(err,'Merci d\u2019indiquer une date souhaitee.');
 
     const btn=document.getElementById('pvSubmit');
-    btn.textContent='Envoi en cours…';btn.disabled=true;
+    btn.textContent='Envoi en cours...';btn.disabled=true;
     showErr(err,'');
 
     try{
@@ -630,15 +648,15 @@
         btn.textContent='Envoyer la demande';btn.disabled=false;
         return;
       }
-      document.getElementById('modalCard').innerHTML=`
+      document.getElementById('privatForm').innerHTML=`
         <div class="confirm-msg">
-          <div class="check">✓</div>
-          <h3>Demande envoyée !</h3>
+          <div class="check" style="background:var(--accent-pale);color:var(--accent-dark);">&#10003;</div>
+          <h3>Demande envoyee !</h3>
           <p style="color:var(--warm-grey);margin:10px 0 4px">Nous reviendrons vers vous rapidement.</p>
-          <button class="btn-solid" style="width:100%" onclick="closeModal()">Terminer</button>
+          <button class="btn-solid" style="width:100%" onclick="closePrivatPage()">Terminer</button>
         </div>`;
     }catch(e){
-      showErr(err,'Erreur de connexion. Réessayez.');
+      showErr(err,'Erreur de connexion. Reessayez.');
       btn.textContent='Envoyer la demande';btn.disabled=false;
     }
   }
