@@ -115,17 +115,27 @@
   .confirm-msg{text-align:center;padding:8px 0}
   .confirm-msg .check{width:56px;height:56px;border-radius:50%;background:var(--accent-pale);color:var(--accent-dark);display:flex;align-items:center;justify-content:center;font-size:1.7rem;margin:0 auto 14px}
 
-  /* Burger menu */
-  .burger-btn{position:fixed;top:14px;right:14px;z-index:80;width:44px;height:44px;border-radius:12px;border:1.5px solid var(--line);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.08);transition:all .15s}
-  .burger-btn:hover{box-shadow:0 4px 14px rgba(0,0,0,.12)}
-  .burger-btn svg{width:22px;height:22px;color:var(--ink)}
-  .burger-btn.open svg{color:var(--sage)}
+  /* Top bar */
+  .topbar{position:fixed;top:0;left:0;right:0;z-index:78;background:var(--ink);color:#fff;height:40px;display:flex;align-items:center;padding:0 14px;gap:12px}
+  .topbar-burger{background:none;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:4px;color:#fff;flex:0 0 auto}
+  .topbar-burger svg{width:20px;height:20px}
+  .topbar-marquee{flex:1;overflow:hidden;position:relative;height:20px}
+  .topbar-marquee span{position:absolute;white-space:nowrap;font-size:.78rem;font-weight:500;letter-spacing:.2px;animation:marquee 20s linear infinite}
+  @keyframes marquee{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
+  .topbar-arrow{display:none;font-size:.72rem;color:rgba(255,255,255,.6);font-weight:500;flex:0 0 auto;animation:pulse 2s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
+  @media(min-width:620px){.topbar-arrow{display:flex;align-items:center;gap:4px}.topbar-arrow svg{width:14px;height:14px}}
 
+  /* Adjust body for topbar */
+  body{padding-top:40px}
+  #gate{top:40px}
+
+  /* Burger menu */
   #menuPanel{position:fixed;inset:0;z-index:75;display:none}
   #menuPanel.open{display:block}
   .menu-overlay{position:absolute;inset:0;background:rgba(26,26,26,.4)}
-  .menu-drawer{position:absolute;top:0;right:0;width:min(320px,85vw);height:100%;background:var(--cream);padding:72px 24px 32px;overflow-y:auto;box-shadow:-8px 0 30px rgba(0,0,0,.12);animation:slideIn .2s ease}
-  @keyframes slideIn{from{transform:translateX(100%)}to{transform:translateX(0)}}
+  .menu-drawer{position:absolute;top:0;left:0;width:min(320px,85vw);height:100%;background:var(--cream);padding:60px 24px 32px;overflow-y:auto;box-shadow:8px 0 30px rgba(0,0,0,.12);animation:slideInLeft .2s ease}
+  @keyframes slideInLeft{from{transform:translateX(-100%)}to{transform:translateX(0)}}
   .menu-section{margin-bottom:24px}
   .menu-section-title{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--occupied-ink);margin-bottom:10px}
   .menu-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;background:#fff;border:1px solid var(--line);text-decoration:none;color:var(--ink);margin-bottom:8px;transition:all .12s;cursor:pointer}
@@ -175,7 +185,7 @@
   @keyframes flip{0%{transform:rotate(0deg)}50%{transform:rotate(180deg)}100%{transform:rotate(360deg)}}
 
   /* Barre sticky mini salles */
-  .sticky-bar{position:sticky;top:0;z-index:40;background:var(--cream);padding:10px 0 8px;display:none;align-items:center;justify-content:center;gap:8px;border-bottom:1px solid var(--line)}
+  .sticky-bar{position:sticky;top:40px;z-index:40;background:var(--cream);padding:10px 0 8px;display:none;align-items:center;justify-content:center;gap:8px;border-bottom:1px solid var(--line)}
   .sticky-bar.visible{display:flex}
   .sticky-brand{display:flex;align-items:center;gap:5px;flex:0 0 auto;margin-right:6px}
   .sticky-brand svg{width:16px;height:16px;color:var(--sage)}
@@ -209,7 +219,7 @@
     <span class="logo">GREAT<span>LY</span></span><span class="sub">House</span>
   </div>
   <h1>Réserver un espace</h1>
-  <p class="intro">Votre lieu pour vous mettre au vert, souffler et travailler autrement. Choisissez un salon privatif ou la salle de sport, puis un créneau qui vous convient.</p>
+  <p class="intro">Bienvenue dans votre espace membre. Votre lieu pour vous mettre au vert, souffler et travailler autrement. Choisissez un salon privatif ou la salle de sport, puis un créneau qui vous convient. N'hésitez pas à nous contacter directement via le menu pour vos demandes.</p>
 
   <div class="step"><span class="n">1</span> Choisissez votre espace</div>
   <div class="rooms" id="rooms"></div>
@@ -229,10 +239,14 @@
 
 <div id="modal"><div class="modal-card" id="modalCard"></div></div>
 
-<!-- Burger menu button -->
-<button class="burger-btn" id="burgerBtn" onclick="toggleMenu()">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-</button>
+<!-- Top bar -->
+<div class="topbar">
+  <button class="topbar-burger" id="burgerBtn" onclick="toggleMenu()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+  <div class="topbar-marquee"><span>Espace membres — Pour réserver vos espaces privés dans la GREATLY House</span></div>
+  <span class="topbar-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg> Menu</span>
+</div>
 
 <!-- Menu panel -->
 <div id="menuPanel">
@@ -336,14 +350,7 @@
   // ---- Menu & Contacts ----
   function toggleMenu(){
     var p=document.getElementById('menuPanel');
-    var b=document.getElementById('burgerBtn');
     p.classList.toggle('open');
-    b.classList.toggle('open');
-    if(b.classList.contains('open')){
-      b.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>';
-    } else {
-      b.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>';
-    }
   }
   function openContact(who){
     var id=who==='arnaud'?'contactArnaud':'contactJulie';
