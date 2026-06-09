@@ -43,15 +43,6 @@
   h1{text-align:center;font-size:1.7rem;font-weight:700;letter-spacing:-.6px}
   .intro{text-align:center;max-width:520px;margin:10px auto 0;color:var(--warm-grey);font-size:.96rem;line-height:1.55}
 
-  /* infos pratiques */
-  .info-strip{display:flex;flex-direction:column;gap:2px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:6px;margin:22px 0 6px}
-  .info{display:flex;gap:12px;align-items:center;padding:11px 12px;border-radius:13px}
-  .info .ic{width:22px;height:22px;color:var(--sage);flex:0 0 auto}
-  .info .txt{display:flex;flex-direction:column;line-height:1.3;text-align:left}
-  .info b{font-size:.66rem;text-transform:uppercase;letter-spacing:.7px;color:var(--sage);font-weight:700}
-  .info span{font-size:.86rem;color:var(--warm-grey)}
-  @media(min-width:620px){.info-strip{flex-direction:row}.info{flex:1}.info:not(:last-child){border-right:1px solid var(--line)}}
-
   .step{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:1.3px;color:var(--occupied-ink);margin:30px 0 14px;display:flex;align-items:center;gap:10px}
   .step .n{width:22px;height:22px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.72rem;flex:0 0 auto}
 
@@ -172,21 +163,6 @@
   <h1>Réserver un espace</h1>
   <p class="intro">Votre lieu pour vous mettre au vert, souffler et travailler autrement. Choisissez un salon privatif ou la salle de sport, puis un créneau qui vous convient.</p>
 
-  <div class="info-strip">
-    <div class="info">
-      <svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
-      <div class="txt"><b>Où</b><span>10 rue de Lambersart, Verlinghem</span></div>
-    </div>
-    <div class="info">
-      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
-      <div class="txt"><b>Quand</b><span>Lun–Ven · 13h–18h30 · hors vacances</span></div>
-    </div>
-    <div class="info">
-      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h12v5a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8z"/><path d="M16 9h2a2 2 0 0 1 0 4h-2"/><path d="M7 3v2M10 3v2M13 3v2"/></svg>
-      <div class="txt"><b>Sur place</b><span>Thé, café & wifi offerts</span></div>
-    </div>
-  </div>
-
   <div class="privat">
     <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9"/><path d="M5 10v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8"/></svg></div>
     <div class="pt"><b>Un événement, un groupe ?</b><span>Privatisez la maison entière pour vos temps collectifs.</span></div>
@@ -232,11 +208,11 @@
   };
   const ROOMS = {
     bulle: {name:"La Bulle", icon:"headphones", accent:"#6B7D5C", pale:"#CDD8BE", dark:"#4f5e42",
-            tag:"Cocon côté nature pour vos appels visio et la concentration.", cap:"1 à 3 personnes"},
+            tag:"Cocon côté nature pour vos appels visio et la concentration. Lun–Ven 13h–18h30 · Thé, café & wifi offerts.", cap:"1 à 3 personnes"},
     nid:   {name:"Le Nid",   icon:"users",      accent:"#C0814E", pale:"#EBD6BC", dark:"#8f6035",
-            tag:"Salon feutré pour vos réunions et points d'équipe.", cap:"1 à 3 personnes"},
+            tag:"Salon feutré côté nature pour vos échanges et réunions. Lun–Ven 13h–18h30 · Thé, café & wifi offerts.", cap:"1 à 3 personnes"},
     dojo:  {name:"Le Dojo",  icon:"activity",   accent:"#4F7C82", pale:"#C2D8DA", dark:"#3a5d62",
-            tag:"Salle de sport pour vos séances, mobilité et étirements.", cap:"3 personnes max"},
+            tag:"Salle de sport pour vos séances, mobilité et étirements. Lun–Ven 13h–18h30 · Thé, café & wifi offerts.", cap:"3 personnes max"},
   };
 
   const DAY_NAMES = ["Lundi","Mardi","Mercredi","Jeudi","Vendredi"];
