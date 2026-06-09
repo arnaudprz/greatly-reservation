@@ -222,7 +222,6 @@
   </div>
 </div>
 
-<div id="stickyBar" class="sticky-bar"></div>
 <div id="app">
   <div class="brand">
     <span class="logo">GREAT<span>LY</span></span><span class="sub">House</span>
@@ -580,27 +579,9 @@
     });
   }
 
-  function render(){applyAccent();renderRooms();renderWeekNav();renderSlots();renderStickyBar();}
+  function render(){applyAccent();renderRooms();renderWeekNav();renderSlots();}
 
-  // ---- Barre sticky ----
-  function renderStickyBar(){
-    const bar=document.getElementById('stickyBar');
-    bar.innerHTML='<div class="sticky-brand"><span class="slogo">GREAT<span>LY</span></span></div>';
-    Object.entries(ROOMS).forEach(([k,r])=>{
-      const b=document.createElement('button');
-      b.className='mini-room'+(k===current?' sel':'');
-      b.style.setProperty('--c',r.accent);b.style.setProperty('--cp',r.pale);b.style.setProperty('--cd',r.dark);
-      b.innerHTML='<span class="mini-ic" style="background:'+r.pale+';color:'+r.dark+';">'+ICONS[r.icon]+'</span>'+r.name;
-      b.onclick=()=>{current=k;render();document.getElementById('rooms').scrollIntoView({behavior:'smooth',block:'center'});};
-      bar.appendChild(b);
-    });
-  }
 
-  // Afficher la barre sticky quand les cartes salles sortent de l'écran
-  var roomsObs=new IntersectionObserver(function(entries){
-    document.getElementById('stickyBar').classList.toggle('visible',!entries[0].isIntersecting);
-  },{threshold:0});
-  setTimeout(function(){var el=document.getElementById('rooms');if(el)roomsObs.observe(el);},500);
 
   // ---- Réservation ----
   function openModal(di,si){
