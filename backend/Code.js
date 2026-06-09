@@ -7,6 +7,7 @@ var ROOMS = {
   nid: {name:'Le Nid', color:'6', prefix:'[Nid]'},
   dojo: {name:'Le Dojo', color:'7', prefix:'[Dojo]'}
 };
+var PRESENCE_PREFIX = 'Maison:';
 var SLOTS = [780, 870, 960, 1050];
 var SLOT_DURATION = 90;
 var CLOSE_MIN = 1110;
@@ -65,6 +66,7 @@ function doGet(e) {
   if (action === 'cancel') { return handleCancel(e.parameter); }
   if (action === 'checkpassword') { return jsonOut({ok: (e.parameter.pw || '') === PASSWORD}); }
   if (action === 'book') { return handleBook(e.parameter); }
+  if (action === 'maison') { return handleMaison(e.parameter); }
   if (action === 'privatisation') { return handlePrivatisation(e.parameter); }
   return jsonOut({ok: false, error: 'Action inconnue.'});
 }
@@ -76,6 +78,7 @@ function doPost(e) {
   if (action === 'checkpassword') { return jsonOut({ok: (data.pw || '') === PASSWORD}); }
   if (action === 'availability') { return handleAvailability({room: data.room, start: data.start}); }
   if (action === 'book') { return handleBook(data); }
+  if (action === 'maison') { return handleMaison(data); }
   if (action === 'privatisation') { return handlePrivatisation(data); }
   return jsonOut({ok: false, error: 'Action inconnue.'});
 }
@@ -108,7 +111,12 @@ function handleAvailability(params) {
       }
       slots.push({start: SLOTS[k], busy: busy});
     }
-    days.push({date: ymd(date), slots: slots});
+    var presence = null;
+    for (var p = 0; p < events.length; p++) {
+      var t = events[p].getTitle();
+      if (t.indexOf(PRESENCE_PREFIX) === 0) { presence = t.substring(PRESENCE_PREFIX.length).trim(); break; }
+    }
+    days.push({date: ymd(date), slots: slots, presence: presence});
   }
   return jsonOut({ok:true, days:days});
 }
@@ -217,6 +225,28 @@ function handlePrivatisation(data) {
   GmailApp.sendEmail(OWNER_EMAIL, sujet, 'Nouvelle demande de privatisation :\n\nPrenom : ' + name + '\nEmail : ' + email + '\nTelephone : ' + tel + '\nDate souhaitee : ' + date + '\nNombre de personnes : ' + nb + '\n\nBesoin :\n' + need, {name: 'GREATLY Reservation', replyTo: email});
   labelLastSentEmail(sujet);
   return jsonOut({ok:true, message:'Demande envoyee !'});
+}
+
+function handleMaison(data) {
+  var dateStr = data.date || '';
+  var name = (data.name || '').trim();
+  var email = (data.email || '').trim();
+  var tel = (data.tel || '').trim();
+  if (!name) { return jsonOut({ok:false, error:'Prenom requis.'}); }
+  if (!email || email.indexOf('@') === -1) { return jsonOut({ok:false, error:'Email invalide.'}); }
+  if (tel.replace(/\D/g,'').length < 8) { return jsonOut({ok:false, error:'Telephone invalide.'}); }
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) { return jsonOut({ok:false, error:'Date invalide.'}); }
+  var date = parseDate(dateStr);
+  var cal = getCal();
+  var event = cal.createAllDayEvent('A la maison - ' + name, date, {
+    description: 'Passage a la GREATLY House\nPrenom : ' + name + '\nEmail : ' + email + '\nTelephone : ' + tel
+  });
+  event.setColor('2');
+  GmailApp.sendEmail(OWNER_EMAIL, '[Maison] ' + name + ' passe le ' + dateStr,
+    'Passage prevu :\n\nPrenom : ' + name + '\nEmail : ' + email + '\nTel : ' + tel + '\nDate : ' + dateStr,
+    {name: 'GREATLY Reservation'});
+  labelLastSentEmail('[Maison] ' + name);
+  return jsonOut({ok:true, message:'C est note !'});
 }
 
 function buildEmail(prenom, salle, date, horaire, accent, accentPale, accentDark, lienGoogle, lienAnnulation) {

@@ -66,7 +66,27 @@
   .room-tab:hover{background:var(--cream)}
   .room-tab.sel{background:var(--c);color:#fff}
   .room-tab.sel svg{color:#fff}
-  @media(max-width:420px){.room-tab{font-size:.78rem;padding:9px 4px;gap:4px}.room-tab svg{width:16px;height:16px}}
+  .room-tab.sep{border-right:1.5px solid var(--line);border-radius:12px 0 0 12px;margin-right:2px}
+  @media(max-width:480px){.room-tab{font-size:.72rem;padding:8px 4px;gap:3px}.room-tab svg{width:15px;height:15px}}
+
+  /* Panneau maison */
+  #maisonPanel{display:none}
+  #maisonPanel.visible{display:block}
+  .maison-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px 20px;margin-top:14px}
+  .maison-header{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+  .maison-avatar{width:44px;height:44px;border-radius:12px;background:#CDD8BE;color:#4f5e42;display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:700;flex:0 0 auto}
+  .maison-header .mh-info{flex:1}
+  .maison-header .mh-title{font-size:1.05rem;font-weight:700}
+  .maison-header .mh-sub{font-size:.82rem;color:var(--warm-grey)}
+  .maison-desc{font-size:.88rem;color:var(--warm-grey);line-height:1.5;margin:10px 0 18px}
+  .maison-label{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--occupied-ink);margin-bottom:10px}
+  .maison-day{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--cream);border:1.5px solid transparent;border-radius:14px;margin-bottom:8px;cursor:pointer;transition:all .12s}
+  .maison-day:hover{border-color:var(--sage);background:#fff}
+  .maison-day .md-date{font-weight:700;font-size:.92rem;min-width:90px}
+  .maison-day .md-text{flex:1;font-size:.85rem;color:var(--warm-grey)}
+  .maison-day .md-arrow{color:var(--sage);flex:0 0 auto}
+  .maison-day .md-arrow svg{width:18px;height:18px}
+  .maison-loading{text-align:center;padding:20px 0;color:var(--warm-grey);font-size:.88rem}
 
   /* bande détail espace sélectionné */
   .room-detail{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-top:10px}
@@ -233,14 +253,26 @@
   <div class="rooms" id="rooms"></div>
   <div class="room-detail" id="roomDetail"></div>
 
-  <div class="step"><span class="n">2</span> Choisissez votre semaine</div>
+  <div id="maisonPanel">
+    <div class="maison-card">
+      <div class="maison-header">
+        <div class="maison-avatar">A</div>
+        <div class="mh-info"><div class="mh-title">A la maison</div><div class="mh-sub">Je suis dans les espaces communs · passez sans rendez-vous</div></div>
+      </div>
+      <p class="maison-desc">Pas besoin de réserver une salle : dites-moi juste que vous passez, je serai la pour papoter, prendre un cafe ou echanger.</p>
+      <div class="maison-label">Choisissez un jour pour me prevenir :</div>
+      <div id="maisonDays"><div class="maison-loading">Chargement...</div></div>
+    </div>
+  </div>
+
+  <div id="step2" class="step"><span class="n">2</span> Choisissez votre semaine</div>
   <div class="weeknav">
     <button id="prevW" onclick="changeWeek(-1)">‹</button>
     <div class="label" id="weekLabel"></div>
     <button id="nextW" onclick="changeWeek(1)">›</button>
   </div>
 
-  <div class="step"><span class="n">3</span> Choisissez un créneau</div>
+  <div id="step3" class="step"><span class="n">3</span> Choisissez un créneau</div>
   <p class="hint">Seuls les créneaux disponibles sont affichés. Les autres sont déjà réservés (sans afficher par qui).</p>
   <div id="slotsList"></div>
 </div>
@@ -400,7 +432,8 @@
     headphones:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="13" width="4" height="7" rx="2"/><rect x="17" y="13" width="4" height="7" rx="2"/></svg>',
     users:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 5.2a3.2 3.2 0 0 1 0 6"/><path d="M18.5 20a6.5 6.5 0 0 0-3-5.5"/></svg>',
     activity:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2.5 7 5-14 2.5 7H21"/></svg>',
-    check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>'
+    check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>',
+    home:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9"/><path d="M5 10v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8"/></svg>'
   };
   const ROOMS = {
     bulle: {name:"La Bulle", icon:"headphones", accent:"#6B7D5C", pale:"#CDD8BE", dark:"#4f5e42",
@@ -454,9 +487,15 @@
 
   function applyAccent(){
     const r=document.documentElement;
-    r.style.setProperty('--accent',ROOMS[current].accent);
-    r.style.setProperty('--accent-pale',ROOMS[current].pale);
-    r.style.setProperty('--accent-dark',ROOMS[current].dark);
+    if(current==='maison'){
+      r.style.setProperty('--accent','#4f5e42');
+      r.style.setProperty('--accent-pale','#CDD8BE');
+      r.style.setProperty('--accent-dark','#4f5e42');
+    } else {
+      r.style.setProperty('--accent',ROOMS[current].accent);
+      r.style.setProperty('--accent-pale',ROOMS[current].pale);
+      r.style.setProperty('--accent-dark',ROOMS[current].dark);
+    }
   }
 
   // Helper API : GET pour les lectures, POST via formulaire pour les écritures
@@ -502,6 +541,14 @@
 
   function renderRooms(){
     const wrap=document.getElementById('rooms');wrap.innerHTML='';
+    // Onglet maison
+    const m=document.createElement('button');
+    m.className='room-tab sep'+(current==='maison'?' sel':'');
+    m.style.setProperty('--c','#4f5e42');
+    m.innerHTML=ICONS.home+'A la maison';
+    m.onclick=()=>{current='maison';render();};
+    wrap.appendChild(m);
+    // Onglets salles
     Object.entries(ROOMS).forEach(([k,r])=>{
       const c=document.createElement('button');
       c.className='room-tab'+(k===current?' sel':'');
@@ -510,12 +557,91 @@
       c.onclick=()=>{current=k;render();};
       wrap.appendChild(c);
     });
-    // Bande de detail
-    const r=ROOMS[current];
-    document.getElementById('roomDetail').innerHTML=`
-      <div class="rd-icon" style="background:${r.pale};color:${r.dark}">${ICONS[r.icon]}</div>
-      <div class="rd-info"><div class="rd-name">${r.name}</div><div class="rd-tag">${r.tag}</div></div>
-      <span class="rd-cap" style="background:${r.pale};color:${r.dark}">${r.cap}</span>`;
+    // Bande de detail / panneau maison
+    const det=document.getElementById('roomDetail');
+    const mp=document.getElementById('maisonPanel');
+    const s2=document.getElementById('step2');
+    const s3=document.getElementById('step3');
+    const wn=document.querySelector('.weeknav');
+    const hint=document.querySelector('.hint');
+    const sl=document.getElementById('slotsList');
+    if(current==='maison'){
+      det.style.display='none';
+      mp.classList.add('visible');
+      s2.style.display='none';wn.style.display='none';
+      s3.style.display='none';if(hint)hint.style.display='none';sl.style.display='none';
+      renderMaisonDays();
+    } else {
+      det.style.display='';
+      mp.classList.remove('visible');
+      s2.style.display='';wn.style.display='';
+      s3.style.display='';if(hint)hint.style.display='';sl.style.display='';
+      const r=ROOMS[current];
+      det.innerHTML=`
+        <div class="rd-icon" style="background:${r.pale};color:${r.dark}">${ICONS[r.icon]}</div>
+        <div class="rd-info"><div class="rd-name">${r.name}</div><div class="rd-tag">${r.tag}</div></div>
+        <span class="rd-cap" style="background:${r.pale};color:${r.dark}">${r.cap}</span>`;
+    }
+  }
+
+  async function renderMaisonDays(){
+    const wrap=document.getElementById('maisonDays');
+    wrap.innerHTML='<div class="maison-loading">Chargement...</div>';
+    let apiDays=null;
+    try{apiDays=await fetchAvailability('bulle',weekStart);}catch(e){}
+    wrap.innerHTML='';
+    if(!apiDays){wrap.innerHTML='<div class="maison-loading">Erreur de chargement</div>';return;}
+    const DAY_FULL=['Lundi','Mardi','Mercredi','Jeudi','Vendredi'];
+    let found=false;
+    apiDays.forEach((dd,i)=>{
+      if(!dd.presence) return;
+      if(isPast(addDays(weekStart,i))) return;
+      found=true;
+      const d=addDays(weekStart,i);
+      const label=DAY_FULL[i]+' '+d.getDate()+' '+FR_MONTH[d.getMonth()];
+      const btn=document.createElement('div');
+      btn.className='maison-day';
+      btn.innerHTML='<span class="md-date">'+label+'</span><span class="md-text">'+dd.presence+'</span><span class="md-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg></span>';
+      btn.onclick=()=>openMaisonModal(ymd(d),label,dd.presence);
+      wrap.appendChild(btn);
+    });
+    if(!found) wrap.innerHTML='<div class="maison-loading">Aucun jour de presence cette semaine</div>';
+  }
+
+  function openMaisonModal(dateStr,label,presence){
+    document.getElementById('modalCard').innerHTML=`
+      <h3>A la maison</h3>
+      <div class="when">${label} · ${presence}</div>
+      <div class="field"><label>Ton prenom</label><input type="text" id="bkName" placeholder="Prenom"></div>
+      <div class="field"><label>Ton email</label><input type="email" id="bkMail" placeholder="prenom@email.com" inputmode="email"></div>
+      <div class="field"><label>Ton telephone</label><input type="tel" id="bkTel" placeholder="06 12 34 56 78" inputmode="tel"></div>
+      <div class="form-err" id="bkErr"></div>
+      <p class="rgpd">Aucun creneau bloque : je note simplement votre passage.</p>
+      <div class="modal-actions">
+        <button class="btn-ghost" onclick="closeModal()">Annuler</button>
+        <button class="btn-solid" id="bkSubmit" style="background:#4f5e42" onclick="confirmMaison('${dateStr}','${label}')">Je passe</button>
+      </div>`;
+    document.getElementById('modal').style.display='flex';
+  }
+
+  async function confirmMaison(dateStr,label){
+    const name=val('bkName'),mail=val('bkMail'),tel=val('bkTel'),err=document.getElementById('bkErr');
+    if(!name)return showErr(err,'Merci d\u2019indiquer ton prenom.');
+    if(!isEmail(mail))return showErr(err,'Merci d\u2019indiquer un email valide.');
+    if(tel.replace(/\D/g,'').length<8)return showErr(err,'Merci d\u2019indiquer un telephone valide.');
+    const btn=document.getElementById('bkSubmit');
+    btn.textContent='Envoi...';btn.disabled=true;showErr(err,'');
+    try{
+      const data=await apiPost({action:'maison',date:dateStr,name:name,email:mail,tel:tel});
+      if(!data.ok){showErr(err,data.error||'Erreur.');btn.textContent='Je passe';btn.disabled=false;return;}
+      document.getElementById('modalCard').innerHTML=`
+        <div class="confirm-msg">
+          <div class="check" style="background:#CDD8BE;color:#4f5e42;">&#10003;</div>
+          <h3>C'est note, a bientot a la maison !</h3>
+          <p style="color:var(--warm-grey);margin:10px 0 4px">${label}</p>
+          <button class="btn-solid" style="width:100%;background:#4f5e42" onclick="closeModal()">Terminer</button>
+        </div>`;
+    }catch(e){showErr(err,'Erreur de connexion.');btn.textContent='Je passe';btn.disabled=false;}
   }
 
   function renderWeekNav(){
