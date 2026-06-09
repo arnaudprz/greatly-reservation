@@ -3,10 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Réserver un espace · Greatly</title>
+<title>Réserver un espace · GREATLY House</title>
+<meta name="description" content="Réservez un espace à la GREATLY House : salons privatifs et salle de sport, à Verlinghem. Lun-Ven 13h-18h30.">
+<meta property="og:title" content="GREATLY House — Réserver un espace">
+<meta property="og:description" content="Réservez un salon privatif ou la salle de sport à la GREATLY House, Verlinghem. Thé, café & wifi offerts.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://arnaudprz.github.io/greatly-reservation/">
+<meta property="og:image" content="https://arnaudprz.github.io/greatly-reservation/greatly-og-share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GREATLY House — Réserver un espace">
+<meta name="twitter:description" content="Réservez un salon privatif ou la salle de sport à la GREATLY House, Verlinghem.">
+<meta name="twitter:image" content="https://arnaudprz.github.io/greatly-reservation/greatly-og-share.jpg">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
 <style>
   :root{
     --sage:#6B7D5C; --sage-dark:#5a6b4d;
@@ -37,10 +51,10 @@
   /* ---------- App ---------- */
   #app{display:none;max-width:680px;margin:0 auto;padding:26px 18px 96px}
   .brand{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:8px}
-  .brand .leaf{width:20px;height:20px;color:var(--sage)}
+  .brand img{flex:0 0 auto}
   .brand .logo{font-size:1.15rem}
   .brand .sub{color:var(--warm-grey);font-weight:600;font-size:1.15rem;letter-spacing:-.3px}
-  h1{text-align:center;font-size:1.7rem;font-weight:700;letter-spacing:-.6px}
+  h1{text-align:center;font-size:1.7rem;font-weight:400;letter-spacing:-.3px;font-family:'Playfair Display',Georgia,serif}
   .intro{text-align:center;max-width:520px;margin:10px auto 0;color:var(--warm-grey);font-size:.96rem;line-height:1.55}
 
   .step{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:1.3px;color:var(--occupied-ink);margin:30px 0 14px;display:flex;align-items:center;gap:10px}
@@ -145,6 +159,7 @@
 
 <div id="gate">
   <div class="gate-card">
+    <img src="favicon.svg" alt="Greatly" style="width:40px;height:38px;margin-bottom:8px;">
     <div class="logo">GREAT<span>LY</span></div>
     <div class="gate-sub">Espace membres · Réservation</div>
     <label for="pw">Mot de passe membre</label>
@@ -157,7 +172,7 @@
 <div id="stickyBar" class="sticky-bar"></div>
 <div id="app">
   <div class="brand">
-    <svg class="leaf" viewBox="0 0 24 24" fill="currentColor"><path d="M4 21c0-9 7-16 16-16 0 9-7 16-16 16zm3-3C12 16 16 12 17.4 7.6 12 9 8.4 12.6 7 18z"/></svg>
+    <img src="favicon.svg" alt="Greatly" style="width:24px;height:23px;">
     <span class="logo">GREAT<span>LY</span></span><span class="sub">House</span>
   </div>
   <h1>Réserver un espace</h1>
@@ -388,7 +403,7 @@
   // ---- Barre sticky ----
   function renderStickyBar(){
     const bar=document.getElementById('stickyBar');
-    bar.innerHTML='<div class="sticky-brand"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 21c0-9 7-16 16-16 0 9-7 16-16 16zm3-3C12 16 16 12 17.4 7.6 12 9 8.4 12.6 7 18z"/></svg><span class="slogo">GREAT<span>LY</span></span></div>';
+    bar.innerHTML='<div class="sticky-brand"><img src="favicon.svg" alt="" style="width:18px;height:17px;"><span class="slogo">GREAT<span>LY</span></span></div>';
     Object.entries(ROOMS).forEach(([k,r])=>{
       const b=document.createElement('button');
       b.className='mini-room'+(k===current?' sel':'');

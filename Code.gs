@@ -12,9 +12,9 @@ const CONFIG = {
   // Couleurs Google Calendar (index EventColor)
   // https://developers.google.com/apps-script/reference/calendar/event-color
   ROOMS: {
-    bulle: { name: 'La Bulle',  color: CalendarApp.EventColor.SAGE,   prefix: '[Bulle]' },
-    nid:   { name: 'Le Nid',    color: CalendarApp.EventColor.ORANGE, prefix: '[Nid]' },
-    dojo:  { name: 'Le Dojo',   color: CalendarApp.EventColor.CYAN,   prefix: '[Dojo]' },
+    bulle: { name: 'La Bulle',  color: '2',  prefix: '[Bulle]' },  // Vert pâle
+    nid:   { name: 'Le Nid',    color: '6',  prefix: '[Nid]' },    // Orange
+    dojo:  { name: 'Le Dojo',   color: '7',  prefix: '[Dojo]' },   // Cyan
   },
 
   SLOTS: [13*60, 14*60+30, 16*60, 17*60+30],  // minutes depuis minuit
