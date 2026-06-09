@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Réserver un espace · GREATLY House</title>
-<meta name="description" content="Réservez un espace à la GREATLY House : salons privatifs et salle de sport, à Verlinghem. Lun-Ven 13h-18h30.">
-<meta property="og:title" content="GREATLY House — Réserver un espace">
+<title>Espace membres · GREATLY House</title>
+<meta name="description" content="Espace membres GREATLY House : réservez un salon privatif ou la salle de sport, à Verlinghem. Lun-Ven 13h-18h30.">
+<meta property="og:title" content="GREATLY House — Espace membres">
 <meta property="og:description" content="Réservez un salon privatif ou la salle de sport à la GREATLY House, Verlinghem. Thé, café & wifi offerts.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://arnaudprz.github.io/greatly-reservation/">
@@ -14,7 +14,7 @@
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="fr_FR">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="GREATLY House — Réserver un espace">
+<meta name="twitter:title" content="GREATLY House — Espace membres">
 <meta name="twitter:description" content="Réservez un salon privatif ou la salle de sport à la GREATLY House, Verlinghem.">
 <meta name="twitter:image" content="https://arnaudprz.github.io/greatly-reservation/greatly-og-share.jpg">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -125,12 +125,42 @@
   .confirm-msg{text-align:center;padding:8px 0}
   .confirm-msg .check{width:56px;height:56px;border-radius:50%;background:var(--accent-pale);color:var(--accent-dark);display:flex;align-items:center;justify-content:center;font-size:1.7rem;margin:0 auto 14px}
 
-  /* WhatsApp */
-  .wa-fab{position:fixed;right:18px;bottom:18px;z-index:90;display:flex;align-items:center;gap:10px;text-decoration:none}
-  .wa-fab .bubble{width:58px;height:58px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.22);transition:transform .15s}
-  .wa-fab:hover .bubble{transform:scale(1.06)}
-  .wa-fab .lbl{background:#fff;color:var(--ink);font-size:.82rem;font-weight:600;padding:8px 13px;border-radius:999px;box-shadow:0 4px 12px rgba(0,0,0,.12)}
-  @media (max-width:520px){.wa-fab .lbl{display:none}}
+  /* Burger menu */
+  .burger-btn{position:fixed;top:14px;right:14px;z-index:80;width:44px;height:44px;border-radius:12px;border:1.5px solid var(--line);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.08);transition:all .15s}
+  .burger-btn:hover{box-shadow:0 4px 14px rgba(0,0,0,.12)}
+  .burger-btn svg{width:22px;height:22px;color:var(--ink)}
+  .burger-btn.open svg{color:var(--sage)}
+
+  #menuPanel{position:fixed;inset:0;z-index:75;display:none}
+  #menuPanel.open{display:block}
+  .menu-overlay{position:absolute;inset:0;background:rgba(26,26,26,.4)}
+  .menu-drawer{position:absolute;top:0;right:0;width:min(320px,85vw);height:100%;background:var(--cream);padding:72px 24px 32px;overflow-y:auto;box-shadow:-8px 0 30px rgba(0,0,0,.12);animation:slideIn .2s ease}
+  @keyframes slideIn{from{transform:translateX(100%)}to{transform:translateX(0)}}
+  .menu-section{margin-bottom:24px}
+  .menu-section-title{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--occupied-ink);margin-bottom:10px}
+  .menu-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;background:#fff;border:1px solid var(--line);text-decoration:none;color:var(--ink);margin-bottom:8px;transition:all .12s;cursor:pointer}
+  .menu-item:hover{box-shadow:0 4px 12px rgba(0,0,0,.06);transform:translateY(-1px)}
+  .menu-item .mi-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+  .menu-item .mi-icon svg{width:18px;height:18px}
+  .menu-item .mi-text{font-size:.88rem;font-weight:600}
+  .menu-item .mi-sub{font-size:.76rem;color:var(--warm-grey);font-weight:400}
+
+  /* Contact panels */
+  .contact-panel{position:fixed;inset:0;z-index:85;display:none;align-items:flex-end;justify-content:center}
+  .contact-panel.open{display:flex}
+  .contact-overlay{position:absolute;inset:0;background:rgba(26,26,26,.45)}
+  .contact-card{position:relative;background:#fff;border-radius:22px 22px 0 0;padding:28px 24px calc(28px + env(safe-area-inset-bottom));width:100%;max-width:440px;max-height:90vh;overflow-y:auto;z-index:1}
+  @media(min-width:760px){.contact-card{border-radius:20px;margin:20px}}
+  .contact-photo{width:80px;height:80px;border-radius:50%;object-fit:cover;margin:0 auto 14px;display:block}
+  .contact-name{text-align:center;font-size:1.2rem;font-weight:700;font-family:'Playfair Display',Georgia,serif}
+  .contact-role{text-align:center;font-size:.85rem;color:var(--warm-grey);margin:4px 0 20px}
+  .contact-actions{display:flex;flex-direction:column;gap:10px}
+  .contact-btn{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:14px;text-decoration:none;font-family:inherit;font-size:.9rem;font-weight:600;border:none;cursor:pointer;transition:all .12s}
+  .contact-btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.08)}
+  .contact-btn svg{width:20px;height:20px;flex:0 0 auto}
+  .contact-btn.wa{background:#25D366;color:#fff}
+  .contact-btn.mail{background:var(--cream);color:var(--ink);border:1.5px solid var(--line)}
+  .contact-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;border:none;background:var(--cream);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:var(--warm-grey)}
 
   @media(min-width:760px){
     #modal{align-items:center;padding:20px}
@@ -161,7 +191,7 @@
   <div class="gate-card">
     <img src="favicon.svg" alt="Greatly" style="width:40px;height:38px;margin-bottom:8px;">
     <div class="logo">GREAT<span>LY</span></div>
-    <div class="gate-sub">Espace membres · Réservation</div>
+    <div class="gate-sub">Espace membres</div>
     <label for="pw">Mot de passe membre</label>
     <input type="password" id="pw" placeholder="••••••••" autocomplete="off">
     <button class="btn" onclick="checkPw()">Accéder</button>
@@ -202,17 +232,99 @@
 
 <div id="modal"><div class="modal-card" id="modalCard"></div></div>
 
-<a class="wa-fab" href="https://wa.me/33651156344" target="_blank" rel="noopener" aria-label="Discuter sur WhatsApp">
-  <span class="lbl">Une question ? Écris-moi</span>
-  <span class="bubble">
-    <svg width="30" height="30" viewBox="0 0 32 32" fill="#fff"><path d="M16.04 3C9.4 3 4 8.4 4 15.04c0 2.12.55 4.18 1.6 6L4 29l8.18-1.55a12 12 0 0 0 3.86.64h.01C22.7 28.08 28.1 22.68 28.1 16.04 28.1 8.4 22.68 3 16.04 3zm0 22.06c-1.18 0-2.34-.2-3.44-.6l-.25-.1-4.85.92.92-4.73-.16-.25a9.9 9.9 0 0 1-1.52-5.21c0-5.5 4.48-9.98 9.98-9.98 2.67 0 5.18 1.04 7.06 2.92a9.92 9.92 0 0 1 2.92 7.06c0 5.5-4.48 9.97-9.98 9.97zm5.47-7.47c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35z"/></svg>
-  </span>
-</a>
+<!-- Burger menu button -->
+<button class="burger-btn" id="burgerBtn" onclick="toggleMenu()">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+</button>
+
+<!-- Menu panel -->
+<div id="menuPanel">
+  <div class="menu-overlay" onclick="toggleMenu()"></div>
+  <div class="menu-drawer">
+    <div class="menu-section">
+      <div class="menu-section-title">Nous contacter</div>
+      <a class="menu-item" onclick="toggleMenu();openContact('arnaud')">
+        <span class="mi-icon" style="background:#CDD8BE;color:#4f5e42;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+        <div><div class="mi-text">Contacter Arnaud</div><div class="mi-sub">WhatsApp ou email</div></div>
+      </a>
+      <a class="menu-item" onclick="toggleMenu();openContact('julie')">
+        <span class="mi-icon" style="background:#EBD6BC;color:#8f6035;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+        <div><div class="mi-text">Contacter Julie</div><div class="mi-sub">Par email</div></div>
+      </a>
+    </div>
+    <div class="menu-section">
+      <div class="menu-section-title">Informations</div>
+      <div class="menu-item" onclick="toggleMenu()">
+        <span class="mi-icon" style="background:var(--cream);color:var(--ink);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
+        <div><div class="mi-text">Nos horaires</div><div class="mi-sub">Lun-Ven 13h-18h30 · hors vacances scolaires</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Contact Arnaud -->
+<div class="contact-panel" id="contactArnaud">
+  <div class="contact-overlay" onclick="closeContact('arnaud')"></div>
+  <div class="contact-card">
+    <button class="contact-close" onclick="closeContact('arnaud')">&#10005;</button>
+    <img src="arnaud.jpg" alt="Arnaud" class="contact-photo">
+    <div class="contact-name">Arnaud Przybylski</div>
+    <div class="contact-role">Fondateur GREATLY</div>
+    <div class="contact-actions">
+      <a href="https://wa.me/33651156344" target="_blank" rel="noopener" class="contact-btn wa">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35z"/><path d="M12 2C6.48 2 2 6.48 2 12c0 1.77.46 3.43 1.27 4.88L2 22l5.22-1.25A9.96 9.96 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.65 0-3.18-.5-4.46-1.35l-.32-.19-3.27.78.82-3.2-.21-.34A7.95 7.95 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/></svg>
+        Contacter sur WhatsApp
+      </a>
+      <a href="mailto:arnaudprz@gmail.com" class="contact-btn mail">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+        Envoyer un email
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Contact Julie -->
+<div class="contact-panel" id="contactJulie">
+  <div class="contact-overlay" onclick="closeContact('julie')"></div>
+  <div class="contact-card">
+    <button class="contact-close" onclick="closeContact('julie')">&#10005;</button>
+    <img src="julie.jpg" alt="Julie" class="contact-photo">
+    <div class="contact-name">Julie Houriez</div>
+    <div class="contact-role">Naturopathe GREATLY</div>
+    <div class="contact-actions">
+      <a href="mailto:juhou00@gmail.com" class="contact-btn mail">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+        Envoyer un email
+      </a>
+    </div>
+  </div>
+</div>
 
 <script>
   // ---- API ----
   const API_URL = 'https://script.google.com/macros/s/AKfycbx_O4Mo47Y9vvUkSG9pltSh4D9ktJvfdnqUx1fSLP5bfLpy8ip9hajGns3VhhnwQljFBQ/exec';
   let PASSWORD = '';
+
+  // ---- Menu & Contacts ----
+  function toggleMenu(){
+    var p=document.getElementById('menuPanel');
+    var b=document.getElementById('burgerBtn');
+    p.classList.toggle('open');
+    b.classList.toggle('open');
+    if(b.classList.contains('open')){
+      b.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>';
+    } else {
+      b.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>';
+    }
+  }
+  function openContact(who){
+    var id=who==='arnaud'?'contactArnaud':'contactJulie';
+    document.getElementById(id).classList.add('open');
+  }
+  function closeContact(who){
+    var id=who==='arnaud'?'contactArnaud':'contactJulie';
+    document.getElementById(id).classList.remove('open');
+  }
 
   // ---- Espaces ----
   const ICONS = {
