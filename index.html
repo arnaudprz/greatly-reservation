@@ -934,22 +934,32 @@
     document.getElementById(id).classList.remove('open');
   }
 
-  // ---- Navigation home/reservation ----
-  function showReservation(){
-    document.getElementById('homeSection').style.display='none';
-    document.getElementById('reservationSection').style.display='';
-    document.getElementById('progPage').classList.remove('open');
-    document.getElementById('infosPage').classList.remove('open');
-    render();
+  // ---- Navigation par hash ----
+  function navigate(page){
+    if(page) window.location.hash=page; else history.replaceState(null,null,' ');
+    applyRoute();
+  }
+  function applyRoute(){
+    var h=(window.location.hash||'').replace('#','');
+    var home=document.getElementById('homeSection');
+    var resa=document.getElementById('reservationSection');
+    var prog=document.getElementById('progPage');
+    var infos=document.getElementById('infosPage');
+    home.style.display='none';
+    resa.style.display='none';
+    prog.classList.remove('open');
+    infos.classList.remove('open');
+    if(h==='reservations'){resa.style.display='';render();}
+    else if(h==='programme'){prog.classList.add('open');setTimeout(initFadeAnimations,100);}
+    else if(h==='infos'){infos.classList.add('open');setTimeout(initFadeAnimations,100);}
+    else{home.style.display='';}
     window.scrollTo({top:0,behavior:'smooth'});
   }
-  function goHome(){
-    document.getElementById('homeSection').style.display='';
-    document.getElementById('reservationSection').style.display='none';
-    document.getElementById('progPage').classList.remove('open');
-    document.getElementById('infosPage').classList.remove('open');
-    window.scrollTo({top:0,behavior:'smooth'});
-  }
+  window.addEventListener('hashchange',applyRoute);
+  function showReservation(){navigate('reservations');}
+  function goHome(){navigate('');}
+  function openProgrammeNav(){navigate('programme');}
+  function openInfosNav(){navigate('infos');}
 
   // ---- Scroll to top + reading progress ----
   window.addEventListener('scroll',function(){
@@ -969,14 +979,7 @@
   });
 
   // ---- Infos pratiques ----
-  function openInfos(){
-    document.getElementById('homeSection').style.display='none';
-    document.getElementById('reservationSection').style.display='none';
-    document.getElementById('progPage').classList.remove('open');
-    document.getElementById('infosPage').classList.add('open');
-    window.scrollTo({top:0,behavior:'smooth'});
-    setTimeout(initFadeAnimations,100);
-  }
+  function openInfos(){navigate('infos');}
   function closeInfos(){goHome();}
 
   // ---- Programme ----
@@ -986,14 +989,7 @@
   function initFadeAnimations(){
     document.querySelectorAll('.prog-fade').forEach(function(el){el.classList.remove('visible');fadeObs.observe(el);});
   }
-  function openProgramme(){
-    document.getElementById('homeSection').style.display='none';
-    document.getElementById('reservationSection').style.display='none';
-    document.getElementById('infosPage').classList.remove('open');
-    document.getElementById('progPage').classList.add('open');
-    window.scrollTo({top:0,behavior:'smooth'});
-    setTimeout(initFadeAnimations,100);
-  }
+  function openProgramme(){navigate('programme');}
   function closeProgramme(){goHome();}
 
   // ---- Horaires ----
