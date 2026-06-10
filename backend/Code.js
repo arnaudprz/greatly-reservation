@@ -1,5 +1,3 @@
-var NOTION_PAGE_ID = '367753bd7261801988e3c9be30530561';
-function getNotionToken() { return PropertiesService.getScriptProperties().getProperty('NOTION_TOKEN'); }
 var PASSWORD = 'Reservation2302';
 var SECRET = 'GR34TLY_s3cr3t_2026';
 var OWNER_EMAIL = 'arnaudprz@gmail.com';
@@ -70,7 +68,6 @@ function doGet(e) {
   if (action === 'book') { return handleBook(e.parameter); }
   if (action === 'maison') { return handleMaison(e.parameter); }
   if (action === 'privatisation') { return handlePrivatisation(e.parameter); }
-  if (action === 'programme') { return handleProgramme(); }
   return jsonOut({ok: false, error: 'Action inconnue.'});
 }
 
@@ -83,7 +80,6 @@ function doPost(e) {
   if (action === 'book') { return handleBook(data); }
   if (action === 'maison') { return handleMaison(data); }
   if (action === 'privatisation') { return handlePrivatisation(data); }
-  if (action === 'programme') { return handleProgramme(); }
   return jsonOut({ok: false, error: 'Action inconnue.'});
 }
 
@@ -294,103 +290,6 @@ function handleMaison(data) {
 
 function buildEmail(prenom, salle, date, horaire, accent, accentPale, accentDark, lienGoogle, lienAnnulation) {
   return '<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"></head><body style="margin:0;padding:24px 12px;background:#EDE8E0;font-family:Helvetica Neue,Arial,sans-serif;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px;margin:0 auto;"><tr><td><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:6px 0 18px;"><span style="font-size:18px;font-weight:700;letter-spacing:-.3px;color:#6B7D5C;">GREAT<span style="color:#1A1A1A;">LY</span></span><span style="font-size:18px;font-weight:600;color:#6B6460;"> House</span></td></tr></table><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FFFFFF;border-radius:20px;overflow:hidden;border:1px solid #E7E1D7;"><tr><td style="height:6px;background:' + accent + ';font-size:0;line-height:0;"> </td></tr><tr><td style="padding:32px 30px 8px;text-align:center;"><table role="presentation" cellpadding="0" cellspacing="0" align="center"><tr><td style="width:56px;height:56px;background:' + accentPale + ';border-radius:50%;text-align:center;vertical-align:middle;font-size:28px;color:' + accentDark + ';">&#10003;</td></tr></table><h1 style="margin:18px 0 4px;font-size:23px;color:#1A1A1A;font-weight:700;">C\'est reserve !</h1><p style="margin:0;color:#6B6460;font-size:15px;line-height:1.5;">Bonjour <strong>' + prenom + '</strong>, votre creneau est confirme.<br>On a hate de vous accueillir a la maison.</p></td></tr><tr><td style="padding:22px 30px 6px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F7F4EF;border-radius:14px;"><tr><td style="padding:18px 20px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td style="font-size:12px;text-transform:uppercase;letter-spacing:.6px;color:#9c958b;font-weight:700;padding-bottom:2px;">Espace</td></tr><tr><td style="font-size:18px;font-weight:700;color:#1A1A1A;padding-bottom:14px;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:' + accent + ';margin-right:8px;"></span>' + salle + '</td></tr><tr><td style="font-size:12px;text-transform:uppercase;letter-spacing:.6px;color:#9c958b;font-weight:700;padding-bottom:2px;">Date & horaire</td></tr><tr><td style="font-size:15px;color:#1A1A1A;font-weight:600;padding-bottom:14px;">' + date + ' - ' + horaire + '</td></tr><tr><td style="font-size:12px;text-transform:uppercase;letter-spacing:.6px;color:#9c958b;font-weight:700;padding-bottom:2px;">Lieu</td></tr><tr><td style="font-size:15px;color:#1A1A1A;font-weight:600;">GREATLY House - 10 rue de Lambersart, Verlinghem</td></tr></table></td></tr></table></td></tr><tr><td style="padding:20px 30px 6px;text-align:center;"><a href="' + lienGoogle + '" style="display:block;background:' + accent + ';color:#ffffff;text-decoration:none;font-size:15px;font-weight:700;padding:15px 20px;border-radius:12px;">Ajouter a Google Agenda</a></td></tr><tr><td style="padding:14px 30px 4px;text-align:center;"><p style="margin:0;color:#9c958b;font-size:13px;line-height:1.5;">Une invitation est aussi jointe a ce mail.</p></td></tr><tr><td style="padding:18px 30px 0;text-align:center;"><p style="margin:0;color:#6B6460;font-size:14px;line-height:1.6;">Un empechement ? <a href="' + lienAnnulation + '" style="color:' + accent + ';font-weight:700;text-decoration:underline;">Annuler ce creneau</a> - il sera aussitot libere.</p></td></tr><tr><td style="padding:12px 30px 28px;text-align:center;"><p style="margin:0;color:#6B6460;font-size:14px;line-height:1.6;">Une question ? Ecrivez-nous sur WhatsApp au <a href="https://wa.me/33651156344" style="color:' + accent + ';font-weight:700;text-decoration:none;">06 51 15 63 44</a>.</p></td></tr></table><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:20px 16px 8px;"><p style="margin:0;color:#9c958b;font-size:12px;line-height:1.6;">GREATLY House - 10 rue de Lambersart, Verlinghem - Lun-Ven, 13h-18h30</p></td></tr></table></td></tr></table></body></html>';
-}
-
-// ---- Programme (Notion) ----
-
-function handleProgramme() {
-  try {
-    var blocks = fetchNotionBlocks(NOTION_PAGE_ID);
-    var html = notionBlocksToHtml(blocks);
-    return jsonOut({ok: true, html: html});
-  } catch(e) {
-    return jsonOut({ok: false, error: 'Erreur Notion: ' + e.message});
-  }
-}
-
-function fetchNotionBlocks(blockId) {
-  var allBlocks = [];
-  var hasMore = true;
-  var startCursor = null;
-  while (hasMore) {
-    var url = 'https://api.notion.com/v1/blocks/' + blockId + '/children?page_size=100';
-    if (startCursor) url += '&start_cursor=' + startCursor;
-    var res = UrlFetchApp.fetch(url, {
-      headers: {'Authorization': 'Bearer ' + getNotionToken(), 'Notion-Version': '2022-06-28'},
-      muteHttpExceptions: true
-    });
-    var data = JSON.parse(res.getContentText());
-    if (data.results) {
-      for (var i = 0; i < data.results.length; i++) {
-        allBlocks.push(data.results[i]);
-      }
-    }
-    hasMore = data.has_more || false;
-    startCursor = data.next_cursor || null;
-  }
-  return allBlocks;
-}
-
-function richTextToHtml(richTextArray) {
-  if (!richTextArray) return '';
-  var html = '';
-  for (var i = 0; i < richTextArray.length; i++) {
-    var rt = richTextArray[i];
-    var text = rt.plain_text || '';
-    text = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-    if (rt.annotations) {
-      if (rt.annotations.bold) text = '<strong>' + text + '</strong>';
-      if (rt.annotations.italic) text = '<em>' + text + '</em>';
-      if (rt.annotations.strikethrough) text = '<s>' + text + '</s>';
-    }
-    html += text;
-  }
-  return html;
-}
-
-function notionBlocksToHtml(blocks) {
-  var html = '';
-  var inList = false;
-  for (var i = 0; i < blocks.length; i++) {
-    var b = blocks[i];
-    var type = b.type;
-    if (type !== 'bulleted_list_item' && type !== 'numbered_list_item' && inList) {
-      html += '</ul>';
-      inList = false;
-    }
-    if (type === 'paragraph') {
-      var t = richTextToHtml(b.paragraph.rich_text);
-      if (t) html += '<p>' + t + '</p>';
-    } else if (type === 'heading_1') {
-      html += '<h1>' + richTextToHtml(b.heading_1.rich_text) + '</h1>';
-    } else if (type === 'heading_2') {
-      html += '<h2>' + richTextToHtml(b.heading_2.rich_text) + '</h2>';
-    } else if (type === 'heading_3') {
-      html += '<h3>' + richTextToHtml(b.heading_3.rich_text) + '</h3>';
-    } else if (type === 'bulleted_list_item') {
-      if (!inList) { html += '<ul>'; inList = true; }
-      html += '<li>' + richTextToHtml(b.bulleted_list_item.rich_text) + '</li>';
-    } else if (type === 'numbered_list_item') {
-      if (!inList) { html += '<ul>'; inList = true; }
-      html += '<li>' + richTextToHtml(b.numbered_list_item.rich_text) + '</li>';
-    } else if (type === 'quote') {
-      html += '<blockquote>' + richTextToHtml(b.quote.rich_text) + '</blockquote>';
-    } else if (type === 'callout') {
-      var icon = (b.callout.icon && b.callout.icon.emoji) ? b.callout.icon.emoji + ' ' : '';
-      html += '<div class="aside-box">' + richTextToHtml(b.callout.rich_text);
-      if (b.has_children) {
-        try {
-          var children = fetchNotionBlocks(b.id);
-          html += notionBlocksToHtml(children);
-        } catch(e) {}
-      }
-      html += '</div>';
-    } else if (type === 'divider') {
-      html += '<hr>';
-    }
-  }
-  if (inList) html += '</ul>';
-  return html;
 }
 
 function cancelPage(success, message) {
