@@ -197,6 +197,28 @@
   .privat-form .field{margin-bottom:14px}
   .privat-form .field label{display:block;font-size:.76rem;font-weight:600;color:var(--warm-grey);margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px}
 
+  /* Scroll to top */
+  .scroll-top{position:fixed;bottom:20px;right:20px;width:44px;height:44px;border-radius:50%;background:var(--sage);color:#fff;border:none;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.15);z-index:70;transition:transform .15s}
+  .scroll-top:hover{transform:scale(1.08)}
+  .scroll-top.show{display:flex}
+  .scroll-top svg{width:20px;height:20px}
+
+  /* Sidebar sommaire desktop */
+  #infosPage{display:none}
+  #infosPage.open{display:block}
+  .infos-layout{position:relative}
+  .infos-sidebar{display:none}
+  @media(min-width:1100px){
+    .infos-layout{display:flex;gap:0}
+    .infos-sidebar{display:block;position:sticky;top:72px;width:200px;flex:0 0 200px;height:fit-content;padding:16px 0;margin-right:20px}
+    .infos-sidebar a{display:block;font-size:.76rem;color:var(--warm-grey);text-decoration:none;padding:6px 12px;border-left:2px solid transparent;border-radius:0 8px 8px 0;transition:all .12s;line-height:1.3;margin-bottom:2px}
+    .infos-sidebar a:hover{color:var(--sage);background:rgba(107,125,92,.05)}
+    .infos-sidebar a.active{color:var(--sage);border-left-color:var(--sage);font-weight:600;background:rgba(107,125,92,.06)}
+    .infos-sidebar .sidebar-title{font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--occupied-ink);padding:0 12px 8px}
+    .infos-main{flex:1;min-width:0}
+    .infos-mobile-toc{display:none !important}
+  }
+
   /* Page programme */
   #progPage{display:none}
   #progPage.open{display:block}
@@ -303,29 +325,57 @@
   <p class="hint">Seuls les créneaux disponibles sont affichés. Les autres sont déjà réservés (sans afficher par qui).</p>
   <div id="slotsList"></div>
   <div id="infosPage">
-    <div class="prog-inner">
+    <div style="max-width:960px;margin:0 auto;padding:32px 22px 80px;">
       <button class="prog-back" onclick="closeInfos()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour aux reservations</button>
+    <div class="infos-layout">
+      <nav class="infos-sidebar">
+        <div class="sidebar-title">Sommaire</div>
+        <a href="#infos-programme">Vous rejoignez GREATLY</a>
+        <a href="#infos-pionnier">Programme pionnier</a>
+        <a href="#infos-maison">La GREATLY House</a>
+        <a href="#infos-experience">L'experience</a>
+        <a href="#infos-pedagogique">Cadre pedagogique</a>
+        <a href="#infos-deontologique">Cadre deontologique</a>
+        <a href="#infos-logistique">Cadre logistique</a>
+        <a href="#infos-admin">Cadre administratif</a>
+      </nav>
+      <div class="infos-main">
 
       <div class="prog-hero prog-fade">
         <svg class="prog-svg-deco" style="top:-20px;right:-30px;width:120px;height:120px;" viewBox="0 0 24 24" fill="currentColor" color="var(--sage)"><path d="M4 21c0-9 7-16 16-16 0 9-7 16-16 16zm3-3C12 16 16 12 17.4 7.6 12 9 8.4 12.6 7 18z"/></svg>
         <div class="prog-hero-photos">
           <div style="text-align:center"><img src="julie.jpg" alt="Julie"><div class="ph-label">Julie Houriez</div></div>
           <div style="text-align:center"><img src="claire.jpg" alt="Claire"><div class="ph-label">Claire Laloyaux</div></div>
+          <div style="text-align:center"><img src="alexandra.jpg" alt="Alexandra"><div class="ph-label">Alexandra Brabant</div></div>
         </div>
         <h1>Nous sommes ravis de vous accueillir : bienvenue chez GREATLY!</h1>
         <p style="font-size:.88rem;color:var(--sage);font-weight:600;margin-bottom:10px;">Votre livret d'accueil</p>
       </div>
 
+      <div class="infos-mobile-toc prog-fade" style="background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-bottom:20px;">
+        <p style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--occupied-ink);margin-bottom:10px;">Sommaire</p>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <a href="#infos-programme" style="font-size:.88rem;color:var(--sage-dark);text-decoration:none;padding:6px 10px;border-radius:8px;transition:background .12s;" onmouseover="this.style.background='var(--cream)'" onmouseout="this.style.background=''">1. Vous rejoignez le programme GREATLY</a>
+          <a href="#infos-pionnier" style="font-size:.88rem;color:var(--sage-dark);text-decoration:none;padding:6px 10px;border-radius:8px;transition:background .12s;" onmouseover="this.style.background='var(--cream)'" onmouseout="this.style.background=''">2. Le programme GREATLY pionnier</a>
+          <a href="#infos-maison" style="font-size:.88rem;color:var(--sage-dark);text-decoration:none;padding:6px 10px;border-radius:8px;transition:background .12s;" onmouseover="this.style.background='var(--cream)'" onmouseout="this.style.background=''">3. La GREATLY House</a>
+          <a href="#infos-experience" style="font-size:.88rem;color:var(--sage-dark);text-decoration:none;padding:6px 10px;border-radius:8px;transition:background .12s;" onmouseover="this.style.background='var(--cream)'" onmouseout="this.style.background=''">4. L'experience GREATLY</a>
+          <a href="#infos-pedagogique" style="font-size:.88rem;color:var(--sage-dark);text-decoration:none;padding:6px 10px;border-radius:8px;transition:background .12s;" onmouseover="this.style.background='var(--cream)'" onmouseout="this.style.background=''">5. Le cadre pedagogique</a>
+          <a href="#infos-deontologique" style="font-size:.88rem;color:var(--sage-dark);text-decoration:none;padding:6px 10px;border-radius:8px;transition:background .12s;" onmouseover="this.style.background='var(--cream)'" onmouseout="this.style.background=''">6. Le cadre deontologique</a>
+          <a href="#infos-logistique" style="font-size:.88rem;color:var(--sage-dark);text-decoration:none;padding:6px 10px;border-radius:8px;transition:background .12s;" onmouseover="this.style.background='var(--cream)'" onmouseout="this.style.background=''">7. Le cadre logistique</a>
+          <a href="#infos-admin" style="font-size:.88rem;color:var(--sage-dark);text-decoration:none;padding:6px 10px;border-radius:8px;transition:background .12s;" onmouseover="this.style.background='var(--cream)'" onmouseout="this.style.background=''">8. Cadre administratif</a>
+        </div>
+      </div>
+
       <div class="aside-box prog-fade">
         <p>Pour votre bien-etre et celui du groupe, nous avons pris soin de reunir dans ce livret d'accueil tout ce qui vous aidera a vous sentir chez vous : l'esprit qui nous anime et le cadre dans lequel nous cheminerons ensemble.</p>
         <p>Prenez le temps de le parcourir a votre rythme. Et si une question, une hesitation ou meme une simple remarque vous vient au sujet de ce cadre d'engagement, sachez que nous sommes la, avec plaisir, pour en echanger avec vous. N'hesitez jamais a nous solliciter.</p>
-        <p><strong>Julie Houriez</strong> : jh.naturopathie@gmail.com / 06 75 70 26 78</p>
+        <p><strong>Julie Houriez</strong> : <a href="mailto:jh.naturopathie@gmail.com" style="color:var(--sage);">jh.naturopathie@gmail.com</a> / 06 75 70 26 78</p>
       </div>
 
       <hr class="prog-divider">
       <div class="prog-fade">
       <div class="prog-section-icon" style="background:rgba(107,125,92,.1);color:var(--sage);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
-      <h2 style="border:none;padding:0;margin-top:0;">Vous rejoignez le programme GREATLY</h2>
+      <h2 id="infos-programme" style="border:none;padding:0;margin-top:0;">Vous rejoignez le programme GREATLY</h2>
       </div>
       <div class="prog-fade">
       <p><strong>GREATLY est un programme d'accompagnement</strong> pense pour cultiver et renforcer durablement ENERGIE et LUCIDITE des dirigeants, cadres et talents cles de l'entreprise ainsi que des solopreneurs et professions liberales.</p>
@@ -336,7 +386,7 @@
       <hr class="prog-divider">
       <div class="prog-fade">
       <div class="prog-section-icon" style="background:rgba(107,125,92,.1);color:var(--sage);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
-      <h2 style="border:none;padding:0;margin-top:0;">Le programme GREATLY pionnier</h2>
+      <h2 id="infos-pionnier" style="border:none;padding:0;margin-top:0;">Le programme GREATLY pionnier</h2>
       </div>
       <div class="prog-fade">
       <p>Vous suivez pendant <strong>6 mois (juin 2026 - janvier 2027)</strong> un programme collectif en presentiel comprenant 3 types d'activites : atelier, activite physique, detente et echanges dans un lieu Ressource.</p>
@@ -370,7 +420,7 @@
       <hr class="prog-divider">
       <div class="prog-fade">
       <div class="prog-section-icon" style="background:rgba(192,129,78,.1);color:#C0814E;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9"/><path d="M5 10v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8"/></svg></div>
-      <h2 style="border:none;padding:0;margin-top:0;">La GREATLY House</h2>
+      <h2 id="infos-maison" style="border:none;padding:0;margin-top:0;">La GREATLY House</h2>
       </div>
       <div class="prog-fade">
       <p>Un lieu pour prendre du recul, se mettre au vert et souffler. Un espace pour sortir de son cadre habituel, le temps d'un moment, pour retrouver de la clarte et repartir plus leger ou simplement travailler dans un environnement qui fait du bien. Vous pourrez aussi y croiser les intervenants et coachs GREATLY, qui ont egalement leurs habitudes dans la maison.</p>
@@ -399,7 +449,7 @@
       <hr class="prog-divider">
       <div class="prog-fade">
       <div class="prog-section-icon" style="background:rgba(79,124,130,.1);color:#4F7C82;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div>
-      <h2 style="border:none;padding:0;margin-top:0;">L'experience GREATLY</h2>
+      <h2 id="infos-experience" style="border:none;padding:0;margin-top:0;">L'experience GREATLY</h2>
       </div>
       <div class="prog-fade">
       <h3>Une experience collective en presentiel</h3>
@@ -435,7 +485,7 @@
       <hr class="prog-divider">
       <div class="prog-fade">
       <div class="prog-section-icon" style="background:rgba(107,125,92,.1);color:var(--sage);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
-      <h2 style="border:none;padding:0;margin-top:0;">Le cadre pedagogique</h2>
+      <h2 style="border:none;padding:0;margin-top:0;" id="infos-pedagogique">Le cadre pedagogique</h2>
       </div>
 
       <div class="prog-fade">
@@ -481,7 +531,7 @@
       <hr class="prog-divider">
       <div class="prog-fade">
       <div class="prog-section-icon" style="background:rgba(192,129,78,.1);color:#C0814E;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-      <h2 style="border:none;padding:0;margin-top:0;">Le cadre deontologique</h2>
+      <h2 style="border:none;padding:0;margin-top:0;" id="infos-deontologique">Le cadre deontologique</h2>
       </div>
       <div class="prog-fade">
       <p>Vous accueillir, c'est creer avec vous les conditions favorables a l'epanouissement de chacun et a une belle dynamique de groupe. C'est pourquoi votre adhesion au cadre deontologique et aux valeurs de GREATLY est essentielle : c'est ce qui rend l'experience sereine et precieuse pour tous.</p>
@@ -496,7 +546,7 @@
       <hr class="prog-divider">
       <div class="prog-fade">
       <div class="prog-section-icon" style="background:rgba(79,124,130,.1);color:#4F7C82;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
-      <h2 style="border:none;padding:0;margin-top:0;">Le cadre logistique</h2>
+      <h2 style="border:none;padding:0;margin-top:0;" id="infos-logistique">Le cadre logistique</h2>
       </div>
 
       <div class="prog-fade">
@@ -515,9 +565,9 @@
       <p>Vous mettez a disposition de GREATLY un mail et un numero de telephone sur lequel nous pouvons vous joindre personnellement.</p>
       <p>Pendant le programme, vous pouvez echanger avec :</p>
       <p><strong>Programme LUCIDITE :</strong></p>
-      <ul><li><strong>Julie Houriez</strong> : jh.naturopathie@gmail.com / 06 75 70 26 78</li><li><strong>Claire Laloyaux</strong> : boosterdesens@gmail.com / 06 21 93 49 02</li></ul>
+      <ul><li><strong>Julie Houriez</strong> : <a href="mailto:jh.naturopathie@gmail.com" style="color:var(--sage);">jh.naturopathie@gmail.com</a> / 06 75 70 26 78</li><li><strong>Claire Laloyaux</strong> : <a href="mailto:boosterdesens@gmail.com" style="color:var(--sage);">boosterdesens@gmail.com</a> / 06 21 93 49 02</li></ul>
       <p><strong>Programme ENERGIE :</strong></p>
-      <ul><li><strong>Alexandra Brabant</strong> : alexandrabrabant@outlook.fr / 06 99 55 65 01</li></ul>
+      <ul><li><strong>Alexandra Brabant</strong> : <a href="mailto:alexandrabrabant@outlook.fr" style="color:var(--sage);">alexandrabrabant@outlook.fr</a> / 06 99 55 65 01</li></ul>
       <p><strong>Prevenir de votre venue a la maison et pour toute reservation :</strong></p>
       <ul><li><strong>Arnaud Przybylski</strong> : arnaudprz@gmail.com / 06 51 15 63 44</li></ul>
       </div>
@@ -531,7 +581,7 @@
       <hr class="prog-divider">
       <div class="prog-fade">
       <div class="prog-section-icon" style="background:rgba(107,125,92,.1);color:var(--sage);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg></div>
-      <h2 style="border:none;padding:0;margin-top:0;">Cadre administratif</h2>
+      <h2 style="border:none;padding:0;margin-top:0;" id="infos-admin">Cadre administratif</h2>
       </div>
 
       <div class="prog-fade">
@@ -563,8 +613,10 @@
 
       <div class="aside-box prog-fade" style="text-align:center;margin-top:30px;">
         <p style="font-size:1.1rem;font-weight:700;color:var(--ink);">Il ne vous reste maintenant plus qu'a profiter du programme GREATLY :)</p>
-        <p><strong>Pour toute question, n'hesitez pas a nous contacter :</strong><br>Julie Houriez : jh.naturopathie@gmail.com / 06 75 70 26 78</p>
+        <p><strong>Pour toute question, n'hesitez pas a nous contacter :</strong><br>Julie Houriez : <a href="mailto:jh.naturopathie@gmail.com" style="color:var(--sage);">jh.naturopathie@gmail.com</a> / 06 75 70 26 78</p>
       </div>
+      </div><!-- /infos-main -->
+    </div><!-- /infos-layout -->
     </div>
   </div>
 
@@ -646,6 +698,8 @@
     </div>
   </div>
 </div>
+
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 15l-6-6-6 6"/></svg></button>
 
 <div id="modal"><div class="modal-card" id="modalCard"></div></div>
 
@@ -796,6 +850,12 @@
     var id=who==='arnaud'?'contactArnaud':'contactJulie';
     document.getElementById(id).classList.remove('open');
   }
+
+  // ---- Scroll to top ----
+  window.addEventListener('scroll',function(){
+    var btn=document.getElementById('scrollTop');
+    if(window.scrollY>400) btn.classList.add('show'); else btn.classList.remove('show');
+  });
 
   // ---- Infos pratiques ----
   function openInfos(){
