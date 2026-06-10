@@ -197,6 +197,28 @@
   .privat-form .field{margin-bottom:14px}
   .privat-form .field label{display:block;font-size:.76rem;font-weight:600;color:var(--warm-grey);margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px}
 
+  /* Page programme */
+  #progPage{position:fixed;inset:0;z-index:85;display:none}
+  #progPage.open{display:block}
+  .prog-wrap{position:absolute;inset:0;background:#fff;overflow-y:auto;padding:56px 0 0}
+  .prog-close{position:fixed;top:70px;right:18px;z-index:86;width:36px;height:36px;border-radius:50%;border:none;background:var(--cream);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:var(--warm-grey);box-shadow:0 2px 8px rgba(0,0,0,.1)}
+  .prog-inner{max-width:680px;margin:0 auto;padding:32px 22px 80px}
+  .prog-inner h1{font-family:'Playfair Display',Georgia,serif;font-weight:400;font-size:1.8rem;letter-spacing:-.3px;margin-bottom:8px}
+  .prog-inner h2{font-size:1.25rem;font-weight:700;margin:36px 0 12px;padding-top:20px;border-top:1px solid var(--line)}
+  .prog-inner h3{font-size:1.05rem;font-weight:700;margin:24px 0 8px}
+  .prog-inner p{font-size:.92rem;color:var(--warm-grey);line-height:1.65;margin-bottom:12px}
+  .prog-inner strong{color:var(--ink)}
+  .prog-inner blockquote{border-left:3px solid var(--sage);margin:16px 0;padding:12px 18px;background:var(--cream);border-radius:0 12px 12px 0;font-style:italic;color:var(--ink);font-size:.95rem;line-height:1.6}
+  .prog-inner .aside-box{background:var(--cream);border-radius:14px;padding:18px 20px;margin:16px 0;font-size:.9rem;line-height:1.6;color:var(--ink)}
+  .prog-inner .aside-box p{color:var(--ink);margin-bottom:6px}
+  .prog-inner ul{margin:8px 0 16px 18px;font-size:.9rem;color:var(--warm-grey);line-height:1.65}
+  .prog-inner li{margin-bottom:6px}
+  .prog-month{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;margin:20px 0}
+  .prog-month h3{margin-top:0;color:var(--sage)}
+  .prog-month .pm-theme{background:var(--cream);border-radius:12px;padding:14px 16px;margin:10px 0;font-style:italic;font-size:.92rem;color:var(--ink)}
+  .prog-month .pm-energy{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+  .prog-month .pm-tag{font-size:.78rem;font-weight:600;padding:6px 12px;border-radius:999px;background:var(--accent-pale);color:var(--accent-dark)}
+
   @keyframes spin{to{transform:rotate(360deg)}}
   .loader{display:flex;flex-direction:column;align-items:center;padding:40px 0;gap:14px}
   .hourglass{font-size:2rem;animation:flip 1.5s ease-in-out infinite}
@@ -221,6 +243,7 @@
 <nav class="navbar">
   <div class="nav-logo"><span>G R E A T L Y</span><span class="dot"></span></div>
   <div class="nav-links">
+    <button class="nav-link" onclick="openProgramme()">Le programme</button>
     <button class="nav-link" onclick="openContact('arnaud')">Contacter Arnaud</button>
     <button class="nav-link" onclick="openContact('julie')">Contacter Julie</button>
     <button class="nav-link" onclick="openPrivatPage()">Privatiser la maison</button>
@@ -272,6 +295,13 @@
 <div id="menuPanel">
   <div class="menu-overlay" onclick="toggleMenu()"></div>
   <div class="menu-drawer">
+    <div class="menu-section">
+      <div class="menu-section-title">Decouvrir</div>
+      <a class="menu-item" onclick="toggleMenu();openProgramme()">
+        <span class="mi-icon" style="background:#E8D9C5;color:#6B5138;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
+        <div><div class="mi-text">Le programme</div><div class="mi-sub">Parcours Lucidite & Energie</div></div>
+      </a>
+    </div>
     <div class="menu-section">
       <div class="menu-section-title">Nous contacter</div>
       <a class="menu-item" onclick="toggleMenu();openContact('arnaud')">
@@ -357,6 +387,16 @@
   </div>
 </div>
 
+<!-- Programme -->
+<div id="progPage">
+  <div class="prog-wrap">
+    <button class="prog-close" onclick="closeProgramme()">&#10005;</button>
+    <div class="prog-inner" id="progContent">
+      <div class="loader"><span class="hourglass">&#9203;</span><p style="color:var(--warm-grey);font-size:.92rem;margin:0;">Chargement du programme...</p></div>
+    </div>
+  </div>
+</div>
+
 <!-- Privatisation -->
 <div id="privatPage">
   <div class="contact-overlay" onclick="closePrivatPage()"></div>
@@ -402,6 +442,25 @@
     var id=who==='arnaud'?'contactArnaud':'contactJulie';
     document.getElementById(id).classList.remove('open');
   }
+
+  // ---- Programme (Notion) ----
+  var progLoaded=false;
+  async function openProgramme(){
+    document.getElementById('progPage').classList.add('open');
+    if(progLoaded) return;
+    try{
+      const data=await apiGet({action:'programme'});
+      if(data.ok){
+        document.getElementById('progContent').innerHTML='<h1>Le programme GREATLY</h1>'+data.html;
+        progLoaded=true;
+      } else {
+        document.getElementById('progContent').innerHTML='<p style="text-align:center;color:var(--warm-grey);padding:40px 0;">Erreur de chargement du programme.</p>';
+      }
+    }catch(e){
+      document.getElementById('progContent').innerHTML='<p style="text-align:center;color:var(--warm-grey);padding:40px 0;">Erreur de connexion.</p>';
+    }
+  }
+  function closeProgramme(){document.getElementById('progPage').classList.remove('open');}
 
   // ---- Horaires ----
   function openHoraires(){document.getElementById('horairesPanel').classList.add('open');}
