@@ -48,7 +48,7 @@
   .gate-hint{color:var(--occupied-ink);font-size:.78rem;margin-top:22px}
 
   /* ---------- App ---------- */
-  #app{display:none;max-width:680px;margin:0 auto;padding:26px 18px 96px}
+  #app{display:none;max-width:960px;margin:0 auto;padding:26px 18px 96px}
   .brand{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:8px}
   .brand img{flex:0 0 auto}
   .brand .logo{font-size:1.15rem}
@@ -135,7 +135,8 @@
   .confirm-msg .check{width:56px;height:56px;border-radius:50%;background:var(--accent-pale);color:var(--accent-dark);display:flex;align-items:center;justify-content:center;font-size:1.7rem;margin:0 auto 14px}
 
   /* Navbar */
-  .navbar{position:fixed;top:0;left:0;right:0;z-index:80;background:#fff;height:56px;display:flex;align-items:center;padding:0 24px;border-bottom:1px solid var(--line)}
+  .navbar{position:fixed;top:0;left:0;right:0;z-index:80;background:#fff;height:56px;display:none;align-items:center;padding:0 24px;border-bottom:1px solid var(--line)}
+  .navbar.visible{display:flex}
   .nav-logo{display:flex;align-items:center;gap:6px;flex:0 0 auto}
   .nav-logo img{width:22px;height:21px}
   .nav-logo span{font-size:.95rem;font-weight:700;letter-spacing:2px;color:var(--ink)}
@@ -150,8 +151,9 @@
   @media(min-width:820px){.nav-links{display:flex}.nav-burger{margin-left:8px}}
 
   /* Adjust body for navbar */
-  body{padding-top:56px}
-  #gate{top:56px}
+  body{padding-top:0}
+  body.logged-in{padding-top:56px}
+  #gate{top:0}
 
   /* Burger menu */
   #menuPanel{position:fixed;inset:0;z-index:75;display:none}
@@ -1007,6 +1009,8 @@
         PASSWORD=v;
         document.getElementById('gate').style.display='none';
         document.getElementById('app').style.display='block';
+        document.querySelector('.navbar').classList.add('visible');
+        document.body.classList.add('logged-in');
         render();
       } else {
         document.getElementById('gateError').textContent="Mot de passe incorrect.";
