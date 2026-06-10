@@ -731,9 +731,7 @@
       if(current==='maison'){
         const now=new Date();
         const isToday=ymd(d)===ymd(now);
-        const isTomorrow=ymd(d)===ymd(addDays(now,1));
-        const pastMidi=now.getHours()>=12;
-        if(isToday || (isTomorrow && pastMidi)){return;}
+        if(isToday && now.getHours()>=12){return;}
         block.innerHTML=`<div class="day-head">${left}<span class="day-count">Dispo</span></div><div class="chips"><button class="chip" onclick="openMaisonModal('${ymd(d)}','${DAY_NAMES[di]} ${d.getDate()} ${FR_MONTH[d.getMonth()]}')">13:00 - 18:30</button></div>`;
         wrap.appendChild(block);return;
       }
