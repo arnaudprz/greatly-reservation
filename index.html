@@ -198,10 +198,11 @@
   .privat-form .field label{display:block;font-size:.76rem;font-weight:600;color:var(--warm-grey);margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px}
 
   /* Page programme */
-  #progPage{position:fixed;inset:0;z-index:85;display:none}
+  #progPage{display:none}
   #progPage.open{display:block}
-  .prog-wrap{position:absolute;inset:0;background:#fff;overflow-y:auto;padding:56px 0 0}
-  .prog-close{position:fixed;top:70px;right:18px;z-index:86;width:36px;height:36px;border-radius:50%;border:none;background:var(--cream);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:var(--warm-grey);box-shadow:0 2px 8px rgba(0,0,0,.1)}
+  .prog-back{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:10px;border:1.5px solid var(--line);background:#fff;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;color:var(--sage-dark);margin-bottom:20px;transition:all .12s}
+  .prog-back:hover{background:var(--cream)}
+  .prog-back svg{width:16px;height:16px}
   .prog-inner{max-width:680px;margin:0 auto;padding:32px 22px 80px}
   .prog-inner h1{font-family:'Playfair Display',Georgia,serif;font-weight:400;font-size:1.8rem;letter-spacing:-.3px;margin-bottom:8px}
   .prog-inner h2{font-size:1.25rem;font-weight:700;margin:36px 0 12px;padding-top:20px;border-top:1px solid var(--line)}
@@ -286,6 +287,50 @@
   <div id="step3" class="step"><span class="n">3</span> Choisissez un créneau</div>
   <p class="hint">Seuls les créneaux disponibles sont affichés. Les autres sont déjà réservés (sans afficher par qui).</p>
   <div id="slotsList"></div>
+  <div id="progPage">
+    <div class="prog-inner">
+      <button class="prog-back" onclick="closeProgramme()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour aux reservations</button>
+      <h1>Le programme GREATLY</h1>
+      <p><strong>GREATLY est un programme d'accompagnement annuel</strong> qui cultive et renforce durablement votre energie et votre lucidite.</p>
+      <p>Il s'adresse aux dirigeants, cadres et talents cles des entreprises, aux solopreneurs et aux professions liberales qui souhaitent s'inscrire dans une dynamique d'evolution, fait de prises de conscience et de bienfaits concrets et durables.</p>
+      <p>En accompagnant leurs dirigeants et leurs cadres, nous aidons aussi les entreprises a gagner en performance et a renforcer l'engagement de leurs talents sur la duree.</p>
+      <h2>Notre conviction</h2>
+      <blockquote>Energie, lucidite et intelligence collective sont indissociables pour avancer loin et longtemps.</blockquote>
+      <p>Notre programme cultive ces trois dimensions a la fois :</p>
+      <p><strong>Une energie durable</strong>, qui nourrit votre engagement et soutient votre elan dans la duree.</p>
+      <p><strong>Une lucidite cultivee</strong>, qui eclaire vos decisions et affine votre regard au fil du temps.</p>
+      <p><strong>La force d'un collectif</strong>, qui demultiplie vos idees et fait emerger les meilleures reponses.</p>
+      <p>C'est la <strong>regularite</strong> qui transforme l'essai. Semaine apres semaine, mois apres mois, sur toute une annee, les prises de conscience s'ancrent, les bienfaits s'installent, et les changements deviennent vraiment votres.</p>
+      <div class="aside-box"><p>C'est ainsi que se construit une <strong>performance durable</strong>, en accord avec votre corps, votre esprit et vos relations.</p></div>
+      <h2>L'experience GREATLY</h2>
+      <p>Concu autour de l'alignement <strong>tete, coeur, corps</strong>, le programme se vit en presentiel, en groupe ferme d'une dizaine de personnes qui chemine ensemble toute l'annee.</p>
+      <p>Le groupe est <strong>mixte, paritaire et intergenerationnel</strong>, pour preserver la richesse des regards. On s'y autorise a parler vrai, a se laisser inspirer, a s'enrichir d'expertises et de parcours differents des siens.</p>
+      <p>Les rencontres ont lieu a la <strong>Greatly House</strong>, notre lieu ressource niche dans la campagne lilloise, en <strong>deconnexion numerique</strong>. La maison vous est aussi ouverte chaque apres-midi, pour vous y poser seul ou avec les autres membres.</p>
+      <div class="aside-box"><p>Le programme forme un tout indissociable. Tout au long des six mois, vous vivez en parallele <strong>deux parcours complementaires, entierement compris dans votre accompagnement</strong> : la <strong>Lucidite</strong>, un atelier reflexif chaque mois, et l'<strong>Energie</strong>, deux activites encadrees chaque semaine. Un septieme rendez-vous, en janvier 2027, cloture le parcours par un temps de bilan partage.</p></div>
+      <h2>Le parcours Lucidite</h2>
+      <div class="aside-box"><h3>Objectifs</h3><p>Prendre du recul, clarifier ses intentions, mettre de la conscience dans l'action et gagner en discernement pour decider avec justesse.</p></div>
+      <h3>Comment cela se deroule</h3>
+      <p>Une fois par mois, vous retrouvez votre groupe a la Greatly House autour d'un brunch convivial a 11h30, suivi d'un atelier reflexif de 12h30 a 14h, anime par un intervenant expert.</p>
+      <p>Entre deux ateliers, vous experimentez une pratique ou menez une experience concrete pour ancrer ce qui a ete partage. Au fil des mois, vous construisez une lecture plus fine de vous-meme, de vos besoins et de vos leviers.</p>
+      <h2>Le parcours Energie</h2>
+      <div class="aside-box"><h3>Objectifs</h3><p>Reconnecter au corps, apaiser le mental, entretenir une vitalite durable et retrouver le plaisir de bouger a son rythme.</p></div>
+      <h3>Comment cela se deroule</h3>
+      <p>Chaque semaine, deux activites complementaires de 2h chacune vous sont proposees sur la metropole lilloise :</p>
+      <ul>
+        <li><strong>Le mardi entre 10h et 14h, une pratique douce</strong> (yoga, tai-chi, qi gong, sophrologie, marche meditative...) pour relacher les tensions et apaiser les pensees.</li>
+        <li><strong>Le vendredi entre 9h et 13h, une activite sportive dynamique</strong> (padel, escalade, escrime, boxe, circuit training, basket...) pour remettre le corps en mouvement.</li>
+      </ul>
+      <p>Soit jusqu'a <strong>quatre heures d'activite physique encadree par semaine</strong>, a pratiquer selon votre rythme.</p>
+      <h2>Le detail mois par mois</h2>
+      <div class="prog-month"><h3>Mois 1, Juin 2026 : Le cadre</h3><p><strong>Atelier Lucidite du jeudi 11 juin, a la Greatly House, de 11h30 a 14h</strong></p><div class="pm-theme"><em>Penser le cadre pour soutenir l'engagement</em></div><p>Premier rendez-vous du groupe. On apprend a se connaitre et l'on pose ensemble les fondations d'un espace secure et confidentiel.</p><p><strong>Benefices retires :</strong> savoir formuler ses besoins et poser un cadre pour soi, accueillir celui de l'autre, et s'engager pleinement dans le collectif.</p><div class="pm-energy"><span class="pm-tag">Mardi : Yoga decouverte</span><span class="pm-tag">Vendredi : Padel</span></div></div>
+      <div class="prog-month"><h3>Mois 2, Juillet 2026 : Les decisions</h3><p><strong>Atelier Lucidite du jeudi 2 juillet, a la Greatly House, de 11h30 a 14h</strong></p><div class="pm-theme"><em>Comment transformer le silence en veritable avantage decisionnel ?</em></div><p>Un mois pour rehabiliter le silence et l'ecoute du corps comme ressources de discernement.</p><p><strong>Benefice retire :</strong> decouvrir et enrichir son mode naturel de prise de decision.</p><div class="pm-energy"><span class="pm-tag">Pas d'activite pendant les vacances scolaires</span></div></div>
+      <div class="prog-month"><h3>Mois 3, Septembre 2026 : L'energie</h3><p><strong>Atelier Lucidite du jeudi 17 septembre, a la Greatly House, de 11h30 a 14h</strong></p><div class="pm-theme"><em>Et si l'energie durable devenait votre nouveau standard de performance ?</em></div><p>Comment cultiver une energie qui se renouvelle plutot qu'une energie qui s'epuise ?</p><p><strong>Benefices retires :</strong> identifier les leviers physiologiques de l'energie et reperer ses signaux faibles.</p><div class="pm-energy"><span class="pm-tag">Mardi : Tai-chi decouverte</span><span class="pm-tag">Vendredi : Escrime</span></div></div>
+      <div class="prog-month"><h3>Mois 4, Octobre 2026 : Les emotions</h3><p><strong>Atelier Lucidite du jeudi 8 octobre, a la Greatly House, de 11h30 a 14h</strong></p><div class="pm-theme"><em>Leadership : et si vos emotions devenaient votre meilleur atout strategique ?</em></div><p>Les emotions sont des informations precieuses au service de vos decisions et de la qualite de vos relations.</p><p><strong>Benefice retire :</strong> reconnaitre et comprendre ses emotions pour agir de maniere plus juste et plus efficace.</p><div class="pm-energy"><span class="pm-tag">Mardi : Tai-chi renforcement</span><span class="pm-tag">Vendredi : Boxe</span></div></div>
+      <div class="prog-month"><h3>Mois 5, Novembre 2026 : Le temps</h3><p><strong>Atelier Lucidite du jeudi 12 novembre, a la Greatly House, de 11h30 a 14h</strong></p><div class="pm-theme"><em>Et si reprendre le controle de votre temps etait votre meilleur investissement ?</em></div><p>Notre rapport au temps faconne notre rapport au monde. Un temps pour clarifier ses priorites et choisir ce a quoi l'on dit oui en pleine conscience.</p><p><strong>Benefice retire :</strong> une lecture plus juste de sa relation au temps, pour reinvestir son energie la ou elle compte vraiment.</p><div class="pm-energy"><span class="pm-tag">Mardi : Qi gong decouverte</span><span class="pm-tag">Vendredi : Circuit Training</span></div></div>
+      <div class="prog-month"><h3>Mois 6, Decembre 2026 : Le collectif</h3><p><strong>Atelier Lucidite du jeudi 10 decembre, a la Greatly House, de 11h30 a 14h</strong></p><div class="pm-theme"><em>Comment faire du collectif votre meilleur levier de croissance ?</em></div><p>On cloture le cycle thematique par la qualite du lien et la puissance du collectif pour decider et avancer.</p><p><strong>Benefices retires :</strong> sortir de l'isolement decisionnel et cultiver des relations qui nourrissent durablement vos choix.</p><div class="pm-energy"><span class="pm-tag">Mardi : Qi gong perfectionnement</span><span class="pm-tag">Vendredi : Basket</span></div></div>
+      <div class="prog-month"><h3>Bilan, jeudi 14 janvier 2027</h3><p><strong>A la Greatly House, de 11h30 a 14h</strong></p><div class="pm-theme"><em>Six mois d'evolution : regards, retours et perspectives</em></div><p>Une rencontre dediee a mesurer le chemin parcouru, partager les evolutions ressenties et dessiner les prolongements possibles.</p><p><strong>Benefice retire :</strong> un retour d'experience structure qui consolide les acquis et oriente la suite du parcours.</p></div>
+    </div>
+  </div>
 </div>
 
 <div id="modal"><div class="modal-card" id="modalCard"></div></div>
@@ -387,121 +432,6 @@
   </div>
 </div>
 
-<!-- Programme -->
-<div id="progPage">
-  <div class="prog-wrap">
-    <button class="prog-close" onclick="closeProgramme()">&#10005;</button>
-    <div class="prog-inner">
-
-      <h1>Le programme GREATLY</h1>
-      <p><strong>GREATLY est un programme d'accompagnement annuel</strong> qui cultive et renforce durablement votre energie et votre lucidite.</p>
-      <p>Il s'adresse aux dirigeants, cadres et talents cles des entreprises, aux solopreneurs et aux professions liberales qui souhaitent s'inscrire dans une dynamique d'evolution, fait de prises de conscience et de bienfaits concrets et durables.</p>
-      <p>En accompagnant leurs dirigeants et leurs cadres, nous aidons aussi les entreprises a gagner en performance et a renforcer l'engagement de leurs talents sur la duree.</p>
-
-      <h2>Notre conviction</h2>
-      <blockquote>Energie, lucidite et intelligence collective sont indissociables pour avancer loin et longtemps.</blockquote>
-      <p>Notre programme cultive ces trois dimensions a la fois :</p>
-      <p><strong>Une energie durable</strong>, qui nourrit votre engagement et soutient votre elan dans la duree.</p>
-      <p><strong>Une lucidite cultivee</strong>, qui eclaire vos decisions et affine votre regard au fil du temps.</p>
-      <p><strong>La force d'un collectif</strong>, qui demultiplie vos idees et fait emerger les meilleures reponses.</p>
-      <p>C'est la <strong>regularite</strong> qui transforme l'essai. Semaine apres semaine, mois apres mois, sur toute une annee, les prises de conscience s'ancrent, les bienfaits s'installent, et les changements deviennent vraiment votres.</p>
-      <div class="aside-box"><p>C'est ainsi que se construit une <strong>performance durable</strong>, en accord avec votre corps, votre esprit et vos relations.</p></div>
-
-      <h2>L'experience GREATLY</h2>
-      <p>Concu autour de l'alignement <strong>tete, coeur, corps</strong>, le programme se vit en presentiel, en groupe ferme d'une dizaine de personnes qui chemine ensemble toute l'annee.</p>
-      <p>Le groupe est <strong>mixte, paritaire et intergenerationnel</strong>, pour preserver la richesse des regards. On s'y autorise a parler vrai, a se laisser inspirer, a s'enrichir d'expertises et de parcours differents des siens.</p>
-      <p>Les rencontres ont lieu a la <strong>Greatly House</strong>, notre lieu ressource niche dans la campagne lilloise, en <strong>deconnexion numerique</strong>. La maison vous est aussi ouverte chaque apres-midi, pour vous y poser seul ou avec les autres membres.</p>
-      <div class="aside-box"><p>Le programme forme un tout indissociable. Tout au long des six mois, vous vivez en parallele <strong>deux parcours complementaires, entierement compris dans votre accompagnement</strong> : la <strong>Lucidite</strong>, un atelier reflexif chaque mois, et l'<strong>Energie</strong>, deux activites encadrees chaque semaine. Un septieme rendez-vous, en janvier 2027, cloture le parcours par un temps de bilan partage.</p></div>
-
-      <h2>Le parcours Lucidite</h2>
-      <div class="aside-box">
-        <h3>Objectifs</h3>
-        <p>Prendre du recul, clarifier ses intentions, mettre de la conscience dans l'action et gagner en discernement pour decider avec justesse.</p>
-      </div>
-      <h3>Comment cela se deroule</h3>
-      <p>Une fois par mois, vous retrouvez votre groupe a la Greatly House autour d'un brunch convivial a 11h30, suivi d'un atelier reflexif de 12h30 a 14h, anime par un intervenant expert. Chaque rencontre explore un theme parmi ceux identifies comme essentiels par et pour le groupe.</p>
-      <p>Entre deux ateliers, vous experimentez une pratique ou menez une experience concrete pour ancrer ce qui a ete partage. Au fil des mois, vous construisez une lecture plus fine de vous-meme, de vos besoins et de vos leviers.</p>
-
-      <h2>Le parcours Energie</h2>
-      <div class="aside-box">
-        <h3>Objectifs</h3>
-        <p>Reconnecter au corps, apaiser le mental, entretenir une vitalite durable et retrouver le plaisir de bouger a son rythme.</p>
-      </div>
-      <h3>Comment cela se deroule</h3>
-      <p>Chaque semaine, deux activites complementaires de 2h chacune vous sont proposees sur la metropole lilloise :</p>
-      <ul>
-        <li><strong>Le mardi entre 10h et 14h, une pratique douce</strong> (yoga, tai-chi, qi gong, sophrologie, marche meditative...) pour relacher les tensions et apaiser les pensees.</li>
-        <li><strong>Le vendredi entre 9h et 13h, une activite sportive dynamique</strong> (padel, escalade, escrime, boxe, circuit training, basket...) pour remettre le corps en mouvement.</li>
-      </ul>
-      <p>Soit jusqu'a <strong>quatre heures d'activite physique encadree par semaine</strong>, a pratiquer selon votre rythme.</p>
-
-      <h2>Le detail mois par mois</h2>
-
-      <div class="prog-month">
-        <h3>Mois 1, Juin 2026 : Le cadre</h3>
-        <p><strong>Atelier Lucidite du jeudi 11 juin, a la Greatly House, de 11h30 a 14h</strong></p>
-        <div class="pm-theme"><em>Penser le cadre pour soutenir l'engagement</em></div>
-        <p>Premier rendez-vous du groupe. On apprend a se connaitre et l'on pose ensemble les fondations d'un espace secure et confidentiel.</p>
-        <p><strong>Benefices retires :</strong> savoir formuler ses besoins et poser un cadre pour soi, accueillir celui de l'autre, et s'engager pleinement dans le collectif.</p>
-        <div class="pm-energy"><span class="pm-tag">Mardi : Yoga decouverte</span><span class="pm-tag">Vendredi : Padel</span></div>
-      </div>
-
-      <div class="prog-month">
-        <h3>Mois 2, Juillet 2026 : Les decisions</h3>
-        <p><strong>Atelier Lucidite du jeudi 2 juillet, a la Greatly House, de 11h30 a 14h</strong></p>
-        <div class="pm-theme"><em>Comment transformer le silence en veritable avantage decisionnel ?</em></div>
-        <p>Un mois pour rehabiliter le silence et l'ecoute du corps comme ressources de discernement.</p>
-        <p><strong>Benefice retire :</strong> decouvrir et enrichir son mode naturel de prise de decision.</p>
-        <div class="pm-energy"><span class="pm-tag">Pas d'activite pendant les vacances scolaires</span></div>
-      </div>
-
-      <div class="prog-month">
-        <h3>Mois 3, Septembre 2026 : L'energie</h3>
-        <p><strong>Atelier Lucidite du jeudi 17 septembre, a la Greatly House, de 11h30 a 14h</strong></p>
-        <div class="pm-theme"><em>Et si l'energie durable devenait votre nouveau standard de performance ?</em></div>
-        <p>Comment cultiver une energie qui se renouvelle plutot qu'une energie qui s'epuise ?</p>
-        <p><strong>Benefices retires :</strong> identifier les leviers physiologiques de l'energie et reperer ses signaux faibles.</p>
-        <div class="pm-energy"><span class="pm-tag">Mardi : Tai-chi decouverte</span><span class="pm-tag">Vendredi : Escrime</span></div>
-      </div>
-
-      <div class="prog-month">
-        <h3>Mois 4, Octobre 2026 : Les emotions</h3>
-        <p><strong>Atelier Lucidite du jeudi 8 octobre, a la Greatly House, de 11h30 a 14h</strong></p>
-        <div class="pm-theme"><em>Leadership : et si vos emotions devenaient votre meilleur atout strategique ?</em></div>
-        <p>Les emotions sont des informations precieuses au service de vos decisions et de la qualite de vos relations.</p>
-        <p><strong>Benefice retire :</strong> reconnaitre et comprendre ses emotions pour agir de maniere plus juste et plus efficace.</p>
-        <div class="pm-energy"><span class="pm-tag">Mardi : Tai-chi renforcement</span><span class="pm-tag">Vendredi : Boxe</span></div>
-      </div>
-
-      <div class="prog-month">
-        <h3>Mois 5, Novembre 2026 : Le temps</h3>
-        <p><strong>Atelier Lucidite du jeudi 12 novembre, a la Greatly House, de 11h30 a 14h</strong></p>
-        <div class="pm-theme"><em>Et si reprendre le controle de votre temps etait votre meilleur investissement ?</em></div>
-        <p>Notre rapport au temps faconne notre rapport au monde. Un temps pour clarifier ses priorites et choisir ce a quoi l'on dit oui en pleine conscience.</p>
-        <p><strong>Benefice retire :</strong> une lecture plus juste de sa relation au temps, pour reinvestir son energie la ou elle compte vraiment.</p>
-        <div class="pm-energy"><span class="pm-tag">Mardi : Qi gong decouverte</span><span class="pm-tag">Vendredi : Circuit Training</span></div>
-      </div>
-
-      <div class="prog-month">
-        <h3>Mois 6, Decembre 2026 : Le collectif</h3>
-        <p><strong>Atelier Lucidite du jeudi 10 decembre, a la Greatly House, de 11h30 a 14h</strong></p>
-        <div class="pm-theme"><em>Comment faire du collectif votre meilleur levier de croissance ?</em></div>
-        <p>On cloture le cycle thematique par la qualite du lien et la puissance du collectif pour decider et avancer.</p>
-        <p><strong>Benefices retires :</strong> sortir de l'isolement decisionnel et cultiver des relations qui nourrissent durablement vos choix.</p>
-        <div class="pm-energy"><span class="pm-tag">Mardi : Qi gong perfectionnement</span><span class="pm-tag">Vendredi : Basket</span></div>
-      </div>
-
-      <div class="prog-month">
-        <h3>Bilan, jeudi 14 janvier 2027</h3>
-        <p><strong>A la Greatly House, de 11h30 a 14h</strong></p>
-        <div class="pm-theme"><em>Six mois d'evolution : regards, retours et perspectives</em></div>
-        <p>Une rencontre dediee a mesurer le chemin parcouru, partager les evolutions ressenties et dessiner les prolongements possibles.</p>
-        <p><strong>Benefice retire :</strong> un retour d'experience structure qui consolide les acquis et oriente la suite du parcours.</p>
-      </div>
-
-    </div>
-  </div>
-</div>
 
 <!-- Privatisation -->
 <div id="privatPage">
@@ -550,8 +480,19 @@
   }
 
   // ---- Programme ----
-  function openProgramme(){document.getElementById('progPage').classList.add('open');}
-  function closeProgramme(){document.getElementById('progPage').classList.remove('open');}
+  function openProgramme(){
+    document.getElementById('progPage').classList.add('open');
+    // Masquer le contenu réservation
+    var els=document.querySelectorAll('#app > :not(#progPage):not(.brand)');
+    for(var i=0;i<els.length;i++) els[i].style.display='none';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  function closeProgramme(){
+    document.getElementById('progPage').classList.remove('open');
+    var els=document.querySelectorAll('#app > :not(#progPage):not(.brand)');
+    for(var i=0;i<els.length;i++) els[i].style.display='';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
 
   // ---- Horaires ----
   function openHoraires(){document.getElementById('horairesPanel').classList.add('open');}
