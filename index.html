@@ -256,9 +256,10 @@
 
 <!-- Navbar -->
 <nav class="navbar">
-  <div class="nav-logo" onclick="closeProgramme()" style="cursor:pointer;"><span>G R E A T L Y</span><span class="dot"></span></div>
+  <div class="nav-logo" onclick="closeProgramme();closeInfos();" style="cursor:pointer;"><span>G R E A T L Y</span><span class="dot"></span></div>
   <div class="nav-links">
     <button class="nav-link" onclick="openProgramme()">Le programme</button>
+    <button class="nav-link" onclick="openInfos()">Infos pratiques</button>
     <button class="nav-link" onclick="openContact('arnaud')">Contacter Arnaud</button>
     <button class="nav-link" onclick="openContact('julie')">Contacter Julie</button>
     <button class="nav-link" onclick="openPrivatPage()">Privatiser la maison</button>
@@ -301,6 +302,136 @@
   <div id="step3" class="step"><span class="n">3</span> Choisissez un créneau</div>
   <p class="hint">Seuls les créneaux disponibles sont affichés. Les autres sont déjà réservés (sans afficher par qui).</p>
   <div id="slotsList"></div>
+  <div id="infosPage">
+    <div class="prog-inner">
+      <button class="prog-back" onclick="closeInfos()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour aux reservations</button>
+
+      <div class="prog-hero prog-fade">
+        <svg class="prog-svg-deco" style="top:-20px;right:-30px;width:120px;height:120px;" viewBox="0 0 24 24" fill="currentColor" color="var(--sage)"><path d="M4 21c0-9 7-16 16-16 0 9-7 16-16 16zm3-3C12 16 16 12 17.4 7.6 12 9 8.4 12.6 7 18z"/></svg>
+        <div class="prog-hero-photos">
+          <div style="text-align:center"><img src="julie.jpg" alt="Julie"><div class="ph-label">Julie Houriez</div></div>
+          <div style="text-align:center"><img src="claire.jpg" alt="Claire"><div class="ph-label">Claire Laloyaux</div></div>
+        </div>
+        <h1>Bienvenue chez GREATLY</h1>
+        <p style="font-size:.88rem;color:var(--sage);font-weight:600;margin-bottom:10px;">Votre livret d'accueil</p>
+      </div>
+
+      <div class="aside-box prog-fade">
+        <p>Pour votre bien-etre et celui du groupe, nous avons pris soin de reunir dans ce livret d'accueil tout ce qui vous aidera a vous sentir chez vous : l'esprit qui nous anime et le cadre dans lequel nous cheminerons ensemble.</p>
+        <p>Prenez le temps de le parcourir a votre rythme. Et si une question vous vient, nous sommes la pour en echanger avec vous.</p>
+        <p><strong>Julie Houriez</strong> : jh.naturopathie@gmail.com / 06 75 70 26 78</p>
+      </div>
+
+      <hr class="prog-divider">
+      <div class="prog-fade">
+      <div class="prog-section-icon" style="background:rgba(107,125,92,.1);color:var(--sage);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+      <h2 style="border:none;padding:0;margin-top:0;">Le programme GREATLY pionnier</h2>
+      </div>
+      <div class="prog-fade">
+      <p>Vous suivez pendant <strong>6 mois (juin 2026 - janvier 2027)</strong> un programme collectif en presentiel comprenant 3 types d'activites : atelier, activite physique, detente et echanges dans un lieu ressource.</p>
+      <div class="aside-box"><p>Nous avons imagine un parcours en deux volets indissociables : <strong>Energie</strong> et <strong>Lucidite</strong>. Le premier regenere le corps, le second clarifie l'esprit. Les deux se nourrissent l'un l'autre, et c'est de cette alliance que nait une dynamique d'evolution durable.</p></div>
+      </div>
+
+      <div class="prog-fade">
+      <h3>Tous les mois : la Lucidite</h3>
+      <p>Un temps pour soi, autour d'un dejeuner, pour souffler et prendre du recul. Les jeudis, de 11h30 a 14h :</p>
+      <ul><li>11 juin 2026</li><li>2 juillet 2026</li><li>17 septembre 2026</li><li>8 octobre 2026</li><li>12 novembre 2026</li><li>10 decembre 2026</li><li>14 janvier 2027</li></ul>
+      </div>
+
+      <div class="prog-fade">
+      <h3>Toutes les semaines : l'Energie</h3>
+      <p>Jusqu'a <strong>4h d'activite physique encadree par semaine</strong> (2 x 2h) :</p>
+      <ul><li>Le mardi, entre 10h et 14h (2h) : reconnexion au corps</li><li>Le vendredi, entre 9h et 13h (2h) : activite sportive</li></ul>
+      <p><em>(hors vacances scolaires)</em></p>
+      </div>
+
+      <hr class="prog-divider">
+      <div class="prog-fade">
+      <div class="prog-section-icon" style="background:rgba(192,129,78,.1);color:#C0814E;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9"/><path d="M5 10v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8"/></svg></div>
+      <h2 style="border:none;padding:0;margin-top:0;">La GREATLY House</h2>
+      </div>
+      <div class="prog-fade">
+      <p>Un lieu pour prendre du recul, se mettre au vert et souffler. Ouverte du <strong>lundi au vendredi, de 13h a 18h30</strong> (hors vacances scolaires).</p>
+      <h3>Au rez-de-chaussee</h3>
+      <ul>
+        <li><strong>Le Salon</strong> : espace collectif avec fauteuils et cheminee, en deconnexion numerique.</li>
+        <li><strong>La Tablee</strong> : espace de coworking avec wifi, silencieux et sans telephone.</li>
+        <li><strong>La Cuisine</strong> : the, cafe et eau a disposition. Micro-ondes, bouilloire, frigo. En autogestion.</li>
+        <li><strong>La Salle de sport</strong> : a disposition pour bouger a votre rythme.</li>
+      </ul>
+      <h3>Au premier etage</h3>
+      <ul><li><strong>Deux petits bureaux privatifs</strong> (1 a 3 personnes) pour vos rendez-vous en presentiel, en visio ou par telephone.</li></ul>
+      <h3>A l'exterieur</h3>
+      <ul><li><strong>Le Jardin</strong> : terrasse, arbres et mobilier pour vous poser au soleil ou a l'ombre.</li></ul>
+      </div>
+
+      <hr class="prog-divider">
+      <div class="prog-fade">
+      <div class="prog-section-icon" style="background:rgba(79,124,130,.1);color:#4F7C82;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div>
+      <h2 style="border:none;padding:0;margin-top:0;">L'experience GREATLY</h2>
+      </div>
+      <div class="prog-fade">
+      <h3>Une experience collective en presentiel</h3>
+      <p>Vous rejoignez un <strong>groupe ferme de 10 personnes maximum</strong>, mixte et intergenerationnel, qui evolue avec les memes membres pendant toute l'annee.</p>
+      <h3>Un engagement reciproque</h3>
+      <p>La participation reguliere et la presence de chacun contribuent a creer un espace de confiance pour tous. Vous vous engagez pour vous mais aussi pour le groupe.</p>
+      <h3>Une experience de deconnexion</h3>
+      <p>Pendant les activites : telephone et ordinateur ont leur vestiaire. A la GREATLY House, vous choisissez votre espace en fonction de ce que vous voulez vivre.</p>
+      <h3>L'esprit GREATLY</h3>
+      <p>Nous vous accueillons par votre prenom. Chez GREATLY, ce qui importe, c'est de se rencontrer sans masque et avec le coeur. L'objectif des activites physiques n'est pas la performance mais de s'installer dans une regularite choisie, utile et durable.</p>
+      </div>
+
+      <hr class="prog-divider">
+      <div class="prog-fade">
+      <div class="prog-section-icon" style="background:rgba(107,125,92,.1);color:var(--sage);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+      <h2 style="border:none;padding:0;margin-top:0;">Le cadre pedagogique</h2>
+      </div>
+      <div class="prog-fade">
+      <h3>Deroulement d'un atelier Lucidite</h3>
+      <p>Les ateliers sont animes par des intervenants professionnels a la GREATLY House :</p>
+      <ul><li>11h20 : accueil</li><li>11h30-12h30 : brunch</li><li>12h30-14h : atelier</li><li>14h-14h15 : debrief</li></ul>
+      <p>Si vous avez un regime alimentaire particulier pour le brunch, merci de nous le preciser.</p>
+      <h3>Deroulement d'une activite physique</h3>
+      <p>Chaque seance dure entre 60 et 90 minutes : accueil, echauffement en douceur (15 min), exploration guidee (30 a 50 min), recuperation (10 min), temps d'echange.</p>
+      <h3>Evaluation et amelioration</h3>
+      <p>En tant que membre pionnier, vos retours sont fondateurs. Plusieurs espaces d'expression : temps de cloture, questionnaire par mail, bilan trimestriel en septembre, et bilan final en janvier.</p>
+      <h3>Accompagnement individuel</h3>
+      <p>Si vous ressentez l'envie d'aller plus loin sur un sujet, GREATLY vous offre la possibilite d'un prolongement individuel, accompagne par un intervenant de confiance. Libre et sans obligation.</p>
+      </div>
+
+      <hr class="prog-divider">
+      <div class="prog-fade">
+      <div class="prog-section-icon" style="background:rgba(192,129,78,.1);color:#C0814E;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <h2 style="border:none;padding:0;margin-top:0;">Le cadre deontologique</h2>
+      </div>
+      <div class="prog-fade">
+      <p>Les valeurs qui nous animent :</p>
+      <ul><li>Confidentialite et discretion</li><li>Ecoute</li><li>Engagement</li><li>Authenticite</li><li>Respect et bienveillance</li><li>Tolerance et ouverture d'esprit</li></ul>
+      <p>Ce qui n'a pas sa place chez GREATLY :</p>
+      <ul><li>Divulguer des informations partagees par un membre</li><li>Le jugement</li><li>Le parti pris ideologique et le proselytisme</li><li>Le lobbying</li><li>Tout message a visee commerciale ou promotionnelle</li><li>Enregistrer ou prendre des photos pendant les rencontres</li></ul>
+      </div>
+
+      <hr class="prog-divider">
+      <div class="prog-fade">
+      <div class="prog-section-icon" style="background:rgba(79,124,130,.1);color:#4F7C82;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+      <h2 style="border:none;padding:0;margin-top:0;">Contacts</h2>
+      </div>
+      <div class="prog-fade">
+      <p><strong>Programme Lucidite :</strong></p>
+      <ul><li><strong>Julie Houriez</strong> : jh.naturopathie@gmail.com / 06 75 70 26 78</li><li><strong>Claire Laloyaux</strong> : boosterdesens@gmail.com / 06 21 93 49 02</li></ul>
+      <p><strong>Programme Energie :</strong></p>
+      <ul><li><strong>Alexandra Brabant</strong> : alexandrabrabant@outlook.fr / 06 99 55 65 01</li></ul>
+      <p><strong>La maison & reservations :</strong></p>
+      <ul><li><strong>Arnaud Przybylski</strong> : arnaudprz@gmail.com / 06 51 15 63 44</li></ul>
+      </div>
+
+      <div class="aside-box prog-fade" style="text-align:center;margin-top:30px;">
+        <p style="font-size:1.05rem;font-weight:700;color:var(--ink);">Il ne vous reste maintenant plus qu'a profiter du programme GREATLY :)</p>
+        <p><strong>Pour toute question :</strong> Julie Houriez : jh.naturopathie@gmail.com / 06 75 70 26 78</p>
+      </div>
+    </div>
+  </div>
+
   <div id="progPage">
     <div class="prog-inner">
       <button class="prog-back" onclick="closeProgramme()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour aux reservations</button>
@@ -392,6 +523,10 @@
       <a class="menu-item" onclick="toggleMenu();openProgramme()">
         <span class="mi-icon" style="background:#E8D9C5;color:#6B5138;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
         <div><div class="mi-text">Le programme</div><div class="mi-sub">Parcours Lucidite & Energie</div></div>
+      </a>
+      <a class="menu-item" onclick="toggleMenu();openInfos()">
+        <span class="mi-icon" style="background:rgba(79,124,130,.1);color:#4F7C82;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span>
+        <div><div class="mi-text">Infos pratiques</div><div class="mi-sub">Livret d'accueil & cadre</div></div>
       </a>
     </div>
     <div class="menu-section">
@@ -526,6 +661,22 @@
     document.getElementById(id).classList.remove('open');
   }
 
+  // ---- Infos pratiques ----
+  function openInfos(){
+    document.getElementById('infosPage').classList.add('open');
+    var els=document.querySelectorAll('#app > :not(#infosPage):not(#progPage):not(.brand)');
+    for(var i=0;i<els.length;i++) els[i].style.display='none';
+    document.getElementById('progPage').classList.remove('open');
+    window.scrollTo({top:0,behavior:'smooth'});
+    setTimeout(initFadeAnimations,100);
+  }
+  function closeInfos(){
+    document.getElementById('infosPage').classList.remove('open');
+    var els=document.querySelectorAll('#app > :not(#infosPage):not(#progPage):not(.brand)');
+    for(var i=0;i<els.length;i++) els[i].style.display='';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
   // ---- Programme ----
   var fadeObs=new IntersectionObserver(function(entries){
     entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');fadeObs.unobserve(e.target);}});
@@ -535,15 +686,16 @@
   }
   function openProgramme(){
     document.getElementById('progPage').classList.add('open');
-    // Masquer le contenu réservation
-    var els=document.querySelectorAll('#app > :not(#progPage):not(.brand)');
+    document.getElementById('infosPage').classList.remove('open');
+    var els=document.querySelectorAll('#app > :not(#progPage):not(#infosPage):not(.brand)');
     for(var i=0;i<els.length;i++) els[i].style.display='none';
     window.scrollTo({top:0,behavior:'smooth'});
     setTimeout(initFadeAnimations,100);
   }
   function closeProgramme(){
     document.getElementById('progPage').classList.remove('open');
-    var els=document.querySelectorAll('#app > :not(#progPage):not(.brand)');
+    document.getElementById('infosPage').classList.remove('open');
+    var els=document.querySelectorAll('#app > :not(#progPage):not(#infosPage):not(.brand)');
     for(var i=0;i<els.length;i++) els[i].style.display='';
     window.scrollTo({top:0,behavior:'smooth'});
   }
