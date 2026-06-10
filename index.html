@@ -948,12 +948,6 @@
     document.getElementById('reservationSection').style.display='none';
     document.getElementById('progPage').classList.remove('open');
     document.getElementById('infosPage').classList.remove('open');
-    // Show all app children
-    var els=document.querySelectorAll('#app > *');
-    for(var i=0;i<els.length;i++) els[i].style.display='';
-    document.getElementById('reservationSection').style.display='none';
-    document.getElementById('progPage').classList.remove('open');
-    document.getElementById('infosPage').classList.remove('open');
     window.scrollTo({top:0,behavior:'smooth'});
   }
 
