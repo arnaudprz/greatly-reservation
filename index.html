@@ -72,11 +72,6 @@
   .c-row .cr-sub{font-size:.82rem;color:var(--warm-grey);line-height:1.35}
   .c-row .cr-badge{font-size:.72rem;font-weight:600;padding:4px 10px;border-radius:999px;white-space:nowrap;margin-left:auto;flex:0 0 auto}
   .c-row .cr-chev{color:var(--sage);flex:0 0 auto;font-size:1.3rem;font-weight:300;margin-left:4px}
-  .c-cta{position:fixed;bottom:0;left:0;right:0;z-index:50;padding:12px 18px calc(12px + env(safe-area-inset-bottom));background:var(--sage);display:none}
-  .c-cta.show{display:block}
-  .c-cta button{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;max-width:560px;margin:0 auto;padding:14px;border:none;border-radius:14px;background:#fff;color:var(--sage-dark);font-family:inherit;font-size:.95rem;font-weight:700;cursor:pointer;transition:transform .1s}
-  .c-cta button:hover{transform:scale(1.01)}
-  .c-cta button svg{width:20px;height:20px}
 
   .step{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:1.3px;color:var(--occupied-ink);margin:30px 0 14px;display:flex;align-items:center;gap:10px}
   .step .n{width:22px;height:22px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.72rem;flex:0 0 auto}
@@ -383,9 +378,6 @@
   </div>
   </div>
 
-  <div class="c-cta" id="homeCta">
-    <button onclick="showReservation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Réserver maintenant</button>
-  </div>
 
   <div id="reservationSection" style="display:none;">
   <div class="brand">
@@ -971,11 +963,10 @@
     resa.style.display='none';
     prog.classList.remove('open');
     infos.classList.remove('open');
-    var cta=document.getElementById('homeCta');
-    if(h==='reservations'){resa.style.display='';render();cta.classList.remove('show');}
-    else if(h==='programme'){prog.classList.add('open');setTimeout(initFadeAnimations,100);cta.classList.remove('show');}
-    else if(h==='infos'){infos.classList.add('open');setTimeout(initFadeAnimations,100);cta.classList.remove('show');}
-    else{home.style.display='';cta.classList.add('show');}
+    if(h==='reservations'){resa.style.display='';render();}
+    else if(h==='programme'){prog.classList.add('open');setTimeout(initFadeAnimations,100);}
+    else if(h==='infos'){infos.classList.add('open');setTimeout(initFadeAnimations,100);}
+    else{home.style.display='';}
     window.scrollTo({top:0,behavior:'smooth'});
   }
   window.addEventListener('hashchange',applyRoute);
