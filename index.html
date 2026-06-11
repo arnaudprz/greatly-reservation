@@ -961,6 +961,8 @@
   }
   function applyRoute(){
     var h=(window.location.hash||'').replace('#','');
+    // Ignorer les ancres de section (sommaires) — ne pas changer de page
+    if(h.indexOf('infos-')===0||h.indexOf('prog-')===0) return;
     var home=document.getElementById('homeSection');
     var resa=document.getElementById('reservationSection');
     var prog=document.getElementById('progPage');
