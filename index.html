@@ -238,6 +238,29 @@
     .infos-mobile-toc{display:none !important}
   }
 
+  /* Page padel */
+  #padelPage{display:none}
+  #padelPage.open{display:block}
+  .padel-slides{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:16/9;background:var(--line);margin:20px 0}
+  .padel-slides img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;opacity:0;transition:opacity .6s ease}
+  .padel-slides img.active{opacity:1}
+  .padel-dots{display:flex;justify-content:center;gap:8px;margin:-10px 0 20px}
+  .padel-dots span{width:8px;height:8px;border-radius:50%;background:var(--line);cursor:pointer;transition:background .2s}
+  .padel-dots span.active{background:var(--sage)}
+  .padel-info{display:grid;grid-template-columns:1fr;gap:10px;margin:20px 0}
+  @media(min-width:500px){.padel-info{grid-template-columns:1fr 1fr}}
+  .padel-info-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;align-items:flex-start;gap:12px}
+  .padel-info-card .pi-icon{width:36px;height:36px;border-radius:10px;background:rgba(107,125,92,.1);color:var(--sage);display:flex;align-items:center;justify-content:center;flex:0 0 36px}
+  .padel-info-card .pi-icon svg{width:18px;height:18px}
+  .padel-info-card .pi-title{font-size:.88rem;font-weight:700;margin-bottom:2px}
+  .padel-info-card .pi-text{font-size:.82rem;color:var(--warm-grey);line-height:1.4}
+  .padel-agenda{display:flex;flex-direction:column;gap:10px;margin:20px 0}
+  .padel-agenda a{display:flex;align-items:center;gap:12px;padding:14px 16px;background:#fff;border:1.5px solid var(--line);border-radius:14px;text-decoration:none;color:var(--ink);transition:all .12s}
+  .padel-agenda a:hover{border-color:var(--sage);box-shadow:0 4px 12px rgba(107,125,92,.1)}
+  .padel-agenda .pa-date{font-weight:700;font-size:.92rem;min-width:100px}
+  .padel-agenda .pa-time{font-size:.85rem;color:var(--warm-grey);flex:1}
+  .padel-agenda .pa-btn{font-size:.78rem;font-weight:600;color:var(--sage);white-space:nowrap}
+
   /* Page programme */
   #progPage{display:none}
   #progPage.open{display:block}
@@ -323,6 +346,7 @@
     <button class="nav-link" onclick="showReservation()">Reservations</button>
     <button class="nav-link" onclick="openProgramme()">Le programme</button>
     <button class="nav-link" onclick="openInfos()">Infos pratiques</button>
+    <button class="nav-link" onclick="navigate('padel')">Padel</button>
     <button class="nav-link" onclick="openContact('arnaud')">Contacter Arnaud</button>
     <button class="nav-link" onclick="openContact('julie')">Contacter Julie</button>
     <button class="nav-link" onclick="openPrivatPage()">Privatiser la maison</button>
@@ -409,6 +433,107 @@
   <p class="hint">Seuls les créneaux disponibles sont affichés. Les autres sont déjà réservés (sans afficher par qui).</p>
   <div id="slotsList"></div>
   </div><!-- /reservationSection -->
+
+  <div id="padelPage">
+    <div class="prog-inner">
+      <button class="prog-back" onclick="goHome()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour</button>
+
+      <div class="prog-hero prog-fade">
+        <h1>🏓 Padel District</h1>
+        <p style="font-size:.88rem;color:var(--sage);font-weight:600;margin-bottom:6px;">Programme Énergie — tous les mardis</p>
+        <p>Chaque mardi, retrouvez votre groupe et votre coach Mathias pour une séance de padel conviviale et accessible à tous les niveaux.</p>
+      </div>
+
+      <div class="padel-slides" id="padelSlides">
+        <img src="https://padel-district.fr/wp-content/uploads/2025/09/Courts-panoramiques-padel.jpg" alt="Courts panoramiques" class="active">
+        <img src="https://padel-district.fr/wp-content/uploads/2025/09/Club-house-padel-district.jpg" alt="Club house">
+        <img src="https://padel-district.fr/wp-content/uploads/2025/09/Terrain-padel-district.jpg" alt="Terrain de padel">
+      </div>
+      <div class="padel-dots" id="padelDots">
+        <span class="active" onclick="goSlide(0)"></span>
+        <span onclick="goSlide(1)"></span>
+        <span onclick="goSlide(2)"></span>
+      </div>
+
+      <hr class="prog-divider">
+
+      <div class="prog-fade">
+        <div class="prog-section-icon" style="background:rgba(107,125,92,.1);color:var(--sage);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
+        <h2 style="border:none;padding:0;margin-top:0;">Votre séance</h2>
+      </div>
+      <div class="prog-fade">
+        <p><strong>Tous les mardis de 10h30 à 12h00</strong>, dans le cadre du programme Énergie, vous retrouvez votre coach <strong>Mathias</strong> et les membres de votre groupe pour une séance de padel encadrée.</p>
+        <p>Le padel se joue à 4 (2 contre 2) sur un terrain vitré plus petit qu'un court de tennis. C'est un sport accessible, convivial et idéal pour se remettre en mouvement tout en passant un bon moment collectif.</p>
+        <p>Mathias adapte chaque séance au niveau du groupe : échauffement, exercices techniques, matchs et debriefing. Aucune expérience préalable n'est nécessaire.</p>
+      </div>
+
+      <hr class="prog-divider">
+
+      <div class="prog-fade">
+        <div class="prog-section-icon" style="background:rgba(192,129,78,.1);color:#C0814E;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+        <h2 style="border:none;padding:0;margin-top:0;">Prochaines séances</h2>
+        <p>Ajoutez directement les séances à votre agenda :</p>
+      </div>
+      <div class="padel-agenda prog-fade">
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Padel+GREATLY+-+Padel+District&dates=20260616T083000Z/20260616T100000Z&details=S%C3%A9ance+padel+avec+Mathias+-+Programme+%C3%89nergie+GREATLY&location=Padel+District%2C+Avenue+de+la+Boutillerie%2C+59320+Sequedin" target="_blank" rel="noopener">
+          <span class="pa-date">Mardi 16 juin</span><span class="pa-time">10h30 – 12h00</span><span class="pa-btn">+ Ajouter à l'agenda</span>
+        </a>
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Padel+GREATLY+-+Padel+District&dates=20260623T083000Z/20260623T100000Z&details=S%C3%A9ance+padel+avec+Mathias+-+Programme+%C3%89nergie+GREATLY&location=Padel+District%2C+Avenue+de+la+Boutillerie%2C+59320+Sequedin" target="_blank" rel="noopener">
+          <span class="pa-date">Mardi 23 juin</span><span class="pa-time">10h30 – 12h00</span><span class="pa-btn">+ Ajouter à l'agenda</span>
+        </a>
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Padel+GREATLY+-+Padel+District&dates=20260630T083000Z/20260630T100000Z&details=S%C3%A9ance+padel+avec+Mathias+-+Programme+%C3%89nergie+GREATLY&location=Padel+District%2C+Avenue+de+la+Boutillerie%2C+59320+Sequedin" target="_blank" rel="noopener">
+          <span class="pa-date">Mardi 30 juin</span><span class="pa-time">10h30 – 12h00</span><span class="pa-btn">+ Ajouter à l'agenda</span>
+        </a>
+      </div>
+
+      <hr class="prog-divider">
+
+      <div class="prog-fade">
+        <div class="prog-section-icon" style="background:rgba(79,124,130,.1);color:#4F7C82;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+        <h2 style="border:none;padding:0;margin-top:0;">Ce qu'il vous faut</h2>
+      </div>
+      <div class="padel-info prog-fade">
+        <div class="padel-info-card">
+          <div class="pi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.38 3.46L16 2 12 5.5 8 2 3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6l6 7 6-7h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/></svg></div>
+          <div><div class="pi-title">Tenue de sport</div><div class="pi-text">Vêtements confortables et chaussures de sport propres (semelles non marquantes, type indoor)</div></div>
+        </div>
+        <div class="padel-info-card">
+          <div class="pi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12l4-4 4 4"/><path d="M12 16V8"/></svg></div>
+          <div><div class="pi-title">Raquette fournie</div><div class="pi-text">Padel District met des raquettes à disposition. Vous pouvez aussi apporter la vôtre si vous en avez une.</div></div>
+        </div>
+        <div class="padel-info-card">
+          <div class="pi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/></svg></div>
+          <div><div class="pi-title">Serviette & eau</div><div class="pi-text">Pensez à prendre une serviette et une bouteille d'eau. Des vestiaires et douches sont disponibles sur place.</div></div>
+        </div>
+        <div class="padel-info-card">
+          <div class="pi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h12v5a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8z"/><path d="M16 9h2a2 2 0 0 1 0 4h-2"/><path d="M7 3v2M10 3v2M13 3v2"/></svg></div>
+          <div><div class="pi-title">Déjeuner sur place</div><div class="pi-text">Pour ceux qui le souhaitent, vous pouvez déjeuner sur place après la séance. Le club house dispose d'un espace restauration.</div></div>
+        </div>
+      </div>
+
+      <hr class="prog-divider">
+
+      <div class="prog-fade">
+        <div class="prog-section-icon" style="background:rgba(139,110,78,.1);color:#8B6E4E;"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg></div>
+        <h2 style="border:none;padding:0;margin-top:0;">Accès & infos pratiques</h2>
+      </div>
+      <div class="prog-fade">
+        <div class="aside-box">
+          <p><strong>Padel District</strong></p>
+          <p>Avenue de la Boutillerie (à côté de BUT)<br>59320 Sequedin</p>
+          <p>Tél : <a href="tel:+33652748678" style="color:var(--sage);">06 52 74 86 78</a><br>
+          Email : <a href="mailto:contact@padel-district.fr" style="color:var(--sage);">contact@padel-district.fr</a></p>
+          <p style="margin-bottom:0;"><strong>Horaires du club :</strong> Lun-Sam 9h-23h30 · Dim 9h-22h</p>
+        </div>
+        <p style="margin-top:16px;">Le club est facilement accessible en voiture avec un grand parking gratuit. Comptez environ 20 minutes depuis la GREATLY House à Verlinghem.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;">
+          <a href="https://maps.google.com/?q=Padel+District+Avenue+de+la+Boutillerie+Sequedin" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:12px 18px;background:#fff;border:1.5px solid var(--line);border-radius:12px;text-decoration:none;color:var(--ink);font-weight:600;font-size:.88rem;transition:all .12s;" onmouseover="this.style.borderColor='var(--sage)'" onmouseout="this.style.borderColor='var(--line)'"><svg viewBox="0 0 24 24" fill="currentColor" style="width:20px;height:20px;color:#4285F4;"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Google Maps</a>
+          <a href="https://waze.com/ul?ll=50.6205,2.9786&navigate=yes&q=Padel+District+Sequedin" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:12px 18px;background:#fff;border:1.5px solid var(--line);border-radius:12px;text-decoration:none;color:var(--ink);font-weight:600;font-size:.88rem;transition:all .12s;" onmouseover="this.style.borderColor='var(--sage)'" onmouseout="this.style.borderColor='var(--line)'"><svg viewBox="0 0 24 24" fill="currentColor" style="width:20px;height:20px;color:#33CCFF;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-2h2v2h-2zm0-4V7h2v6h-2z"/></svg>Waze</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
 
   <div id="infosPage">
     <div style="max-width:960px;margin:0 auto;padding:32px 22px 80px;">
@@ -828,6 +953,10 @@
         <span class="mi-icon" style="background:rgba(79,124,130,.1);color:#4F7C82;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span>
         <div><div class="mi-text">Infos pratiques</div><div class="mi-sub">Livret d'accueil & cadre</div></div>
       </a>
+      <a class="menu-item" onclick="toggleMenu();navigate('padel')">
+        <span class="mi-icon" style="background:rgba(107,125,92,.12);color:var(--sage);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12l4-4 4 4"/><path d="M12 16V8"/></svg></span>
+        <div><div class="mi-text">Padel</div><div class="mi-sub">Tous les mardis chez Padel District</div></div>
+      </a>
     </div>
     <div class="menu-section">
       <div class="menu-section-title">Nous contacter</div>
@@ -978,9 +1107,12 @@
     resa.style.display='none';
     prog.classList.remove('open');
     infos.classList.remove('open');
+    var padel=document.getElementById('padelPage');
+    padel.classList.remove('open');
     if(h==='reservations'){resa.style.display='';render();}
     else if(h==='programme'){prog.classList.add('open');setTimeout(initFadeAnimations,100);}
     else if(h==='infos'){infos.classList.add('open');setTimeout(initFadeAnimations,100);}
+    else if(h==='padel'){padel.classList.add('open');setTimeout(initFadeAnimations,100);}
     else{home.style.display='';}
     window.scrollTo({top:0,behavior:'smooth'});
   }
@@ -989,6 +1121,22 @@
   function goHome(){navigate('');}
   function openProgrammeNav(){navigate('programme');}
   function openInfosNav(){navigate('infos');}
+
+  // ---- Padel slideshow ----
+  var slideIdx=0;
+  function goSlide(n){
+    var imgs=document.querySelectorAll('#padelSlides img');
+    var dots=document.querySelectorAll('#padelDots span');
+    imgs.forEach(function(img){img.classList.remove('active');});
+    dots.forEach(function(dot){dot.classList.remove('active');});
+    slideIdx=n;
+    if(imgs[slideIdx])imgs[slideIdx].classList.add('active');
+    if(dots[slideIdx])dots[slideIdx].classList.add('active');
+  }
+  setInterval(function(){
+    var imgs=document.querySelectorAll('#padelSlides img');
+    if(imgs.length>0) goSlide((slideIdx+1)%imgs.length);
+  },4000);
 
   // ---- Scroll to top + reading progress ----
   window.addEventListener('scroll',function(){
