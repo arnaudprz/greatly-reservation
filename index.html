@@ -7,7 +7,7 @@
 <!-- Auto-refresh : recharge la page si une nouvelle version est deployee (contre le cache Safari/iOS) -->
 <script>
 (function(){
-  var APP_VERSION='2026-06-17-1';
+  var APP_VERSION='2026-06-17-2';
   try{
     fetch('version.txt?_='+Date.now(),{cache:'no-store'})
       .then(function(r){return r.ok?r.text():null;})
@@ -1445,6 +1445,15 @@
   }
 
   // ---- Mot de passe vérifié côté serveur ----
+  function unlockApp(pw){
+    PASSWORD=pw;
+    try{localStorage.setItem('greatly_member',pw);}catch(e){}
+    document.getElementById('gate').style.display='none';
+    document.getElementById('app').style.display='block';
+    document.querySelector('.navbar').classList.add('visible');
+    document.body.classList.add('logged-in');
+    applyRoute();
+  }
   async function checkPw(){
     const v=document.getElementById('pw').value.trim();
     const btn=document.querySelector('#gate .btn');
@@ -1452,11 +1461,7 @@
     try{
       const data=await apiGet({action:'checkpassword',pw:v});
       if(data.ok){
-        PASSWORD=v;
-        document.getElementById('gate').style.display='none';
-        document.getElementById('app').style.display='block';
-        document.querySelector('.navbar').classList.add('visible');
-        document.body.classList.add('logged-in');
+        unlockApp(v);
       } else {
         document.getElementById('gateError').textContent="Mot de passe incorrect.";
       }
@@ -1708,6 +1713,9 @@
   }
 
   document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal();});
+
+  // Reconnexion automatique si le membre s'est deja connecte sur cet appareil
+  try{var _saved=localStorage.getItem('greatly_member');if(_saved)unlockApp(_saved);}catch(e){}
 </script>
 </body>
 </html>
