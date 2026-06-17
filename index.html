@@ -7,7 +7,7 @@
 <!-- Auto-refresh : recharge la page si une nouvelle version est deployee (contre le cache Safari/iOS) -->
 <script>
 (function(){
-  var APP_VERSION='2026-06-17-4';
+  var APP_VERSION='2026-06-17-5';
   try{
     fetch('version.txt?_='+Date.now(),{cache:'no-store'})
       .then(function(r){return r.ok?r.text():null;})
@@ -1250,7 +1250,7 @@
       <div class="field"><label>Votre email</label><input type="email" id="abMail" placeholder="prenom@email.com" inputmode="email"></div>
       <div class="field"><label>Quel atelier ?</label><select id="abAtelier" onchange="toggleAbsenceSport()"><option value="">Choisir…</option><option value="Atelier Énergie">Atelier Énergie</option><option value="Atelier Lucidité">Atelier Lucidité</option></select></div>
       <div class="field" id="abSportField" style="display:none"><label>Type de sport</label><input type="text" id="abSport" placeholder="Ex : Padel, Yoga…"></div>
-      <div class="field"><label>Date concernée (optionnel)</label><input type="date" id="abDate"></div>
+      <div class="field"><label>Date concernée</label><input type="date" id="abDate"></div>
       <div class="form-err" id="abErr"></div>
       <p class="rgpd">Vos données servent uniquement à traiter votre signalement d'absence.</p>
       <div class="modal-actions">
@@ -1415,6 +1415,7 @@
     if(val('abTel').replace(/\D/g,'').length<8)return showErr(err,'Merci d’indiquer un telephone valide.');
     if(!isEmail(val('abMail')))return showErr(err,'Merci d’indiquer un email valide.');
     if(!val('abAtelier'))return showErr(err,'Merci de choisir l’atelier concerne.');
+    if(!val('abDate'))return showErr(err,'Merci d’indiquer la date concernee.');
     showErr(err,'');
     var msg='Bonjour Arnaud, je previens d\'une absence.\n'
       +'Prenom : '+val('abName')+'\n'
