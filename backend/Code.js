@@ -68,6 +68,7 @@ function doGet(e) {
   if (action === 'book') { return handleBook(e.parameter); }
   if (action === 'maison') { return handleMaison(e.parameter); }
   if (action === 'privatisation') { return handlePrivatisation(e.parameter); }
+  if (action === 'absence') { return handleAbsence(e.parameter); }
   return jsonOut({ok: false, error: 'Action inconnue.'});
 }
 
@@ -80,6 +81,7 @@ function doPost(e) {
   if (action === 'book') { return handleBook(data); }
   if (action === 'maison') { return handleMaison(data); }
   if (action === 'privatisation') { return handlePrivatisation(data); }
+  if (action === 'absence') { return handleAbsence(data); }
   return jsonOut({ok: false, error: 'Action inconnue.'});
 }
 
@@ -225,6 +227,28 @@ function handlePrivatisation(data) {
   GmailApp.sendEmail(OWNER_EMAIL, sujet, 'Nouvelle demande de privatisation :\n\nPrenom : ' + name + '\nEmail : ' + email + '\nTelephone : ' + tel + '\nDate souhaitee : ' + date + '\nNombre de personnes : ' + nb + '\n\nBesoin :\n' + need, {name: 'GREATLY Reservation', replyTo: email});
   labelLastSentEmail(sujet);
   return jsonOut({ok:true, message:'Demande envoyee !'});
+}
+
+function handleAbsence(data) {
+  var name = (data.name || '').trim();
+  var email = (data.email || '').trim();
+  var tel = (data.tel || '').trim();
+  var atelier = (data.atelier || '').trim();
+  var sport = (data.sport || '').trim();
+  var date = (data.date || '').trim();
+  if (!name) { return jsonOut({ok:false, error:'Prenom requis.'}); }
+  if (!email) { return jsonOut({ok:false, error:'Email requis.'}); }
+  var sujet = 'Absence signalee - ' + name + (atelier ? ' (' + atelier + ')' : '');
+  var corps = 'Un membre signale une absence :\n\n'
+    + 'Prenom : ' + name + '\n'
+    + 'Email : ' + email + '\n'
+    + 'Telephone : ' + tel + '\n'
+    + 'Atelier : ' + (atelier || 'non precise') + '\n'
+    + (sport ? 'Sport : ' + sport + '\n' : '')
+    + (date ? 'Date : ' + date + '\n' : '');
+  GmailApp.sendEmail(OWNER_EMAIL, sujet, corps, {name: 'GREATLY Reservation', replyTo: email});
+  labelLastSentEmail(sujet);
+  return jsonOut({ok:true, message:'Absence signalee !'});
 }
 
 function handleMaison(data) {
