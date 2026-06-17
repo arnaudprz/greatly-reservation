@@ -246,7 +246,8 @@ function handleAbsence(data) {
     + 'Atelier : ' + (atelier || 'non precise') + '\n'
     + (sport ? 'Sport : ' + sport + '\n' : '')
     + (date ? 'Date : ' + date + '\n' : '');
-  GmailApp.sendEmail(OWNER_EMAIL, sujet, corps, {name: 'GREATLY Reservation', replyTo: email});
+  var destinataires = OWNER_EMAIL + ',juhou00@gmail.com,tomalex59@hotmail.fr,claire.laloyaux59@gmail.com';
+  GmailApp.sendEmail(destinataires, sujet, corps, {name: 'GREATLY Reservation', replyTo: email});
   labelLastSentEmail(sujet);
   return jsonOut({ok:true, message:'Absence signalee !'});
 }
