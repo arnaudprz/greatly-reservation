@@ -163,9 +163,11 @@
   .nav-link:hover{color:var(--sage);background:rgba(107,125,92,.08)}
   .nav-link.cta{background:var(--sage);color:#fff;font-weight:600;padding:8px 18px;border-radius:999px}
   .nav-link.cta:hover{background:var(--sage-dark)}
+  .nav-fb{display:none;color:#C0814E;margin-left:18px}
+  .nav-fb:hover{color:#C0814E;background:rgba(192,129,78,.1)}
   .nav-burger{display:flex;align-items:center;justify-content:center;margin-left:auto;background:none;border:none;cursor:pointer;padding:6px;color:var(--sage-dark)}
   .nav-burger svg{width:24px;height:24px}
-  @media(min-width:820px){.nav-links{display:flex}.nav-burger{margin-left:8px}}
+  @media(min-width:820px){.nav-links{display:flex}.nav-burger{margin-left:8px}.nav-fb{display:inline-flex;align-items:center;gap:5px}}
 
   /* Adjust body for navbar */
   body{padding-top:0}
@@ -347,6 +349,7 @@
 <!-- Navbar -->
 <nav class="navbar">
   <div class="nav-logo" onclick="goHome()" style="cursor:pointer;"><span>G R E A T L Y</span><span class="dot"></span></div>
+  <button class="nav-link nav-fb" onclick="window.open('https://arnaudprz.github.io/Greatly-retours/membre.html','_blank','noopener')">💬 Votre avis nous intéresse</button>
   <div class="nav-links">
     <button class="nav-link" onclick="navigate('activites')">🔥 Vos activités</button>
     <button class="nav-link" onclick="showReservation()">Reservations</button>
@@ -391,6 +394,11 @@
       <p style="text-align:center;font-family:'Playfair Display',Georgia,serif;font-size:1.1rem;color:var(--ink);font-weight:400;">Que souhaitez-vous faire aujourd'hui ?</p>
     </div>
     <div class="c-list">
+      <div class="c-row" onclick="window.open('https://arnaudprz.github.io/Greatly-retours/membre.html','_blank','noopener')">
+        <div class="cr-icon" style="background:rgba(192,129,78,.12);color:#C0814E;font-size:1.3rem;">💬</div>
+        <div class="cr-body"><div class="cr-title">Votre avis nous intéresse</div><div class="cr-sub">Partagez vos retours, aidez-nous à faire grandir la GREATLY House</div></div>
+        <span class="cr-chev">&#8250;</span>
+      </div>
       <div class="c-row" onclick="navigate('activites')" style="border-color:var(--sage);background:rgba(107,125,92,.03);">
         <div class="cr-icon" style="background:rgba(107,125,92,.12);color:var(--sage);font-size:1.3rem;">🔥</div>
         <div class="cr-body"><div class="cr-title">Vos activités physiques</div><div class="cr-sub">Padel, yoga et plus — votre programme Énergie de la semaine</div></div>
@@ -1047,6 +1055,12 @@
 <div id="menuPanel">
   <div class="menu-overlay" onclick="toggleMenu()"></div>
   <div class="menu-drawer">
+    <div class="menu-section">
+      <a class="menu-item" onclick="toggleMenu();window.open('https://arnaudprz.github.io/Greatly-retours/membre.html','_blank','noopener')">
+        <span class="mi-icon" style="background:rgba(192,129,78,.12);color:#C0814E;">💬</span>
+        <div><div class="mi-text">Votre avis nous intéresse</div><div class="mi-sub">Partagez vos retours en 2 minutes</div></div>
+      </a>
+    </div>
     <div class="menu-section">
       <div class="menu-section-title">🔥 Vos activités</div>
       <a class="menu-item" onclick="toggleMenu();navigate('padel')">
