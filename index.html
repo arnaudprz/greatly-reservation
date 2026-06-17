@@ -7,7 +7,7 @@
 <!-- Auto-refresh : recharge la page si une nouvelle version est deployee (contre le cache Safari/iOS) -->
 <script>
 (function(){
-  var APP_VERSION='2026-06-17-2';
+  var APP_VERSION='2026-06-17-3';
   try{
     fetch('version.txt?_='+Date.now(),{cache:'no-store'})
       .then(function(r){return r.ok?r.text():null;})
@@ -565,8 +565,22 @@
         </a>
       </div>
 
-      <div class="aside-box prog-fade" style="margin-top:24px;">
-        <p>Rendez-vous à la GREATLY House, 10 rue de Lambersart à Verlinghem. L'adresse figure dans l'invitation agenda.</p>
+      <hr class="prog-divider">
+
+      <div class="prog-fade">
+        <div class="prog-section-icon" style="background:rgba(79,124,130,.1);color:#4F7C82;"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg></div>
+        <h2 style="border:none;padding:0;margin-top:0;">Accès & infos pratiques</h2>
+      </div>
+      <div class="prog-fade">
+        <div class="aside-box">
+          <p><strong>GREATLY House</strong></p>
+          <p style="margin-bottom:0;">10 rue de Lambersart<br>59237 Verlinghem</p>
+        </div>
+        <p style="margin-top:16px;">Stationnement facile devant la maison. Présentez-vous quelques minutes avant le début de la séance, le temps de vous installer.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;">
+          <a href="https://maps.google.com/?q=10+rue+de+Lambersart+59237+Verlinghem" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:12px 18px;background:#fff;border:1.5px solid var(--line);border-radius:12px;text-decoration:none;color:var(--ink);font-weight:600;font-size:.88rem;transition:all .12s;" onmouseover="this.style.borderColor='var(--sage)'" onmouseout="this.style.borderColor='var(--line)'"><svg viewBox="0 0 24 24" fill="currentColor" style="width:20px;height:20px;color:#4285F4;"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Google Maps</a>
+          <a href="https://waze.com/ul?q=10%20rue%20de%20Lambersart%20Verlinghem&navigate=yes" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:12px 18px;background:#fff;border:1.5px solid var(--line);border-radius:12px;text-decoration:none;color:var(--ink);font-weight:600;font-size:.88rem;transition:all .12s;" onmouseover="this.style.borderColor='var(--sage)'" onmouseout="this.style.borderColor='var(--line)'"><svg viewBox="0 0 24 24" fill="currentColor" style="width:20px;height:20px;color:#33CCFF;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-2h2v2h-2zm0-4V7h2v6h-2z"/></svg>Waze</a>
+        </div>
       </div>
     </div>
   </div>
