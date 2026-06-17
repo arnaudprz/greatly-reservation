@@ -4,6 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Espace membres · GREATLY House</title>
+<!-- Auto-refresh : recharge la page si une nouvelle version est deployee (contre le cache Safari/iOS) -->
+<script>
+(function(){
+  var APP_VERSION='2026-06-17-1';
+  try{
+    fetch('version.txt?_='+Date.now(),{cache:'no-store'})
+      .then(function(r){return r.ok?r.text():null;})
+      .then(function(v){
+        if(!v)return; v=v.trim();
+        if(v&&v!==APP_VERSION&&location.search.indexOf('v='+v)===-1){
+          location.replace(location.pathname+'?v='+encodeURIComponent(v)+location.hash);
+        }
+      }).catch(function(){});
+  }catch(e){}
+})();
+</script>
 <meta name="description" content="Espace membres GREATLY House : réservez un salon privatif ou la salle de sport, à Verlinghem. Lun-Ven 13h-18h30.">
 <meta property="og:title" content="GREATLY House — Espace membre">
 <meta property="og:description" content="Découvrez vos avantages. Réservez vos espaces privés à la GREATLY House, Verlinghem.">
