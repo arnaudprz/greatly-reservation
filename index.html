@@ -7,7 +7,7 @@
 <!-- Auto-refresh : recharge la page si une nouvelle version est deployee (contre le cache Safari/iOS) -->
 <script>
 (function(){
-  var APP_VERSION='2026-06-18-2';
+  var APP_VERSION='2026-06-18-3';
   try{
     fetch('version.txt?_='+Date.now(),{cache:'no-store'})
       .then(function(r){return r.ok?r.text():null;})
@@ -88,7 +88,8 @@
   .c-row .cr-body{flex:1;min-width:0}
   .c-row .cr-title{font-size:.95rem;font-weight:700;margin-bottom:2px}
   .c-row .cr-sub{font-size:.82rem;color:var(--warm-grey);line-height:1.35}
-  .c-row .cr-badge{font-size:.72rem;font-weight:600;padding:4px 10px;border-radius:999px;white-space:nowrap;margin-left:auto;flex:0 0 auto}
+  .c-row .cr-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:2px}
+  .c-row .cr-badge{font-size:.7rem;font-weight:700;padding:3px 9px;border-radius:999px;white-space:nowrap;flex:0 0 auto;letter-spacing:.2px}
   .c-row .cr-chev{color:var(--sage);flex:0 0 auto;font-size:1.3rem;font-weight:300;margin-left:4px}
 
   .step{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:1.3px;color:var(--occupied-ink);margin:30px 0 14px;display:flex;align-items:center;gap:10px}
@@ -176,16 +177,22 @@
   .nav-logo img{width:22px;height:21px}
   .nav-logo span{font-size:.95rem;font-weight:700;letter-spacing:2px;color:var(--ink)}
   .nav-logo .dot{width:8px;height:8px;border-radius:50%;background:var(--sage);margin-left:2px}
-  .nav-links{display:none;align-items:center;gap:4px;margin-left:auto}
-  .nav-link{font-size:.82rem;font-weight:500;color:var(--sage-dark);text-decoration:none;padding:8px 14px;border-radius:10px;cursor:pointer;transition:all .12s;border:none;background:none;font-family:inherit}
-  .nav-link:hover{color:var(--sage);background:rgba(107,125,92,.08)}
-  .nav-link.cta{background:var(--sage);color:#fff;font-weight:600;padding:8px 18px;border-radius:999px}
-  .nav-link.cta:hover{background:var(--sage-dark)}
-  .nav-fb{display:none;color:#C0814E;margin-left:18px}
-  .nav-fb:hover{color:#C0814E;background:rgba(192,129,78,.1)}
+  .nav-links{display:none;align-items:center;gap:5px;margin-left:5px}
+  .nav-link{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;text-align:left;padding:6px 11px;border-radius:12px;border:1.5px solid var(--line);background:#fff;cursor:pointer;transition:all .12s;font-family:inherit;line-height:1.1}
+  .nav-link .nl-title{font-size:.78rem;font-weight:700;color:var(--ink);white-space:nowrap}
+  .nav-link .nl-sub{font-size:.62rem;font-weight:500;color:var(--warm-grey);white-space:nowrap;margin-top:1px}
+  .nav-link:hover{border-color:var(--sage);box-shadow:0 3px 10px rgba(107,125,92,.12)}
+  .nav-link.cta{background:var(--sage);border-color:var(--sage)}
+  .nav-link.cta .nl-title{color:#fff}
+  .nav-link.cta .nl-sub{color:rgba(255,255,255,.82)}
+  .nav-link.cta:hover{background:var(--sage-dark);border-color:var(--sage-dark)}
+  .nav-fb{display:none;margin-left:auto;background:rgba(192,129,78,.08);border-color:rgba(192,129,78,.42)}
+  .nav-fb .nl-title{color:#C0814E}
+  .nav-fb .nl-sub{color:#b0875c}
+  .nav-fb:hover{background:rgba(192,129,78,.15);border-color:#C0814E}
   .nav-burger{display:flex;align-items:center;justify-content:center;margin-left:auto;background:none;border:none;cursor:pointer;padding:6px;color:var(--sage-dark)}
   .nav-burger svg{width:24px;height:24px}
-  @media(min-width:820px){.nav-links{display:flex}.nav-burger{margin-left:8px}.nav-fb{display:inline-flex;align-items:center;gap:5px}}
+  @media(min-width:1366px){.nav-links{display:flex}.nav-fb{display:flex}.nav-burger{margin-left:8px}}
 
   /* Adjust body for navbar */
   body{padding-top:0}
@@ -206,6 +213,9 @@
   .menu-item .mi-icon svg{width:18px;height:18px}
   .menu-item .mi-text{font-size:.88rem;font-weight:600}
   .menu-item .mi-sub{font-size:.76rem;color:var(--warm-grey);font-weight:400}
+  .menu-item>div{flex:1;min-width:0}
+  .menu-item .mi-badge{flex:0 0 auto;align-self:flex-start;margin-top:1px;font-size:.66rem;font-weight:700;padding:4px 10px;border-radius:999px;white-space:nowrap;letter-spacing:.2px}
+  .menu-item.featured{background:linear-gradient(135deg,rgba(107,125,92,.13),rgba(107,125,92,.04));border:1.5px solid rgba(107,125,92,.38)}
 
   /* Contact panels */
   .contact-panel{position:fixed;inset:0;z-index:85;display:none;align-items:center;justify-content:center;padding:20px}
@@ -382,16 +392,16 @@
 <!-- Navbar -->
 <nav class="navbar">
   <div class="nav-logo" onclick="goHome()" style="cursor:pointer;"><span>G R E A T L Y</span><span class="dot"></span></div>
-  <button class="nav-link nav-fb" onclick="window.open('https://arnaudprz.github.io/Greatly-retours/membre.html','_blank','noopener')">💬 Votre avis nous intéresse</button>
+  <button class="nav-link nav-fb" onclick="window.open('https://arnaudprz.github.io/Greatly-retours/membre.html','_blank','noopener')"><span class="nl-title">Votre avis nous intéresse</span><span class="nl-sub">On vous écoute</span></button>
   <div class="nav-links">
-    <button class="nav-link" onclick="navigate('activites')">🔥 Vos activités</button>
-    <button class="nav-link" onclick="showReservation()">Réservations</button>
-    <button class="nav-link" onclick="openProgramme()">Le programme</button>
-    <button class="nav-link" onclick="openInfos()">Infos pratiques</button>
-    <button class="nav-link" onclick="openContact('arnaud')">Contacter Arnaud</button>
-    <button class="nav-link" onclick="openContact('julie')">Contacter Julie</button>
-    <button class="nav-link" onclick="openPrivatPage()">Privatiser la maison</button>
-    <button class="nav-link cta" onclick="openHoraires()">Nos horaires</button>
+    <button class="nav-link" onclick="navigate('activites')"><span class="nl-title">Vos activités</span><span class="nl-sub">On bouge ensemble</span></button>
+    <button class="nav-link" onclick="showReservation()"><span class="nl-title">Réservations</span><span class="nl-sub">Comme chez vous</span></button>
+    <button class="nav-link" onclick="openProgramme()"><span class="nl-title">Le programme</span><span class="nl-sub">À votre rythme</span></button>
+    <button class="nav-link" onclick="openInfos()"><span class="nl-title">Infos pratiques</span><span class="nl-sub">Bon à savoir</span></button>
+    <button class="nav-link" onclick="openContact('arnaud')"><span class="nl-title">Contacter Arnaud</span><span class="nl-sub">On est là</span></button>
+    <button class="nav-link" onclick="openContact('julie')"><span class="nl-title">Contacter Julie</span><span class="nl-sub">Avec plaisir</span></button>
+    <button class="nav-link" onclick="openPrivatPage()"><span class="nl-title">Privatiser la maison</span><span class="nl-sub">Sur mesure</span></button>
+    <button class="nav-link cta" onclick="openHoraires()"><span class="nl-title">Nos horaires</span><span class="nl-sub">À bientôt</span></button>
   </div>
   <button class="nav-burger" onclick="toggleMenu()">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
@@ -422,37 +432,37 @@
     <div class="c-list">
       <div class="c-row" onclick="window.open('https://arnaudprz.github.io/Greatly-retours/membre.html','_blank','noopener')">
         <div class="cr-icon" style="background:rgba(192,129,78,.12);color:#C0814E;font-size:1.3rem;">💬</div>
-        <div class="cr-body"><div class="cr-title">Votre avis nous intéresse</div></div>
+        <div class="cr-body"><div class="cr-head"><span class="cr-title">Votre avis nous intéresse</span><span class="cr-badge" style="background:rgba(107,125,92,.16);color:var(--sage-dark);">On vous écoute</span></div><div class="cr-sub">2 minutes, et c'est anonyme</div></div>
         <span class="cr-chev">&#8250;</span>
       </div>
       <div class="c-row" onclick="openAbsence()">
         <div class="cr-icon" style="background:rgba(180,83,63,.1);color:#b4533f;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m14.5 14.5-4 4M10.5 14.5l4 4"/></svg></div>
-        <div class="cr-body"><div class="cr-title">Signaler une absence</div><div class="cr-sub">Vous ne pourrez pas venir ? Prévenez-nous</div></div>
+        <div class="cr-body"><div class="cr-head"><span class="cr-title">Signaler une absence</span><span class="cr-badge" style="background:rgba(180,83,63,.12);color:#b4533f;">Aucun souci</span></div><div class="cr-sub">Prévenez-nous, on s'adapte</div></div>
         <span class="cr-chev">&#8250;</span>
       </div>
       <div class="c-row" onclick="navigate('activites')" style="border-color:var(--sage);background:rgba(107,125,92,.03);">
         <div class="cr-icon" style="background:rgba(107,125,92,.12);color:var(--sage);font-size:1.3rem;">🔥</div>
-        <div class="cr-body"><div class="cr-title">Vos activités physiques</div><div class="cr-sub">Padel, yoga et plus — votre programme Énergie de la semaine</div></div>
+        <div class="cr-body"><div class="cr-head"><span class="cr-title">Vos activités physiques</span><span class="cr-badge" style="background:var(--sage);color:#fff;">On bouge ensemble</span></div><div class="cr-sub">Padel, yoga et plus — votre semaine Énergie</div></div>
         <span class="cr-chev">&#8250;</span>
       </div>
       <div class="c-row" onclick="showReservation()">
         <div class="cr-icon" style="background:rgba(107,125,92,.12);color:var(--sage);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
-        <div class="cr-body"><div class="cr-title">Réserver un espace individuel</div><div class="cr-sub">Salon, dojo ou simple bonjour à la GREATLY House</div></div>
+        <div class="cr-body"><div class="cr-head"><span class="cr-title">Réserver un espace individuel</span><span class="cr-badge" style="background:rgba(107,125,92,.16);color:var(--sage-dark);">Comme chez vous</span></div><div class="cr-sub">Salon, dojo ou simple bonjour à la GREATLY House</div></div>
         <span class="cr-chev">&#8250;</span>
       </div>
       <div class="c-row" onclick="openProgramme()">
         <div class="cr-icon" style="background:rgba(192,129,78,.12);color:#C0814E;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
-        <div class="cr-body"><div class="cr-title">Votre parcours</div><div class="cr-sub">Mois après mois, lucidité & énergie</div></div>
+        <div class="cr-body"><div class="cr-head"><span class="cr-title">Votre parcours</span><span class="cr-badge" style="background:rgba(192,129,78,.2);color:#8f6035;">À votre rythme</span></div><div class="cr-sub">Mois après mois, lucidité & énergie</div></div>
         <span class="cr-chev">&#8250;</span>
       </div>
       <div class="c-row" onclick="openInfos()">
         <div class="cr-icon" style="background:rgba(79,124,130,.12);color:#4F7C82;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></div>
-        <div class="cr-body"><div class="cr-title">Tout savoir</div><div class="cr-sub">Le cadre, l'esprit, les contacts</div></div>
+        <div class="cr-body"><div class="cr-head"><span class="cr-title">Tout savoir</span><span class="cr-badge" style="background:rgba(79,124,130,.14);color:#4F7C82;">Bon à savoir</span></div><div class="cr-sub">Le cadre, l'esprit, les contacts</div></div>
         <span class="cr-chev">&#8250;</span>
       </div>
       <div class="c-row" onclick="openPrivatPage()">
         <div class="cr-icon" style="background:rgba(139,110,78,.12);color:#8B6E4E;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9"/><path d="M5 10v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8"/></svg></div>
-        <div class="cr-body"><div class="cr-title">Privatiser la maison</div><div class="cr-sub">La maison entière pour vos événements d'équipe</div></div>
+        <div class="cr-body"><div class="cr-head"><span class="cr-title">Privatiser la maison</span><span class="cr-badge" style="background:rgba(107,125,92,.16);color:var(--sage-dark);">Sur mesure</span></div><div class="cr-sub">La maison entière pour vos événements d'équipe</div></div>
         <span class="cr-chev">&#8250;</span>
       </div>
     </div>
@@ -1101,64 +1111,75 @@
   <div class="menu-overlay" onclick="toggleMenu()"></div>
   <div class="menu-drawer">
     <div class="menu-section">
-      <a class="menu-item" onclick="toggleMenu();window.open('https://arnaudprz.github.io/Greatly-retours/membre.html','_blank','noopener')">
+      <a class="menu-item featured" onclick="toggleMenu();window.open('https://arnaudprz.github.io/Greatly-retours/membre.html','_blank','noopener')">
         <span class="mi-icon" style="background:rgba(192,129,78,.12);color:#C0814E;">💬</span>
-        <div><div class="mi-text">Votre avis nous intéresse</div><div class="mi-sub">Partagez vos retours en 2 minutes</div></div>
+        <div><div class="mi-text">Votre avis nous intéresse</div><div class="mi-sub">2 minutes, et c'est anonyme</div></div>
+        <span class="mi-badge" style="background:var(--sage);color:#fff;">On vous écoute</span>
       </a>
+    </div>
+    <div class="menu-section">
+      <div class="menu-section-title">Au quotidien</div>
       <div class="menu-item" onclick="toggleMenu();openAbsence()">
         <span class="mi-icon" style="background:rgba(180,83,63,.1);color:#b4533f;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m14.5 14.5-4 4M10.5 14.5l4 4"/></svg></span>
-        <div><div class="mi-text">Signaler une absence</div><div class="mi-sub">Vous ne pourrez pas venir ? Prévenez-nous</div></div>
+        <div><div class="mi-text">Signaler une absence</div><div class="mi-sub">Prévenez-nous, on s'adapte</div></div>
+        <span class="mi-badge" style="background:rgba(180,83,63,.12);color:#b4533f;">Aucun souci</span>
       </div>
     </div>
     <div class="menu-section">
-      <div class="menu-section-title">🔥 Vos activités</div>
+      <div class="menu-section-title">Vos activités</div>
       <a class="menu-item" onclick="toggleMenu();navigate('padel')">
         <span class="mi-icon" style="background:rgba(107,125,92,.12);color:var(--sage);">🏓</span>
         <div><div class="mi-text">Padel</div><div class="mi-sub">Mardis 10h30 · Padel District</div></div>
+        <span class="mi-badge" style="background:rgba(107,125,92,.16);color:var(--sage-dark);">À mardi !</span>
       </a>
       <a class="menu-item" onclick="toggleMenu();navigate('yoga')">
         <span class="mi-icon" style="background:rgba(79,124,130,.12);color:#4F7C82;">🧘</span>
-        <div><div class="mi-text">Yoga</div><div class="mi-sub">Reconnexion au corps</div></div>
+        <div><div class="mi-text">Yoga</div><div class="mi-sub">Un temps pour se reconnecter</div></div>
+        <span class="mi-badge" style="background:rgba(79,124,130,.14);color:#4F7C82;">Respirez</span>
       </a>
     </div>
     <div class="menu-section">
-      <div class="menu-section-title">Réserver</div>
+      <div class="menu-section-title">Réserver & découvrir</div>
       <a class="menu-item" onclick="toggleMenu();showReservation()">
         <span class="mi-icon" style="background:rgba(107,125,92,.12);color:var(--sage);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
         <div><div class="mi-text">Réservations</div><div class="mi-sub">Salon, dojo ou simple bonjour</div></div>
+        <span class="mi-badge" style="background:rgba(107,125,92,.16);color:var(--sage-dark);">Comme chez vous</span>
       </a>
-    </div>
-    <div class="menu-section">
-      <div class="menu-section-title">Découvrir</div>
       <a class="menu-item" onclick="toggleMenu();openProgramme()">
         <span class="mi-icon" style="background:#E8D9C5;color:#6B5138;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
         <div><div class="mi-text">Le programme</div><div class="mi-sub">Parcours Lucidité & Énergie</div></div>
+        <span class="mi-badge" style="background:rgba(192,129,78,.2);color:#8f6035;">À votre rythme</span>
       </a>
       <a class="menu-item" onclick="toggleMenu();openInfos()">
         <span class="mi-icon" style="background:rgba(79,124,130,.1);color:#4F7C82;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span>
-        <div><div class="mi-text">Infos pratiques</div><div class="mi-sub">Livret d'accueil & cadre</div></div>
+        <div><div class="mi-text">Infos pratiques</div><div class="mi-sub">Tout pour vous sentir à l'aise</div></div>
+        <span class="mi-badge" style="background:rgba(79,124,130,.14);color:#4F7C82;">Bon à savoir</span>
       </a>
     </div>
     <div class="menu-section">
       <div class="menu-section-title">Nous contacter</div>
       <a class="menu-item" onclick="toggleMenu();openContact('arnaud')">
         <span class="mi-icon" style="background:#CDD8BE;color:#4f5e42;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
-        <div><div class="mi-text">Contacter Arnaud</div><div class="mi-sub">WhatsApp ou email</div></div>
+        <div><div class="mi-text">Contacter Arnaud</div><div class="mi-sub">WhatsApp ou email, quand vous voulez</div></div>
+        <span class="mi-badge" style="background:#CDD8BE;color:#4f5e42;">On est là</span>
       </a>
       <a class="menu-item" onclick="toggleMenu();openContact('julie')">
         <span class="mi-icon" style="background:#EBD6BC;color:#8f6035;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
-        <div><div class="mi-text">Contacter Julie</div><div class="mi-sub">Par email</div></div>
+        <div><div class="mi-text">Contacter Julie</div><div class="mi-sub">Par email, elle vous répond vite</div></div>
+        <span class="mi-badge" style="background:#EBD6BC;color:#8f6035;">Avec plaisir</span>
       </a>
     </div>
     <div class="menu-section">
       <div class="menu-section-title">La maison</div>
       <a class="menu-item" onclick="toggleMenu();openPrivatPage()">
         <span class="mi-icon" style="background:#CDD8BE;color:#4f5e42;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9"/><path d="M5 10v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8"/></svg></span>
-        <div><div class="mi-text">Privatiser la maison</div><div class="mi-sub">Pour vos événements pro</div></div>
+        <div><div class="mi-text">Privatiser la maison</div><div class="mi-sub">Votre événement, notre maison</div></div>
+        <span class="mi-badge" style="background:#CDD8BE;color:#4f5e42;">Sur mesure</span>
       </a>
       <div class="menu-item" onclick="toggleMenu();openHoraires()">
         <span class="mi-icon" style="background:var(--cream);color:var(--ink);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
-        <div><div class="mi-text">Nos horaires</div><div class="mi-sub">Lun-Ven 13h-18h30 · hors vacances scolaires</div></div>
+        <div><div class="mi-text">Nos horaires</div><div class="mi-sub">Lun-Ven 13h-18h30</div></div>
+        <span class="mi-badge" style="background:rgba(139,110,78,.12);color:#8B6E4E;">À bientôt</span>
       </div>
     </div>
   </div>
