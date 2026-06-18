@@ -7,7 +7,7 @@
 <!-- Auto-refresh : recharge la page si une nouvelle version est deployee (contre le cache Safari/iOS) -->
 <script>
 (function(){
-  var APP_VERSION='2026-06-17-6';
+  var APP_VERSION='2026-06-18-1';
   try{
     fetch('version.txt?_='+Date.now(),{cache:'no-store'})
       .then(function(r){return r.ok?r.text():null;})
@@ -295,16 +295,16 @@
   .prog-back:hover{background:var(--cream)}
   .prog-back svg{width:16px;height:16px}
   .prog-inner{max-width:680px;margin:0 auto;padding:32px 22px 80px;font-family:'DM Sans',sans-serif}
-  .prog-inner h1{font-family:'Playfair Display',Georgia,serif;font-weight:400;font-size:1.8rem;letter-spacing:-.3px;margin-bottom:12px}
-  .prog-inner h2{font-family:'Playfair Display',Georgia,serif;font-size:1.35rem;font-weight:400;margin:44px 0 16px;padding-top:24px;border-top:1px solid var(--line)}
-  .prog-inner h3{font-size:1rem;font-weight:700;margin:28px 0 12px}
-  .prog-inner p{font-size:.93rem;color:#4a4a4a;line-height:1.8;margin-bottom:16px}
-  .prog-inner strong{color:var(--ink)}
-  .prog-inner blockquote{border-left:3px solid var(--sage);margin:24px 0;padding:16px 20px;background:var(--cream);border-radius:0 12px 12px 0;font-family:'Playfair Display',Georgia,serif;font-style:italic;color:var(--ink);font-size:1rem;line-height:1.7}
-  .prog-inner .aside-box{background:var(--cream);border-radius:14px;padding:20px 24px;margin:24px 0;font-size:.9rem;line-height:1.75;color:var(--ink)}
-  .prog-inner .aside-box p{color:var(--ink);margin-bottom:8px}
-  .prog-inner ul{margin:12px 0 20px 20px;font-size:.9rem;color:#4a4a4a;line-height:1.8}
-  .prog-inner li{margin-bottom:8px}
+  .prog-inner h1,.infos-main h1,.prog-main h1{font-family:'Playfair Display',Georgia,serif;font-weight:400;font-size:1.8rem;letter-spacing:-.3px;margin-bottom:12px}
+  .prog-inner h2,.infos-main h2,.prog-main h2{font-family:'Playfair Display',Georgia,serif;font-size:1.35rem;font-weight:400;margin:48px 0 18px;padding-top:24px;border-top:1px solid var(--line)}
+  .prog-inner h3,.infos-main h3,.prog-main h3{font-size:1.02rem;font-weight:700;margin:30px 0 12px;line-height:1.4}
+  .prog-inner p,.infos-main p,.prog-main p{font-size:.95rem;color:#4a4a4a;line-height:1.85;margin-bottom:20px;text-align:left}
+  .prog-inner strong,.infos-main strong,.prog-main strong{color:var(--ink)}
+  .prog-inner blockquote,.infos-main blockquote,.prog-main blockquote{border-left:3px solid var(--sage);margin:28px 0;padding:18px 22px;background:var(--cream);border-radius:0 12px 12px 0;font-family:'Playfair Display',Georgia,serif;font-style:italic;color:var(--ink);font-size:1rem;line-height:1.75;text-align:left}
+  .prog-inner .aside-box,.infos-main .aside-box,.prog-main .aside-box{background:var(--cream);border-radius:14px;padding:22px 24px;margin:28px 0;font-size:.92rem;line-height:1.8;color:var(--ink);text-align:left}
+  .prog-inner .aside-box p,.infos-main .aside-box p,.prog-main .aside-box p{color:var(--ink);margin-bottom:10px}
+  .prog-inner ul,.infos-main ul,.prog-main ul{margin:14px 0 22px 20px;font-size:.95rem;color:#4a4a4a;line-height:1.85;text-align:left}
+  .prog-inner li,.infos-main li,.prog-main li{margin-bottom:10px}
   .prog-month{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px;margin:24px 0}
   .prog-month h3{margin-top:0;color:var(--sage)}
   .prog-month .pm-theme{background:var(--cream);border-radius:12px;padding:16px 18px;margin:12px 0;font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:.95rem;color:var(--ink);line-height:1.6}
@@ -372,7 +372,7 @@
   <button class="nav-link nav-fb" onclick="window.open('https://arnaudprz.github.io/Greatly-retours/membre.html','_blank','noopener')">💬 Votre avis nous intéresse</button>
   <div class="nav-links">
     <button class="nav-link" onclick="navigate('activites')">🔥 Vos activités</button>
-    <button class="nav-link" onclick="showReservation()">Reservations</button>
+    <button class="nav-link" onclick="showReservation()">Réservations</button>
     <button class="nav-link" onclick="openProgramme()">Le programme</button>
     <button class="nav-link" onclick="openInfos()">Infos pratiques</button>
     <button class="nav-link" onclick="openContact('arnaud')">Contacter Arnaud</button>
@@ -452,7 +452,7 @@
   <div class="brand">
     <span class="logo">GREAT<span>LY</span></span><span class="sub">House</span>
   </div>
-  <h1>Reservez votre espace</h1>
+  <h1>Réservez votre espace</h1>
   <p class="intro">Choisissez un lieu, puis un creneau.</p>
 
   <div class="step"><span class="n">1</span> Choisissez votre espace</div>
@@ -689,7 +689,7 @@
 
   <div id="infosPage">
     <div style="max-width:960px;margin:0 auto;padding:32px 22px 80px;">
-      <button class="prog-back" onclick="closeInfos()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour aux reservations</button>
+      <button class="prog-back" onclick="closeInfos()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour aux réservations</button>
       <div class="reading-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg> 15 min de lecture</div>
     <div class="infos-layout">
       <nav class="infos-sidebar">
@@ -697,9 +697,9 @@
         <a href="#infos-programme">Vous rejoignez GREATLY</a>
         <a href="#infos-pionnier">Programme pionnier</a>
         <a href="#infos-maison">La GREATLY House</a>
-        <a href="#infos-experience">L'experience</a>
-        <a href="#infos-pedagogique">Cadre pedagogique</a>
-        <a href="#infos-deontologique">Cadre deontologique</a>
+        <a href="#infos-experience">L'expérience</a>
+        <a href="#infos-pedagogique">Cadre pédagogique</a>
+        <a href="#infos-deontologique">Cadre déontologique</a>
         <a href="#infos-logistique">Cadre logistique</a>
         <a href="#infos-admin">Cadre administratif</a>
       </nav>
@@ -722,17 +722,17 @@
           <a href="#infos-programme" style="font-size:.88rem;color:var(--sage-dark);text-decoration:none;padding:6px 10px;border-radius:8px;transition:background .12s;" onmouseover="this.style.background='var(--cream)'" onmouseout="this.style.background=''">1. Vous rejoignez le programme GREATLY</a>
           <a href="#infos-pionnier" style="font-size:.88rem;color:var(--sage-dark);text-decoration:none;padding:6px 10px;border-radius:8px;transition:background .12s;" onmouseover="this.style.background='var(--cream)'" onmouseout="this.style.background=''">2. Le programme GREATLY pionnier</a>
           <a href="#infos-maison" style="font-size:.88rem;color:var(--sage-dark);text-decoration:none;padding:6px 10px;border-radius:8px;transition:background .12s;" onmouseover="this.style.background='var(--cream)'" onmouseout="this.style.background=''">3. La GREATLY House</a>
-          <a href="#infos-experience" style="font-size:.88rem;color:var(--sage-dark);text-decoration:none;padding:6px 10px;border-radius:8px;transition:background .12s;" onmouseover="this.style.background='var(--cream)'" onmouseout="this.style.background=''">4. L'experience GREATLY</a>
-          <a href="#infos-pedagogique" style="font-size:.88rem;color:var(--sage-dark);text-decoration:none;padding:6px 10px;border-radius:8px;transition:background .12s;" onmouseover="this.style.background='var(--cream)'" onmouseout="this.style.background=''">5. Le cadre pedagogique</a>
-          <a href="#infos-deontologique" style="font-size:.88rem;color:var(--sage-dark);text-decoration:none;padding:6px 10px;border-radius:8px;transition:background .12s;" onmouseover="this.style.background='var(--cream)'" onmouseout="this.style.background=''">6. Le cadre deontologique</a>
+          <a href="#infos-experience" style="font-size:.88rem;color:var(--sage-dark);text-decoration:none;padding:6px 10px;border-radius:8px;transition:background .12s;" onmouseover="this.style.background='var(--cream)'" onmouseout="this.style.background=''">4. L'expérience GREATLY</a>
+          <a href="#infos-pedagogique" style="font-size:.88rem;color:var(--sage-dark);text-decoration:none;padding:6px 10px;border-radius:8px;transition:background .12s;" onmouseover="this.style.background='var(--cream)'" onmouseout="this.style.background=''">5. Le cadre pédagogique</a>
+          <a href="#infos-deontologique" style="font-size:.88rem;color:var(--sage-dark);text-decoration:none;padding:6px 10px;border-radius:8px;transition:background .12s;" onmouseover="this.style.background='var(--cream)'" onmouseout="this.style.background=''">6. Le cadre déontologique</a>
           <a href="#infos-logistique" style="font-size:.88rem;color:var(--sage-dark);text-decoration:none;padding:6px 10px;border-radius:8px;transition:background .12s;" onmouseover="this.style.background='var(--cream)'" onmouseout="this.style.background=''">7. Le cadre logistique</a>
           <a href="#infos-admin" style="font-size:.88rem;color:var(--sage-dark);text-decoration:none;padding:6px 10px;border-radius:8px;transition:background .12s;" onmouseover="this.style.background='var(--cream)'" onmouseout="this.style.background=''">8. Cadre administratif</a>
         </div>
       </div>
 
       <div class="aside-box prog-fade">
-        <p>Pour votre bien-etre et celui du groupe, nous avons pris soin de reunir dans ce livret d'accueil tout ce qui vous aidera a vous sentir chez vous : l'esprit qui nous anime et le cadre dans lequel nous cheminerons ensemble.</p>
-        <p>Prenez le temps de le parcourir a votre rythme. Et si une question, une hesitation ou meme une simple remarque vous vient au sujet de ce cadre d'engagement, sachez que nous sommes la, avec plaisir, pour en echanger avec vous. N'hesitez jamais a nous solliciter.</p>
+        <p>Pour votre bien-être et celui du groupe, nous avons pris soin de réunir dans ce livret d'accueil tout ce qui vous aidera à vous sentir chez vous : l'esprit qui nous anime et le cadre dans lequel nous cheminerons ensemble.</p>
+        <p>Prenez le temps de le parcourir à votre rythme. Et si une question, une hésitation ou même une simple remarque vous vient au sujet de ce cadre d'engagement, sachez que nous sommes là, avec plaisir, pour en échanger avec vous. N'hésitez jamais à nous solliciter.</p>
         <p><strong>Julie Houriez</strong> : <a href="mailto:jh.naturopathie@gmail.com" style="color:var(--sage);">jh.naturopathie@gmail.com</a> / 06 75 70 26 78</p>
       </div>
 
@@ -742,8 +742,8 @@
       <h2 id="infos-programme" style="border:none;padding:0;margin-top:0;">Vous rejoignez le programme GREATLY</h2>
       </div>
       <div class="prog-fade">
-      <p><strong>GREATLY est un programme d'accompagnement</strong> pense pour cultiver et renforcer durablement ENERGIE et LUCIDITE des dirigeants, cadres et talents cles de l'entreprise ainsi que des solopreneurs et professions liberales.</p>
-      <p>GREATLY est un programme pense pour celles et ceux qui evoluent dans des environnements exigeants, la ou la pression peut peser et ou l'on s'oublie parfois soi-meme. Nous sommes la pour vous accompagner, a vos cotes, vers plus de confiance, une meilleure forme, des decisions plus lucides, et ce sentiment precieux de se sentir bien, dans son corps comme dans sa tete.</p>
+      <p><strong>GREATLY est un programme d'accompagnement</strong> pensé pour cultiver et renforcer durablement ÉNERGIE et LUCIDITÉ des dirigeants, cadres et talents clés de l'entreprise ainsi que des solopreneurs et professions libérales.</p>
+      <p>GREATLY est un programme pensé pour celles et ceux qui évoluent dans des environnements exigeants, là où la pression peut peser et où l'on s'oublie parfois soi-même. Nous sommes là pour vous accompagner, à vos côtés, vers plus de confiance, une meilleure forme, des décisions plus lucides, et ce sentiment précieux de se sentir bien, dans son corps comme dans sa tête.</p>
       <blockquote>Vous rejoignez un groupe special : le groupe pionnier !</blockquote>
       </div>
 
@@ -753,30 +753,30 @@
       <h2 id="infos-pionnier" style="border:none;padding:0;margin-top:0;">Le programme GREATLY pionnier</h2>
       </div>
       <div class="prog-fade">
-      <p>Vous suivez pendant <strong>6 mois (juin 2026 - janvier 2027)</strong> un programme collectif en presentiel comprenant 3 types d'activites : atelier, activite physique, detente et echanges dans un lieu Ressource.</p>
-      <p>Ce programme est anime par des intervenants, coachs sportifs, professionnels de l'accompagnement.</p>
-      <p>Chaque activite est proposee en presentiel et vise l'alignement "tete-coeur-corps" pour mettre de la conscience dans l'action et gagner en concentration, pertinence et vitalite :</p>
-      <div class="aside-box"><p>Nous avons imagine un parcours en deux volets indissociables : <strong>Energie</strong> et <strong>Lucidite</strong>. Le premier regenere le corps, le second clarifie l'esprit. Les deux se nourrissent l'un l'autre, et c'est de cette alliance que nait une dynamique d'evolution durable, pensee pour avancer a votre rythme.</p></div>
+      <p>Vous suivez pendant <strong>6 mois (juin 2026 - janvier 2027)</strong> un programme collectif en présentiel comprenant 3 types d'activités : atelier, activité physique, détente et échanges dans un lieu Ressource.</p>
+      <p>Ce programme est animé par des intervenants, coachs sportifs, professionnels de l'accompagnement.</p>
+      <p>Chaque activité est proposée en présentiel et vise l'alignement "tête-cœur-corps" pour mettre de la conscience dans l'action et gagner en concentration, pertinence et vitalité :</p>
+      <div class="aside-box"><p>Nous avons imaginé un parcours en deux volets indissociables : <strong>Énergie</strong> et <strong>Lucidité</strong>. Le premier régénère le corps, le second clarifie l'esprit. Les deux se nourrissent l'un l'autre, et c'est de cette alliance que naît une dynamique d'évolution durable, pensée pour avancer à votre rythme.</p></div>
       </div>
 
       <div class="prog-fade">
-      <h3>Tous les mois : "La Lucidite"</h3>
-      <p>Un temps pour soi, autour d'un dejeuner, pour souffler et prendre du recul sur sa facon d'avancer. Un moment pour clarifier ce qui compte vraiment et transformer sa facon de faire, pas a pas : trouver son juste rythme, decider avec clarte, et deployer son energie sur ce qui en vaut la peine.</p>
-      <p>Les jeudis, de 11h30 a 14h :</p>
-      <ul><li>11 juin 2026</li><li>2 juillet 2026</li><li>17 septembre 2026</li><li>8 octobre 2026</li><li>12 novembre 2026</li><li>10 decembre 2026</li><li>14 janvier 2027</li></ul>
-      <p><strong>Dans le prolongement du programme Lucidite</strong></p>
-      <p>Nous vous proposons chaque semaine des activites physiques en lien avec la thematique du mois (Programme Energie). Une facon de se projeter et de vivre les themes ensemble, collectivement.</p>
+      <h3>Tous les mois : "La Lucidité"</h3>
+      <p>Un temps pour soi, autour d'un déjeuner, pour souffler et prendre du recul sur sa façon d'avancer. Un moment pour clarifier ce qui compte vraiment et transformer sa façon de faire, pas à pas : trouver son juste rythme, décider avec clarté, et déployer son énergie sur ce qui en vaut la peine.</p>
+      <p>Les jeudis, de 11h30 à 14h :</p>
+      <ul><li>11 juin 2026</li><li>2 juillet 2026</li><li>17 septembre 2026</li><li>8 octobre 2026</li><li>12 novembre 2026</li><li>10 décembre 2026</li><li>14 janvier 2027</li></ul>
+      <p><strong>Dans le prolongement du programme Lucidité</strong></p>
+      <p>Nous vous proposons chaque semaine des activités physiques en lien avec la thématique du mois (Programme Énergie). Une façon de se projeter et de vivre les thèmes ensemble, collectivement.</p>
       </div>
 
       <div class="prog-fade">
-      <h3>Toutes les semaines : Programme Energie</h3>
-      <p>Le programme Energie est au service du programme Lucidite : il permet de vivre l'experience pleinement, puis de la prolonger dans le temps.</p>
-      <p>Il se deploie en deux temps complementaires :</p>
+      <h3>Toutes les semaines : Programme Énergie</h3>
+      <p>Le programme Énergie est au service du programme Lucidité : il permet de vivre l'expérience pleinement, puis de la prolonger dans le temps.</p>
+      <p>Il se déploie en deux temps complémentaires :</p>
       <ul>
-        <li>une <strong>activite de reconnexion au corps</strong>, essentielle pour s'apaiser et mieux gerer ses pensees ;</li>
-        <li>une <strong>activite sportive</strong> pour remettre le corps en mouvement, a son rythme.</li>
+        <li>une <strong>activité de reconnexion au corps</strong>, essentielle pour s'apaiser et mieux gérer ses pensées ;</li>
+        <li>une <strong>activité sportive</strong> pour remettre le corps en mouvement, à son rythme.</li>
       </ul>
-      <p>Soit jusqu'a <strong>4h d'activite physique encadree par semaine</strong> (2 x 2h) :</p>
+      <p>Soit jusqu'à <strong>4h d'activité physique encadrée par semaine</strong> (2 x 2h) :</p>
       <ul><li>le mardi, entre 10h et 14h (2h)</li><li>le vendredi, entre 9h et 13h (2h)</li></ul>
       <p><em>(hors vacances scolaires)</em></p>
       </div>
@@ -787,124 +787,124 @@
       <h2 id="infos-maison" style="border:none;padding:0;margin-top:0;">La GREATLY House</h2>
       </div>
       <div class="prog-fade">
-      <p>Un lieu pour prendre du recul, se mettre au vert et souffler. Un espace pour sortir de son cadre habituel, le temps d'un moment, pour retrouver de la clarte et repartir plus leger ou simplement travailler dans un environnement qui fait du bien. Vous pourrez aussi y croiser les intervenants et coachs GREATLY, qui ont egalement leurs habitudes dans la maison.</p>
+      <p>Un lieu pour prendre du recul, se mettre au vert et souffler. Un espace pour sortir de son cadre habituel, le temps d'un moment, pour retrouver de la clarté et repartir plus léger ou simplement travailler dans un environnement qui fait du bien. Vous pourrez aussi y croiser les intervenants et coachs GREATLY, qui ont également leurs habitudes dans la maison.</p>
       <h3>Vous sentir chez vous</h3>
-      <p>Le rez-de-chaussee, avec son salon, est un espace collectif pense pour se retrouver et echanger, en deconnexion numerique. Quand vous avez besoin de travailler sur ordinateur, la salle a manger vous accueille (sans telephone, pour preserver le calme de chacun). Et pour vos appels, nous vous invitons a vous installer tranquillement dans le jardin ou dans les salons a l'etage.</p>
-      <p>Envie d'un moment a vous ? Vous pouvez reserver un petit salon pour vous poser ou travailler dans votre propre espace, ou meme privatiser la maison pour vos evenements professionnels. Pour toute reservation, ecrivez-nous a arnaudprz@gmail.com.</p>
-      <p>Vous avez aussi acces a la salle de fitness pour bouger a votre rythme, et a la salle de bains si vous en avez besoin. Cote cuisine, the, cafe et eau sont a votre disposition : servez-vous, et faites comme chez vous.</p>
-      <p><strong>Horaires :</strong> Ouverte tous les jours, du lundi au vendredi, de 13h a 18h30. <em>(hors vacances scolaires)</em></p>
+      <p>Le rez-de-chaussée, avec son salon, est un espace collectif pensé pour se retrouver et échanger, en déconnexion numérique. Quand vous avez besoin de travailler sur ordinateur, la salle à manger vous accueille (sans téléphone, pour préserver le calme de chacun). Et pour vos appels, nous vous invitons à vous installer tranquillement dans le jardin ou dans les salons à l'étage.</p>
+      <p>Envie d'un moment à vous ? Vous pouvez réserver un petit salon pour vous poser ou travailler dans votre propre espace, ou même privatiser la maison pour vos événements professionnels. Pour toute réservation, écrivez-nous à arnaudprz@gmail.com.</p>
+      <p>Vous avez aussi accès à la salle de fitness pour bouger à votre rythme, et à la salle de bains si vous en avez besoin. Côté cuisine, thé, café et eau sont à votre disposition : servez-vous, et faites comme chez vous.</p>
+      <p><strong>Horaires :</strong> Ouverte tous les jours, du lundi au vendredi, de 13h à 18h30. <em>(hors vacances scolaires)</em></p>
       </div>
 
       <div class="prog-fade">
-      <h3>Au rez-de-chaussee</h3>
+      <h3>Au rez-de-chaussée</h3>
       <ul>
-        <li><strong>Le Salon</strong> : un espace collectif avec fauteuils et cheminee, pense pour les rencontres, les lectures et les moments de reverie. Ici, on laisse de cote telephone et ordinateur pour se mettre simplement au rythme de ce qui s'y vit.</li>
-        <li><strong>La Tablee</strong> : une grande table ou poser un carnet, un ordinateur et sa tasse de the ou de cafe. Un espace de coworking avec wifi, que nous gardons silencieux et sans telephone, par respect pour chacun.</li>
-        <li><strong>La Cuisine</strong> : pour les pauses autour d'une boisson ou d'un encas, equipee d'un micro-ondes, d'une machine a cafe, d'une bouilloire et d'un frigo. Vous pouvez y dejeuner sur place. Elle est a disposition de tous en autogestion (chacun nettoie la vaisselle qu'il utilise), avec the et cafe offerts.</li>
-        <li><strong>Une salle de sport</strong> : a votre disposition pour bouger, pratiquer une activite ou prolonger un moment de mouvement a votre rythme, ainsi qu'une salle de bain, pour vous rafraichir et repartir sereinement apres l'effort.</li>
+        <li><strong>Le Salon</strong> : un espace collectif avec fauteuils et cheminée, pensé pour les rencontres, les lectures et les moments de rêverie. Ici, on laisse de côté téléphone et ordinateur pour se mettre simplement au rythme de ce qui s'y vit.</li>
+        <li><strong>La Tablée</strong> : une grande table où poser un carnet, un ordinateur et sa tasse de thé ou de café. Un espace de coworking avec wifi, que nous gardons silencieux et sans téléphone, par respect pour chacun.</li>
+        <li><strong>La Cuisine</strong> : pour les pauses autour d'une boisson ou d'un encas, équipée d'un micro-ondes, d'une machine à café, d'une bouilloire et d'un frigo. Vous pouvez y déjeuner sur place. Elle est à disposition de tous en autogestion (chacun nettoie la vaisselle qu'il utilise), avec thé et café offerts.</li>
+        <li><strong>Une salle de sport</strong> : à votre disposition pour bouger, pratiquer une activité ou prolonger un moment de mouvement à votre rythme, ainsi qu'une salle de bain, pour vous rafraîchir et repartir sereinement après l'effort.</li>
       </ul>
-      <h3>Au premier etage</h3>
-      <ul><li><strong>Deux petits bureaux privatifs</strong> (1 a 3 personnes), pour vos rendez-vous en presentiel, en visio ou par telephone.</li></ul>
-      <h3>A l'exterieur</h3>
-      <ul><li><strong>Le Jardin</strong>, avec sa terrasse, ses arbres et son mobilier, pour vous poser au soleil ou a l'ombre d'un chene, vous reposer, ecrire, dessiner, passer un appel ou simplement echanger.</li></ul>
-      <p>Vous pouvez aussi privatiser un espace selon vos besoins : le rez-de-chaussee pour un atelier en petit groupe (10 personnes maximum) ou un salon privatif (2 a 3 personnes), le matin de 10h a 13h, sur demande et reservation.</p>
+      <h3>Au premier étage</h3>
+      <ul><li><strong>Deux petits bureaux privatifs</strong> (1 à 3 personnes), pour vos rendez-vous en présentiel, en visio ou par téléphone.</li></ul>
+      <h3>À l'extérieur</h3>
+      <ul><li><strong>Le Jardin</strong>, avec sa terrasse, ses arbres et son mobilier, pour vous poser au soleil ou à l'ombre d'un chêne, vous reposer, écrire, dessiner, passer un appel ou simplement échanger.</li></ul>
+      <p>Vous pouvez aussi privatiser un espace selon vos besoins : le rez-de-chaussée pour un atelier en petit groupe (10 personnes maximum) ou un salon privatif (2 à 3 personnes), le matin de 10h à 13h, sur demande et réservation.</p>
       </div>
 
       <hr class="prog-divider">
       <div class="prog-fade">
       <div class="prog-section-icon" style="background:rgba(79,124,130,.1);color:#4F7C82;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div>
-      <h2 id="infos-experience" style="border:none;padding:0;margin-top:0;">L'experience GREATLY</h2>
+      <h2 id="infos-experience" style="border:none;padding:0;margin-top:0;">L'expérience GREATLY</h2>
       </div>
       <div class="prog-fade">
-      <h3>Une experience collective en presentiel</h3>
-      <p>Vous rejoignez un groupe mixte de <strong>10 personnes maximum</strong> pour favoriser une dynamique relationnelle de proximite et favoriser les echanges.</p>
-      <p>Votre groupe est ferme, aucune personne ne peut plus y entrer une fois constitue. Il evolue donc avec les memes membres pendant toute l'annee.</p>
-      <p>Les membres viennent d'horizons differents : entreprises, PME, TPE, professions liberales et independants pour garantir une diversite de regards et d'experience. Un groupe ne peut accueillir deux personnes de la meme organisation ou deux personnes qui se connaissent.</p>
-      <p>GREATLY est une entreprise a mission qui s'engage socialement pour accompagner le developpement de bonnes pratiques en entreprise et qui ouvre des places dans ses groupes a des professionnels venant d'horizon associatif, de collectifs ou organisations qui n'auraient pas necessairement les moyens de participer au programme.</p>
-      </div>
-
-      <div class="prog-fade">
-      <h3>Un engagement reciproque</h3>
-      <p>La participation reguliere et la presence de chacun a chaque rencontre contribuent a creer un espace de confiance, de soutien et d'evolution pour tous. Vous vous engagez pour vous mais aussi pour le groupe. En votre absence, le groupe ne peut beneficier de votre participation, de votre experience, de votre sensibilite, de votre regard.</p>
-      <p>En cas d'empechement, vous decidez en conscience de ne pas venir et vous nous prevenez des que possible. Nous n'offrons pas de seance de rattrapage, ni de remboursement dans ce cas.</p>
+      <h3>Une expérience collective en présentiel</h3>
+      <p>Vous rejoignez un groupe mixte de <strong>10 personnes maximum</strong> pour favoriser une dynamique relationnelle de proximité et favoriser les échanges.</p>
+      <p>Votre groupe est fermé, aucune personne ne peut plus y entrer une fois constitué. Il évolue donc avec les mêmes membres pendant toute l'année.</p>
+      <p>Les membres viennent d'horizons différents : entreprises, PME, TPE, professions libérales et indépendants pour garantir une diversité de regards et d'expérience. Un groupe ne peut accueillir deux personnes de la même organisation ou deux personnes qui se connaissent.</p>
+      <p>GREATLY est une entreprise à mission qui s'engage socialement pour accompagner le développement de bonnes pratiques en entreprise et qui ouvre des places dans ses groupes à des professionnels venant d'horizon associatif, de collectifs ou organisations qui n'auraient pas nécessairement les moyens de participer au programme.</p>
       </div>
 
       <div class="prog-fade">
-      <h3>Une experience de deconnexion</h3>
-      <p>Suivre le programme GREATLY, c'est pouvoir rencontrer de nouvelles personnes et rejoindre une communaute tout autant que pouvoir se mettre dans une bulle :</p>
+      <h3>Un engagement réciproque</h3>
+      <p>La participation régulière et la présence de chacun à chaque rencontre contribuent à créer un espace de confiance, de soutien et d'évolution pour tous. Vous vous engagez pour vous mais aussi pour le groupe. En votre absence, le groupe ne peut bénéficier de votre participation, de votre expérience, de votre sensibilité, de votre regard.</p>
+      <p>En cas d'empêchement, vous décidez en conscience de ne pas venir et vous nous prévenez dès que possible. Nous n'offrons pas de séance de rattrapage, ni de remboursement dans ce cas.</p>
+      </div>
+
+      <div class="prog-fade">
+      <h3>Une expérience de déconnexion</h3>
+      <p>Suivre le programme GREATLY, c'est pouvoir rencontrer de nouvelles personnes et rejoindre une communauté tout autant que pouvoir se mettre dans une bulle :</p>
       <ul>
-        <li><strong>Pendant les activites</strong> : telephone et ordinateur ont leur vestiaire a l'entree de la maison ou dans un espace dedie lors des activites physiques afin de favoriser une qualite de presence (disponibilite a l'autre et a soi, ecoute et respect du groupe) en coherence avec les objectifs du programme (lucidite, clarte mentale, qualite du lien).</li>
-        <li><strong>Quand vous venez a la GREATLY House</strong>, vous choisissez votre espace en fonction de ce que vous voulez vivre : connexion/deconnexion, seul/en lien, travailler/rever.</li>
+        <li><strong>Pendant les activités</strong> : téléphone et ordinateur ont leur vestiaire à l'entrée de la maison ou dans un espace dédié lors des activités physiques afin de favoriser une qualité de présence (disponibilité à l'autre et à soi, écoute et respect du groupe) en cohérence avec les objectifs du programme (lucidité, clarté mentale, qualité du lien).</li>
+        <li><strong>Quand vous venez à la GREATLY House</strong>, vous choisissez votre espace en fonction de ce que vous voulez vivre : connexion/déconnexion, seul/en lien, travailler/rêver.</li>
       </ul>
-      <p>Pour tout besoin urgent ou impossibilite a deconnecter votre telephone pendant une activite pour des raisons personnelles ou professionnelles, vous pouvez en informer la coordinatrice afin de prendre la decision la plus ajustee au besoin du groupe.</p>
+      <p>Pour tout besoin urgent ou impossibilité à déconnecter votre téléphone pendant une activité pour des raisons personnelles ou professionnelles, vous pouvez en informer la coordinatrice afin de prendre la décision la plus ajustée au besoin du groupe.</p>
       </div>
 
       <div class="prog-fade">
       <h3>L'esprit GREATLY</h3>
-      <p>Nous vous accueillons par votre prenom et non par votre nom ou fonction. Chez GREATLY, ce qui importe, c'est de se rencontrer sans masque et sans cape mais avec le coeur.</p>
-      <p>Les ateliers ne sont pas des lieux de business mais des lieux ou chacun arrive tel qu'il est.</p>
-      <p>L'objectif des activites physiques n'est pas la performance ou la competition. C'est de s'installer dans une regularite choisie, utile, et durable.</p>
+      <p>Nous vous accueillons par votre prénom et non par votre nom ou fonction. Chez GREATLY, ce qui importe, c'est de se rencontrer sans masque et sans cape mais avec le cœur.</p>
+      <p>Les ateliers ne sont pas des lieux de business mais des lieux où chacun arrive tel qu'il est.</p>
+      <p>L'objectif des activités physiques n'est pas la performance ou la compétition. C'est de s'installer dans une régularité choisie, utile, et durable.</p>
       </div>
 
       <hr class="prog-divider">
       <div class="prog-fade">
       <div class="prog-section-icon" style="background:rgba(107,125,92,.1);color:var(--sage);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
-      <h2 style="border:none;padding:0;margin-top:0;" id="infos-pedagogique">Le cadre pedagogique</h2>
+      <h2 style="border:none;padding:0;margin-top:0;" id="infos-pedagogique">Le cadre pédagogique</h2>
       </div>
 
       <div class="prog-fade">
-      <h3>Le deroule d'un atelier Lucidite</h3>
-      <p>Les ateliers LUCIDITE sont animes par des intervenants professionnels ayant developpe une expertise sur un sujet par leur experience et ayant signe la charte d'engagement GREATLY. Ils ne sont pas la pour delivrer une methode mais pour ouvrir des possibles. Il ne s'agit pas de vous remplir la tete mais de vous faire vivre une experience, un pas de cote pour renouveler ou enrichir votre regard.</p>
-      <p>Les rencontres ont lieu a la GREATLY House et suivent le deroule suivant :</p>
+      <h3>Le déroulé d'un atelier Lucidité</h3>
+      <p>Les ateliers LUCIDITÉ sont animés par des intervenants professionnels ayant développé une expertise sur un sujet par leur expérience et ayant signé la charte d'engagement GREATLY. Ils ne sont pas là pour délivrer une méthode mais pour ouvrir des possibles. Il ne s'agit pas de vous remplir la tête mais de vous faire vivre une expérience, un pas de côté pour renouveler ou enrichir votre regard.</p>
+      <p>Les rencontres ont lieu à la GREATLY House et suivent le déroulé suivant :</p>
       <ul><li>11h20 : accueil</li><li>11h30-12h30 : brunch</li><li>12h30-14h : atelier</li><li>14h-14h15 : debrief</li></ul>
-      <p>Une coordinatrice est presente a l'atelier et reste la referente pour toute question. Elle peut participer a l'atelier pour le suivi pedagogique. Dans ce cas, elle a le meme statut que les membres et est participante.</p>
-      <p>Entre deux seances, l'intervenant peut suggerer une experience a mener pour integrer ce qui a ete aborde. Un retour d'experience peut etre partage en debut de seance suivante.</p>
-      <p>Si vous avez un regime alimentaire particulier a respecter pour le brunch, merci de nous le preciser avant le demarrage des ateliers.</p>
+      <p>Une coordinatrice est présente à l'atelier et reste la référente pour toute question. Elle peut participer à l'atelier pour le suivi pédagogique. Dans ce cas, elle a le même statut que les membres et est participante.</p>
+      <p>Entre deux séances, l'intervenant peut suggérer une expérience à mener pour intégrer ce qui a été abordé. Un retour d'expérience peut être partagé en début de séance suivante.</p>
+      <p>Si vous avez un régime alimentaire particulier à respecter pour le brunch, merci de nous le préciser avant le démarrage des ateliers.</p>
       </div>
 
       <div class="prog-fade">
-      <h3>Le deroule d'une activite physique</h3>
-      <p>Les activites <strong>ENERGIE</strong> sont animees par des coachs sportifs qui ont signe la charte d'engagement GREATLY. Leur role n'est pas de vous pousser a la performance ni de vous faire transpirer a tout prix, mais de vous accompagner dans la remise en mouvement, a votre rythme. Ensemble, l'idee est de faire naitre de petits declics, ceux qui, mis bout a bout, aident a installer une habitude qui dure.</p>
-      <p>Chaque mois, nous vous transmettons le programme des activites avec les adresses de nos lieux partenaires (Villayoga, Between Village, Climb'up...), pour que vous puissiez choisir ce qui vous parle.</p>
-      <p>Chaque seance dure entre 60 et 90 minutes selon la discipline, et suit un deroule pense pour vous mettre en confiance : un temps d'accueil, un echauffement en douceur (15 min), une exploration guidee (30 a 50 min), un moment de recuperation (10 min), puis un temps d'echange pour cloturer ensemble.</p>
-      <p>Entre deux seances, votre coach pourra vous proposer un micro-rituel ou une pratique a experimenter dans votre quotidien : un peu de mobilite, de respiration, quelques etirements, une marche... Rien d'obligatoire, ce sont des invitations. Et si vous le souhaitez, vous pourrez partager votre ressenti au debut de la seance suivante.</p>
-      <p>Enfin, si vous vivez avec un probleme de sante particulier ou une situation dont nous devrions tenir compte, n'hesitez pas a nous en faire part avant de demarrer : c'est important pour que nous puissions vous accompagner en toute securite.</p>
+      <h3>Le déroulé d'une activité physique</h3>
+      <p>Les activités <strong>ÉNERGIE</strong> sont animées par des coachs sportifs qui ont signé la charte d'engagement GREATLY. Leur rôle n'est pas de vous pousser à la performance ni de vous faire transpirer à tout prix, mais de vous accompagner dans la remise en mouvement, à votre rythme. Ensemble, l'idée est de faire naître de petits déclics, ceux qui, mis bout à bout, aident à installer une habitude qui dure.</p>
+      <p>Chaque mois, nous vous transmettons le programme des activités avec les adresses de nos lieux partenaires (Villayoga, Between Village, Climb'up...), pour que vous puissiez choisir ce qui vous parle.</p>
+      <p>Chaque séance dure entre 60 et 90 minutes selon la discipline, et suit un déroulé pensé pour vous mettre en confiance : un temps d'accueil, un échauffement en douceur (15 min), une exploration guidée (30 à 50 min), un moment de récupération (10 min), puis un temps d'échange pour clôturer ensemble.</p>
+      <p>Entre deux séances, votre coach pourra vous proposer un micro-rituel ou une pratique à expérimenter dans votre quotidien : un peu de mobilité, de respiration, quelques étirements, une marche... Rien d'obligatoire, ce sont des invitations. Et si vous le souhaitez, vous pourrez partager votre ressenti au début de la séance suivante.</p>
+      <p>Enfin, si vous vivez avec un problème de santé particulier ou une situation dont nous devrions tenir compte, n'hésitez pas à nous en faire part avant de démarrer : c'est important pour que nous puissions vous accompagner en toute sécurité.</p>
       </div>
 
       <div class="prog-fade">
-      <h3>Processus d'evaluation et d'amelioration</h3>
-      <p>Nous tenons a rester au plus pres de vos besoins et a pouvoir nous ajuster au fil du temps. En tant que membre pionnier, votre regard compte particulierement : vos retours seront vraiment fondateurs. Ils nourriront l'evolution du programme lors du bilan de fin de session, et nous permettront aussi de le reajuster en cours d'annee si un besoin important se fait sentir au sein du groupe.</p>
+      <h3>Processus d'évaluation et d'amélioration</h3>
+      <p>Nous tenons à rester au plus près de vos besoins et à pouvoir nous ajuster au fil du temps. En tant que membre pionnier, votre regard compte particulièrement : vos retours seront vraiment fondateurs. Ils nourriront l'évolution du programme lors du bilan de fin de session, et nous permettront aussi de le réajuster en cours d'année si un besoin important se fait sentir au sein du groupe.</p>
       <p>Pour cela, plusieurs espaces d'expression vous sont ouverts :</p>
       <ul>
-        <li>Un temps de cloture a la fin de chaque rencontre, pour faire le point ensemble.</li>
-        <li>Un questionnaire envoye par mail, pour recueillir votre ressenti et accueillir toutes vos idees d'amelioration.</li>
-        <li>Un bilan intermediaire trimestriel en presentiel, pense comme un moment d'ajustement (prevu en septembre).</li>
-        <li>Le dernier atelier du programme, entierement dedie au bilan (bilan personnel, bilan du groupe et bilan de l'accompagnement). Il fait pleinement partie du parcours et se vit aussi comme un temps de celebration.</li>
+        <li>Un temps de clôture à la fin de chaque rencontre, pour faire le point ensemble.</li>
+        <li>Un questionnaire envoyé par mail, pour recueillir votre ressenti et accueillir toutes vos idées d'amélioration.</li>
+        <li>Un bilan intermédiaire trimestriel en présentiel, pensé comme un moment d'ajustement (prévu en septembre).</li>
+        <li>Le dernier atelier du programme, entièrement dédié au bilan (bilan personnel, bilan du groupe et bilan de l'accompagnement). Il fait pleinement partie du parcours et se vit aussi comme un temps de célébration.</li>
       </ul>
-      <p>Enfin, une coordinatrice est presente lors des activites et reste votre referente pour toute question. N'hesitez jamais a vous tourner vers elle.</p>
+      <p>Enfin, une coordinatrice est présente lors des activités et reste votre référente pour toute question. N'hésitez jamais à vous tourner vers elle.</p>
       </div>
 
       <div class="prog-fade">
       <h3>Accompagnement individuel</h3>
-      <p>Chaque atelier peut devenir un declencheur, une prise de conscience, un veritable point d'inflexion. Il se peut qu'a l'issue d'une session, vous ressentiez l'envie d'aller plus loin sur un sujet qui vous touche. Si c'est le cas, GREATLY vous offre, en toute liberte, la possibilite d'un prolongement individuel, accompagne par un intervenant ou une personne de confiance referencee, selon ce dont vous avez besoin. Il vous suffit d'en faire la demande aupres de l'une des coordinatrices.</p>
-      <p>Ce prolongement est avant tout une porte ouverte, que vous etes libre de franchir ou non :</p>
-      <ul><li>Il ne fait pas partie du programme de base.</li><li>Il n'a rien d'obligatoire.</li><li>Il ne repose sur aucune incitation commerciale.</li><li>C'est une opportunite pedagogique ouverte, respectueuse du rythme et de la liberte de chacun.</li></ul>
-      <p>La mise en relation se fait par l'intermediaire de GREATLY, et les conditions financieres de l'accompagnement se definissent ensemble, lors d'un echange tripartite avec vous, en toute transparence.</p>
+      <p>Chaque atelier peut devenir un déclencheur, une prise de conscience, un véritable point d'inflexion. Il se peut qu'à l'issue d'une session, vous ressentiez l'envie d'aller plus loin sur un sujet qui vous touche. Si c'est le cas, GREATLY vous offre, en toute liberté, la possibilité d'un prolongement individuel, accompagné par un intervenant ou une personne de confiance référencée, selon ce dont vous avez besoin. Il vous suffit d'en faire la demande auprès de l'une des coordinatrices.</p>
+      <p>Ce prolongement est avant tout une porte ouverte, que vous êtes libre de franchir ou non :</p>
+      <ul><li>Il ne fait pas partie du programme de base.</li><li>Il n'a rien d'obligatoire.</li><li>Il ne repose sur aucune incitation commerciale.</li><li>C'est une opportunité pédagogique ouverte, respectueuse du rythme et de la liberté de chacun.</li></ul>
+      <p>La mise en relation se fait par l'intermédiaire de GREATLY, et les conditions financières de l'accompagnement se définissent ensemble, lors d'un échange tripartite avec vous, en toute transparence.</p>
       </div>
 
       <hr class="prog-divider">
       <div class="prog-fade">
       <div class="prog-section-icon" style="background:rgba(192,129,78,.1);color:#C0814E;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-      <h2 style="border:none;padding:0;margin-top:0;" id="infos-deontologique">Le cadre deontologique</h2>
+      <h2 style="border:none;padding:0;margin-top:0;" id="infos-deontologique">Le cadre déontologique</h2>
       </div>
       <div class="prog-fade">
-      <p>Vous accueillir, c'est creer avec vous les conditions favorables a l'epanouissement de chacun et a une belle dynamique de groupe. C'est pourquoi votre adhesion au cadre deontologique et aux valeurs de GREATLY est essentielle : c'est ce qui rend l'experience sereine et precieuse pour tous.</p>
+      <p>Vous accueillir, c'est créer avec vous les conditions favorables à l'épanouissement de chacun et à une belle dynamique de groupe. C'est pourquoi votre adhésion au cadre déontologique et aux valeurs de GREATLY est essentielle : c'est ce qui rend l'expérience sereine et précieuse pour tous.</p>
       <p><strong>Les valeurs qui nous animent :</strong></p>
-      <ul><li>Confidentialite et discretion</li><li>Ecoute</li><li>Engagement</li><li>Authenticite</li><li>Respect et bienveillance</li><li>Tolerance et ouverture d'esprit</li></ul>
-      <p><strong>Ce qui, a l'inverse, n'a pas sa place chez GREATLY :</strong></p>
-      <ul><li>Divulguer des informations partagees par un membre</li><li>Le jugement</li><li>Le parti pris ideologique et le proselytisme</li><li>Le lobbying</li><li>Tout message a visee commerciale ou promotionnelle, car nous tenons a preserver un espace de totale neutralite</li><li>Enregistrer ou prendre des photos pendant les rencontres</li></ul>
-      <p>GREATLY est un programme d'accompagnement, et non une therapie de groupe. Pour autant, la vie du groupe et l'espace que nous allons construire ensemble donneront naturellement lieu a des partages d'experiences personnelles. La qualite de l'ecoute de chacun et le respect de la confidentialite seront alors indispensables pour que chacun se sente libre de s'exprimer en confiance.</p>
-      <p>Et bien sur, tout ce que vous partagerez avec notre equipe restera strictement confidentiel.</p>
+      <ul><li>Confidentialité et discrétion</li><li>Écoute</li><li>Engagement</li><li>Authenticité</li><li>Respect et bienveillance</li><li>Tolérance et ouverture d'esprit</li></ul>
+      <p><strong>Ce qui, à l'inverse, n'a pas sa place chez GREATLY :</strong></p>
+      <ul><li>Divulguer des informations partagées par un membre</li><li>Le jugement</li><li>Le parti pris idéologique et le prosélytisme</li><li>Le lobbying</li><li>Tout message à visée commerciale ou promotionnelle, car nous tenons à préserver un espace de totale neutralité</li><li>Enregistrer ou prendre des photos pendant les rencontres</li></ul>
+      <p>GREATLY est un programme d'accompagnement, et non une thérapie de groupe. Pour autant, la vie du groupe et l'espace que nous allons construire ensemble donneront naturellement lieu à des partages d'expériences personnelles. La qualité de l'écoute de chacun et le respect de la confidentialité seront alors indispensables pour que chacun se sente libre de s'exprimer en confiance.</p>
+      <p>Et bien sûr, tout ce que vous partagerez avec notre équipe restera strictement confidentiel.</p>
       </div>
 
       <hr class="prog-divider">
@@ -915,31 +915,31 @@
 
       <div class="prog-fade">
       <h3>La GREATLY House</h3>
-      <p>Les ateliers ont lieu a la GREATLY House, au <strong>10 rue de Lambersart a Verlinghem</strong>. Le lieu est facilement accessible en voiture (vous pouvez vous garer le long de la route, en face de la grille d'entree) comme en bus (a 10 minutes de marche).</p>
-      <p>C'est un endroit qui vous est ouvert, a vous, membres, du <strong>lundi au vendredi de 13h a 18h30</strong> (hors vacances scolaires). Pour nous aider a bien gerer le lieu et a vous accueillir dans les meilleures conditions, nous vous remercions de nous prevenir de votre venue la veille avant midi.</p>
+      <p>Les ateliers ont lieu à la GREATLY House, au <strong>10 rue de Lambersart à Verlinghem</strong>. Le lieu est facilement accessible en voiture (vous pouvez vous garer le long de la route, en face de la grille d'entrée) comme en bus (à 10 minutes de marche).</p>
+      <p>C'est un endroit qui vous est ouvert, à vous, membres, du <strong>lundi au vendredi de 13h à 18h30</strong> (hors vacances scolaires). Pour nous aider à bien gérer le lieu et à vous accueillir dans les meilleures conditions, nous vous remercions de nous prévenir de votre venue la veille avant midi.</p>
       </div>
 
       <div class="prog-fade">
-      <h3>Quelle tenue pour les activites ?</h3>
-      <p>Aux ateliers, vous venez comme vous etes (pas de tenue particuliere). Pour les activites physiques, nous vous preciserons quelle tenue prendre pour etre a l'aise dans la pratique.</p>
+      <h3>Quelle tenue pour les activités ?</h3>
+      <p>Aux ateliers, vous venez comme vous êtes (pas de tenue particulière). Pour les activités physiques, nous vous préciserons quelle tenue prendre pour être à l'aise dans la pratique.</p>
       </div>
 
       <div class="prog-fade">
       <h3>Communiquer avec GREATLY</h3>
-      <p>Vous mettez a disposition de GREATLY un mail et un numero de telephone sur lequel nous pouvons vous joindre personnellement.</p>
-      <p>Pendant le programme, vous pouvez echanger avec :</p>
-      <p><strong>Programme LUCIDITE :</strong></p>
+      <p>Vous mettez à disposition de GREATLY un mail et un numéro de téléphone sur lequel nous pouvons vous joindre personnellement.</p>
+      <p>Pendant le programme, vous pouvez échanger avec :</p>
+      <p><strong>Programme LUCIDITÉ :</strong></p>
       <ul><li><strong>Julie Houriez</strong> : <a href="mailto:jh.naturopathie@gmail.com" style="color:var(--sage);">jh.naturopathie@gmail.com</a> / 06 75 70 26 78</li><li><strong>Claire Laloyaux</strong> : <a href="mailto:boosterdesens@gmail.com" style="color:var(--sage);">boosterdesens@gmail.com</a> / 06 21 93 49 02</li></ul>
-      <p><strong>Programme ENERGIE :</strong></p>
+      <p><strong>Programme ÉNERGIE :</strong></p>
       <ul><li><strong>Alexandra Brabant</strong> : <a href="mailto:alexandrabrabant@outlook.fr" style="color:var(--sage);">alexandrabrabant@outlook.fr</a> / 06 99 55 65 01</li></ul>
-      <p><strong>Prevenir de votre venue a la maison et pour toute reservation :</strong></p>
+      <p><strong>Prévenir de votre venue à la maison et pour toute réservation :</strong></p>
       <ul><li><strong>Arnaud Przybylski</strong> : arnaudprz@gmail.com / 06 51 15 63 44</li></ul>
       </div>
 
       <div class="prog-fade">
       <h3>Communiquer avec les autres membres</h3>
-      <p>Nous laissons le besoin d'echange de coordonnees a discretion des membres du groupe.</p>
-      <p>Le groupe est libre d'organiser son espace de communication numerique en fonction de ses envies et besoins (WhatsApp, rdv en dehors de la maison...). GREATLY organise les temps d'activites en presentiel mais n'a pas prevu d'espace numerique pour accueillir les echanges en dehors du programme.</p>
+      <p>Nous laissons le besoin d'échange de coordonnées à discrétion des membres du groupe.</p>
+      <p>Le groupe est libre d'organiser son espace de communication numérique en fonction de ses envies et besoins (WhatsApp, rdv en dehors de la maison...). GREATLY organise les temps d'activités en présentiel mais n'a pas prévu d'espace numérique pour accueillir les échanges en dehors du programme.</p>
       </div>
 
       <hr class="prog-divider">
@@ -950,34 +950,34 @@
 
       <div class="prog-fade">
       <h3>Votre engagement</h3>
-      <p>Dans le cadre de votre participation au programme GREATLY pionnier, vous vous engagez a :</p>
+      <p>Dans le cadre de votre participation au programme GREATLY pionnier, vous vous engagez à :</p>
       <ul>
         <li>honorer les dates des rencontres</li>
         <li>respecter les heures de rendez-vous</li>
-        <li>respecter le cadre deontologique</li>
-        <li>respecter les regles de fonctionnement de la GREATLY House</li>
-        <li>nous partager toute information utile pour votre pleine et confortable participation au programme (alimentaire, probleme de sante, besoin specifique...)</li>
-        <li>nous remettre une attestation medicale pour toute pratique sportive</li>
-        <li>participer a l'evaluation du programme (repondre aux questionnaires notamment)</li>
+        <li>respecter le cadre déontologique</li>
+        <li>respecter les règles de fonctionnement de la GREATLY House</li>
+        <li>nous partager toute information utile pour votre pleine et confortable participation au programme (alimentaire, problème de santé, besoin spécifique...)</li>
+        <li>nous remettre une attestation médicale pour toute pratique sportive</li>
+        <li>participer à l'évaluation du programme (répondre aux questionnaires notamment)</li>
       </ul>
       </div>
 
       <div class="prog-fade">
-      <h3>Propriete intellectuelle</h3>
-      <p>Tous les documents (documents contractuels comme ce document, document administratif ou pedagogique...) que nous echangeons avec nos membres restent strictement confidentiels et ne peuvent etre diffuses en dehors du cadre GREATLY.</p>
+      <h3>Propriété intellectuelle</h3>
+      <p>Tous les documents (documents contractuels comme ce document, document administratif ou pédagogique...) que nous échangeons avec nos membres restent strictement confidentiels et ne peuvent être diffusés en dehors du cadre GREATLY.</p>
       </div>
 
       <div class="prog-fade">
       <h3>Contractualisation</h3>
-      <p>Vous avez dit oui a cette aventure, et nous en sommes vraiment heureux : votre place parmi nous est desormais confirmee.</p>
-      <p>Pour la suite, nous vous adresserons simplement la facture afin que vous puissiez proceder au reglement avant le tout premier atelier LUCIDITE.</p>
-      <p>Et bien sur, vous ne serez jamais seul dans cette demarche. Pour la moindre question, le moindre doute, votre referent est la pour vous :</p>
+      <p>Vous avez dit oui à cette aventure, et nous en sommes vraiment heureux : votre place parmi nous est désormais confirmée.</p>
+      <p>Pour la suite, nous vous adresserons simplement la facture afin que vous puissiez procéder au règlement avant le tout premier atelier LUCIDITÉ.</p>
+      <p>Et bien sûr, vous ne serez jamais seul dans cette démarche. Pour la moindre question, le moindre doute, votre référent est là pour vous :</p>
       <p><strong>Arnaud Przybylski</strong> : arnaudprz@gmail.com</p>
       </div>
 
       <div class="aside-box prog-fade" style="text-align:center;margin-top:30px;">
-        <p style="font-size:1.1rem;font-weight:700;color:var(--ink);">Il ne vous reste maintenant plus qu'a profiter du programme GREATLY :)</p>
-        <p><strong>Pour toute question, n'hesitez pas a nous contacter :</strong><br>Julie Houriez : <a href="mailto:jh.naturopathie@gmail.com" style="color:var(--sage);">jh.naturopathie@gmail.com</a> / 06 75 70 26 78</p>
+        <p style="font-size:1.1rem;font-weight:700;color:var(--ink);">Il ne vous reste maintenant plus qu'à profiter du programme GREATLY :)</p>
+        <p><strong>Pour toute question, n'hésitez pas à nous contacter :</strong><br>Julie Houriez : <a href="mailto:jh.naturopathie@gmail.com" style="color:var(--sage);">jh.naturopathie@gmail.com</a> / 06 75 70 26 78</p>
       </div>
       </div><!-- /infos-main -->
     </div><!-- /infos-layout -->
@@ -986,15 +986,15 @@
 
   <div id="progPage">
     <div style="max-width:960px;margin:0 auto;padding:32px 22px 80px;">
-      <button class="prog-back" onclick="closeProgramme()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour aux reservations</button>
+      <button class="prog-back" onclick="closeProgramme()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour aux réservations</button>
     <div class="prog-layout">
       <nav class="prog-sidebar">
         <div class="sidebar-title">Sommaire</div>
         <a href="#prog-conviction">Notre conviction</a>
-        <a href="#prog-experience">L'experience GREATLY</a>
-        <a href="#prog-lucidite">Parcours Lucidite</a>
-        <a href="#prog-energie">Parcours Energie</a>
-        <a href="#prog-mois">Detail mois par mois</a>
+        <a href="#prog-experience">L'expérience GREATLY</a>
+        <a href="#prog-lucidite">Parcours Lucidité</a>
+        <a href="#prog-energie">Parcours Énergie</a>
+        <a href="#prog-mois">Détail mois par mois</a>
       </nav>
       <div class="prog-main">
 
@@ -1010,68 +1010,68 @@
         </div>
         <h1>Le programme GREATLY</h1>
         <p style="font-size:.88rem;color:var(--sage);font-weight:600;margin-bottom:10px;">Responsables du programme</p>
-        <p><strong>GREATLY est un programme d'accompagnement annuel</strong> qui cultive et renforce durablement votre energie et votre lucidite.</p>
+        <p><strong>GREATLY est un programme d'accompagnement annuel</strong> qui cultive et renforce durablement votre énergie et votre lucidité.</p>
       </div>
 
       <div class="prog-fade">
-      <p>Il s'adresse aux dirigeants, cadres et talents cles des entreprises, aux solopreneurs et aux professions liberales qui souhaitent s'inscrire dans une dynamique d'evolution, fait de prises de conscience et de bienfaits concrets et durables.</p>
-      <p>En accompagnant leurs dirigeants et leurs cadres, nous aidons aussi les entreprises a gagner en performance et a renforcer l'engagement de leurs talents sur la duree.</p>
+      <p>Il s'adresse aux dirigeants, cadres et talents clés des entreprises, aux solopreneurs et aux professions libérales qui souhaitent s'inscrire dans une dynamique d'évolution, fait de prises de conscience et de bienfaits concrets et durables.</p>
+      <p>En accompagnant leurs dirigeants et leurs cadres, nous aidons aussi les entreprises à gagner en performance et à renforcer l'engagement de leurs talents sur la durée.</p>
       </div>
       <hr class="prog-divider">
       <div class="prog-fade">
       <div class="prog-section-icon" style="background:rgba(107,125,92,.1);color:var(--sage);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
       <h2 style="border:none;padding:0;margin-top:0;" id="prog-conviction">Notre conviction</h2>
       </div>
-      <blockquote>Energie, lucidite et intelligence collective sont indissociables pour avancer loin et longtemps.</blockquote>
-      <p>Notre programme cultive ces trois dimensions a la fois :</p>
-      <p><strong>Une energie durable</strong>, qui nourrit votre engagement et soutient votre elan dans la duree.</p>
-      <p><strong>Une lucidite cultivee</strong>, qui eclaire vos decisions et affine votre regard au fil du temps.</p>
-      <p><strong>La force d'un collectif</strong>, qui demultiplie vos idees et fait emerger les meilleures reponses.</p>
-      <p>C'est la <strong>regularite</strong> qui transforme l'essai. Semaine apres semaine, mois apres mois, sur toute une annee, les prises de conscience s'ancrent, les bienfaits s'installent, et les changements deviennent vraiment votres.</p>
+      <blockquote>Énergie, lucidité et intelligence collective sont indissociables pour avancer loin et longtemps.</blockquote>
+      <p>Notre programme cultive ces trois dimensions à la fois :</p>
+      <p><strong>Une énergie durable</strong>, qui nourrit votre engagement et soutient votre élan dans la durée.</p>
+      <p><strong>Une lucidité cultivée</strong>, qui éclaire vos décisions et affine votre regard au fil du temps.</p>
+      <p><strong>La force d'un collectif</strong>, qui démultiplie vos idées et fait émerger les meilleures réponses.</p>
+      <p>C'est la <strong>régularité</strong> qui transforme l'essai. Semaine après semaine, mois après mois, sur toute une année, les prises de conscience s'ancrent, les bienfaits s'installent, et les changements deviennent vraiment vôtres.</p>
       <div class="aside-box"><p>C'est ainsi que se construit une <strong>performance durable</strong>, en accord avec votre corps, votre esprit et vos relations.</p></div>
       <hr class="prog-divider">
       <div class="prog-fade">
       <div class="prog-section-icon" style="background:rgba(192,129,78,.1);color:#C0814E;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div>
-      <h2 style="border:none;padding:0;margin-top:0;" id="prog-experience">L'experience GREATLY</h2>
+      <h2 style="border:none;padding:0;margin-top:0;" id="prog-experience">L'expérience GREATLY</h2>
       </div>
-      <p>Concu autour de l'alignement <strong>tete, coeur, corps</strong>, le programme se vit en presentiel, en groupe ferme d'une dizaine de personnes qui chemine ensemble toute l'annee.</p>
-      <p>Le groupe est <strong>mixte, paritaire et intergenerationnel</strong>, pour preserver la richesse des regards. On s'y autorise a parler vrai, a se laisser inspirer, a s'enrichir d'expertises et de parcours differents des siens.</p>
-      <p>Les rencontres ont lieu a la <strong>Greatly House</strong>, notre lieu ressource niche dans la campagne lilloise, en <strong>deconnexion numerique</strong>. La maison vous est aussi ouverte chaque apres-midi, pour vous y poser seul ou avec les autres membres.</p>
-      <div class="aside-box"><p>Le programme forme un tout indissociable. Tout au long des six mois, vous vivez en parallele <strong>deux parcours complementaires, entierement compris dans votre accompagnement</strong> : la <strong>Lucidite</strong>, un atelier reflexif chaque mois, et l'<strong>Energie</strong>, deux activites encadrees chaque semaine. Un septieme rendez-vous, en janvier 2027, cloture le parcours par un temps de bilan partage.</p></div>
+      <p>Conçu autour de l'alignement <strong>tête, cœur, corps</strong>, le programme se vit en présentiel, en groupe fermé d'une dizaine de personnes qui chemine ensemble toute l'année.</p>
+      <p>Le groupe est <strong>mixte, paritaire et intergénérationnel</strong>, pour préserver la richesse des regards. On s'y autorise à parler vrai, à se laisser inspirer, à s'enrichir d'expertises et de parcours différents des siens.</p>
+      <p>Les rencontres ont lieu à la <strong>Greatly House</strong>, notre lieu ressource niché dans la campagne lilloise, en <strong>déconnexion numérique</strong>. La maison vous est aussi ouverte chaque après-midi, pour vous y poser seul ou avec les autres membres.</p>
+      <div class="aside-box"><p>Le programme forme un tout indissociable. Tout au long des six mois, vous vivez en parallèle <strong>deux parcours complémentaires, entièrement compris dans votre accompagnement</strong> : la <strong>Lucidité</strong>, un atelier réflexif chaque mois, et l'<strong>Énergie</strong>, deux activités encadrées chaque semaine. Un septième rendez-vous, en janvier 2027, clôture le parcours par un temps de bilan partagé.</p></div>
       <hr class="prog-divider">
       <div class="prog-fade">
       <div class="prog-section-icon" style="background:rgba(79,124,130,.1);color:#4F7C82;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></div>
-      <h2 style="border:none;padding:0;margin-top:0;" id="prog-lucidite">Le parcours Lucidite</h2>
+      <h2 style="border:none;padding:0;margin-top:0;" id="prog-lucidite">Le parcours Lucidité</h2>
       </div>
-      <div class="aside-box"><h3>Objectifs</h3><p>Prendre du recul, clarifier ses intentions, mettre de la conscience dans l'action et gagner en discernement pour decider avec justesse.</p></div>
-      <h3>Comment cela se deroule</h3>
-      <p>Une fois par mois, vous retrouvez votre groupe a la Greatly House autour d'un brunch convivial a 11h30, suivi d'un atelier reflexif de 12h30 a 14h, anime par un intervenant expert.</p>
-      <p>Entre deux ateliers, vous experimentez une pratique ou menez une experience concrete pour ancrer ce qui a ete partage. Au fil des mois, vous construisez une lecture plus fine de vous-meme, de vos besoins et de vos leviers.</p>
+      <div class="aside-box"><h3>Objectifs</h3><p>Prendre du recul, clarifier ses intentions, mettre de la conscience dans l'action et gagner en discernement pour décider avec justesse.</p></div>
+      <h3>Comment cela se déroule</h3>
+      <p>Une fois par mois, vous retrouvez votre groupe à la Greatly House autour d'un brunch convivial à 11h30, suivi d'un atelier réflexif de 12h30 à 14h, animé par un intervenant expert.</p>
+      <p>Entre deux ateliers, vous expérimentez une pratique ou menez une expérience concrète pour ancrer ce qui a été partagé. Au fil des mois, vous construisez une lecture plus fine de vous-même, de vos besoins et de vos leviers.</p>
       <hr class="prog-divider">
       <div class="prog-fade">
       <div class="prog-section-icon" style="background:rgba(107,125,92,.1);color:var(--sage);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
-      <h2 style="border:none;padding:0;margin-top:0;" id="prog-energie">Le parcours Energie</h2>
+      <h2 style="border:none;padding:0;margin-top:0;" id="prog-energie">Le parcours Énergie</h2>
       </div>
-      <div class="aside-box"><h3>Objectifs</h3><p>Reconnecter au corps, apaiser le mental, entretenir une vitalite durable et retrouver le plaisir de bouger a son rythme.</p></div>
-      <h3>Comment cela se deroule</h3>
-      <p>Chaque semaine, deux activites complementaires de 2h chacune vous sont proposees sur la metropole lilloise :</p>
+      <div class="aside-box"><h3>Objectifs</h3><p>Reconnecter au corps, apaiser le mental, entretenir une vitalité durable et retrouver le plaisir de bouger à son rythme.</p></div>
+      <h3>Comment cela se déroule</h3>
+      <p>Chaque semaine, deux activités complémentaires de 2h chacune vous sont proposées sur la métropole lilloise :</p>
       <ul>
-        <li><strong>Le mardi entre 10h et 14h, une pratique douce</strong> (yoga, tai-chi, qi gong, sophrologie, marche meditative...) pour relacher les tensions et apaiser les pensees.</li>
-        <li><strong>Le vendredi entre 9h et 13h, une activite sportive dynamique</strong> (padel, escalade, escrime, boxe, circuit training, basket...) pour remettre le corps en mouvement.</li>
+        <li><strong>Le mardi entre 10h et 14h, une pratique douce</strong> (yoga, tai-chi, qi gong, sophrologie, marche méditative...) pour relâcher les tensions et apaiser les pensées.</li>
+        <li><strong>Le vendredi entre 9h et 13h, une activité sportive dynamique</strong> (padel, escalade, escrime, boxe, circuit training, basket...) pour remettre le corps en mouvement.</li>
       </ul>
-      <p>Soit jusqu'a <strong>quatre heures d'activite physique encadree par semaine</strong>, a pratiquer selon votre rythme.</p>
+      <p>Soit jusqu'à <strong>quatre heures d'activité physique encadrée par semaine</strong>, à pratiquer selon votre rythme.</p>
       <hr class="prog-divider">
       <div class="prog-fade">
       <div class="prog-section-icon" style="background:rgba(192,129,78,.1);color:#C0814E;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
-      <h2 style="border:none;padding:0;margin-top:0;" id="prog-mois">Le detail mois par mois</h2>
+      <h2 style="border:none;padding:0;margin-top:0;" id="prog-mois">Le détail mois par mois</h2>
       </div>
-      <div class="prog-month prog-fade"><h3>Mois 1, Juin 2026 : Le cadre</h3><p><strong>Atelier Lucidite du jeudi 11 juin, a la Greatly House, de 11h30 a 14h</strong></p><div class="pm-theme"><em>Penser le cadre pour soutenir l'engagement</em></div><p>Premier rendez-vous du groupe. On apprend a se connaitre et l'on pose ensemble les fondations d'un espace secure et confidentiel.</p><p><strong>Benefices retires :</strong> savoir formuler ses besoins et poser un cadre pour soi, accueillir celui de l'autre, et s'engager pleinement dans le collectif.</p><div class="pm-energy"><span class="pm-tag">Mardi : Yoga decouverte</span><span class="pm-tag">Vendredi : Padel</span></div></div>
-      <div class="prog-month prog-fade"><h3>Mois 2, Juillet 2026 : Les decisions</h3><p><strong>Atelier Lucidite du jeudi 2 juillet, a la Greatly House, de 11h30 a 14h</strong></p><div class="pm-theme"><em>Comment transformer le silence en veritable avantage decisionnel ?</em></div><p>Un mois pour rehabiliter le silence et l'ecoute du corps comme ressources de discernement.</p><p><strong>Benefice retire :</strong> decouvrir et enrichir son mode naturel de prise de decision.</p><div class="pm-energy"><span class="pm-tag">Pas d'activite pendant les vacances scolaires</span></div></div>
-      <div class="prog-month prog-fade"><h3>Mois 3, Septembre 2026 : L'energie</h3><p><strong>Atelier Lucidite du jeudi 17 septembre, a la Greatly House, de 11h30 a 14h</strong></p><div class="pm-theme"><em>Et si l'energie durable devenait votre nouveau standard de performance ?</em></div><p>Comment cultiver une energie qui se renouvelle plutot qu'une energie qui s'epuise ?</p><p><strong>Benefices retires :</strong> identifier les leviers physiologiques de l'energie et reperer ses signaux faibles.</p><div class="pm-energy"><span class="pm-tag">Mardi : Tai-chi decouverte</span><span class="pm-tag">Vendredi : Escrime</span></div></div>
-      <div class="prog-month prog-fade"><h3>Mois 4, Octobre 2026 : Les emotions</h3><p><strong>Atelier Lucidite du jeudi 8 octobre, a la Greatly House, de 11h30 a 14h</strong></p><div class="pm-theme"><em>Leadership : et si vos emotions devenaient votre meilleur atout strategique ?</em></div><p>Les emotions sont des informations precieuses au service de vos decisions et de la qualite de vos relations.</p><p><strong>Benefice retire :</strong> reconnaitre et comprendre ses emotions pour agir de maniere plus juste et plus efficace.</p><div class="pm-energy"><span class="pm-tag">Mardi : Tai-chi renforcement</span><span class="pm-tag">Vendredi : Boxe</span></div></div>
-      <div class="prog-month prog-fade"><h3>Mois 5, Novembre 2026 : Le temps</h3><p><strong>Atelier Lucidite du jeudi 12 novembre, a la Greatly House, de 11h30 a 14h</strong></p><div class="pm-theme"><em>Et si reprendre le controle de votre temps etait votre meilleur investissement ?</em></div><p>Notre rapport au temps faconne notre rapport au monde. Un temps pour clarifier ses priorites et choisir ce a quoi l'on dit oui en pleine conscience.</p><p><strong>Benefice retire :</strong> une lecture plus juste de sa relation au temps, pour reinvestir son energie la ou elle compte vraiment.</p><div class="pm-energy"><span class="pm-tag">Mardi : Qi gong decouverte</span><span class="pm-tag">Vendredi : Circuit Training</span></div></div>
-      <div class="prog-month prog-fade"><h3>Mois 6, Decembre 2026 : Le collectif</h3><p><strong>Atelier Lucidite du jeudi 10 decembre, a la Greatly House, de 11h30 a 14h</strong></p><div class="pm-theme"><em>Comment faire du collectif votre meilleur levier de croissance ?</em></div><p>On cloture le cycle thematique par la qualite du lien et la puissance du collectif pour decider et avancer.</p><p><strong>Benefices retires :</strong> sortir de l'isolement decisionnel et cultiver des relations qui nourrissent durablement vos choix.</p><div class="pm-energy"><span class="pm-tag">Mardi : Qi gong perfectionnement</span><span class="pm-tag">Vendredi : Basket</span></div></div>
-      <div class="prog-month prog-fade"><h3>Bilan, jeudi 14 janvier 2027</h3><p><strong>A la Greatly House, de 11h30 a 14h</strong></p><div class="pm-theme"><em>Six mois d'evolution : regards, retours et perspectives</em></div><p>Une rencontre dediee a mesurer le chemin parcouru, partager les evolutions ressenties et dessiner les prolongements possibles.</p><p><strong>Benefice retire :</strong> un retour d'experience structure qui consolide les acquis et oriente la suite du parcours.</p></div>
+      <div class="prog-month prog-fade"><h3>Mois 1, Juin 2026 : Le cadre</h3><p><strong>Atelier Lucidité du jeudi 11 juin, à la Greatly House, de 11h30 à 14h</strong></p><div class="pm-theme"><em>Penser le cadre pour soutenir l'engagement</em></div><p>Premier rendez-vous du groupe. On apprend à se connaître et l'on pose ensemble les fondations d'un espace sécurisé et confidentiel.</p><p><strong>Bénéfices retirés :</strong> savoir formuler ses besoins et poser un cadre pour soi, accueillir celui de l'autre, et s'engager pleinement dans le collectif.</p><div class="pm-energy"><span class="pm-tag">Mardi : Yoga découverte</span><span class="pm-tag">Vendredi : Padel</span></div></div>
+      <div class="prog-month prog-fade"><h3>Mois 2, Juillet 2026 : Les décisions</h3><p><strong>Atelier Lucidité du jeudi 2 juillet, à la Greatly House, de 11h30 à 14h</strong></p><div class="pm-theme"><em>Comment transformer le silence en véritable avantage décisionnel ?</em></div><p>Un mois pour réhabiliter le silence et l'écoute du corps comme ressources de discernement.</p><p><strong>Bénéfice retiré :</strong> découvrir et enrichir son mode naturel de prise de décision.</p><div class="pm-energy"><span class="pm-tag">Pas d'activité pendant les vacances scolaires</span></div></div>
+      <div class="prog-month prog-fade"><h3>Mois 3, Septembre 2026 : L'énergie</h3><p><strong>Atelier Lucidité du jeudi 17 septembre, à la Greatly House, de 11h30 à 14h</strong></p><div class="pm-theme"><em>Et si l'énergie durable devenait votre nouveau standard de performance ?</em></div><p>Comment cultiver une énergie qui se renouvelle plutôt qu'une énergie qui s'épuise ?</p><p><strong>Bénéfices retirés :</strong> identifier les leviers physiologiques de l'énergie et repérer ses signaux faibles.</p><div class="pm-energy"><span class="pm-tag">Mardi : Tai-chi découverte</span><span class="pm-tag">Vendredi : Escrime</span></div></div>
+      <div class="prog-month prog-fade"><h3>Mois 4, Octobre 2026 : Les émotions</h3><p><strong>Atelier Lucidité du jeudi 8 octobre, à la Greatly House, de 11h30 à 14h</strong></p><div class="pm-theme"><em>Leadership : et si vos émotions devenaient votre meilleur atout stratégique ?</em></div><p>Les émotions sont des informations précieuses au service de vos décisions et de la qualité de vos relations.</p><p><strong>Bénéfice retiré :</strong> reconnaître et comprendre ses émotions pour agir de manière plus juste et plus efficace.</p><div class="pm-energy"><span class="pm-tag">Mardi : Tai-chi renforcement</span><span class="pm-tag">Vendredi : Boxe</span></div></div>
+      <div class="prog-month prog-fade"><h3>Mois 5, Novembre 2026 : Le temps</h3><p><strong>Atelier Lucidité du jeudi 12 novembre, à la Greatly House, de 11h30 à 14h</strong></p><div class="pm-theme"><em>Et si reprendre le contrôle de votre temps était votre meilleur investissement ?</em></div><p>Notre rapport au temps façonne notre rapport au monde. Un temps pour clarifier ses priorités et choisir ce à quoi l'on dit oui en pleine conscience.</p><p><strong>Bénéfice retiré :</strong> une lecture plus juste de sa relation au temps, pour réinvestir son énergie là où elle compte vraiment.</p><div class="pm-energy"><span class="pm-tag">Mardi : Qi gong découverte</span><span class="pm-tag">Vendredi : Circuit Training</span></div></div>
+      <div class="prog-month prog-fade"><h3>Mois 6, Décembre 2026 : Le collectif</h3><p><strong>Atelier Lucidité du jeudi 10 décembre, à la Greatly House, de 11h30 à 14h</strong></p><div class="pm-theme"><em>Comment faire du collectif votre meilleur levier de croissance ?</em></div><p>On clôture le cycle thématique par la qualité du lien et la puissance du collectif pour décider et avancer.</p><p><strong>Bénéfices retirés :</strong> sortir de l'isolement décisionnel et cultiver des relations qui nourrissent durablement vos choix.</p><div class="pm-energy"><span class="pm-tag">Mardi : Qi gong perfectionnement</span><span class="pm-tag">Vendredi : Basket</span></div></div>
+      <div class="prog-month prog-fade"><h3>Bilan, jeudi 14 janvier 2027</h3><p><strong>À la Greatly House, de 11h30 à 14h</strong></p><div class="pm-theme"><em>Six mois d'évolution : regards, retours et perspectives</em></div><p>Une rencontre dédiée à mesurer le chemin parcouru, partager les évolutions ressenties et dessiner les prolongements possibles.</p><p><strong>Bénéfice retiré :</strong> un retour d'expérience structuré qui consolide les acquis et oriente la suite du parcours.</p></div>
 
       </div><!-- /prog-main -->
     </div><!-- /prog-layout -->
@@ -1106,17 +1106,17 @@
       </a>
     </div>
     <div class="menu-section">
-      <div class="menu-section-title">Reserver</div>
+      <div class="menu-section-title">Réserver</div>
       <a class="menu-item" onclick="toggleMenu();showReservation()">
         <span class="mi-icon" style="background:rgba(107,125,92,.12);color:var(--sage);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
-        <div><div class="mi-text">Reservations</div><div class="mi-sub">Salon, dojo ou simple bonjour</div></div>
+        <div><div class="mi-text">Réservations</div><div class="mi-sub">Salon, dojo ou simple bonjour</div></div>
       </a>
     </div>
     <div class="menu-section">
-      <div class="menu-section-title">Decouvrir</div>
+      <div class="menu-section-title">Découvrir</div>
       <a class="menu-item" onclick="toggleMenu();openProgramme()">
         <span class="mi-icon" style="background:#E8D9C5;color:#6B5138;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
-        <div><div class="mi-text">Le programme</div><div class="mi-sub">Parcours Lucidite & Energie</div></div>
+        <div><div class="mi-text">Le programme</div><div class="mi-sub">Parcours Lucidité & Énergie</div></div>
       </a>
       <a class="menu-item" onclick="toggleMenu();openInfos()">
         <span class="mi-icon" style="background:rgba(79,124,130,.1);color:#4F7C82;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span>
@@ -1592,11 +1592,11 @@
 
   function openMaisonModal(dateStr,label){
     document.getElementById('modalCard').innerHTML=`
-      <h3>A la maison</h3>
+      <h3>À la maison</h3>
       <div class="when">${label} · 13:00 - 18:30</div>
-      <div class="field"><label>Ton prenom</label><input type="text" id="bkName" placeholder="Prenom"></div>
+      <div class="field"><label>Ton prénom</label><input type="text" id="bkName" placeholder="Prénom"></div>
       <div class="field"><label>Ton email</label><input type="email" id="bkMail" placeholder="prenom@email.com" inputmode="email"></div>
-      <div class="field"><label>Ton telephone</label><input type="tel" id="bkTel" placeholder="06 12 34 56 78" inputmode="tel"></div>
+      <div class="field"><label>Ton téléphone</label><input type="tel" id="bkTel" placeholder="06 12 34 56 78" inputmode="tel"></div>
       <div class="form-err" id="bkErr"></div>
       <p class="rgpd">Vos donnees servent uniquement a confirmer votre passage. Aucun creneau horaire n'est bloque.</p>
       <div class="modal-actions">
