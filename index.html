@@ -7,7 +7,7 @@
 <!-- Auto-refresh : recharge la page si une nouvelle version est deployee (contre le cache Safari/iOS) -->
 <script>
 (function(){
-  var APP_VERSION='2026-06-18-4';
+  var APP_VERSION='2026-06-18-5';
   try{
     fetch('version.txt?_='+Date.now(),{cache:'no-store'})
       .then(function(r){return r.ok?r.text():null;})
@@ -88,7 +88,7 @@
   .c-row .cr-body{flex:1;min-width:0}
   .c-row .cr-title{font-size:.95rem;font-weight:700;margin-bottom:2px}
   .c-row .cr-sub{font-size:.82rem;color:var(--warm-grey);line-height:1.35}
-  .c-row .cr-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:2px}
+  .c-row .cr-head{display:flex;flex-direction:column;align-items:flex-start;gap:7px;margin-bottom:7px}
   .c-row .cr-badge{font-size:.7rem;font-weight:700;padding:3px 9px;border-radius:999px;white-space:nowrap;flex:0 0 auto;letter-spacing:.2px}
   .c-row .cr-chev{color:var(--sage);flex:0 0 auto;font-size:1.3rem;font-weight:300;margin-left:4px}
 
