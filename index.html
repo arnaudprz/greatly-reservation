@@ -7,7 +7,7 @@
 <!-- Auto-refresh : recharge la page si une nouvelle version est deployee (contre le cache Safari/iOS) -->
 <script>
 (function(){
-  var APP_VERSION='2026-06-18-5';
+  var APP_VERSION='2026-09-07-1';
   try{
     fetch('version.txt?_='+Date.now(),{cache:'no-store'})
       .then(function(r){return r.ok?r.text():null;})
@@ -44,7 +44,7 @@
     --accent:#6B7D5C; --accent-pale:#CDD8BE; --accent-dark:#4f5e42;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{overflow-x:hidden;max-width:100%}
+  html,body{overflow-x:clip;max-width:100%}
   html{-webkit-text-size-adjust:100%}
   body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
   svg{display:block}
@@ -80,17 +80,42 @@
   .welcome-eyebrow{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--sage);margin-bottom:8px}
   .welcome-head h1{font-family:'Playfair Display',Georgia,serif;font-weight:400;font-size:1.55rem;line-height:1.35;margin-bottom:8px}
   .welcome-head p{font-size:.9rem;color:var(--warm-grey);line-height:1.55}
-  .c-list{display:flex;flex-direction:column;gap:10px}
-  .c-row{display:flex;align-items:center;gap:14px;background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:15px 16px;cursor:pointer;transition:all .15s;text-decoration:none;color:var(--ink)}
+  .c-list{display:flex;flex-direction:column;gap:8px}
+  .c-row{display:flex;align-items:center;gap:11px;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:11px 13px;cursor:pointer;transition:all .15s;text-decoration:none;color:var(--ink)}
   .c-row:hover{border-color:var(--sage);box-shadow:0 4px 16px rgba(107,125,92,.1)}
-  .c-row .cr-icon{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;flex:0 0 46px}
-  .c-row .cr-icon svg{width:22px;height:22px}
+  .c-row .cr-icon{width:36px;height:36px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex:0 0 36px;font-size:1rem!important}
+  .c-row .cr-icon svg{width:17px;height:17px}
   .c-row .cr-body{flex:1;min-width:0}
-  .c-row .cr-title{font-size:.95rem;font-weight:700;margin-bottom:2px}
-  .c-row .cr-sub{font-size:.82rem;color:var(--warm-grey);line-height:1.35}
-  .c-row .cr-head{display:flex;flex-direction:column;align-items:flex-start;gap:7px;margin-bottom:7px}
-  .c-row .cr-badge{font-size:.7rem;font-weight:700;padding:3px 9px;border-radius:999px;white-space:nowrap;flex:0 0 auto;letter-spacing:.2px}
-  .c-row .cr-chev{color:var(--sage);flex:0 0 auto;font-size:1.3rem;font-weight:300;margin-left:4px}
+  .c-row .cr-title{font-size:.86rem;font-weight:700}
+  .c-row .cr-sub{font-size:.74rem;color:var(--warm-grey);line-height:1.35}
+  .c-row .cr-head{display:flex;flex-direction:row;align-items:center;flex-wrap:wrap;gap:7px;margin-bottom:2px}
+  .c-row .cr-badge{font-size:.63rem;font-weight:700;padding:2px 7px;border-radius:999px;white-space:nowrap;flex:0 0 auto;letter-spacing:.2px}
+  .c-row .cr-chev{color:var(--sage);flex:0 0 auto;font-size:1.15rem;font-weight:300;margin-left:2px}
+
+  /* On retire les badges decoratifs (On vous ecoute, Aucun souci...) partout :
+     seul le badge "Nouveau" de la carte mise en avant reste */
+  .c-row .cr-badge,.menu-item .mi-badge{display:none}
+  .c-row.hero .cr-badge,.menu-item.hero .mi-badge{display:inline-block}
+  .c-row .cr-head{margin-bottom:1px}
+
+  /* Carte mise en avant : le programme de rentree */
+  .c-row.hero{align-items:flex-start;gap:16px;padding:20px 18px;border-radius:20px;border-width:2px;border-color:#C0814E;background:linear-gradient(135deg,rgba(192,129,78,.14) 0%,rgba(192,129,78,.05) 100%);box-shadow:0 6px 20px rgba(192,129,78,.13);margin-bottom:6px}
+  .c-row.hero:hover{border-color:#a86c3d;box-shadow:0 10px 28px rgba(192,129,78,.22)}
+  .c-row.hero .cr-icon{width:54px;height:54px;flex:0 0 54px;border-radius:16px}
+  .c-row.hero .cr-icon svg{width:26px;height:26px}
+  .c-row.hero .cr-head{margin-bottom:6px}
+  .c-row.hero .cr-title{font-family:'Playfair Display',Georgia,serif;font-weight:400;font-size:1.3rem;line-height:1.2}
+  .c-row.hero .cr-badge{font-size:.66rem}
+  .c-row.hero .cr-sub{font-size:.86rem;line-height:1.5;color:#6B5138}
+  .c-row.hero .cr-chev{font-size:1.7rem;color:#C0814E;align-self:center}
+  .hero-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
+  .hero-tags span{font-size:.7rem;font-weight:600;color:#8f6035;background:rgba(255,255,255,.75);border:1px solid rgba(192,129,78,.3);padding:3px 9px;border-radius:999px}
+  @media(max-width:600px){
+    .c-row.hero{padding:16px 14px;gap:12px}
+    .c-row.hero .cr-icon{width:44px;height:44px;flex:0 0 44px}
+    .c-row.hero .cr-title{font-size:1.12rem}
+    .c-row.hero .cr-sub{font-size:.8rem}
+  }
 
   .step{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:1.3px;color:var(--occupied-ink);margin:30px 0 14px;display:flex;align-items:center;gap:10px}
   .step .n{width:22px;height:22px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.72rem;flex:0 0 auto}
@@ -207,15 +232,26 @@
   @keyframes slideInLeft{from{transform:translateX(-100%)}to{transform:translateX(0)}}
   .menu-section{margin-bottom:24px}
   .menu-section-title{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--occupied-ink);margin-bottom:10px}
-  .menu-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;background:#fff;border:1px solid var(--line);text-decoration:none;color:var(--ink);margin-bottom:8px;transition:all .12s;cursor:pointer}
+  .menu-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:13px;background:#fff;border:1px solid var(--line);text-decoration:none;color:var(--ink);margin-bottom:6px;transition:all .12s;cursor:pointer}
   .menu-item:hover{box-shadow:0 4px 12px rgba(0,0,0,.06);transform:translateY(-1px)}
-  .menu-item .mi-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
-  .menu-item .mi-icon svg{width:18px;height:18px}
-  .menu-item .mi-text{font-size:.88rem;font-weight:600}
-  .menu-item .mi-sub{font-size:.76rem;color:var(--warm-grey);font-weight:400}
+  .menu-item .mi-icon{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;font-size:.9rem}
+  .menu-item .mi-icon svg{width:15px;height:15px}
+  .menu-item .mi-text{font-size:.82rem;font-weight:600;line-height:1.25}
+  .menu-item .mi-sub{font-size:.71rem;color:var(--warm-grey);font-weight:400;line-height:1.3}
   .menu-item>div{flex:1;min-width:0}
-  .menu-item .mi-badge{flex:0 0 auto;align-self:flex-start;margin-top:1px;font-size:.66rem;font-weight:700;padding:4px 10px;border-radius:999px;white-space:nowrap;letter-spacing:.2px}
+  .menu-item .mi-badge{flex:0 0 auto;align-self:flex-start;margin-top:1px;font-size:.61rem;font-weight:700;padding:3px 8px;border-radius:999px;white-space:nowrap;letter-spacing:.2px}
   .menu-item.featured{background:linear-gradient(135deg,rgba(107,125,92,.13),rgba(107,125,92,.04));border:1.5px solid rgba(107,125,92,.38)}
+
+  /* Menu : entree mise en avant */
+  .menu-item.hero{align-items:flex-start;gap:13px;padding:15px 14px;border-radius:18px;border:2px solid #C0814E;background:linear-gradient(135deg,rgba(192,129,78,.16) 0%,rgba(192,129,78,.05) 100%);box-shadow:0 5px 16px rgba(192,129,78,.15);margin-bottom:4px}
+  .menu-item.hero .mi-icon{width:44px;height:44px;border-radius:13px}
+  .menu-item.hero .mi-icon svg{width:22px;height:22px}
+  .menu-item.hero .mi-head{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:3px}
+  .menu-item.hero .mi-text{font-family:'Playfair Display',Georgia,serif;font-weight:400;font-size:1.08rem}
+  .menu-item.hero .mi-badge{align-self:center;margin-top:0;font-size:.62rem}
+  .menu-item.hero .mi-sub{font-size:.78rem;color:#6B5138}
+  .menu-item.hero .hero-tags{margin-top:9px}
+  .menu-item.hero .hero-tags span{font-size:.66rem;padding:2px 8px}
 
   /* Contact panels */
   .contact-panel{position:fixed;inset:0;z-index:85;display:none;align-items:center;justify-content:center;padding:20px}
@@ -259,9 +295,9 @@
   #infosPage.open{display:block}
   .infos-layout{position:relative}
   .infos-sidebar{display:none}
-  @media(min-width:1100px){
-    .infos-layout{display:flex;gap:0}
-    .infos-sidebar{display:block;position:sticky;top:72px;width:200px;flex:0 0 200px;height:fit-content;padding:16px 0;margin-right:20px}
+  @media(min-width:980px){
+    .infos-layout{display:flex;gap:0;align-items:flex-start}
+    .infos-sidebar{display:block;position:sticky;top:80px;align-self:flex-start;width:200px;flex:0 0 200px;height:fit-content;max-height:calc(100vh - 100px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;padding:16px 0;margin-right:20px}
     .infos-sidebar a{display:block;font-size:.76rem;color:var(--warm-grey);text-decoration:none;padding:6px 12px;border-left:2px solid transparent;border-radius:0 8px 8px 0;transition:all .12s;line-height:1.3;margin-bottom:2px}
     .infos-sidebar a:hover{color:var(--sage);background:rgba(107,125,92,.05)}
     .infos-sidebar a.active{color:var(--sage);border-left-color:var(--sage);font-weight:600;background:rgba(107,125,92,.06)}
@@ -271,6 +307,73 @@
   }
 
   /* Pages activités */
+  .act-soon{background:var(--cream);border-radius:18px;padding:26px 24px;text-align:center;margin-bottom:20px}
+  .act-soon-badge{display:inline-block;font-size:.66rem;font-weight:800;text-transform:uppercase;letter-spacing:.8px;padding:5px 11px;border-radius:999px;background:#C0814E;color:#fff;margin-bottom:12px}
+  .act-soon h2{font-family:'Playfair Display',Georgia,serif;font-weight:400;font-size:1.2rem;margin:0 0 10px;color:var(--ink)}
+  .act-soon p{font-size:.9rem;color:var(--warm-grey);line-height:1.7;margin:0}
+  .absence-line{text-align:center;font-size:.84rem;color:var(--warm-grey);margin:16px 0 0;line-height:1.6}
+  .absence-line button{background:none;border:none;padding:0;font-family:inherit;font-size:inherit;font-weight:700;color:var(--sage-dark);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+  .absence-line button:hover{color:var(--sage)}
+  .rentree-band{text-align:center;background:linear-gradient(135deg,rgba(192,129,78,.12) 0%,rgba(192,129,78,.04) 100%);border-radius:20px;padding:22px 20px;margin-bottom:26px}
+  .rentree-band .rb-badge{display:inline-block;font-size:.63rem;font-weight:800;text-transform:uppercase;letter-spacing:.8px;padding:4px 10px;border-radius:999px;background:#C0814E;color:#fff;margin-bottom:10px}
+  .rentree-band .rb-title{font-family:'Playfair Display',Georgia,serif;font-weight:400;font-size:1.7rem;margin:0 0 4px;color:var(--ink)}
+  .rentree-band .cta-dates{display:inline-flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:11px;margin-top:18px;padding:13px 20px;border-radius:999px;background:#C0814E;color:#fff;font-weight:700;font-size:.92rem;line-height:1.25;text-decoration:none;box-shadow:0 6px 18px rgba(192,129,78,.28);transition:all .12s}
+  .rentree-band .cta-new{font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.7px;padding:3px 8px;border-radius:999px;background:#fff;color:#8f6035}
+  .rentree-band .cta-second{display:inline-block;margin-top:11px;font-size:.8rem;font-weight:600;color:#8f6035;text-decoration:underline;text-underline-offset:3px}
+  .agenda-allbtn{display:inline-block;margin-top:10px;padding:7px 14px;border-radius:999px;background:rgba(192,129,78,.13);border:1px solid rgba(192,129,78,.35);color:#8f6035;font-size:.79rem;font-weight:700;text-decoration:none}
+  .agenda-allbtn:hover{background:rgba(192,129,78,.2)}
+  .rentree-band .cta-dates:hover{background:#a86c3d;transform:translateY(-1px);box-shadow:0 8px 22px rgba(192,129,78,.36)}
+  .rentree-band .cta-plus{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;flex:0 0 28px;border-radius:50%;background:rgba(255,255,255,.24);font-size:1.3rem;font-weight:400;line-height:1;padding-bottom:3px}
+  @media(max-width:600px){.rentree-band .cta-dates{width:100%;padding:13px 14px;font-size:.85rem;gap:9px}}
+  .rentree-band .rb-sub{font-size:.85rem;color:var(--warm-grey);margin:0}
+  .rdv-card{background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:20px 22px;margin-bottom:14px;transition:all .12s}
+  .rdv-card:hover{border-color:var(--sage)}
+  .rdv-head{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+  .rdv-day{font-family:'Playfair Display',Georgia,serif;font-size:1.12rem;color:var(--ink)}
+  .rdv-hour{font-size:.78rem;font-weight:700;color:var(--sage);background:rgba(107,125,92,.1);padding:4px 10px;border-radius:999px}
+  .rdv-new{margin-left:auto;font-size:.63rem;font-weight:800;text-transform:uppercase;letter-spacing:.7px;padding:4px 9px;border-radius:999px;background:#C0814E;color:#fff}
+  .rdv-item{display:flex;gap:12px;align-items:flex-start}
+  .rdv-item+.rdv-item{margin-top:16px;padding-top:16px;border-top:1px dashed var(--line)}
+  .rdv-icon{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+  .rdv-title{font-size:.95rem;font-weight:700;color:var(--ink);margin-bottom:6px}
+  .rdv-freq{font-size:.72rem;font-weight:600;color:var(--warm-grey);background:var(--cream);padding:3px 8px;border-radius:999px;margin-left:6px;white-space:nowrap}
+  .rdv-card p{font-size:.87rem;color:var(--warm-grey);line-height:1.65;margin:0 0 8px}
+  .rdv-card p:last-child{margin-bottom:0}
+  .rdv-note{margin-top:14px!important;padding-top:12px;border-top:1px solid var(--line);font-style:italic}
+  .agenda-title{font-family:'Playfair Display',Georgia,serif;font-weight:400;font-size:1.3rem;text-align:center;margin:34px 0 10px}
+  .agenda-intro{font-size:.86rem;color:var(--warm-grey);line-height:1.6;text-align:center;margin:0 auto 16px;max-width:460px}
+  .agenda-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 14px;margin-bottom:18px}
+  .agenda-legend span{display:inline-flex;align-items:center;gap:6px;font-size:.73rem;font-weight:600;color:var(--warm-grey)}
+  .agenda-legend i{width:8px;height:8px;border-radius:50%;display:inline-block}
+  .agenda-month{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:1.1px;color:var(--occupied-ink);margin:22px 0 8px;padding-left:2px}
+  .agenda-group{background:#fff;border:1.5px solid var(--line);border-radius:16px;overflow:hidden}
+  .ag-row{display:flex;align-items:center;gap:13px;padding:11px 14px;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line);transition:background .12s}
+  .ag-row:last-child{border-bottom:none}
+  .ag-row:hover{background:rgba(107,125,92,.05)}
+  .ag-day{display:flex;flex-direction:column;align-items:center;justify-content:center;width:42px;flex:0 0 42px;line-height:1.1}
+  .ag-dow{font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px;opacity:.85}
+  .ag-num{font-size:1.15rem;font-weight:800}
+  .ag-body{flex:1;min-width:0}
+  .ag-title{display:block;font-size:.86rem;font-weight:600;line-height:1.35}
+  .ag-sub{display:block;font-size:.75rem;color:var(--warm-grey);margin-top:2px}
+  .ag-plus{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;flex:0 0 30px;border-radius:50%;background:rgba(107,125,92,.12);color:var(--sage-dark);font-size:1.25rem;font-weight:400;line-height:1;padding-bottom:3px}
+  .ag-row:hover .ag-plus{background:var(--sage);color:#fff}
+  .ag-pause{text-align:center;font-size:.79rem;font-style:italic;color:var(--warm-grey);background:var(--cream);border-radius:12px;padding:10px 14px;margin:8px 0 0}
+  .cal-btn{display:flex;align-items:center;justify-content:center;gap:11px;width:100%;margin-top:18px;padding:13px 16px;border:1.5px solid var(--sage);border-radius:14px;background:#fff;color:var(--sage-dark);font-weight:700;font-size:.9rem;text-decoration:none;transition:all .12s;box-sizing:border-box}
+  .cal-btn:hover{background:rgba(107,125,92,.07);box-shadow:0 4px 12px rgba(107,125,92,.12)}
+  .cal-btn .cal-plus{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;flex:0 0 30px;border-radius:50%;background:var(--sage);color:#fff;font-size:1.35rem;font-weight:400;line-height:1;padding-bottom:3px}
+  .cal-btn .cal-txt{display:flex;flex-direction:column;line-height:1.25}
+  .cal-btn .cal-sub{font-size:.75rem;font-weight:500;color:var(--warm-grey);margin-top:2px}
+  @media(max-width:600px){
+    .ag-row{gap:11px;padding:10px 12px}
+    .ag-day{width:38px;flex:0 0 38px}
+    .ag-num{font-size:1.08rem}
+    .ag-title{font-size:.84rem}
+    .ag-sub{font-size:.73rem}
+    .agenda-intro{font-size:.82rem}
+    .cal-btn{padding:12px 14px;font-size:.86rem}
+    .rdv-freq{display:block;margin:4px 0 0;width:fit-content}
+  }
   #activitesPage{display:none}
   #activitesPage.open{display:block}
   #yogaPage{display:none}
@@ -317,9 +420,19 @@
   .prog-inner li,.infos-main li,.prog-main li{margin-bottom:10px}
   .prog-month{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px;margin:24px 0}
   .prog-month h3{margin-top:0;color:var(--sage)}
+  #lucidPage{display:none}
+  #lucidPage.open{display:block}
+  /* Pastilles programmes (rentree) */
+  .prog-pills{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 24px}
+  .pp-card{display:flex;align-items:center;gap:11px;width:100%;padding:13px 16px;border:1.5px solid var(--line);border-radius:999px;background:#fff;cursor:pointer;font-family:inherit;text-align:left;transition:all .12s}
+  .pp-card:hover{border-color:var(--sage);box-shadow:0 4px 12px rgba(107,125,92,.12)}
+  .pp-card .pp-icon{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.05rem;flex-shrink:0}
+  .pp-card .pp-body{flex:1;min-width:0}
+  .pp-card .pp-title{display:block;font-size:.9rem;font-weight:700;color:var(--ink);line-height:1.25}
+  .pp-card .pp-sub{display:block;font-size:.75rem;color:var(--warm-grey);margin-top:2px}
+  .pp-new{font-size:.64rem;font-weight:800;text-transform:uppercase;letter-spacing:.7px;padding:4px 9px;border-radius:999px;background:#C0814E;color:#fff;white-space:nowrap;flex-shrink:0}
+  @media(max-width:600px){.prog-pills{grid-template-columns:1fr;gap:10px}}
   .prog-month .pm-theme{background:var(--cream);border-radius:12px;padding:16px 18px;margin:12px 0;font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:.95rem;color:var(--ink);line-height:1.6}
-  .prog-month .pm-energy{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
-  .prog-month .pm-tag{font-size:.78rem;font-weight:600;padding:6px 12px;border-radius:999px;background:var(--accent-pale);color:var(--accent-dark)}
   /* Mobile : plus de largeur pour la lecture (95%) et le menu (100%), cartes du menu compactes */
   @media(max-width:600px){
     #infosPage>div,#progPage>div{padding-left:2.5%!important;padding-right:2.5%!important}
@@ -327,11 +440,16 @@
     .menu-drawer{width:100%;padding:74px 16px 20px}
     .menu-section{margin-bottom:12px}
     .menu-section-title{margin-bottom:6px;font-size:.68rem}
-    .menu-item{padding:8px 12px;margin-bottom:6px}
-    .menu-item .mi-icon{width:32px;height:32px}
-    .menu-item .mi-icon svg{width:16px;height:16px}
-    .menu-item .mi-text{font-size:.86rem}
-    .menu-item .mi-sub{font-size:.73rem}
+    .menu-item{padding:8px 11px;margin-bottom:5px}
+    .menu-item .mi-icon{width:28px;height:28px}
+    .menu-item .mi-icon svg{width:14px;height:14px}
+    .menu-item .mi-text{font-size:.8rem}
+    .menu-item .mi-sub{font-size:.7rem}
+    .menu-item.hero{padding:14px 13px;margin-bottom:4px}
+    .menu-item.hero .mi-icon{width:40px;height:40px}
+    .menu-item.hero .mi-icon svg{width:20px;height:20px}
+    .menu-item.hero .mi-text{font-size:1.02rem}
+    .menu-item.hero .mi-sub{font-size:.76rem}
   }
 
   /* Reading progress bar */
@@ -344,9 +462,9 @@
   /* Programme sidebar */
   .prog-layout{position:relative}
   .prog-sidebar{display:none}
-  @media(min-width:1100px){
-    .prog-layout{display:flex;gap:0}
-    .prog-sidebar{display:block;position:sticky;top:72px;width:200px;flex:0 0 200px;height:fit-content;padding:16px 0;margin-right:20px}
+  @media(min-width:980px){
+    .prog-layout{display:flex;gap:0;align-items:flex-start}
+    .prog-sidebar{display:block;position:sticky;top:80px;align-self:flex-start;width:200px;flex:0 0 200px;height:fit-content;max-height:calc(100vh - 100px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;padding:16px 0;margin-right:20px}
     .prog-sidebar a{display:block;font-size:.76rem;color:var(--warm-grey);text-decoration:none;padding:6px 12px;border-left:2px solid transparent;border-radius:0 8px 8px 0;transition:all .12s;line-height:1.3;margin-bottom:2px}
     .prog-sidebar a:hover{color:var(--sage);background:rgba(107,125,92,.05)}
     .prog-sidebar a.active{color:var(--sage);border-left-color:var(--sage);font-weight:600;background:rgba(107,125,92,.06)}
@@ -394,9 +512,8 @@
   <div class="nav-logo" onclick="goHome()" style="cursor:pointer;"><span>G R E A T L Y</span><span class="dot"></span></div>
   <button class="nav-link nav-fb" onclick="window.open('https://arnaudprz.github.io/Greatly-retours/membre.html','_blank','noopener')"><span class="nl-title">Votre avis nous intéresse</span><span class="nl-sub">On vous écoute</span></button>
   <div class="nav-links">
-    <button class="nav-link" onclick="navigate('activites')"><span class="nl-title">Vos activités</span><span class="nl-sub">On bouge ensemble</span></button>
+    <button class="nav-link" onclick="openProgramme()"><span class="nl-title">Programme de rentrée</span><span class="nl-sub">Septembre 2026</span></button>
     <button class="nav-link" onclick="showReservation()"><span class="nl-title">Réservations</span><span class="nl-sub">Comme chez vous</span></button>
-    <button class="nav-link" onclick="openProgramme()"><span class="nl-title">Le programme</span><span class="nl-sub">À votre rythme</span></button>
     <button class="nav-link" onclick="openInfos()"><span class="nl-title">Infos pratiques</span><span class="nl-sub">Bon à savoir</span></button>
     <button class="nav-link" onclick="openContact('arnaud')"><span class="nl-title">Contacter Arnaud</span><span class="nl-sub">On est là</span></button>
     <button class="nav-link" onclick="openContact('julie')"><span class="nl-title">Contacter Julie</span><span class="nl-sub">Avec plaisir</span></button>
@@ -430,29 +547,23 @@
       <p style="text-align:center;font-family:'Playfair Display',Georgia,serif;font-size:1.1rem;color:var(--ink);font-weight:400;">Que souhaitez-vous faire aujourd'hui ?</p>
     </div>
     <div class="c-list">
+      <div class="c-row hero" onclick="openProgramme()">
+        <div class="cr-icon" style="background:#E8D9C5;color:#6B5138;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+        <div class="cr-body">
+          <div class="cr-head"><span class="cr-title">Programme de rentrée</span><span class="cr-badge" style="background:#C0814E;color:#fff;">Nouveau</span></div>
+          <div class="cr-sub">Septembre → novembre 2026 — les ateliers du jeudi, vos rendez-vous de la semaine et toutes vos dates.</div>
+          <div class="hero-tags"><span>3 ateliers</span><span>Yoga &amp; Pilates</span><span>Entre nous</span><span>20 dates</span></div>
+        </div>
+        <span class="cr-chev">&#8250;</span>
+      </div>
       <div class="c-row" onclick="window.open('https://arnaudprz.github.io/Greatly-retours/membre.html','_blank','noopener')">
         <div class="cr-icon" style="background:rgba(192,129,78,.12);color:#C0814E;font-size:1.3rem;">💬</div>
         <div class="cr-body"><div class="cr-head"><span class="cr-title">Votre avis nous intéresse</span><span class="cr-badge" style="background:rgba(107,125,92,.16);color:var(--sage-dark);">On vous écoute</span></div><div class="cr-sub">2 minutes, et c'est anonyme</div></div>
         <span class="cr-chev">&#8250;</span>
       </div>
-      <div class="c-row" onclick="openAbsence()">
-        <div class="cr-icon" style="background:rgba(180,83,63,.1);color:#b4533f;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m14.5 14.5-4 4M10.5 14.5l4 4"/></svg></div>
-        <div class="cr-body"><div class="cr-head"><span class="cr-title">Signaler une absence</span><span class="cr-badge" style="background:rgba(180,83,63,.12);color:#b4533f;">Aucun souci</span></div><div class="cr-sub">Prévenez-nous, on s'adapte</div></div>
-        <span class="cr-chev">&#8250;</span>
-      </div>
-      <div class="c-row" onclick="navigate('activites')" style="border-color:var(--sage);background:rgba(107,125,92,.03);">
-        <div class="cr-icon" style="background:rgba(107,125,92,.12);color:var(--sage);font-size:1.3rem;">🔥</div>
-        <div class="cr-body"><div class="cr-head"><span class="cr-title">Vos activités physiques</span><span class="cr-badge" style="background:var(--sage);color:#fff;">On bouge ensemble</span></div><div class="cr-sub">Padel, yoga et plus — votre semaine Énergie</div></div>
-        <span class="cr-chev">&#8250;</span>
-      </div>
       <div class="c-row" onclick="showReservation()">
         <div class="cr-icon" style="background:rgba(107,125,92,.12);color:var(--sage);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
         <div class="cr-body"><div class="cr-head"><span class="cr-title">Réserver un espace individuel</span><span class="cr-badge" style="background:rgba(107,125,92,.16);color:var(--sage-dark);">Comme chez vous</span></div><div class="cr-sub">Salon, dojo ou simple bonjour à la GREATLY House</div></div>
-        <span class="cr-chev">&#8250;</span>
-      </div>
-      <div class="c-row" onclick="openProgramme()">
-        <div class="cr-icon" style="background:rgba(192,129,78,.12);color:#C0814E;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
-        <div class="cr-body"><div class="cr-head"><span class="cr-title">Votre parcours</span><span class="cr-badge" style="background:rgba(192,129,78,.2);color:#8f6035;">À votre rythme</span></div><div class="cr-sub">Mois après mois, lucidité & énergie</div></div>
         <span class="cr-chev">&#8250;</span>
       </div>
       <div class="c-row" onclick="openInfos()">
@@ -463,6 +574,11 @@
       <div class="c-row" onclick="openPrivatPage()">
         <div class="cr-icon" style="background:rgba(139,110,78,.12);color:#8B6E4E;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9"/><path d="M5 10v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8"/></svg></div>
         <div class="cr-body"><div class="cr-head"><span class="cr-title">Privatiser la maison</span><span class="cr-badge" style="background:rgba(107,125,92,.16);color:var(--sage-dark);">Sur mesure</span></div><div class="cr-sub">La maison entière pour vos événements d'équipe</div></div>
+        <span class="cr-chev">&#8250;</span>
+      </div>
+      <div class="c-row" onclick="openAbsence()">
+        <div class="cr-icon" style="background:rgba(180,83,63,.1);color:#b4533f;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m14.5 14.5-4 4M10.5 14.5l4 4"/></svg></div>
+        <div class="cr-body"><div class="cr-head"><span class="cr-title">Signaler une absence</span><span class="cr-badge" style="background:rgba(180,83,63,.12);color:#b4533f;">Aucun souci</span></div><div class="cr-sub">Prévenez-nous, on s'adapte</div></div>
         <span class="cr-chev">&#8250;</span>
       </div>
     </div>
@@ -493,32 +609,9 @@
   <div id="slotsList"></div>
   </div><!-- /reservationSection -->
 
-  <div id="activitesPage">
-    <div style="max-width:560px;margin:0 auto;padding:32px 22px 80px;">
-      <button class="prog-back" onclick="goHome()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour</button>
-      <div style="text-align:center;margin-bottom:28px;">
-        <p style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--sage);margin-bottom:8px;">Programme Énergie</p>
-        <h1 style="font-family:'Playfair Display',Georgia,serif;font-weight:400;font-size:1.55rem;margin-bottom:8px;">🔥 Vos activités physiques</h1>
-        <p style="font-size:.9rem;color:var(--warm-grey);line-height:1.55;">Deux rendez-vous par semaine pour remettre le corps en mouvement, à votre rythme. Choisissez votre activité.</p>
-      </div>
-      <div class="activity-cards">
-        <div class="c-row" onclick="navigate('padel')">
-          <div class="cr-icon" style="background:rgba(107,125,92,.12);color:var(--sage);font-size:1.4rem;">🏓</div>
-          <div class="cr-body"><div class="cr-title">Padel</div><div class="cr-sub">Tous les mardis 10h30 – 12h · Padel District, Sequedin</div></div>
-          <span class="cr-chev">&#8250;</span>
-        </div>
-        <div class="c-row" onclick="navigate('yoga')">
-          <div class="cr-icon" style="background:rgba(79,124,130,.12);color:#4F7C82;font-size:1.4rem;">🧘</div>
-          <div class="cr-body"><div class="cr-title">Yoga</div><div class="cr-sub">Reconnexion au corps, apaisement et souplesse</div></div>
-          <span class="cr-chev">&#8250;</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div id="yogaPage">
     <div class="prog-inner">
-      <button class="prog-back" onclick="navigate('activites')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Vos activités</button>
+      <button class="prog-back" onclick="navigate('programme')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Programme de rentrée</button>
 
       <div class="prog-hero prog-fade">
         <h1>🧘 Yoga</h1>
@@ -529,7 +622,7 @@
       <div style="background:#FFF8E1;border:1.5px solid #F0D98C;border-radius:14px;padding:16px 18px;margin-bottom:20px;display:flex;align-items:flex-start;gap:12px;">
         <span style="font-size:1.3rem;flex:0 0 auto;">📅</span>
         <div style="font-size:.88rem;line-height:1.6;color:var(--ink);">
-          <strong>Prochaines séances : vendredi 19 juin, vendredi 26 juin et vendredi 3 juillet, à la maison (10 rue de Lambersart, Verlinghem).</strong><br>
+          <strong>Tous les vendredis de 10h30 à 12h, à la GREATLY House (10 rue de Lambersart, Verlinghem), jusqu'à fin novembre.</strong><br>
           Les séances sont animées par Sonia. Rendez-vous directement à la GREATLY House.
         </div>
       </div>
@@ -541,7 +634,7 @@
         <h2 style="border:none;padding:0;margin-top:0;">Votre séance</h2>
       </div>
       <div class="prog-fade">
-        <p>Le yoga fait partie du volet <strong>reconnexion au corps</strong> du programme Énergie. Chaque séance est animée par <strong>Sonia</strong> et pensée pour vous remettre en mouvement en douceur.</p>
+        <p>Le yoga fait partie du volet <strong>reconnexion au corps</strong> du programme Énergie. Chaque séance est animée par <strong>Sonia</strong> et pensée pour vous remettre en mouvement en douceur.</p><p>Le mardi remet le corps en mouvement, le vendredi permet de relâcher avant le week-end. Les deux se complètent. Vos retours sur Sonia ont été précieux, alors on poursuit avec elle pour les deux prochains mois.</p>
         <p>Pas besoin d'être souple ou expérimenté : la pratique s'adapte à chacun. L'objectif n'est pas la performance mais de <strong>relâcher le corps, calmer le mental et repartir plus léger</strong>.</p>
         <p>Les séances alternent postures, respiration, mobilité et étirements, pour un effet durable sur votre énergie au quotidien.</p>
       </div>
@@ -579,14 +672,32 @@
         <p>Ajoutez les séances à votre agenda :</p>
       </div>
       <div class="padel-agenda prog-fade">
-        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Yoga+GREATLY&dates=20260619T083000Z/20260619T100000Z&details=S%C3%A9ance+yoga+anim%C3%A9e+par+Sonia+-+Programme+%C3%89nergie+GREATLY&location=GREATLY+House%2C+10+rue+de+Lambersart%2C+59237+Verlinghem" target="_blank" rel="noopener">
-          <span class="pa-date">Vendredi 19 juin</span><span class="pa-time">10h30 – 12h00</span><span class="pa-btn">+ Ajouter à l'agenda</span>
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Yoga+GREATLY&dates=20260918T083000Z/20260918T100000Z&details=S%C3%A9ance+yoga+anim%C3%A9e+par+Sonia+-+Programme+%C3%89nergie+GREATLY&location=GREATLY+House%2C+10+rue+de+Lambersart%2C+59237+Verlinghem" target="_blank" rel="noopener">
+          <span class="pa-date">Vendredi 18 septembre</span><span class="pa-time">10h30 – 12h00</span><span class="pa-btn">+ Ajouter à l'agenda</span>
         </a>
-        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Yoga+GREATLY&dates=20260626T083000Z/20260626T100000Z&details=S%C3%A9ance+yoga+anim%C3%A9e+par+Sonia+-+Programme+%C3%89nergie+GREATLY&location=GREATLY+House%2C+10+rue+de+Lambersart%2C+59237+Verlinghem" target="_blank" rel="noopener">
-          <span class="pa-date">Vendredi 26 juin</span><span class="pa-time">10h30 – 12h00</span><span class="pa-btn">+ Ajouter à l'agenda</span>
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Yoga+GREATLY&dates=20260925T083000Z/20260925T100000Z&details=S%C3%A9ance+yoga+anim%C3%A9e+par+Sonia+-+Programme+%C3%89nergie+GREATLY&location=GREATLY+House%2C+10+rue+de+Lambersart%2C+59237+Verlinghem" target="_blank" rel="noopener">
+          <span class="pa-date">Vendredi 25 septembre</span><span class="pa-time">10h30 – 12h00</span><span class="pa-btn">+ Ajouter à l'agenda</span>
         </a>
-        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Yoga+GREATLY&dates=20260703T083000Z/20260703T100000Z&details=S%C3%A9ance+yoga+anim%C3%A9e+par+Sonia+-+Programme+%C3%89nergie+GREATLY&location=GREATLY+House%2C+10+rue+de+Lambersart%2C+59237+Verlinghem" target="_blank" rel="noopener">
-          <span class="pa-date">Vendredi 3 juillet</span><span class="pa-time">10h30 – 12h00</span><span class="pa-btn">+ Ajouter à l'agenda</span>
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Yoga+GREATLY&dates=20261002T083000Z/20261002T100000Z&details=S%C3%A9ance+yoga+anim%C3%A9e+par+Sonia+-+Programme+%C3%89nergie+GREATLY&location=GREATLY+House%2C+10+rue+de+Lambersart%2C+59237+Verlinghem" target="_blank" rel="noopener">
+          <span class="pa-date">Vendredi 2 octobre</span><span class="pa-time">10h30 – 12h00</span><span class="pa-btn">+ Ajouter à l'agenda</span>
+        </a>
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Yoga+GREATLY&dates=20261009T083000Z/20261009T100000Z&details=S%C3%A9ance+yoga+anim%C3%A9e+par+Sonia+-+Programme+%C3%89nergie+GREATLY&location=GREATLY+House%2C+10+rue+de+Lambersart%2C+59237+Verlinghem" target="_blank" rel="noopener">
+          <span class="pa-date">Vendredi 9 octobre</span><span class="pa-time">10h30 – 12h00</span><span class="pa-btn">+ Ajouter à l'agenda</span>
+        </a>
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Yoga+GREATLY&dates=20261016T083000Z/20261016T100000Z&details=S%C3%A9ance+yoga+anim%C3%A9e+par+Sonia+-+Programme+%C3%89nergie+GREATLY&location=GREATLY+House%2C+10+rue+de+Lambersart%2C+59237+Verlinghem" target="_blank" rel="noopener">
+          <span class="pa-date">Vendredi 16 octobre</span><span class="pa-time">10h30 – 12h00</span><span class="pa-btn">+ Ajouter à l'agenda</span>
+        </a>
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Yoga+GREATLY&dates=20261106T093000Z/20261106T110000Z&details=S%C3%A9ance+yoga+anim%C3%A9e+par+Sonia+-+Programme+%C3%89nergie+GREATLY&location=GREATLY+House%2C+10+rue+de+Lambersart%2C+59237+Verlinghem" target="_blank" rel="noopener">
+          <span class="pa-date">Vendredi 6 novembre</span><span class="pa-time">10h30 – 12h00</span><span class="pa-btn">+ Ajouter à l'agenda</span>
+        </a>
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Yoga+GREATLY&dates=20261113T093000Z/20261113T110000Z&details=S%C3%A9ance+yoga+anim%C3%A9e+par+Sonia+-+Programme+%C3%89nergie+GREATLY&location=GREATLY+House%2C+10+rue+de+Lambersart%2C+59237+Verlinghem" target="_blank" rel="noopener">
+          <span class="pa-date">Vendredi 13 novembre</span><span class="pa-time">10h30 – 12h00</span><span class="pa-btn">+ Ajouter à l'agenda</span>
+        </a>
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Yoga+GREATLY&dates=20261120T093000Z/20261120T110000Z&details=S%C3%A9ance+yoga+anim%C3%A9e+par+Sonia+-+Programme+%C3%89nergie+GREATLY&location=GREATLY+House%2C+10+rue+de+Lambersart%2C+59237+Verlinghem" target="_blank" rel="noopener">
+          <span class="pa-date">Vendredi 20 novembre</span><span class="pa-time">10h30 – 12h00</span><span class="pa-btn">+ Ajouter à l'agenda</span>
+        </a>
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Yoga+GREATLY&dates=20261127T093000Z/20261127T110000Z&details=S%C3%A9ance+yoga+anim%C3%A9e+par+Sonia+-+Programme+%C3%89nergie+GREATLY&location=GREATLY+House%2C+10+rue+de+Lambersart%2C+59237+Verlinghem" target="_blank" rel="noopener">
+          <span class="pa-date">Vendredi 27 novembre</span><span class="pa-time">10h30 – 12h00</span><span class="pa-btn">+ Ajouter à l'agenda</span>
         </a>
       </div>
 
@@ -612,7 +723,7 @@
 
   <div id="padelPage">
     <div class="prog-inner">
-      <button class="prog-back" onclick="navigate('activites')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Vos activités</button>
+      <button class="prog-back" onclick="navigate('programme')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Programme de rentrée</button>
 
       <div class="prog-hero prog-fade">
         <h1>🏓 Padel District</h1>
@@ -1010,7 +1121,12 @@
       <button class="prog-back" onclick="closeProgramme()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour aux réservations</button>
     <div class="prog-layout">
       <nav class="prog-sidebar">
-        <div class="sidebar-title">Sommaire</div>
+        <div class="sidebar-title">La rentrée</div>
+        <a href="#prog-ateliers">Les ateliers du jeudi</a>
+        <a href="#prog-semaine">Vos rendez-vous de la semaine</a>
+        <a href="#prog-dates">Vos dates jusqu'à fin novembre</a>
+        <div class="sidebar-title" style="margin-top:18px;">Le programme</div>
+        <a href="#prog-ensemble">Vue d'ensemble</a>
         <a href="#prog-conviction">Notre conviction</a>
         <a href="#prog-experience">L'expérience GREATLY</a>
         <a href="#prog-lucidite">Parcours Lucidité</a>
@@ -1018,6 +1134,212 @@
         <a href="#prog-mois">Détail mois par mois</a>
       </nav>
       <div class="prog-main">
+
+      <div class="rentree-band">
+        <h1 class="rb-title">Programme de rentrée</h1>
+        <p class="rb-sub">Septembre → novembre 2026</p>
+        <a class="cta-dates" href="greatly-rentree-2026.ics" type="text/calendar"><span class="cta-plus">+</span><span class="cta-txt">Ajouter les 20 dates à votre agenda</span><span class="cta-new">Nouveau</span></a>
+        <a class="cta-second" href="#prog-dates">Ou parcourir les dates une par une</a>
+      </div>
+
+
+    <div style="text-align:center;margin-bottom:26px;">
+      <p style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:#C0814E;margin-bottom:8px;">Programme Lucidité · Rentrée 2026</p>
+      <h1 id="prog-ateliers" style="margin-bottom:10px;">Les ateliers du jeudi</h1>
+      <p style="font-size:.92rem;color:var(--warm-grey);line-height:1.6;">Cette seconde partie du programme garde le même cap. Ce qui bouge, c'est la façon d'y aller, ajustée à partir de vos retours et de nos échanges.</p>
+    </div>
+
+    <div class="aside-box prog-fade"><h3>Ce que vous allez vivre</h3><p>Du temps pour y voir clair. Des moments pour prendre soin de votre énergie. Et un endroit où parler vrai, simplement.</p></div>
+
+    <div class="prog-fade">
+      <h3>Comment cela se déroule</h3>
+      <p>Une fois par mois, vous retrouvez votre groupe à la GREATLY House autour d'un <strong>brunch convivial à 11h30</strong>, suivi d'un <strong>atelier réflexif de 12h30 à 14h</strong>, animé par un intervenant expert.</p>
+      <p>Entre deux ateliers, vous expérimentez une pratique ou menez une expérience concrète pour ancrer ce qui a été partagé. Au fil des mois, vous construisez une lecture plus fine de vous-même, de vos besoins et de vos leviers.</p>
+    </div>
+
+    <h2 style="margin-top:40px;">Les ateliers de la rentrée</h2>
+
+    <div class="prog-month prog-fade"><h3>Jeudi 17 septembre 2026 : Le temps</h3><p><strong>À la GREATLY House, de 11h30 à 14h</strong></p><div class="pm-theme"><em>Et si reprendre le contrôle de votre temps était votre meilleur investissement ?</em></div><p>Notre rapport au temps façonne notre rapport au monde. Un temps pour clarifier ses priorités et choisir ce à quoi l'on dit oui en pleine conscience.</p><p><strong>Bénéfice retiré :</strong> une lecture plus juste de sa relation au temps, pour réinvestir son énergie là où elle compte vraiment.</p><a class="cal-btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Atelier%20Lucidit%C3%A9%20%E2%80%94%20Le%20temps%20%C2%B7%20GREATLY&amp;dates=20260917T093000Z/20260917T120000Z&amp;details=Atelier%20Lucidit%C3%A9%20%E2%80%94%20Le%20temps%20%C2%B7%20GREATLY%20House&amp;location=GREATLY%20House%2C%2010%20rue%20de%20Lambersart%2C%2059237%20Verlinghem" target="_blank" rel="noopener"><span class="cal-plus">+</span><span class="cal-txt">Ajouter à votre agenda<span class="cal-sub">GREATLY House · 11h30 – 14h</span></span></a></div>
+
+    <div class="prog-month prog-fade"><h3>Jeudi 8 octobre 2026 : Les émotions</h3><p><strong>À la GREATLY House, de 11h30 à 14h</strong></p><div class="pm-theme"><em>Leadership : et si vos émotions devenaient votre meilleur atout stratégique ?</em></div><p>Les émotions sont des informations précieuses au service de vos décisions et de la qualité de vos relations.</p><p><strong>Bénéfice retiré :</strong> reconnaître et comprendre ses émotions pour agir de manière plus juste et plus efficace.</p><a class="cal-btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Atelier%20Lucidit%C3%A9%20%E2%80%94%20Les%20%C3%A9motions%20%C2%B7%20GREATLY&amp;dates=20261008T093000Z/20261008T120000Z&amp;details=Atelier%20Lucidit%C3%A9%20%E2%80%94%20Les%20%C3%A9motions%20%C2%B7%20GREATLY%20House&amp;location=GREATLY%20House%2C%2010%20rue%20de%20Lambersart%2C%2059237%20Verlinghem" target="_blank" rel="noopener"><span class="cal-plus">+</span><span class="cal-txt">Ajouter à votre agenda<span class="cal-sub">GREATLY House · 11h30 – 14h</span></span></a></div>
+
+    <div class="prog-month prog-fade"><h3>Jeudi 12 novembre 2026 : L'énergie</h3><p><strong>À la GREATLY House, de 11h30 à 14h</strong></p><div class="pm-theme"><em>Et si l'énergie durable devenait votre nouveau standard de performance ?</em></div><p>Comment cultiver une énergie qui se renouvelle plutôt qu'une énergie qui s'épuise ?</p><p><strong>Bénéfices retirés :</strong> identifier les leviers physiologiques de l'énergie et repérer ses signaux faibles.</p><a class="cal-btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Atelier%20Lucidit%C3%A9%20%E2%80%94%20L%27%C3%A9nergie%20%C2%B7%20GREATLY&amp;dates=20261112T103000Z/20261112T130000Z&amp;details=Atelier%20Lucidit%C3%A9%20%E2%80%94%20L%27%C3%A9nergie%20%C2%B7%20GREATLY%20House&amp;location=GREATLY%20House%2C%2010%20rue%20de%20Lambersart%2C%2059237%20Verlinghem" target="_blank" rel="noopener"><span class="cal-plus">+</span><span class="cal-txt">Ajouter à votre agenda<span class="cal-sub">GREATLY House · 11h30 – 14h</span></span></a></div>
+
+
+      <div style="text-align:center;margin-bottom:26px;">
+        <p style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--sage);margin-bottom:8px;">Programme Énergie · Rentrée 2026</p>
+        <h1 id="prog-semaine" style="font-family:'Playfair Display',Georgia,serif;font-weight:400;font-size:1.55rem;margin-bottom:8px;">Vos rendez-vous de la semaine</h1>
+        <p style="font-size:.9rem;color:var(--warm-grey);line-height:1.6;">La lucidité ne vient pas que de la tête. Elle a besoin d'un corps disponible et de moments pour respirer. C'est ce que font les rendez-vous de la semaine — tous à la GREATLY House, de 10h30 à midi.</p>
+      </div>
+
+      <div class="rdv-card">
+        <div class="rdv-head"><span class="rdv-day">Le mardi</span><span class="rdv-hour">10h30 – 12h</span><span class="rdv-new">Nouveau</span></div>
+        <div class="rdv-split">
+          <div class="rdv-item">
+            <span class="rdv-icon" style="background:rgba(139,110,78,.12);color:#8B6E4E;">💬</span>
+            <div>
+              <div class="rdv-title">Entre nous <span class="rdv-freq">un mardi sur deux</span></div>
+              <p>Un temps d'échange ouvert. Vous venez comme vous êtes, avec ce qui vous traverse en ce moment. Sans thème, sans préparation.</p>
+              <p><strong>Une fois sur deux, on accueille un invité</strong> — quelqu'un dont le parcours ou la pratique éclaire le sujet travaillé le jeudi. Il vient raconter sa façon de faire, écouter la vôtre, et échanger avec vous pendant une heure et demie. C'est une conversation, pas une intervention.</p>
+            </div>
+          </div>
+          <div class="rdv-item">
+            <span class="rdv-icon" style="background:rgba(107,125,92,.12);color:var(--sage);">🤸</span>
+            <div>
+              <div class="rdv-title">Pilates <span class="rdv-freq">les autres mardis</span></div>
+              <p>Le Pilates travaille le centre du corps, le dos, la respiration. C'est lent et précis. Chacun avance à son rythme, avec ce qu'il a ce jour-là. Vous repartez avec un corps plus disponible, et souvent la tête plus claire.</p>
+            </div>
+          </div>
+        </div>
+        <p class="rdv-note">N'hésitez pas à profiter de la maison ensuite : déjeuner sur place, vous poser, travailler, à votre convenance.</p>
+      </div>
+
+      <div class="rdv-card" onclick="navigate('yoga')" style="cursor:pointer;">
+        <div class="rdv-head"><span class="rdv-day">Le vendredi</span><span class="rdv-hour">10h30 – 12h</span><span class="cr-chev" style="margin-left:auto;">&#8250;</span></div>
+        <div class="rdv-item">
+          <span class="rdv-icon" style="background:rgba(79,124,130,.12);color:#4F7C82;">🧘</span>
+          <div>
+            <div class="rdv-title">Yoga avec Sonia</div>
+            <p>Le mardi remet le corps en mouvement, le vendredi permet de relâcher avant le week-end. Les deux se complètent. Vos retours sur Sonia ont été précieux, alors on poursuit avec elle pour les deux prochains mois.</p>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="agenda-title" id="prog-dates">Vos dates jusqu'à fin novembre</h2>
+      <p class="agenda-intro">Vous nous avez demandé de la visibilité, alors voici toutes les dates d'un coup. Tout se passe à la GREATLY House — touchez une date pour l'ajouter à votre agenda.<br><a class="agenda-allbtn" href="greatly-rentree-2026.ics" type="text/calendar">+ Tout ajouter d'un coup</a></p>
+      <div class="agenda-legend">
+        <span><i style="background:#C0814E"></i>Lucidité</span>
+        <span><i style="background:#8B6E4E"></i>Entre nous</span>
+        <span><i style="background:#6B7D5C"></i>Pilates</span>
+        <span><i style="background:#4F7C82"></i>Yoga</span>
+      </div>
+      <div class="agenda-month">Septembre 2026</div>
+      <div class="agenda-group">
+        <a class="ag-row" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Lucidit%C3%A9%20%E2%80%94%20GREATLY&amp;dates=20260917T093000Z/20260917T120000Z&amp;details=Atelier%20Lucidit%C3%A9%20%E2%80%94%20Le%20temps%20%C2%B7%20GREATLY%20House&amp;location=GREATLY%20House%2C%2010%20rue%20de%20Lambersart%2C%2059237%20Verlinghem" target="_blank" rel="noopener">
+          <span class="ag-day" style="color:#C0814E"><span class="ag-dow">jeu.</span><span class="ag-num">17</span></span>
+          <span class="ag-body"><span class="ag-title">Atelier Lucidité — Le temps</span><span class="ag-sub">11h30 – 14h</span></span>
+          <span class="ag-plus">+</span>
+        </a>
+        <a class="ag-row" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Yoga%20%E2%80%94%20GREATLY&amp;dates=20260918T083000Z/20260918T100000Z&amp;details=Yoga%20avec%20Sonia%20%C2%B7%20GREATLY%20House&amp;location=GREATLY%20House%2C%2010%20rue%20de%20Lambersart%2C%2059237%20Verlinghem" target="_blank" rel="noopener">
+          <span class="ag-day" style="color:#4F7C82"><span class="ag-dow">ven.</span><span class="ag-num">18</span></span>
+          <span class="ag-body"><span class="ag-title">Yoga avec Sonia</span><span class="ag-sub">10h30 – 12h</span></span>
+          <span class="ag-plus">+</span>
+        </a>
+        <a class="ag-row" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Entre%20nous%20%E2%80%94%20GREATLY&amp;dates=20260922T083000Z/20260922T100000Z&amp;details=Entre%20nous%20%E2%80%94%20avec%20un%20invit%C3%A9%2C%20autour%20du%20temps%20%C2%B7%20GREATLY%20House&amp;location=GREATLY%20House%2C%2010%20rue%20de%20Lambersart%2C%2059237%20Verlinghem" target="_blank" rel="noopener">
+          <span class="ag-day" style="color:#8B6E4E"><span class="ag-dow">mar.</span><span class="ag-num">22</span></span>
+          <span class="ag-body"><span class="ag-title">Entre nous — avec un invité, autour du temps</span><span class="ag-sub">10h30 – 12h</span></span>
+          <span class="ag-plus">+</span>
+        </a>
+        <a class="ag-row" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Yoga%20%E2%80%94%20GREATLY&amp;dates=20260925T083000Z/20260925T100000Z&amp;details=Yoga%20avec%20Sonia%20%C2%B7%20GREATLY%20House&amp;location=GREATLY%20House%2C%2010%20rue%20de%20Lambersart%2C%2059237%20Verlinghem" target="_blank" rel="noopener">
+          <span class="ag-day" style="color:#4F7C82"><span class="ag-dow">ven.</span><span class="ag-num">25</span></span>
+          <span class="ag-body"><span class="ag-title">Yoga avec Sonia</span><span class="ag-sub">10h30 – 12h</span></span>
+          <span class="ag-plus">+</span>
+        </a>
+        <a class="ag-row" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Pilates%20%E2%80%94%20GREATLY&amp;dates=20260929T083000Z/20260929T100000Z&amp;details=Pilates%20%C2%B7%20GREATLY%20House&amp;location=GREATLY%20House%2C%2010%20rue%20de%20Lambersart%2C%2059237%20Verlinghem" target="_blank" rel="noopener">
+          <span class="ag-day" style="color:#6B7D5C"><span class="ag-dow">mar.</span><span class="ag-num">29</span></span>
+          <span class="ag-body"><span class="ag-title">Pilates</span><span class="ag-sub">10h30 – 12h</span></span>
+          <span class="ag-plus">+</span>
+        </a>
+      </div>
+      <div class="agenda-month">Octobre 2026</div>
+      <div class="agenda-group">
+        <a class="ag-row" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Yoga%20%E2%80%94%20GREATLY&amp;dates=20261002T083000Z/20261002T100000Z&amp;details=Yoga%20avec%20Sonia%20%C2%B7%20GREATLY%20House&amp;location=GREATLY%20House%2C%2010%20rue%20de%20Lambersart%2C%2059237%20Verlinghem" target="_blank" rel="noopener">
+          <span class="ag-day" style="color:#4F7C82"><span class="ag-dow">ven.</span><span class="ag-num">2</span></span>
+          <span class="ag-body"><span class="ag-title">Yoga avec Sonia</span><span class="ag-sub">10h30 – 12h</span></span>
+          <span class="ag-plus">+</span>
+        </a>
+        <a class="ag-row" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Entre%20nous%20%E2%80%94%20GREATLY&amp;dates=20261006T083000Z/20261006T100000Z&amp;details=Entre%20nous%20%C2%B7%20GREATLY%20House&amp;location=GREATLY%20House%2C%2010%20rue%20de%20Lambersart%2C%2059237%20Verlinghem" target="_blank" rel="noopener">
+          <span class="ag-day" style="color:#8B6E4E"><span class="ag-dow">mar.</span><span class="ag-num">6</span></span>
+          <span class="ag-body"><span class="ag-title">Entre nous</span><span class="ag-sub">10h30 – 12h</span></span>
+          <span class="ag-plus">+</span>
+        </a>
+        <a class="ag-row" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Lucidit%C3%A9%20%E2%80%94%20GREATLY&amp;dates=20261008T093000Z/20261008T120000Z&amp;details=Atelier%20Lucidit%C3%A9%20%E2%80%94%20Les%20%C3%A9motions%20%C2%B7%20GREATLY%20House&amp;location=GREATLY%20House%2C%2010%20rue%20de%20Lambersart%2C%2059237%20Verlinghem" target="_blank" rel="noopener">
+          <span class="ag-day" style="color:#C0814E"><span class="ag-dow">jeu.</span><span class="ag-num">8</span></span>
+          <span class="ag-body"><span class="ag-title">Atelier Lucidité — Les émotions</span><span class="ag-sub">11h30 – 14h</span></span>
+          <span class="ag-plus">+</span>
+        </a>
+        <a class="ag-row" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Yoga%20%E2%80%94%20GREATLY&amp;dates=20261009T083000Z/20261009T100000Z&amp;details=Yoga%20avec%20Sonia%20%C2%B7%20GREATLY%20House&amp;location=GREATLY%20House%2C%2010%20rue%20de%20Lambersart%2C%2059237%20Verlinghem" target="_blank" rel="noopener">
+          <span class="ag-day" style="color:#4F7C82"><span class="ag-dow">ven.</span><span class="ag-num">9</span></span>
+          <span class="ag-body"><span class="ag-title">Yoga avec Sonia</span><span class="ag-sub">10h30 – 12h</span></span>
+          <span class="ag-plus">+</span>
+        </a>
+        <a class="ag-row" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Pilates%20%E2%80%94%20GREATLY&amp;dates=20261013T083000Z/20261013T100000Z&amp;details=Pilates%20%C2%B7%20GREATLY%20House&amp;location=GREATLY%20House%2C%2010%20rue%20de%20Lambersart%2C%2059237%20Verlinghem" target="_blank" rel="noopener">
+          <span class="ag-day" style="color:#6B7D5C"><span class="ag-dow">mar.</span><span class="ag-num">13</span></span>
+          <span class="ag-body"><span class="ag-title">Pilates</span><span class="ag-sub">10h30 – 12h</span></span>
+          <span class="ag-plus">+</span>
+        </a>
+        <a class="ag-row" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Yoga%20%E2%80%94%20GREATLY&amp;dates=20261016T083000Z/20261016T100000Z&amp;details=Yoga%20avec%20Sonia%20%C2%B7%20GREATLY%20House&amp;location=GREATLY%20House%2C%2010%20rue%20de%20Lambersart%2C%2059237%20Verlinghem" target="_blank" rel="noopener">
+          <span class="ag-day" style="color:#4F7C82"><span class="ag-dow">ven.</span><span class="ag-num">16</span></span>
+          <span class="ag-body"><span class="ag-title">Yoga avec Sonia</span><span class="ag-sub">10h30 – 12h</span></span>
+          <span class="ag-plus">+</span>
+        </a>
+      </div>
+      <div class="ag-pause">Pause pendant les vacances de la Toussaint</div>
+      <div class="agenda-month">Novembre 2026</div>
+      <div class="agenda-group">
+        <a class="ag-row" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Entre%20nous%20%E2%80%94%20GREATLY&amp;dates=20261103T093000Z/20261103T110000Z&amp;details=Entre%20nous%20%E2%80%94%20avec%20un%20invit%C3%A9%2C%20autour%20des%20%C3%A9motions%20%C2%B7%20GREATLY%20House&amp;location=GREATLY%20House%2C%2010%20rue%20de%20Lambersart%2C%2059237%20Verlinghem" target="_blank" rel="noopener">
+          <span class="ag-day" style="color:#8B6E4E"><span class="ag-dow">mar.</span><span class="ag-num">3</span></span>
+          <span class="ag-body"><span class="ag-title">Entre nous — avec un invité, autour des émotions</span><span class="ag-sub">10h30 – 12h</span></span>
+          <span class="ag-plus">+</span>
+        </a>
+        <a class="ag-row" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Yoga%20%E2%80%94%20GREATLY&amp;dates=20261106T093000Z/20261106T110000Z&amp;details=Yoga%20avec%20Sonia%20%C2%B7%20GREATLY%20House&amp;location=GREATLY%20House%2C%2010%20rue%20de%20Lambersart%2C%2059237%20Verlinghem" target="_blank" rel="noopener">
+          <span class="ag-day" style="color:#4F7C82"><span class="ag-dow">ven.</span><span class="ag-num">6</span></span>
+          <span class="ag-body"><span class="ag-title">Yoga avec Sonia</span><span class="ag-sub">10h30 – 12h</span></span>
+          <span class="ag-plus">+</span>
+        </a>
+        <a class="ag-row" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Pilates%20%E2%80%94%20GREATLY&amp;dates=20261110T093000Z/20261110T110000Z&amp;details=Pilates%20%C2%B7%20GREATLY%20House&amp;location=GREATLY%20House%2C%2010%20rue%20de%20Lambersart%2C%2059237%20Verlinghem" target="_blank" rel="noopener">
+          <span class="ag-day" style="color:#6B7D5C"><span class="ag-dow">mar.</span><span class="ag-num">10</span></span>
+          <span class="ag-body"><span class="ag-title">Pilates</span><span class="ag-sub">10h30 – 12h</span></span>
+          <span class="ag-plus">+</span>
+        </a>
+        <a class="ag-row" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Lucidit%C3%A9%20%E2%80%94%20GREATLY&amp;dates=20261112T103000Z/20261112T130000Z&amp;details=Atelier%20Lucidit%C3%A9%20%E2%80%94%20L%27%C3%A9nergie%20%C2%B7%20GREATLY%20House&amp;location=GREATLY%20House%2C%2010%20rue%20de%20Lambersart%2C%2059237%20Verlinghem" target="_blank" rel="noopener">
+          <span class="ag-day" style="color:#C0814E"><span class="ag-dow">jeu.</span><span class="ag-num">12</span></span>
+          <span class="ag-body"><span class="ag-title">Atelier Lucidité — L'énergie</span><span class="ag-sub">11h30 – 14h</span></span>
+          <span class="ag-plus">+</span>
+        </a>
+        <a class="ag-row" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Yoga%20%E2%80%94%20GREATLY&amp;dates=20261113T093000Z/20261113T110000Z&amp;details=Yoga%20avec%20Sonia%20%C2%B7%20GREATLY%20House&amp;location=GREATLY%20House%2C%2010%20rue%20de%20Lambersart%2C%2059237%20Verlinghem" target="_blank" rel="noopener">
+          <span class="ag-day" style="color:#4F7C82"><span class="ag-dow">ven.</span><span class="ag-num">13</span></span>
+          <span class="ag-body"><span class="ag-title">Yoga avec Sonia</span><span class="ag-sub">10h30 – 12h</span></span>
+          <span class="ag-plus">+</span>
+        </a>
+        <a class="ag-row" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Entre%20nous%20%E2%80%94%20GREATLY&amp;dates=20261117T093000Z/20261117T110000Z&amp;details=Entre%20nous%20%C2%B7%20GREATLY%20House&amp;location=GREATLY%20House%2C%2010%20rue%20de%20Lambersart%2C%2059237%20Verlinghem" target="_blank" rel="noopener">
+          <span class="ag-day" style="color:#8B6E4E"><span class="ag-dow">mar.</span><span class="ag-num">17</span></span>
+          <span class="ag-body"><span class="ag-title">Entre nous</span><span class="ag-sub">10h30 – 12h</span></span>
+          <span class="ag-plus">+</span>
+        </a>
+        <a class="ag-row" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Yoga%20%E2%80%94%20GREATLY&amp;dates=20261120T093000Z/20261120T110000Z&amp;details=Yoga%20avec%20Sonia%20%C2%B7%20GREATLY%20House&amp;location=GREATLY%20House%2C%2010%20rue%20de%20Lambersart%2C%2059237%20Verlinghem" target="_blank" rel="noopener">
+          <span class="ag-day" style="color:#4F7C82"><span class="ag-dow">ven.</span><span class="ag-num">20</span></span>
+          <span class="ag-body"><span class="ag-title">Yoga avec Sonia</span><span class="ag-sub">10h30 – 12h</span></span>
+          <span class="ag-plus">+</span>
+        </a>
+        <a class="ag-row" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Pilates%20%E2%80%94%20GREATLY&amp;dates=20261124T093000Z/20261124T110000Z&amp;details=Pilates%20%C2%B7%20GREATLY%20House&amp;location=GREATLY%20House%2C%2010%20rue%20de%20Lambersart%2C%2059237%20Verlinghem" target="_blank" rel="noopener">
+          <span class="ag-day" style="color:#6B7D5C"><span class="ag-dow">mar.</span><span class="ag-num">24</span></span>
+          <span class="ag-body"><span class="ag-title">Pilates</span><span class="ag-sub">10h30 – 12h</span></span>
+          <span class="ag-plus">+</span>
+        </a>
+        <a class="ag-row" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Yoga%20%E2%80%94%20GREATLY&amp;dates=20261127T093000Z/20261127T110000Z&amp;details=Yoga%20avec%20Sonia%20%C2%B7%20GREATLY%20House&amp;location=GREATLY%20House%2C%2010%20rue%20de%20Lambersart%2C%2059237%20Verlinghem" target="_blank" rel="noopener">
+          <span class="ag-day" style="color:#4F7C82"><span class="ag-dow">ven.</span><span class="ag-num">27</span></span>
+          <span class="ag-body"><span class="ag-title">Yoga avec Sonia</span><span class="ag-sub">10h30 – 12h</span></span>
+          <span class="ag-plus">+</span>
+        </a>
+      </div>
+
+      <div class="act-soon" style="margin-top:26px;">
+        <span class="act-soon-badge">Et après</span>
+        <h2>On refait le point en décembre</h2>
+        <p>On ajustera le programme avec les nouveaux ateliers et vos retours, pour qu'il colle encore mieux à ce dont vous avez besoin.</p>
+        <p style="margin-top:12px;font-style:italic;">Venez quand vous pouvez, comme vous pouvez. Et si quelque chose vous manque, dites-le.</p>
+      </div>
+
+      <p class="absence-line">Un empêchement sur l'un de ces rendez-vous ? <button onclick="openAbsence()">Signalez-nous votre absence</button></p>
+
+
+      <hr class="prog-divider" style="margin:44px 0 34px;">
+
+      <div style="text-align:center;margin-bottom:10px;">
+        <p style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--warm-grey);margin-bottom:6px;" id="prog-ensemble">Pour rappel</p>
+        <h2 style="border:none;padding:0;margin:0;">Le programme GREATLY dans son ensemble</h2>
+      </div>
 
       <div class="reading-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg> 8 min de lecture</div>
 
@@ -1074,23 +1396,23 @@
       </div>
       <div class="aside-box"><h3>Objectifs</h3><p>Reconnecter au corps, apaiser le mental, entretenir une vitalité durable et retrouver le plaisir de bouger à son rythme.</p></div>
       <h3>Comment cela se déroule</h3>
-      <p>Chaque semaine, deux activités complémentaires de 2h chacune vous sont proposées sur la métropole lilloise :</p>
+      <p>Depuis la rentrée, tout se passe à la <strong>GREATLY House, de 10h30 à midi</strong> :</p>
       <ul>
-        <li><strong>Le mardi entre 10h et 14h, une pratique douce</strong> (yoga, tai-chi, qi gong, sophrologie, marche méditative...) pour relâcher les tensions et apaiser les pensées.</li>
-        <li><strong>Le vendredi entre 9h et 13h, une activité sportive dynamique</strong> (padel, escalade, escrime, boxe, circuit training, basket...) pour remettre le corps en mouvement.</li>
+        <li><strong>Le mardi</strong> — un mardi sur deux, <em>Entre nous</em>, un temps d'échange ouvert, parfois avec un invité ; les autres mardis, une séance de <strong>Pilates</strong>.</li>
+        <li><strong>Le vendredi</strong> — <strong>Yoga avec Sonia</strong>, pour relâcher avant le week-end.</li>
       </ul>
-      <p>Soit jusqu'à <strong>quatre heures d'activité physique encadrée par semaine</strong>, à pratiquer selon votre rythme.</p>
+      <p>Vous pouvez profiter de la maison ensuite : déjeuner sur place, vous poser ou travailler, à votre convenance.</p>
       <hr class="prog-divider">
       <div class="prog-fade">
       <div class="prog-section-icon" style="background:rgba(192,129,78,.1);color:#C0814E;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
       <h2 style="border:none;padding:0;margin-top:0;" id="prog-mois">Le détail mois par mois</h2>
       </div>
-      <div class="prog-month prog-fade"><h3>Mois 1, Juin 2026 : Le cadre</h3><p><strong>Atelier Lucidité du jeudi 11 juin, à la Greatly House, de 11h30 à 14h</strong></p><div class="pm-theme"><em>Penser le cadre pour soutenir l'engagement</em></div><p>Premier rendez-vous du groupe. On apprend à se connaître et l'on pose ensemble les fondations d'un espace sécurisé et confidentiel.</p><p><strong>Bénéfices retirés :</strong> savoir formuler ses besoins et poser un cadre pour soi, accueillir celui de l'autre, et s'engager pleinement dans le collectif.</p><div class="pm-energy"><span class="pm-tag">Mardi : Yoga découverte</span><span class="pm-tag">Vendredi : Padel</span></div></div>
-      <div class="prog-month prog-fade"><h3>Mois 2, Juillet 2026 : Les décisions</h3><p><strong>Atelier Lucidité du jeudi 2 juillet, à la Greatly House, de 11h30 à 14h</strong></p><div class="pm-theme"><em>Comment transformer le silence en véritable avantage décisionnel ?</em></div><p>Un mois pour réhabiliter le silence et l'écoute du corps comme ressources de discernement.</p><p><strong>Bénéfice retiré :</strong> découvrir et enrichir son mode naturel de prise de décision.</p><div class="pm-energy"><span class="pm-tag">Pas d'activité pendant les vacances scolaires</span></div></div>
-      <div class="prog-month prog-fade"><h3>Mois 3, Septembre 2026 : L'énergie</h3><p><strong>Atelier Lucidité du jeudi 17 septembre, à la Greatly House, de 11h30 à 14h</strong></p><div class="pm-theme"><em>Et si l'énergie durable devenait votre nouveau standard de performance ?</em></div><p>Comment cultiver une énergie qui se renouvelle plutôt qu'une énergie qui s'épuise ?</p><p><strong>Bénéfices retirés :</strong> identifier les leviers physiologiques de l'énergie et repérer ses signaux faibles.</p><div class="pm-energy"><span class="pm-tag">Mardi : Tai-chi découverte</span><span class="pm-tag">Vendredi : Escrime</span></div></div>
-      <div class="prog-month prog-fade"><h3>Mois 4, Octobre 2026 : Les émotions</h3><p><strong>Atelier Lucidité du jeudi 8 octobre, à la Greatly House, de 11h30 à 14h</strong></p><div class="pm-theme"><em>Leadership : et si vos émotions devenaient votre meilleur atout stratégique ?</em></div><p>Les émotions sont des informations précieuses au service de vos décisions et de la qualité de vos relations.</p><p><strong>Bénéfice retiré :</strong> reconnaître et comprendre ses émotions pour agir de manière plus juste et plus efficace.</p><div class="pm-energy"><span class="pm-tag">Mardi : Tai-chi renforcement</span><span class="pm-tag">Vendredi : Boxe</span></div></div>
-      <div class="prog-month prog-fade"><h3>Mois 5, Novembre 2026 : Le temps</h3><p><strong>Atelier Lucidité du jeudi 12 novembre, à la Greatly House, de 11h30 à 14h</strong></p><div class="pm-theme"><em>Et si reprendre le contrôle de votre temps était votre meilleur investissement ?</em></div><p>Notre rapport au temps façonne notre rapport au monde. Un temps pour clarifier ses priorités et choisir ce à quoi l'on dit oui en pleine conscience.</p><p><strong>Bénéfice retiré :</strong> une lecture plus juste de sa relation au temps, pour réinvestir son énergie là où elle compte vraiment.</p><div class="pm-energy"><span class="pm-tag">Mardi : Qi gong découverte</span><span class="pm-tag">Vendredi : Circuit Training</span></div></div>
-      <div class="prog-month prog-fade"><h3>Mois 6, Décembre 2026 : Le collectif</h3><p><strong>Atelier Lucidité du jeudi 10 décembre, à la Greatly House, de 11h30 à 14h</strong></p><div class="pm-theme"><em>Comment faire du collectif votre meilleur levier de croissance ?</em></div><p>On clôture le cycle thématique par la qualité du lien et la puissance du collectif pour décider et avancer.</p><p><strong>Bénéfices retirés :</strong> sortir de l'isolement décisionnel et cultiver des relations qui nourrissent durablement vos choix.</p><div class="pm-energy"><span class="pm-tag">Mardi : Qi gong perfectionnement</span><span class="pm-tag">Vendredi : Basket</span></div></div>
+      <div class="prog-month prog-fade"><h3>Mois 1, Juin 2026 : Le cadre</h3><p><strong>Atelier Lucidité du jeudi 11 juin, à la Greatly House, de 11h30 à 14h</strong></p><div class="pm-theme"><em>Penser le cadre pour soutenir l'engagement</em></div><p>Premier rendez-vous du groupe. On apprend à se connaître et l'on pose ensemble les fondations d'un espace sécurisé et confidentiel.</p><p><strong>Bénéfices retirés :</strong> savoir formuler ses besoins et poser un cadre pour soi, accueillir celui de l'autre, et s'engager pleinement dans le collectif.</p></div>
+      <div class="prog-month prog-fade"><h3>Mois 2, Juillet 2026 : Les décisions</h3><p><strong>Atelier Lucidité du jeudi 2 juillet, à la Greatly House, de 11h30 à 14h</strong></p><div class="pm-theme"><em>Comment transformer le silence en véritable avantage décisionnel ?</em></div><p>Un mois pour réhabiliter le silence et l'écoute du corps comme ressources de discernement.</p><p><strong>Bénéfice retiré :</strong> découvrir et enrichir son mode naturel de prise de décision.</p></div>
+      <div class="prog-month prog-fade"><h3>Mois 3, Septembre 2026 : Le temps</h3><p><strong>Atelier Lucidité du jeudi 17 septembre, à la Greatly House, de 11h30 à 14h</strong></p><div class="pm-theme"><em>Et si reprendre le contrôle de votre temps était votre meilleur investissement ?</em></div><p>Notre rapport au temps façonne notre rapport au monde. Un temps pour clarifier ses priorités et choisir ce à quoi l'on dit oui en pleine conscience.</p><p><strong>Bénéfice retiré :</strong> une lecture plus juste de sa relation au temps, pour réinvestir son énergie là où elle compte vraiment.</p></div>
+      <div class="prog-month prog-fade"><h3>Mois 4, Octobre 2026 : Les émotions</h3><p><strong>Atelier Lucidité du jeudi 8 octobre, à la Greatly House, de 11h30 à 14h</strong></p><div class="pm-theme"><em>Leadership : et si vos émotions devenaient votre meilleur atout stratégique ?</em></div><p>Les émotions sont des informations précieuses au service de vos décisions et de la qualité de vos relations.</p><p><strong>Bénéfice retiré :</strong> reconnaître et comprendre ses émotions pour agir de manière plus juste et plus efficace.</p></div>
+      <div class="prog-month prog-fade"><h3>Mois 5, Novembre 2026 : L'énergie</h3><p><strong>Atelier Lucidité du jeudi 12 novembre, à la Greatly House, de 11h30 à 14h</strong></p><div class="pm-theme"><em>Et si l'énergie durable devenait votre nouveau standard de performance ?</em></div><p>Comment cultiver une énergie qui se renouvelle plutôt qu'une énergie qui s'épuise ?</p><p><strong>Bénéfices retirés :</strong> identifier les leviers physiologiques de l'énergie et repérer ses signaux faibles.</p></div>
+      <div class="prog-month prog-fade"><h3>Mois 6, Décembre 2026 : Le collectif</h3><p><strong>Atelier Lucidité du jeudi 10 décembre, à la Greatly House, de 11h30 à 14h</strong></p><div class="pm-theme"><em>Comment faire du collectif votre meilleur levier de croissance ?</em></div><p>On clôture le cycle thématique par la qualité du lien et la puissance du collectif pour décider et avancer.</p><p><strong>Bénéfices retirés :</strong> sortir de l'isolement décisionnel et cultiver des relations qui nourrissent durablement vos choix.</p></div>
       <div class="prog-month prog-fade"><h3>Bilan, jeudi 14 janvier 2027</h3><p><strong>À la Greatly House, de 11h30 à 14h</strong></p><div class="pm-theme"><em>Six mois d'évolution : regards, retours et perspectives</em></div><p>Une rencontre dédiée à mesurer le chemin parcouru, partager les évolutions ressenties et dessiner les prolongements possibles.</p><p><strong>Bénéfice retiré :</strong> un retour d'expérience structuré qui consolide les acquis et oriente la suite du parcours.</p></div>
 
       </div><!-- /prog-main -->
@@ -1109,6 +1431,16 @@
   <div class="menu-overlay" onclick="toggleMenu()"></div>
   <div class="menu-drawer">
     <div class="menu-section">
+      <a class="menu-item hero" onclick="toggleMenu();openProgramme()">
+        <span class="mi-icon" style="background:#E8D9C5;color:#6B5138;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
+        <div>
+          <div class="mi-head"><span class="mi-text">Programme de rentrée</span><span class="mi-badge" style="background:#C0814E;color:#fff;">Nouveau</span></div>
+          <div class="mi-sub">Septembre → novembre 2026</div>
+          <div class="hero-tags"><span>3 ateliers</span><span>Yoga &amp; Pilates</span><span>20 dates</span></div>
+        </div>
+      </a>
+    </div>
+    <div class="menu-section">
       <a class="menu-item featured" onclick="toggleMenu();window.open('https://arnaudprz.github.io/Greatly-retours/membre.html','_blank','noopener')">
         <span class="mi-icon" style="background:rgba(192,129,78,.12);color:#C0814E;">💬</span>
         <div><div class="mi-text">Votre avis nous intéresse</div><div class="mi-sub">2 minutes, et c'est anonyme</div></div>
@@ -1124,29 +1456,11 @@
       </div>
     </div>
     <div class="menu-section">
-      <div class="menu-section-title">Vos activités</div>
-      <a class="menu-item" onclick="toggleMenu();navigate('padel')">
-        <span class="mi-icon" style="background:rgba(107,125,92,.12);color:var(--sage);">🏓</span>
-        <div><div class="mi-text">Padel</div><div class="mi-sub">Mardis 10h30 · Padel District</div></div>
-        <span class="mi-badge" style="background:rgba(107,125,92,.16);color:var(--sage-dark);">À mardi !</span>
-      </a>
-      <a class="menu-item" onclick="toggleMenu();navigate('yoga')">
-        <span class="mi-icon" style="background:rgba(79,124,130,.12);color:#4F7C82;">🧘</span>
-        <div><div class="mi-text">Yoga</div><div class="mi-sub">Un temps pour se reconnecter</div></div>
-        <span class="mi-badge" style="background:rgba(79,124,130,.14);color:#4F7C82;">Respirez</span>
-      </a>
-    </div>
-    <div class="menu-section">
       <div class="menu-section-title">Réserver & découvrir</div>
       <a class="menu-item" onclick="toggleMenu();showReservation()">
         <span class="mi-icon" style="background:rgba(107,125,92,.12);color:var(--sage);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
         <div><div class="mi-text">Réservations</div><div class="mi-sub">Salon, dojo ou simple bonjour</div></div>
         <span class="mi-badge" style="background:rgba(107,125,92,.16);color:var(--sage-dark);">Comme chez vous</span>
-      </a>
-      <a class="menu-item" onclick="toggleMenu();openProgramme()">
-        <span class="mi-icon" style="background:#E8D9C5;color:#6B5138;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
-        <div><div class="mi-text">Le programme</div><div class="mi-sub">Parcours Lucidité & Énergie</div></div>
-        <span class="mi-badge" style="background:rgba(192,129,78,.2);color:#8f6035;">À votre rythme</span>
       </a>
       <a class="menu-item" onclick="toggleMenu();openInfos()">
         <span class="mi-icon" style="background:rgba(79,124,130,.1);color:#4F7C82;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span>
@@ -1278,14 +1592,13 @@
     <div class="privat-hero">
       <div class="ph-icon" style="background:#EBD0CB;color:#b4533f;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m14.5 14.5-4 4M10.5 14.5l4 4"/></svg></div>
       <h2>Signaler une absence</h2>
-      <p>Vous ne pourrez pas venir à un atelier ? Prévenez-nous : on reçoit votre message sur WhatsApp et par email.</p>
+      <p>Vous ne pourrez pas venir à un rendez-vous ? Prévenez-nous : on reçoit votre message sur WhatsApp et par email.</p>
     </div>
     <div class="privat-form" id="absenceForm">
       <div class="field"><label>Votre prénom</label><input type="text" id="abName" placeholder="Prénom"></div>
       <div class="field"><label>Votre téléphone</label><input type="tel" id="abTel" placeholder="06 12 34 56 78" inputmode="tel"></div>
       <div class="field"><label>Votre email</label><input type="email" id="abMail" placeholder="prenom@email.com" inputmode="email"></div>
-      <div class="field"><label>Quel atelier ?</label><select id="abAtelier" onchange="toggleAbsenceSport()"><option value="">Choisir…</option><option value="Atelier Énergie">Atelier Énergie</option><option value="Atelier Lucidité">Atelier Lucidité</option></select></div>
-      <div class="field" id="abSportField" style="display:none"><label>Type de sport</label><input type="text" id="abSport" placeholder="Ex : Padel, Yoga…"></div>
+      <div class="field"><label>Quel rendez-vous ?</label><select id="abAtelier"><option value="">Choisir…</option><option value="Atelier Lucidité">Atelier Lucidité — jeudi</option><option value="Entre nous">Entre nous — mardi</option><option value="Pilates">Pilates — mardi</option><option value="Yoga">Yoga — vendredi</option></select></div>
       <div class="field"><label>Date concernée</label><input type="date" id="abDate"></div>
       <div class="form-err" id="abErr"></div>
       <p class="rgpd">Vos données servent uniquement à traiter votre signalement d'absence.</p>
@@ -1335,20 +1648,39 @@
     infos.classList.remove('open');
     var padel=document.getElementById('padelPage');
     var yoga=document.getElementById('yogaPage');
-    var activites=document.getElementById('activitesPage');
     padel.classList.remove('open');
     yoga.classList.remove('open');
-    activites.classList.remove('open');
     if(h==='reservations'){resa.style.display='';render();}
     else if(h==='programme'){prog.classList.add('open');setTimeout(initFadeAnimations,100);}
     else if(h==='infos'){infos.classList.add('open');setTimeout(initFadeAnimations,100);}
-    else if(h==='activites'){activites.classList.add('open');}
+    else if(h==='activites'||h==='lucidite'){prog.classList.add('open');setTimeout(initFadeAnimations,100);}
     else if(h==='padel'){padel.classList.add('open');setTimeout(initFadeAnimations,100);}
     else if(h==='yoga'){yoga.classList.add('open');setTimeout(initFadeAnimations,100);}
     else{home.style.display='';}
     window.scrollTo({top:0,behavior:'smooth'});
   }
   window.addEventListener('hashchange',applyRoute);
+
+  // ---- Sommaire : surlignage de la section en cours de lecture ----
+  function initTocSpy(){
+    var links=[].slice.call(document.querySelectorAll('.prog-sidebar a, .infos-sidebar a'));
+    if(!links.length) return;
+    function update(){
+      var best=null,bestTop=-1e9;
+      links.forEach(function(a){
+        var el=document.getElementById((a.getAttribute('href')||'').slice(1));
+        if(!el) return;
+        var t=el.getBoundingClientRect().top-140;
+        if(t<=0 && t>bestTop){bestTop=t;best=a;}
+      });
+      links.forEach(function(a){a.classList.remove('active');});
+      if(best) best.classList.add('active');
+    }
+    window.addEventListener('scroll',update,{passive:true});
+    window.addEventListener('resize',update);
+    update();
+  }
+  initTocSpy();
   function showReservation(){navigate('reservations');}
   function goHome(){navigate('');}
   function openProgrammeNav(){navigate('programme');}
@@ -1441,27 +1773,22 @@
   function closeAbsence(){
     document.getElementById('absencePage').classList.remove('open');
   }
-  function toggleAbsenceSport(){
-    var en=document.getElementById('abAtelier').value==='Atelier Énergie';
-    document.getElementById('abSportField').style.display=en?'':'none';
-  }
   function sendAbsence(){
     const err=document.getElementById('abErr');
     if(!val('abName'))return showErr(err,'Merci d’indiquer votre prenom.');
     if(val('abTel').replace(/\D/g,'').length<8)return showErr(err,'Merci d’indiquer un telephone valide.');
     if(!isEmail(val('abMail')))return showErr(err,'Merci d’indiquer un email valide.');
-    if(!val('abAtelier'))return showErr(err,'Merci de choisir l’atelier concerne.');
+    if(!val('abAtelier'))return showErr(err,'Merci de choisir le rendez-vous concerne.');
     if(!val('abDate'))return showErr(err,'Merci d’indiquer la date concernee.');
     showErr(err,'');
     var msg='Bonjour Arnaud, je previens d\'une absence.\n'
       +'Prenom : '+val('abName')+'\n'
       +'Telephone : '+val('abTel')+'\n'
       +'Email : '+val('abMail')+'\n'
-      +'Atelier : '+val('abAtelier')
-      +(val('abSport')?'\nSport : '+val('abSport'):'')
+      +'Rendez-vous : '+val('abAtelier')
       +(val('abDate')?'\nDate : '+val('abDate'):'');
     // Email automatique en arriere-plan
-    apiPost({action:'absence',name:val('abName'),email:val('abMail'),tel:val('abTel'),atelier:val('abAtelier'),sport:val('abSport'),date:val('abDate')}).catch(function(){});
+    apiPost({action:'absence',name:val('abName'),email:val('abMail'),tel:val('abTel'),atelier:val('abAtelier'),date:val('abDate')}).catch(function(){});
     // Ouverture WhatsApp dans le geste utilisateur (evite le blocage popup)
     window.open('https://wa.me/33651156344?text='+encodeURIComponent(msg),'_blank');
     document.getElementById('absenceForm').innerHTML=`
