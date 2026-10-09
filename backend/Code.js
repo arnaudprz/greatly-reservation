@@ -3,8 +3,8 @@ var SECRET = 'GR34TLY_s3cr3t_2026';
 var OWNER_EMAIL = 'arnaudprz@gmail.com';
 var CALENDAR_ID = '0d81c7c7d0b29f3a210fca06e3ba949df1227ca297ca5011ae35e70de8e0e221@group.calendar.google.com';
 var ROOMS = {
-  bulle: {name:'La Bulle', color:'2', prefix:'[Bulle]'},
-  nid: {name:'Le Nid', color:'6', prefix:'[Nid]'},
+  bulle: {name:'La Bulle', color:'3', prefix:'[Bulle]'},
+  nid: {name:'Le Nid', color:'3', prefix:'[Nid]'},
   dojo: {name:'Le Dojo', color:'7', prefix:'[Dojo]'}
 };
 var PRESENCE_PREFIX = 'Maison:';

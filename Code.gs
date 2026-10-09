@@ -12,8 +12,8 @@ const CONFIG = {
   // Couleurs Google Calendar (index EventColor)
   // https://developers.google.com/apps-script/reference/calendar/event-color
   ROOMS: {
-    bulle: { name: 'La Bulle',  color: '2',  prefix: '[Bulle]' },  // Vert pâle
-    nid:   { name: 'Le Nid',    color: '6',  prefix: '[Nid]' },    // Orange
+    bulle: { name: 'La Bulle',  color: '3',  prefix: '[Bulle]' },  // Violet (petit salon)
+    nid:   { name: 'Le Nid',    color: '3',  prefix: '[Nid]' },    // Violet (petit salon)
     dojo:  { name: 'Le Dojo',   color: '7',  prefix: '[Dojo]' },   // Cyan
   },
 
